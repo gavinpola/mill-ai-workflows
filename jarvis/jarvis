@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+"""
+Jarvis - Mill AI Workflow Monitor
+
+Usage:
+    jarvis          # Run dashboard
+    jarvis --demo   # Run with demo data
+"""
+
+import sys
+import os
+
+# Add the jarvis directory to path
+script_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, script_dir)
+
+from tui import run_dashboard
+
+if __name__ == "__main__":
+    demo = "--demo" in sys.argv
+    run_dashboard(demo=demo)

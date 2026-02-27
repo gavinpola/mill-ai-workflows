@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mill Commercial | Camera & CV Architecture Explorer</title>
+
+  <!-- Distinctive Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:ital,wght@0,400;0,600;0,900;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Mill Brand Colors */
+      --mill-black: #0a0a0a;
+      --mill-charcoal: #1a1a1a;
+      --mill-slate: #2d2d2d;
+      --mill-gray: #4a4a4a;
+      --mill-light: #888;
+      --mill-cream: #fafaf8;
+      --mill-white: #ffffff;
+
+      /* Accent Colors - Technical/Earthy */
+      --accent-green: #303803;
+      --accent-lime: #84cc16;
+      --accent-amber: #f59e0b;
+      --accent-red: #dc2626;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+
+      /* Gradients */
+      --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+      --gradient-glow: radial-gradient(ellipse at 50% 0%, rgba(132, 204, 22, 0.15) 0%, transparent 60%);
+      --gradient-card: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--mill-black);
+      color: var(--mill-cream);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--mill-charcoal);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--mill-slate);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-lime);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 4rem 2rem;
+      background: var(--gradient-dark);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-glow);
+      pointer-events: none;
+    }
+
+    /* Animated Grid Background */
+    .grid-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        linear-gradient(rgba(132, 204, 22, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(132, 204, 22, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridMove 20s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(60px, 60px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 1000px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: rgba(132, 204, 22, 0.1);
+      border: 1px solid rgba(132, 204, 22, 0.3);
+      border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-lime);
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 0.6s ease-out 0.1s both;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--accent-lime) 0%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--mill-light);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      animation: fadeInUp 0.6s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Navigation Pills */
+    .nav-pills {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 4rem;
+      animation: fadeInUp 0.6s ease-out 0.3s both;
+    }
+
+    .nav-pill {
+      padding: 0.75rem 1.5rem;
+      background: var(--mill-charcoal);
+      border: 1px solid var(--mill-slate);
+      border-radius: 100px;
+      color: var(--mill-cream);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-pill:hover, .nav-pill.active {
+      background: var(--accent-lime);
+      border-color: var(--accent-lime);
+      color: var(--mill-black);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(132, 204, 22, 0.3);
+    }
+
+    /* Stats Row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      width: 100%;
+      max-width: 900px;
+      margin-top: 2rem;
+      animation: fadeInUp 0.6s ease-out 0.4s both;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 2rem;
+      background: var(--gradient-card);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      border-color: rgba(132, 204, 22, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .stat-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--accent-lime);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--mill-light);
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--accent-lime);
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      color: var(--mill-light);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Architecture Diagram */
+    .architecture-container {
+      background: var(--mill-charcoal);
+      border-radius: 24px;
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .architecture-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-lime), transparent);
+    }
+
+    .arch-diagram {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    .arch-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .arch-box {
+      padding: 1.5rem 2rem;
+      background: var(--mill-slate);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      min-width: 160px;
+    }
+
+    .arch-box:hover {
+      border-color: var(--accent-lime);
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(132, 204, 22, 0.2);
+    }
+
+    .arch-box.highlight {
+      background: linear-gradient(135deg, rgba(132, 204, 22, 0.2) 0%, rgba(6, 182, 212, 0.1) 100%);
+      border-color: var(--accent-lime);
+    }
+
+    .arch-box .icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .arch-box .label {
+      font-weight: 600;
+      color: var(--mill-cream);
+    }
+
+    .arch-box .spec {
+      font-size: 0.75rem;
+      color: var(--mill-light);
+      margin-top: 0.25rem;
+    }
+
+    .arch-connector {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-lime), var(--accent-cyan));
+      position: relative;
+    }
+
+    .arch-connector.vertical {
+      width: 2px;
+      height: 40px;
+      margin: 0 auto;
+    }
+
+    .arch-connector::after {
+      content: '→';
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent-lime);
+      font-size: 1rem;
+    }
+
+    .arch-connector.vertical::after {
+      content: '↓';
+      right: 50%;
+      top: auto;
+      bottom: -12px;
+      transform: translateX(50%);
+    }
+
+    /* Component Cards */
+    .components-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .component-card {
+      background: var(--mill-charcoal);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .component-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--gradient-card);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .component-card:hover {
+      border-color: rgba(132, 204, 22, 0.3);
+      transform: translateY(-8px);
+    }
+
+    .component-card:hover::before {
+      opacity: 1;
+    }
+
+    .component-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .component-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent-lime), var(--accent-cyan));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .component-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .component-subtitle {
+      font-size: 0.85rem;
+      color: var(--accent-lime);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .component-specs {
+      position: relative;
+      z-index: 1;
+    }
+
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .spec-row:last-child {
+      border-bottom: none;
+    }
+
+    .spec-key {
+      color: var(--mill-light);
+      font-size: 0.9rem;
+    }
+
+    .spec-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      color: var(--mill-cream);
+    }
+
+    .spec-value.highlight {
+      color: var(--accent-lime);
+    }
+
+    /* Cost Calculator */
+    .calculator-container {
+      background: var(--mill-charcoal);
+      border-radius: 24px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    @media (max-width: 900px) {
+      .calculator-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .calc-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .calc-option {
+      padding: 1.5rem;
+      background: var(--mill-slate);
+      border: 2px solid transparent;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .calc-option:hover {
+      border-color: rgba(132, 204, 22, 0.3);
+    }
+
+    .calc-option.selected {
+      border-color: var(--accent-lime);
+      background: rgba(132, 204, 22, 0.1);
+    }
+
+    .calc-option-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .tier-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .tier-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.25rem;
+      color: var(--accent-lime);
+    }
+
+    .tier-desc {
+      font-size: 0.85rem;
+      color: var(--mill-light);
+    }
+
+    .calc-results {
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(132, 204, 22, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
+      border-radius: 16px;
+      border: 1px solid rgba(132, 204, 22, 0.2);
+    }
+
+    .calc-results h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .result-row:last-child {
+      border-bottom: none;
+      padding-top: 1.5rem;
+      margin-top: 0.5rem;
+      border-top: 2px solid var(--accent-lime);
+    }
+
+    .result-label {
+      color: var(--mill-light);
+    }
+
+    .result-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+    }
+
+    .result-value.total {
+      font-size: 1.5rem;
+      color: var(--accent-lime);
+    }
+
+    /* Comparison Table */
+    .comparison-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 2rem;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 1.25rem 1.5rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .comparison-table th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--mill-light);
+      background: var(--mill-charcoal);
+    }
+
+    .comparison-table th:first-child {
+      border-radius: 12px 0 0 0;
+    }
+
+    .comparison-table th:last-child {
+      border-radius: 0 12px 0 0;
+    }
+
+    .comparison-table td {
+      background: var(--mill-charcoal);
+    }
+
+    .comparison-table tr:last-child td:first-child {
+      border-radius: 0 0 0 12px;
+    }
+
+    .comparison-table tr:last-child td:last-child {
+      border-radius: 0 0 12px 0;
+    }
+
+    .comparison-table tr:hover td {
+      background: rgba(132, 204, 22, 0.05);
+    }
+
+    .competitor-name {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 600;
+    }
+
+    .competitor-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .competitor-dot.mill { background: var(--accent-lime); }
+    .competitor-dot.winnow { background: var(--accent-blue); }
+    .competitor-dot.orbisk { background: var(--accent-amber); }
+    .competitor-dot.leanpath { background: var(--accent-cyan); }
+
+    .check {
+      color: var(--accent-lime);
+    }
+
+    .partial {
+      color: var(--accent-amber);
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem 2rem;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .footer-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+
+    .footer-text {
+      color: var(--mill-light);
+      font-size: 0.9rem;
+    }
+
+    /* Slider Input */
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      background: var(--mill-slate);
+      border-radius: 3px;
+      margin: 1rem 0;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      background: var(--accent-lime);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 20px rgba(132, 204, 22, 0.5);
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--mill-light);
+    }
+
+    /* Tooltips */
+    [data-tooltip] {
+      position: relative;
+    }
+
+    [data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.5rem 1rem;
+      background: var(--mill-black);
+      border: 1px solid var(--mill-slate);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    [data-tooltip]:hover::after {
+      opacity: 1;
+      visibility: visible;
+      bottom: calc(100% + 10px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .arch-row {
+        flex-direction: column;
+      }
+
+      .arch-connector {
+        width: 2px;
+        height: 30px;
+      }
+
+      .arch-connector::after {
+        content: '↓';
+        right: 50%;
+        top: auto;
+        bottom: -12px;
+        transform: translateX(50%);
+      }
+
+      .components-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="grid-bg"></div>
+    <div class="hero-content">
+      <div class="badge">Technical Architecture Deep Dive</div>
+      <h1>Computer Vision for <span>Food Waste</span></h1>
+      <p class="subtitle">
+        A comprehensive exploration of camera systems, edge AI, and the technical architecture powering Mill Commercial's food waste intelligence platform.
+      </p>
+
+      <div class="nav-pills">
+        <button class="nav-pill active" onclick="scrollToSection('architecture')">Architecture</button>
+        <button class="nav-pill" onclick="scrollToSection('components')">Components</button>
+        <button class="nav-pill" onclick="scrollToSection('calculator')">Cost Calculator</button>
+        <button class="nav-pill" onclick="scrollToSection('comparison')">Competitors</button>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-value">85%+</div>
+          <div class="stat-label">Target Accuracy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">$2-3.5K</div>
+          <div class="stat-label">Per Unit Cost</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">1-4mo</div>
+          <div class="stat-label">Payback Period</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">157</div>
+          <div class="stat-label">TOPS (Edge AI)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture Section -->
+  <section id="architecture">
+    <div class="section-header">
+      <div class="section-number">01 / SYSTEM DESIGN</div>
+      <h2>Edge-First Hybrid Architecture</h2>
+      <p class="section-desc">Real-time inference at the edge with async cloud sync for analytics and model updates.</p>
+    </div>
+
+    <div class="architecture-container">
+      <div class="arch-diagram">
+        <!-- Input Layer -->
+        <div class="arch-row">
+          <div class="arch-box" data-tooltip="Sony IMX546 - 8MP Global Shutter">
+            <div class="icon">📸</div>
+            <div class="label">8MP Camera</div>
+            <div class="spec">Basler ace2</div>
+          </div>
+          <div class="arch-connector"></div>
+          <div class="arch-box" data-tooltip="95mm baseline, <2% depth error">
+            <div class="icon">📐</div>
+            <div class="label">Depth Sensor</div>
+            <div class="spec">RealSense D455</div>
+          </div>
+          <div class="arch-connector"></div>
+          <div class="arch-box" data-tooltip="IP67, controlled intensity">
+            <div class="icon">💡</div>
+            <div class="label">LED Array</div>
+            <div class="spec">Diffuse Lighting</div>
+          </div>
+        </div>
+
+        <div class="arch-connector vertical"></div>
+
+        <!-- Processing Layer -->
+        <div class="arch-row">
+          <div class="arch-box highlight" data-tooltip="100-157 TOPS, 10-25W">
+            <div class="icon">🧠</div>
+            <div class="label">NVIDIA Jetson Orin NX</div>
+            <div class="spec">Edge AI Compute</div>
+          </div>
+        </div>
+
+        <div class="arch-row" style="gap: 3rem;">
+          <div class="arch-box" data-tooltip="94.2% mAP50 on food datasets">
+            <div class="icon">🎯</div>
+            <div class="label">YOLOv8 Classifier</div>
+            <div class="spec">Food Detection</div>
+          </div>
+          <div class="arch-box" data-tooltip="Stereo depth → volume estimation">
+            <div class="icon">📊</div>
+            <div class="label">Volume Estimator</div>
+            <div class="spec">±10% Accuracy</div>
+          </div>
+          <div class="arch-box" data-tooltip="Weight verification layer">
+            <div class="icon">⚖️</div>
+            <div class="label">Load Cell</div>
+            <div class="spec">Validation</div>
+          </div>
+        </div>
+
+        <div class="arch-connector vertical"></div>
+
+        <!-- Output Layer -->
+        <div class="arch-row">
+          <div class="arch-box">
+            <div class="icon">💾</div>
+            <div class="label">Local Buffer</div>
+            <div class="spec">48hr+ offline</div>
+          </div>
+          <div class="arch-connector"></div>
+          <div class="arch-box" data-tooltip="MQTT + S3 for bandwidth efficiency">
+            <div class="icon">☁️</div>
+            <div class="label">Cloud Sync</div>
+            <div class="spec">Async Upload</div>
+          </div>
+          <div class="arch-connector"></div>
+          <div class="arch-box">
+            <div class="icon">📈</div>
+            <div class="label">Analytics</div>
+            <div class="spec">Dashboard</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Components Section -->
+  <section id="components">
+    <div class="section-header">
+      <div class="section-number">02 / HARDWARE</div>
+      <h2>Component Deep Dive</h2>
+      <p class="section-desc">The recommended bill of materials for Mill Commercial deployment.</p>
+    </div>
+
+    <div class="components-grid">
+      <div class="component-card">
+        <div class="component-header">
+          <div class="component-icon">📸</div>
+          <div>
+            <div class="component-title">Primary Camera</div>
+            <div class="component-subtitle">Basler ace2 a2A4504-18ucPRO</div>
+          </div>
+        </div>
+        <div class="component-specs">
+          <div class="spec-row">
+            <span class="spec-key">Resolution</span>
+            <span class="spec-value highlight">8 MP (3840×2160)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Sensor</span>
+            <span class="spec-value">Sony IMX546 (Pregius S)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Shutter</span>
+            <span class="spec-value">Global (no motion blur)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Frame Rate</span>
+            <span class="spec-value">55 fps @ full res</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Interface</span>
+            <span class="spec-value">USB 3.0</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Unit Cost</span>
+            <span class="spec-value highlight">$900</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-header">
+          <div class="component-icon">📐</div>
+          <div>
+            <div class="component-title">Depth Sensor</div>
+            <div class="component-subtitle">Intel RealSense D455</div>
+          </div>
+        </div>
+        <div class="component-specs">
+          <div class="spec-row">
+            <span class="spec-key">Depth Tech</span>
+            <span class="spec-value">Active Stereo</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Baseline</span>
+            <span class="spec-value highlight">95mm (extended)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Depth Error</span>
+            <span class="spec-value">&lt;2% @ 4m</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">RGB Shutter</span>
+            <span class="spec-value">Global</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">IMU</span>
+            <span class="spec-value">Built-in</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Unit Cost</span>
+            <span class="spec-value highlight">$349</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-header">
+          <div class="component-icon">🧠</div>
+          <div>
+            <div class="component-title">Edge Compute</div>
+            <div class="component-subtitle">NVIDIA Jetson Orin NX 16GB</div>
+          </div>
+        </div>
+        <div class="component-specs">
+          <div class="spec-row">
+            <span class="spec-key">AI Performance</span>
+            <span class="spec-value highlight">100-157 TOPS</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">GPU</span>
+            <span class="spec-value">1024 CUDA + 32 Tensor</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Memory</span>
+            <span class="spec-value">16GB LPDDR5</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Power</span>
+            <span class="spec-value">10-25W</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Software</span>
+            <span class="spec-value">JetPack 6.x</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Unit Cost</span>
+            <span class="spec-value highlight">$599</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-header">
+          <div class="component-icon">🎯</div>
+          <div>
+            <div class="component-title">AI Model Stack</div>
+            <div class="component-subtitle">YOLOv8 + Custom Classifier</div>
+          </div>
+        </div>
+        <div class="component-specs">
+          <div class="spec-row">
+            <span class="spec-key">Detection</span>
+            <span class="spec-value">YOLOv8s (TensorRT)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">mAP50</span>
+            <span class="spec-value highlight">94.2%</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Food Classes</span>
+            <span class="spec-value">498+ types</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Inference</span>
+            <span class="spec-value">&lt;50ms</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Model Size</span>
+            <span class="spec-value">~50MB (quantized)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Framework</span>
+            <span class="spec-value">ONNX + TensorRT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-header">
+          <div class="component-icon">💡</div>
+          <div>
+            <div class="component-title">Illumination</div>
+            <div class="component-subtitle">Smart Vision Lights DFLW</div>
+          </div>
+        </div>
+        <div class="component-specs">
+          <div class="spec-row">
+            <span class="spec-key">Type</span>
+            <span class="spec-value">Diffuse LED Array</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Color Temp</span>
+            <span class="spec-value">5600K (daylight)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">CRI</span>
+            <span class="spec-value highlight">&gt;95</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">IP Rating</span>
+            <span class="spec-value">IP67</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Control</span>
+            <span class="spec-value">PWM dimming</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Unit Cost</span>
+            <span class="spec-value highlight">$250</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="component-card">
+        <div class="component-header">
+          <div class="component-icon">⚖️</div>
+          <div>
+            <div class="component-title">Weight Validation</div>
+            <div class="component-subtitle">Industrial Load Cell + HX711</div>
+          </div>
+        </div>
+        <div class="component-specs">
+          <div class="spec-row">
+            <span class="spec-key">Capacity</span>
+            <span class="spec-value">50kg</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Resolution</span>
+            <span class="spec-value highlight">±5g</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">ADC</span>
+            <span class="spec-value">HX711 24-bit</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Purpose</span>
+            <span class="spec-value">Volume verification</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Accuracy Boost</span>
+            <span class="spec-value">+5-10%</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-key">Unit Cost</span>
+            <span class="spec-value highlight">$75</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator Section -->
+  <section id="calculator">
+    <div class="section-header">
+      <div class="section-number">03 / ECONOMICS</div>
+      <h2>System Cost Calculator</h2>
+      <p class="section-desc">Model the total cost of ownership and ROI for your deployment.</p>
+    </div>
+
+    <div class="calculator-container">
+      <div class="calc-options">
+        <h3 style="margin-bottom: 1rem;">Select Configuration</h3>
+
+        <div class="calc-option selected" onclick="selectTier(this, 'budget')">
+          <div class="calc-option-header">
+            <span class="tier-name">Budget Tier</span>
+            <span class="tier-price">$400</span>
+          </div>
+          <div class="tier-desc">RPi + Coral USB + Basic LED. 60-75% accuracy. Pilot/POC only.</div>
+        </div>
+
+        <div class="calc-option" onclick="selectTier(this, 'mid')">
+          <div class="calc-option-header">
+            <span class="tier-name">Mid-Tier (Recommended)</span>
+            <span class="tier-price">$2,947</span>
+          </div>
+          <div class="tier-desc">Basler + RealSense + Jetson Orin NX. 85%+ accuracy. Production-ready.</div>
+        </div>
+
+        <div class="calc-option" onclick="selectTier(this, 'premium')">
+          <div class="calc-option-header">
+            <span class="tier-name">Premium Tier</span>
+            <span class="tier-price">$10,000+</span>
+          </div>
+          <div class="tier-desc">24MP + Structured Light + Hyperspectral option. 95%+ accuracy.</div>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <label style="color: var(--mill-light); font-size: 0.9rem;">Number of Units</label>
+          <input type="range" min="1" max="1000" value="50" id="unitSlider" oninput="updateCalculation()">
+          <div class="slider-labels">
+            <span>1</span>
+            <span id="unitCount">50 units</span>
+            <span>1000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-results">
+        <h3>Cost Breakdown</h3>
+
+        <div class="result-row">
+          <span class="result-label">Hardware (per unit)</span>
+          <span class="result-value" id="perUnitCost">$400</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Volume Discount</span>
+          <span class="result-value" id="discount">-15%</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Installation (per unit)</span>
+          <span class="result-value">$200</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Annual Maintenance</span>
+          <span class="result-value" id="maintenance">$5,000</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Annual Energy</span>
+          <span class="result-value" id="energy">$1,250</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label"><strong>5-Year TCO</strong></span>
+          <span class="result-value total" id="totalCost">$56,250</span>
+        </div>
+
+        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
+          <div class="result-row">
+            <span class="result-label">Est. Annual Savings/Unit</span>
+            <span class="result-value" id="savings">$1,000-4,000</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label"><strong>Payback Period</strong></span>
+            <span class="result-value total" id="payback">&lt;1 month</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Competitor Comparison -->
+  <section id="comparison">
+    <div class="section-header">
+      <div class="section-number">04 / LANDSCAPE</div>
+      <h2>Competitive Analysis</h2>
+      <p class="section-desc">How Mill Commercial stacks up against existing food waste CV systems.</p>
+    </div>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>System</th>
+          <th>Edge Hardware</th>
+          <th>Accuracy</th>
+          <th>Depth Sensing</th>
+          <th>Circular Economy</th>
+          <th>Est. Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="competitor-name">
+              <div class="competitor-dot mill"></div>
+              Mill Commercial
+            </div>
+          </td>
+          <td>Jetson Orin NX (157 TOPS)</td>
+          <td><span class="check">85%+ (target)</span></td>
+          <td><span class="check">✓ RealSense D455</span></td>
+          <td><span class="check">✓ Chicken feed loop</span></td>
+          <td>$2-3.5K/unit</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="competitor-name">
+              <div class="competitor-dot winnow"></div>
+              Winnow Vision
+            </div>
+          </td>
+          <td>Jetson TX2 (1.3 TFLOPS)</td>
+          <td>80%</td>
+          <td><span class="partial">~ Scale only</span></td>
+          <td><span class="partial">✗ Disposal tracking</span></td>
+          <td>~$5K/unit</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="competitor-name">
+              <div class="competitor-dot orbisk"></div>
+              Orbisk
+            </div>
+          </td>
+          <td>Undisclosed</td>
+          <td>~90% (claimed)</td>
+          <td><span class="check">✓ 3D imaging</span></td>
+          <td><span class="partial">✗ Disposal tracking</span></td>
+          <td>Subscription</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="competitor-name">
+              <div class="competitor-dot leanpath"></div>
+              Leanpath
+            </div>
+          </td>
+          <td>Touchscreen terminal</td>
+          <td>Manual + AI assist</td>
+          <td><span class="partial">~ Scale only</span></td>
+          <td><span class="partial">✗ Disposal tracking</span></td>
+          <td>~$3-8K/unit</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 3rem; padding: 2rem; background: rgba(132, 204, 22, 0.05); border-radius: 16px; border-left: 3px solid var(--accent-lime);">
+      <h3 style="margin-bottom: 1rem; color: var(--accent-lime);">Mill's Differentiation</h3>
+      <ul style="color: var(--mill-light); line-height: 2;">
+        <li><strong>Circular economy integration:</strong> Food grounds → chicken feed closes the loop</li>
+        <li><strong>Modern edge compute:</strong> 100x more AI power than Winnow's Jetson TX2</li>
+        <li><strong>Depth + weight fusion:</strong> Multi-modal validation for higher accuracy</li>
+        <li><strong>Data flywheel:</strong> Consumer deployment = largest food waste behavior dataset</li>
+        <li><strong>LLM-augmented labeling:</strong> Faster model iteration with synthetic data</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">mill</div>
+    <p class="footer-text">
+      Technical Architecture Analysis · February 2026<br>
+      Generated by Mill AI Workflow System
+    </p>
+  </footer>
+
+  <script>
+    // Smooth scroll to sections
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+
+      // Update active nav pill
+      document.querySelectorAll('.nav-pill').forEach(pill => pill.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    // Tier configurations
+    const tiers = {
+      budget: {
+        hardware: 400,
+        installation: 200,
+        maintenance: 100,
+        energy: 25,
+        savings: [1000, 4000],
+        payback: '<1 month'
+      },
+      mid: {
+        hardware: 2947,
+        installation: 500,
+        maintenance: 300,
+        energy: 50,
+        savings: [3000, 8000],
+        payback: '1-4 months'
+      },
+      premium: {
+        hardware: 10000,
+        installation: 2000,
+        maintenance: 1000,
+        energy: 150,
+        savings: [5000, 16000],
+        payback: '4-12 months'
+      }
+    };
+
+    let currentTier = 'budget';
+
+    function selectTier(element, tier) {
+      document.querySelectorAll('.calc-option').forEach(opt => opt.classList.remove('selected'));
+      element.classList.add('selected');
+      currentTier = tier;
+      updateCalculation();
+    }
+
+    function updateCalculation() {
+      const units = parseInt(document.getElementById('unitSlider').value);
+      const tier = tiers[currentTier];
+
+      // Volume discount
+      let discount = 0;
+      if (units >= 100) discount = 0.25;
+      else if (units >= 50) discount = 0.15;
+      else if (units >= 10) discount = 0.05;
+
+      const hardwarePerUnit = tier.hardware * (1 - discount);
+      const totalHardware = hardwarePerUnit * units;
+      const totalInstallation = tier.installation * units;
+      const annualMaintenance = tier.maintenance * units;
+      const annualEnergy = tier.energy * units;
+
+      const fiveYearTCO = totalHardware + totalInstallation + (annualMaintenance * 5) + (annualEnergy * 5);
+
+      // Update UI
+      document.getElementById('unitCount').textContent = units + ' units';
+      document.getElementById('perUnitCost').textContent = '$' + tier.hardware.toLocaleString();
+      document.getElementById('discount').textContent = discount > 0 ? '-' + (discount * 100) + '%' : 'None';
+      document.getElementById('maintenance').textContent = '$' + annualMaintenance.toLocaleString() + '/yr';
+      document.getElementById('energy').textContent = '$' + annualEnergy.toLocaleString() + '/yr';
+      document.getElementById('totalCost').textContent = '$' + Math.round(fiveYearTCO).toLocaleString();
+      document.getElementById('savings').textContent = '$' + tier.savings[0].toLocaleString() + '-' + tier.savings[1].toLocaleString();
+      document.getElementById('payback').textContent = tier.payback;
+    }
+
+    // Initialize
+    updateCalculation();
+
+    // Intersection Observer for animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.component-card, .arch-box').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'all 0.6s ease-out';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>

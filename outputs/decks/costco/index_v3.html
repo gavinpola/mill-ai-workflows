@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Costco + Mill | Strategic Partnership Proposal</title>
+
+  <!-- Distinctive Typography (Claude Cookbook Anti-AI-Slop) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:wght@400;600;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css">
+
+  <style>
+    :root {
+      /* Mill Core */
+      --mill-black: #0a0a0a;
+      --mill-charcoal: #1a1a1a;
+      --mill-slate: #2d2d2d;
+      --mill-gray: #4a4a4a;
+      --mill-light: #888888;
+      --mill-cream: #fafaf8;
+      --mill-white: #ffffff;
+
+      /* Mill Accents */
+      --mill-green: #303803;
+      --accent-lime: #84cc16;
+      --accent-success: #27ae60;
+
+      /* Costco Partner Colors */
+      --costco-red: #E31837;
+      --costco-blue: #005DAA;
+    }
+
+    /* Base Typography */
+    .reveal {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      color: var(--mill-charcoal);
+    }
+
+    .reveal h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 2.8em;
+      font-weight: 900;
+      color: var(--mill-black);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .reveal h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6em;
+      font-weight: 600;
+      color: var(--mill-charcoal);
+      margin-bottom: 0.8em;
+      line-height: 1.2;
+    }
+
+    .reveal h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2em;
+      font-weight: 500;
+      color: var(--mill-gray);
+    }
+
+    /* BCG-Style Insight Titles */
+    .reveal .insight-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4em;
+      font-weight: 600;
+      color: var(--mill-charcoal);
+      border-left: 4px solid var(--accent-lime);
+      padding-left: 24px;
+      margin-bottom: 1.2em;
+      text-align: left;
+    }
+
+    /* Stat Blocks */
+    .reveal .stat {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 4.5em;
+      font-weight: 600;
+      color: var(--accent-lime);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .reveal .stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65em;
+      font-weight: 500;
+      color: var(--mill-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.5em;
+    }
+
+    /* Highlight Box */
+    .reveal .highlight {
+      background: linear-gradient(135deg, rgba(132, 204, 22, 0.08) 0%, rgba(48, 56, 3, 0.04) 100%);
+      border-left: 4px solid var(--accent-lime);
+      padding: 28px 36px;
+      border-radius: 0 12px 12px 0;
+      text-align: left;
+    }
+
+    /* Costco Callout */
+    .reveal .callout {
+      background: rgba(227, 24, 55, 0.05);
+      border-left: 3px solid var(--costco-red);
+      padding: 20px 28px;
+      border-radius: 0 8px 8px 0;
+      text-align: left;
+    }
+
+    /* Grid Layouts */
+    .reveal .two-col {
+      display: flex;
+      justify-content: space-between;
+      gap: 50px;
+      align-items: flex-start;
+    }
+
+    .reveal .col {
+      flex: 1;
+      text-align: left;
+    }
+
+    .reveal .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .reveal .metric-box {
+      background: var(--mill-cream);
+      padding: 28px;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .reveal .metric-box .stat {
+      font-size: 2.2em;
+    }
+
+    /* Tables */
+    .reveal table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.8em;
+    }
+
+    .reveal table th {
+      background: var(--mill-charcoal);
+      color: white;
+      padding: 14px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7em;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-align: left;
+    }
+
+    .reveal table th:first-child { border-radius: 8px 0 0 0; }
+    .reveal table th:last-child { border-radius: 0 8px 0 0; }
+
+    .reveal table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      background: white;
+    }
+
+    .reveal table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+    .reveal table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+
+    /* Timeline */
+    .reveal .timeline {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 40px 0;
+      padding: 0 30px;
+    }
+
+    .reveal .timeline::before {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: 80px;
+      right: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-lime), var(--costco-blue));
+    }
+
+    .reveal .timeline-item {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+
+    .reveal .timeline-dot {
+      width: 44px;
+      height: 44px;
+      background: white;
+      border: 3px solid var(--accent-lime);
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 0.8em;
+      color: var(--accent-lime);
+    }
+
+    /* Circular Flow */
+    .reveal .circular-flow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .reveal .flow-item {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--mill-cream);
+      border: 2px solid var(--accent-lime);
+      font-size: 0.75em;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .reveal .flow-item.active {
+      background: var(--mill-green);
+      color: white;
+      border-color: var(--mill-green);
+    }
+
+    .reveal .flow-arrow {
+      font-size: 1.8em;
+      color: var(--accent-lime);
+    }
+
+    /* Section Number */
+    .reveal .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6em;
+      color: var(--accent-lime);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.8em;
+    }
+
+    /* Source Footnote */
+    .reveal .source {
+      font-size: 0.5em;
+      color: var(--mill-light);
+      margin-top: 24px;
+      font-style: italic;
+    }
+
+    /* Lists */
+    .reveal ul, .reveal ol {
+      text-align: left;
+      margin-left: 0.8em;
+    }
+
+    .reveal li {
+      margin-bottom: 0.6em;
+      line-height: 1.4;
+    }
+
+    /* CTA Button */
+    .reveal .cta {
+      display: inline-block;
+      background: var(--accent-lime);
+      color: var(--mill-black);
+      padding: 18px 36px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1em;
+      text-decoration: none;
+    }
+
+    /* Cover Slide Special */
+    .reveal .cover-slide h1 {
+      font-size: 3.2em;
+      margin-bottom: 0.3em;
+    }
+
+    .reveal .cover-slide .subtitle {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2em;
+      color: var(--mill-gray);
+      font-weight: 400;
+    }
+
+    .reveal .cover-slide .meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6em;
+      color: var(--mill-light);
+      margin-top: 3em;
+    }
+
+    /* Partner Logo Treatment */
+    .reveal .partner-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 1.5em;
+    }
+
+    .reveal .partner-logos .plus {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5em;
+      color: var(--mill-light);
+    }
+
+    /* Key Insight Box */
+    .reveal .key-insight {
+      background: var(--mill-charcoal);
+      color: white;
+      padding: 24px 32px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .reveal .key-insight strong {
+      color: var(--accent-lime);
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: Cover -->
+      <section class="cover-slide">
+        <div class="partner-logos">
+          <span style="font-family: 'Fraunces', serif; font-size: 2em; font-weight: 900;">mill</span>
+          <span class="plus">+</span>
+          <span style="font-weight: 700; color: var(--costco-red); font-size: 1.8em;">COSTCO</span>
+        </div>
+        <h1>Outsmarting Food Waste Together</h1>
+        <p class="subtitle">A Strategic Partnership for Procurement Intelligence</p>
+        <p class="meta">February 2026 · Strategic Partnership Proposal</p>
+        <aside class="notes">
+          Opening: Thank them for their time. Frame this as a data partnership, not a waste management pitch. We're here to help Costco turn waste data into procurement savings.
+        </aside>
+      </section>
+
+      <!-- SLIDE 2: The Problem - Insight Title -->
+      <section>
+        <p class="section-num">01 · THE OPPORTUNITY</p>
+        <h2>Food waste isn't a disposal problem—it's a $400B procurement blind spot</h2>
+        <div class="metric-grid">
+          <div class="metric-box">
+            <div class="stat">40%</div>
+            <div class="stat-label">of US food wasted</div>
+          </div>
+          <div class="metric-box">
+            <div class="stat">$408B</div>
+            <div class="stat-label">annual cost</div>
+          </div>
+          <div class="metric-box">
+            <div class="stat">10%</div>
+            <div class="stat-label">of global emissions</div>
+          </div>
+        </div>
+        <p class="source">Source: ReFED, 2024. USDA Economic Research Service.</p>
+        <aside class="notes">
+          This isn't about sustainability guilt. Food waste is the #1 material in US landfills, but the real story is the $408B in value destroyed annually. For grocery, that's a procurement problem hiding in plain sight.
+        </aside>
+      </section>
+
+      <!-- SLIDE 3: Costco's Advantage -->
+      <section>
+        <p class="section-num">01 · THE OPPORTUNITY</p>
+        <h2>Costco's food prep operations are a strategic asset—with the right data</h2>
+        <div class="metric-grid">
+          <div class="metric-box">
+            <div class="stat">890+</div>
+            <div class="stat-label">warehouses</div>
+          </div>
+          <div class="metric-box">
+            <div class="stat">$254B</div>
+            <div class="stat-label">revenue</div>
+          </div>
+          <div class="metric-box">
+            <div class="stat">117M</div>
+            <div class="stat-label">rotisserie chickens/yr</div>
+          </div>
+        </div>
+        <div class="highlight" style="margin-top: 24px;">
+          <strong>The insight:</strong> Bakery, deli, food court, prepared foods—these are concentrated waste streams you can control. With the right intelligence, they become your competitive advantage.
+        </div>
+        <aside class="notes">
+          Reframe: Their scale is a feature, not a bug. 890 warehouses with consistent operations = massive dataset potential. 117M chickens = circular economy opportunity.
+        </aside>
+      </section>
+
+      <!-- SLIDE 4: The Data Gap -->
+      <section>
+        <p class="section-num">01 · THE OPPORTUNITY</p>
+        <h2>Retailers measure diversion but not causation—that's the gap</h2>
+        <div class="two-col">
+          <div class="col">
+            <h3>What gets measured today:</h3>
+            <ul>
+              <li>Pounds diverted from landfill</li>
+              <li>Donation volumes</li>
+              <li>Recycling rates</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h3 style="color: var(--costco-red);">What doesn't:</h3>
+            <ul>
+              <li><strong>What</strong> is being wasted</li>
+              <li><strong>When</strong> it's being wasted</li>
+              <li><strong>Why</strong> it's being wasted</li>
+            </ul>
+          </div>
+        </div>
+        <div class="key-insight">
+          <strong>Without granular waste data, you're optimizing downstream (disposal) instead of upstream (procurement).</strong>
+        </div>
+        <aside class="notes">
+          The key insight: Diversion metrics are necessary for sustainability reporting but insufficient for operational improvement. You need causation data to actually prevent waste.
+        </aside>
+      </section>
+
+      <!-- SLIDE 5: Mill Solution -->
+      <section>
+        <p class="section-num">02 · THE SOLUTION</p>
+        <h2>Mill turns waste streams into procurement intelligence—automatically</h2>
+        <div class="two-col">
+          <div class="col">
+            <h3>How it works:</h3>
+            <ol>
+              <li><strong>Capture</strong> — AI identifies what's being discarded</li>
+              <li><strong>Analyze</strong> — Real-time patterns by item, time, location</li>
+              <li><strong>Optimize</strong> — Actionable procurement recommendations</li>
+              <li><strong>Close the loop</strong> — Food grounds become chicken feed</li>
+            </ol>
+          </div>
+          <div class="col">
+            <h3>Data you get:</h3>
+            <ul>
+              <li>Item-level waste identification</li>
+              <li>Timing patterns (day/hour/shift)</li>
+              <li>Cross-location benchmarking</li>
+              <li>Trend analysis and anomaly alerts</li>
+              <li>Procurement recommendations</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="notes">
+          Mill started as a consumer product but the real IP is in the AI and data platform. We've processed millions of images at household scale—now applying that to commercial.
+        </aside>
+      </section>
+
+      <!-- SLIDE 6: Circular Economy -->
+      <section>
+        <p class="section-num">02 · THE SOLUTION</p>
+        <h2>Costco's unique opportunity: close the loop on your own supply chain</h2>
+        <div class="circular-flow">
+          <div class="flow-item active">
+            <strong>Food Prep</strong><br>
+            <small>Bakery, Deli, Food Court</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item">
+            <strong>Mill System</strong><br>
+            <small>AI ID + Processing</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item" style="background: #fff3e0; border-color: #f59e0b;">
+            <strong>Food Grounds</strong><br>
+            <small>Processed Output</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item active">
+            <strong>Chicken Feed</strong><br>
+            <small>→ 117M Rotisseries</small>
+          </div>
+        </div>
+        <div class="highlight">
+          <strong>True circular economy:</strong> Your food waste doesn't leave the system—it becomes input for your best-selling product.
+        </div>
+        <aside class="notes">
+          This is Costco-specific and huge. 117M rotisserie chickens per year. Their waste can literally feed their own supply chain. No other retailer has this alignment.
+        </aside>
+      </section>
+
+      <!-- SLIDE 7: Data Advantage -->
+      <section>
+        <p class="section-num">02 · THE SOLUTION</p>
+        <h2>The shift from "we diverted waste" to "we prevented waste"</h2>
+        <table>
+          <tr>
+            <th style="width: 45%;">Current State</th>
+            <th style="width: 55%;">With Mill</th>
+          </tr>
+          <tr>
+            <td>"We diverted X tons from landfill"</td>
+            <td>"We reduced bakery overproduction by 23% by adjusting Thursday orders"</td>
+          </tr>
+          <tr>
+            <td>"Food waste is a challenge"</td>
+            <td>"Rotisserie chickens peak waste at 7pm—we're testing earlier markdowns"</td>
+          </tr>
+          <tr>
+            <td>"We're working on it"</td>
+            <td>"Store #427 wastes 40% less than #312—here's why"</td>
+          </tr>
+        </table>
+        <p class="source">Illustrative examples based on Mill deployment patterns.</p>
+        <aside class="notes">
+          The difference is actionability. Generic waste metrics don't drive change. Specific, real-time insights tied to procurement decisions do.
+        </aside>
+      </section>
+
+      <!-- SLIDE 8: Behavior Change -->
+      <section>
+        <p class="section-num">03 · THE PROOF</p>
+        <h2>Mill doesn't just measure waste—we change how teams work</h2>
+        <div class="metric-grid">
+          <div class="metric-box">
+            <div class="stat" style="color: var(--accent-success);">20%+</div>
+            <div class="stat-label">Waste reduction in 4mo</div>
+          </div>
+          <div class="metric-box">
+            <div class="stat" style="color: var(--accent-success);">60%</div>
+            <div class="stat-label">Users changed behavior</div>
+          </div>
+          <div class="metric-box">
+            <div class="stat" style="color: var(--accent-success);">90%</div>
+            <div class="stat-label">Waste recovery rate</div>
+          </div>
+        </div>
+        <div class="callout" style="margin-top: 24px;">
+          When staff see what they're wasting in real-time, behavior changes immediately. This is the compounding effect—awareness drives action.
+        </div>
+        <p class="source">Source: Mill consumer deployment data, 2025. Commercial pilots showing similar patterns.</p>
+        <aside class="notes">
+          This is Mill's unique differentiator. Competitors measure waste—we change behavior. The 20% reduction comes from awareness alone, before any process changes.
+        </aside>
+      </section>
+
+      <!-- SLIDE 9: Proof Point -->
+      <section>
+        <p class="section-num">03 · THE PROOF</p>
+        <h2>Amazon and Whole Foods chose Mill for their food waste intelligence</h2>
+        <div class="two-col">
+          <div class="col">
+            <h3>The partnership (2027 deployment):</h3>
+            <ul>
+              <li>Mill Commercial in Whole Foods back-of-house</li>
+              <li>Food grounds → chicken feed for WF suppliers</li>
+              <li>Amazon Climate Pledge Fund invested</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h3>What this means for Costco:</h3>
+            <ul>
+              <li>Peer validation at grocery scale</li>
+              <li>Similar operational profile</li>
+              <li>Proven circular economy model</li>
+            </ul>
+          </div>
+        </div>
+        <div class="highlight" style="margin-top: 20px;">
+          <em>Specific performance metrics available under mutual NDA. The fact that Amazon invested is the key signal.</em>
+        </div>
+        <aside class="notes">
+          Be explicit about NDA—transparency builds trust. The investment from Amazon Climate Pledge Fund validates the commercial model.
+        </aside>
+      </section>
+
+      <!-- SLIDE 10: ROI Model -->
+      <section>
+        <p class="section-num">04 · THE IMPACT</p>
+        <h2>Costco's potential: $135-445M annual value at full scale</h2>
+        <div class="two-col">
+          <div class="col">
+            <div class="highlight" style="text-align: center;">
+              <h3 style="margin: 0 0 8px 0;">Pilot (50 warehouses)</h3>
+              <div class="stat" style="font-size: 2em;">$7.5-25M</div>
+              <div class="stat-label">Annual value</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="metric-box" style="text-align: center;">
+              <h3 style="margin: 0 0 8px 0;">Full Rollout (890)</h3>
+              <div class="stat" style="font-size: 2em;">$135-445M</div>
+              <div class="stat-label">Annual value</div>
+            </div>
+          </div>
+        </div>
+        <table style="margin-top: 20px; font-size: 0.75em;">
+          <tr>
+            <th>Assumption</th>
+            <th style="text-align: right;">Conservative</th>
+            <th style="text-align: right;">Optimistic</th>
+          </tr>
+          <tr>
+            <td>Est. food waste per warehouse/year</td>
+            <td style="text-align: right;">$500K</td>
+            <td style="text-align: right;">$1M</td>
+          </tr>
+          <tr>
+            <td>Waste reduction (15-25%)</td>
+            <td style="text-align: right;">$75K</td>
+            <td style="text-align: right;">$250K</td>
+          </tr>
+          <tr>
+            <td>Procurement optimization (2x)</td>
+            <td style="text-align: right;">$150K</td>
+            <td style="text-align: right;">$500K</td>
+          </tr>
+        </table>
+        <p class="source">Based on grocery retail industry benchmarks. Methodology available upon request.</p>
+        <aside class="notes">
+          Show the math transparently. Separate pilot from full rollout. These are ranges, not promises—builds credibility with finance teams.
+        </aside>
+      </section>
+
+      <!-- SLIDE 11: How We Measure Success (NEW - Outcome-Based) -->
+      <section>
+        <p class="section-num">04 · THE IMPACT</p>
+        <h2>We measure success the same way you do—verified procurement savings</h2>
+        <div class="two-col">
+          <div class="col">
+            <h3>Our attribution methodology:</h3>
+            <ol>
+              <li><strong>Baseline capture</strong> — 60-90 days pre-deployment</li>
+              <li><strong>Market benchmark</strong> — Compare to industry standards</li>
+              <li><strong>Controlled measurement</strong> — Isolate Mill's impact</li>
+              <li><strong>Verified savings</strong> — Joint validation process</li>
+            </ol>
+          </div>
+          <div class="col">
+            <div class="key-insight">
+              <strong>We're open to outcome-aligned pricing.</strong><br><br>
+              Base subscription covers the platform. Performance bonus tied to verified savings above baseline.<br><br>
+              <em>We only profit when you do.</em>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          This is the differentiator. We're willing to tie our success to theirs. That's a fundamentally different conversation than "here's a subscription."
+        </aside>
+      </section>
+
+      <!-- SLIDE 12: Implementation -->
+      <section>
+        <p class="section-num">05 · THE PATH FORWARD</p>
+        <h2>Start small, prove value, scale with confidence</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot">Q2</div>
+            <strong>Pilot</strong><br>
+            <small>5-10 warehouses<br>West Coast</small>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">Q3</div>
+            <strong>Validate</strong><br>
+            <small>Measure results<br>Refine model</small>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">Q4</div>
+            <strong>Expand</strong><br>
+            <small>50+ warehouses<br>Full regions</small>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">'27</div>
+            <strong>Scale</strong><br>
+            <small>Full US rollout<br>890+ locations</small>
+          </div>
+        </div>
+        <div class="highlight">
+          <strong>Time to value:</strong> First actionable insights within 30 days of deployment.
+        </div>
+        <aside class="notes">
+          Start small, prove value, scale fast. This de-risks the decision. 30-day insights means they see value before the first quarterly review.
+        </aside>
+      </section>
+
+      <!-- SLIDE 13: Partnership Options -->
+      <section>
+        <p class="section-num">05 · THE PATH FORWARD</p>
+        <h2>Two paths forward—we recommend starting with a pilot</h2>
+        <div class="two-col">
+          <div class="col">
+            <div class="highlight">
+              <h3 style="margin-top: 0; color: var(--accent-lime);">Option A: Pilot Program</h3>
+              <ul style="font-size: 0.85em;">
+                <li>5-10 warehouse deployment</li>
+                <li>90-day evaluation period</li>
+                <li>Dedicated success team</li>
+                <li>No long-term commitment</li>
+              </ul>
+              <p style="margin-top: 16px;"><strong>Best for:</strong> Validating fit before scale</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="metric-box">
+              <h3 style="margin-top: 0;">Option B: Strategic Partnership</h3>
+              <ul style="font-size: 0.85em; text-align: left;">
+                <li>Multi-year agreement</li>
+                <li>Volume-based pricing</li>
+                <li>Joint innovation roadmap</li>
+                <li>Outcome-aligned incentives</li>
+              </ul>
+              <p style="margin-top: 16px;"><strong>Best for:</strong> Full commitment to transformation</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          Always lead with the low-commitment option. Let the results sell the bigger deal.
+        </aside>
+      </section>
+
+      <!-- SLIDE 14: Why Now -->
+      <section>
+        <p class="section-num">05 · THE PATH FORWARD</p>
+        <h2>The window for data advantage is closing</h2>
+        <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+          <p style="font-size: 1em; margin-bottom: 20px;">
+            <span style="color: var(--accent-lime); font-weight: bold; font-family: 'JetBrains Mono', monospace;">01</span>
+            &nbsp;&nbsp;Your <strong>2030 zero waste commitment</strong> is 4 years away. Granular data takes time to build.
+          </p>
+          <p style="font-size: 1em; margin-bottom: 20px;">
+            <span style="color: var(--accent-lime); font-weight: bold; font-family: 'JetBrains Mono', monospace;">02</span>
+            &nbsp;&nbsp;<strong>Amazon has deployed Mill at Whole Foods.</strong> The data advantage compounds over time.
+          </p>
+          <p style="font-size: 1em; margin-bottom: 20px;">
+            <span style="color: var(--accent-lime); font-weight: bold; font-family: 'JetBrains Mono', monospace;">03</span>
+            &nbsp;&nbsp;<strong>Costco's tech-forward culture</strong> (AI inventory, innovation lab) makes you an ideal partner.
+          </p>
+          <p style="font-size: 1em;">
+            <span style="color: var(--accent-lime); font-weight: bold; font-family: 'JetBrains Mono', monospace;">04</span>
+            &nbsp;&nbsp;The 117M chicken opportunity—<strong>close the loop on your own supply chain.</strong>
+          </p>
+        </div>
+        <aside class="notes">
+          Factual statements, no pressure. The chicken feed angle is uniquely Costco. The Amazon point is peer pressure but framed as "data compounds."
+        </aside>
+      </section>
+
+      <!-- SLIDE 15: CTA -->
+      <section>
+        <p class="section-num">NEXT STEPS</p>
+        <h2>Let's start a conversation</h2>
+        <br>
+        <div class="highlight" style="text-align: center;">
+          <p style="font-size: 1.1em; margin-bottom: 16px;">Schedule a technical deep-dive with our team.</p>
+          <span class="cta">Request Pilot Proposal</span>
+        </div>
+        <br>
+        <div style="font-size: 0.8em; color: var(--mill-gray); max-width: 600px; margin: 0 auto;">
+          <p><strong>What we'll cover:</strong></p>
+          <ul style="display: inline-block; text-align: left;">
+            <li>Technical integration with your systems</li>
+            <li>Detailed ROI modeling with your data</li>
+            <li>Pilot warehouse selection criteria</li>
+            <li>Chicken feed supply chain integration</li>
+          </ul>
+        </div>
+        <aside class="notes">
+          Ask for the meeting. Be specific about what the next conversation will cover. Chicken feed integration is the hook.
+        </aside>
+      </section>
+
+      <!-- SLIDE 16: Close -->
+      <section>
+        <div style="margin-bottom: 2em;">
+          <span style="font-family: 'Fraunces', serif; font-size: 3em; font-weight: 900; color: var(--mill-black);">mill</span>
+        </div>
+        <p style="font-size: 1.1em; color: var(--mill-gray);">Outsmarting food waste, together.</p>
+        <br><br>
+        <p style="font-size: 0.9em;">
+          <strong>Website:</strong> mill.com<br>
+          <strong>Email:</strong> partnerships@mill.com
+        </p>
+        <br>
+        <p style="font-size: 0.7em; color: var(--mill-light); max-width: 500px; margin: 0 auto;">
+          "Waste doesn't exist in nature, yet we create it everywhere.<br>
+          Mill is here to change that."
+        </p>
+        <aside class="notes">
+          End with the mission. Leave them thinking about the bigger picture, not just the deal.
+        </aside>
+      </section>
+
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      transition: 'fade',
+      transitionSpeed: 'fast',
+      showNotes: false,
+      controls: true,
+      progress: true,
+      center: true,
+      width: 1920,
+      height: 1080
+    });
+  </script>
+</body>
+</html>

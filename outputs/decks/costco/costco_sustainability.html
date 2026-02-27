@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Costco + Mill: Closing the Loop on Food Waste</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css">
+  <style>
+    :root {
+      --mill-green: #1a472a;
+      --mill-light: #2d5a3d;
+      --mill-accent: #4a7c59;
+      --costco-red: #e31837;
+      --costco-blue: #005daa;
+    }
+    .reveal h1 { color: var(--mill-green); font-size: 2.2em; font-weight: 700; }
+    .reveal h2 { color: var(--mill-light); font-size: 1.6em; }
+    .reveal h3 { color: var(--mill-accent); }
+    .reveal .mill-green { color: var(--mill-green); }
+    .reveal .costco-red { color: var(--costco-red); }
+    .reveal .highlight {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .reveal .stat {
+      font-size: 4em;
+      font-weight: 800;
+      color: var(--mill-green);
+      line-height: 1;
+    }
+    .reveal .stat-label {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 10px;
+    }
+    .reveal .two-col {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      gap: 40px;
+    }
+    .reveal .col {
+      flex: 1;
+      text-align: left;
+    }
+    .reveal ul { text-align: left; }
+    .reveal li { margin-bottom: 15px; }
+    .reveal .quote {
+      font-style: italic;
+      font-size: 1.1em;
+      color: #444;
+      border-left: 4px solid var(--mill-green);
+      padding-left: 20px;
+      margin: 20px 0;
+    }
+    .reveal .cta {
+      background: var(--mill-green);
+      color: white;
+      padding: 20px 40px;
+      border-radius: 8px;
+      font-size: 1.2em;
+      display: inline-block;
+    }
+    .reveal .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .reveal .metric-box {
+      background: #f5f5f5;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .reveal .metric-box .stat {
+      font-size: 2.5em;
+    }
+    .reveal .timeline {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin: 40px 0;
+    }
+    .reveal .timeline::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--mill-green);
+    }
+    .reveal .timeline-item {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .reveal .timeline-dot {
+      width: 40px;
+      height: 40px;
+      background: var(--mill-green);
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+    .reveal .circular-flow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin: 30px 0;
+    }
+    .reveal .flow-item {
+      text-align: center;
+      padding: 20px;
+      background: #f8f8f8;
+      border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .reveal .flow-arrow {
+      font-size: 2em;
+      color: var(--mill-green);
+    }
+    .reveal .source-note {
+      font-size: 0.7em;
+      color: #999;
+      margin-top: 10px;
+    }
+    .reveal .esg-badge {
+      display: inline-block;
+      background: var(--mill-green);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8em;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- SLIDE 1: Cover - Sustainability Framing -->
+      <section>
+        <h1>Costco + Mill</h1>
+        <h2 style="color: #666; font-weight: 400;">Closing the Loop on Food Waste</h2>
+        <br><br>
+        <p style="color: #888;">A Circular Economy Partnership</p>
+        <p style="color: #aaa; font-size: 0.8em;">February 2026</p>
+        <aside class="notes">
+          Opening: Lead with your excitement about Costco's zero waste 2030 commitment. This is about accelerating your sustainability journey through true circular economy.
+        </aside>
+      </section>
+
+      <!-- SLIDE 2: Environmental Impact - Lead with CO2 -->
+      <section>
+        <h2>The Environmental Imperative</h2>
+        <div class="stat">10%</div>
+        <div class="stat-label">of global greenhouse gas emissions come from food waste</div>
+        <br>
+        <p>Food waste generates <strong>more emissions than the entire aviation industry.</strong></p>
+        <div class="fragment highlight" style="margin-top: 30px;">
+          <p style="margin: 0;"><strong>80 billion pounds</strong> of food wasted in the US annually</p>
+          <p style="margin: 10px 0 0 0; font-size: 0.9em;">Food waste is the #1 material in American landfills.</p>
+        </div>
+        <aside class="notes">
+          Lead with emissions data - this is what sustainability leaders care most about. The landfill stat reinforces the scale of the opportunity.
+        </aside>
+      </section>
+
+      <!-- SLIDE 3: Circular Economy - MOVED EARLY for Sustainability audience -->
+      <section>
+        <h2>True Circular Economy: Food to Feed to Food</h2>
+        <div class="circular-flow">
+          <div class="flow-item" style="background: var(--mill-green); color: white;">
+            <strong>Food Prep</strong><br>
+            <small>Bakery, Deli, Food Court</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item">
+            <strong>Mill System</strong><br>
+            <small>AI Processing</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item" style="background: #fff3e0;">
+            <strong>Chicken Feed</strong><br>
+            <small>Food Grounds</small>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item" style="background: var(--mill-green); color: white;">
+            <strong>117M Chickens</strong><br>
+            <small>Costco Rotisserie</small>
+          </div>
+        </div>
+        <p style="margin-top: 20px;">Your food waste doesn't leave the system - it becomes input for your best-selling product.</p>
+        <p class="fragment highlight" style="padding: 15px;"><strong>Complete circularity:</strong> Waste → Feed → Eggs/Chicken → Costco Shelves → Members</p>
+        <aside class="notes">
+          This is the sustainability story. Costco can achieve true circular economy - their waste becomes input for their own poultry supply chain. This is ESG gold.
+        </aside>
+      </section>
+
+      <!-- SLIDE 4: ESG and Certification Value -->
+      <section>
+        <h2>Accelerating Your ESG Goals</h2>
+        <div class="two-col">
+          <div class="col">
+            <h3>Certifications Enabled:</h3>
+            <p>
+              <span class="esg-badge">TRUE Zero Waste</span>
+              <span class="esg-badge">LEED Credits</span>
+              <span class="esg-badge">B Corp Points</span>
+            </p>
+            <ul style="font-size: 0.9em; margin-top: 20px;">
+              <li>90%+ diversion rate documentation</li>
+              <li>Verified circularity metrics</li>
+              <li>Third-party auditable data</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h3>Reporting You'll Get:</h3>
+            <ul style="font-size: 0.9em;">
+              <li>CO2 avoided per location</li>
+              <li>Pounds diverted from landfill</li>
+              <li>Circular economy flow metrics</li>
+              <li>Year-over-year trend analysis</li>
+              <li>Store-by-store benchmarking</li>
+            </ul>
+          </div>
+        </div>
+        <p class="fragment" style="margin-top: 20px;"><strong>2030 is 4 years away.</strong> Granular sustainability data takes time to build.</p>
+        <aside class="notes">
+          Sustainability leaders need certification support and reporting. Emphasize the data trail for ESG reporting and third-party audits.
+        </aside>
+      </section>
+
+      <!-- SLIDE 5: Environmental Impact Metrics -->
+      <section>
+        <h2>Projected Environmental Impact</h2>
+        <div class="metric-grid">
+          <div class="metric-box">
+            <div class="stat" style="color: #27ae60;">90%</div>
+            <div class="stat-label">Waste recovery rate<br>(vs. 26% baseline)</div>
+          </div>
+          <div class="metric-box">
+            <div class="stat" style="color: #27ae60;">20%+</div>
+            <div class="stat-label">Source reduction<br>within 4 months</div>
+          </div>
+          <div class="metric-box">
+            <div class="stat" style="color: #27ae60;">50K+</div>
+            <div class="stat-label">Tons CO2 avoided<br>(full deployment est.)</div>
+          </div>
+        </div>
+        <br>
+        <div class="highlight">
+          <p style="margin: 0; font-size: 1.1em;"><strong>Sustainability ROI:</strong> Environmental impact + brand value + operational savings</p>
+        </div>
+        <p class="source-note">Source: Mill deployment data, 2025. CO2 estimates based on EPA food waste emissions factors.</p>
+        <aside class="notes">
+          Lead with environmental metrics, but frame the financial savings as a co-benefit. Sustainability leaders appreciate that ROI supports the business case.
+        </aside>
+      </section>
+
+      <!-- SLIDE 6: Costco's Sustainability Leadership -->
+      <section>
+        <h2>Building on Costco's Sustainability Leadership</h2>
+        <p style="font-size: 1.1em;">You've committed. Mill helps you deliver.</p>
+        <div class="metric-grid">
+          <div class="metric-box">
+            <div class="stat">2030</div>
+            <div class="stat-label">Zero waste commitment</div>
+          </div>
+          <div class="metric-box">
+            <div class="stat">890+</div>
+            <div class="stat-label">Warehouses to transform</div>
+          </div>
+          <div class="metric-box">
+            <div class="stat">117M</div>
+            <div class="stat-label">Chickens - circular opportunity</div>
+          </div>
+        </div>
+        <p class="fragment" style="margin-top: 20px;">Your food prep operations (bakery, deli, food court) are concentrated waste streams you can transform into <strong>environmental wins.</strong></p>
+        <aside class="notes">
+          Acknowledge their existing commitment. Position Mill as an accelerator of their existing sustainability goals, not a new initiative.
+        </aside>
+      </section>
+
+      <!-- SLIDE 7: Mill Solution - Sustainability Framing -->
+      <section>
+        <h2>Mill: From Waste to Resource</h2>
+        <p style="font-size: 1.2em;">Close the loop on food waste at every location.</p>
+        <br>
+        <div class="two-col">
+          <div class="col">
+            <h3>How it works:</h3>
+            <ol>
+              <li><strong>Capture</strong> - Smart bins with AI identification</li>
+              <li><strong>Transform</strong> - Food becomes chicken feed</li>
+              <li><strong>Track</strong> - Every pound documented for ESG</li>
+              <li><strong>Report</strong> - Auditable sustainability metrics</li>
+            </ol>
+          </div>
+          <div class="col">
+            <h3>Environmental benefits:</h3>
+            <ul>
+              <li>Zero food to landfill</li>
+              <li>Methane emissions avoided</li>
+              <li>Circularity achieved</li>
+              <li>Supply chain shortened</li>
+              <li>Carbon footprint reduced</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="notes">
+          Frame the solution in environmental terms. The data and AI capabilities support the sustainability story, not the other way around.
+        </aside>
+      </section>
+
+      <!-- SLIDE 8: Behavior Change for Sustainability -->
+      <section>
+        <h2>Driving Sustainable Behavior at Scale</h2>
+        <p>Mill doesn't just divert waste - we prevent it at the source.</p>
+        <br>
+        <div class="metric-grid">
+          <div class="metric-box">
+            <div class="stat" style="color: #27ae60;">60%</div>
+            <div class="stat-label">Of users changed food prep behavior</div>
+          </div>
+          <div class="metric-box">
+            <div class="stat" style="color: #27ae60;">20%+</div>
+            <div class="stat-label">Reduction in waste generated</div>
+          </div>
+          <div class="metric-box">
+            <div class="stat" style="color: #27ae60;">Real-time</div>
+            <div class="stat-label">Visibility into waste streams</div>
+          </div>
+        </div>
+        <p class="fragment" style="margin-top: 20px;">When staff see the environmental impact of their choices in real-time, behavior changes immediately.</p>
+        <p class="source-note">Source: Mill consumer deployment data, 2025. Commercial pilots showing similar patterns.</p>
+        <aside class="notes">
+          Sustainability leaders love behavior change - it shows cultural transformation, not just technology deployment.
+        </aside>
+      </section>
+
+      <!-- SLIDE 9: Whole Foods Validation -->
+      <section>
+        <h2>Proven with Industry Leaders</h2>
+        <div class="highlight">
+          <p style="font-size: 1.1em; margin: 0;">Mill is partnering with Amazon and Whole Foods (deployment begins 2027)</p>
+        </div>
+        <br>
+        <div class="two-col">
+          <div class="col">
+            <h3>The sustainability story:</h3>
+            <ul>
+              <li>True circular economy at grocery scale</li>
+              <li>Food grounds become chicken feed</li>
+              <li>Amazon Climate Pledge Fund invested</li>
+              <li>Setting the sustainability standard</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h3>What this means:</h3>
+            <ul>
+              <li>Peer-validated approach</li>
+              <li>The market is moving</li>
+              <li>First-mover advantage still available</li>
+              <li>Costco can lead, not follow</li>
+            </ul>
+          </div>
+        </div>
+        <p class="fragment" style="margin-top: 20px;"><em>Detailed environmental metrics available under mutual NDA.</em></p>
+        <aside class="notes">
+          Amazon Climate Pledge investment is the key signal for sustainability leaders. This validates the environmental credibility.
+        </aside>
+      </section>
+
+      <!-- SLIDE 10: Data for Sustainability Reporting -->
+      <section>
+        <h2>Data That Powers Your ESG Story</h2>
+        <table style="width: 100%; font-size: 0.9em;">
+          <tr style="background: var(--mill-green); color: white;">
+            <th style="padding: 15px;">Today's Reporting</th>
+            <th style="padding: 15px;">With Mill</th>
+          </tr>
+          <tr>
+            <td style="padding: 15px; border-bottom: 1px solid #ddd;">"We diverted X tons from landfill"</td>
+            <td style="padding: 15px; border-bottom: 1px solid #ddd;">"We achieved 90% circularity - waste became feed for 2M chickens"</td>
+          </tr>
+          <tr>
+            <td style="padding: 15px; border-bottom: 1px solid #ddd;">"Food waste is a challenge we're addressing"</td>
+            <td style="padding: 15px; border-bottom: 1px solid #ddd;">"We reduced food waste generation by 23% through data-driven prevention"</td>
+          </tr>
+          <tr>
+            <td style="padding: 15px;">"Working toward zero waste by 2030"</td>
+            <td style="padding: 15px;">"On track for TRUE Zero Waste certification at 450 locations this year"</td>
+          </tr>
+        </table>
+        <aside class="notes">
+          Show the difference in the ESG story they can tell. Vague claims vs. specific, verified, auditable data.
+        </aside>
+      </section>
+
+      <!-- SLIDE 11: Implementation for Sustainability -->
+      <section>
+        <h2>Path to Your 2030 Goal</h2>
+        <div class="timeline" style="margin-top: 50px;">
+          <div class="timeline-item" style="flex: 1;">
+            <div class="timeline-dot">Q2</div>
+            <strong>Pilot</strong><br>
+            <small>5-10 warehouses<br>Baseline metrics</small>
+          </div>
+          <div class="timeline-item" style="flex: 1;">
+            <div class="timeline-dot">Q3</div>
+            <strong>Validate</strong><br>
+            <small>Environmental impact<br>ESG reporting</small>
+          </div>
+          <div class="timeline-item" style="flex: 1;">
+            <div class="timeline-dot">Q4</div>
+            <strong>Expand</strong><br>
+            <small>50+ warehouses<br>Certification path</small>
+          </div>
+          <div class="timeline-item" style="flex: 1;">
+            <div class="timeline-dot">2027-30</div>
+            <strong>Scale</strong><br>
+            <small>Full rollout<br>Zero waste achieved</small>
+          </div>
+        </div>
+        <br>
+        <p class="fragment"><strong>Environmental insights within 30 days.</strong> Certification-ready data within 90 days.</p>
+        <aside class="notes">
+          Connect the timeline to their 2030 commitment. Show this is achievable within their timeframe.
+        </aside>
+      </section>
+
+      <!-- SLIDE 12: Financial Co-Benefits -->
+      <section>
+        <h2>Sustainability That Pays for Itself</h2>
+        <p style="font-size: 1.1em;">Environmental impact <em>and</em> operational value.</p>
+        <br>
+        <div class="two-col">
+          <div class="col">
+            <div class="highlight" style="text-align: center;">
+              <h3 style="margin-top: 0;">Pilot (50 warehouses)</h3>
+              <div class="stat" style="font-size: 2em;">$7.5-25M</div>
+              <div class="stat-label">Annual value captured</div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="metric-box" style="text-align: center;">
+              <h3 style="margin-top: 0;">Full Rollout</h3>
+              <div class="stat" style="font-size: 2em;">$135-445M</div>
+              <div class="stat-label">Annual value potential</div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <p class="fragment" style="font-size: 0.9em;"><strong>Sustainability ROI:</strong> The financial returns make this easier to fund internally. Environmental impact is the mission; cost savings fund the mission.</p>
+        <p class="source-note">Based on grocery retail industry benchmarks for prepared foods operations.</p>
+        <aside class="notes">
+          Position cost savings as supporting the sustainability case, not leading it. This helps sustainability leaders get internal buy-in from finance.
+        </aside>
+      </section>
+
+      <!-- SLIDE 13: Why Now - Sustainability Framing -->
+      <section>
+        <h2>The Sustainability Moment</h2>
+        <div style="text-align: left; max-width: 800px; margin: 0 auto;">
+          <p style="font-size: 1.1em; margin-bottom: 25px;">
+            <span style="color: var(--mill-green); font-weight: bold;">1.</span>
+            Your <strong>2030 zero waste commitment</strong> is 4 years away. Data infrastructure takes time to build.
+          </p>
+          <p style="font-size: 1.1em; margin-bottom: 25px;">
+            <span style="color: var(--mill-green); font-weight: bold;">2.</span>
+            <strong>True circular economy is achievable.</strong> Your waste can feed your chickens - complete the loop.
+          </p>
+          <p style="font-size: 1.1em; margin-bottom: 25px;">
+            <span style="color: var(--mill-green); font-weight: bold;">3.</span>
+            <strong>Amazon Climate Pledge has validated this approach.</strong> The market is moving toward circular.
+          </p>
+          <p style="font-size: 1.1em;">
+            <span style="color: var(--mill-green); font-weight: bold;">4.</span>
+            <strong>Lead, don't follow.</strong> Set the standard for retail sustainability.
+          </p>
+        </div>
+        <aside class="notes">
+          Frame urgency around environmental leadership, not competitive pressure. Sustainability leaders respond to mission, not fear.
+        </aside>
+      </section>
+
+      <!-- SLIDE 14: Call to Action -->
+      <section>
+        <h2>Let's Close the Loop Together</h2>
+        <br>
+        <div class="highlight">
+          <p style="font-size: 1.2em; margin-bottom: 20px;">Start the journey to true circular economy.</p>
+          <div class="cta">Schedule a Sustainability Deep-Dive</div>
+        </div>
+        <br><br>
+        <div style="font-size: 0.9em; color: #666;">
+          <p><strong>What we'll cover:</strong></p>
+          <ul style="display: inline-block; text-align: left;">
+            <li>Environmental impact modeling</li>
+            <li>ESG reporting and certification path</li>
+            <li>Circular economy supply chain integration</li>
+            <li>2030 goal acceleration roadmap</li>
+          </ul>
+        </div>
+        <aside class="notes">
+          Frame the next step around sustainability outcomes, not technical or financial details.
+        </aside>
+      </section>
+
+      <!-- SLIDE 15: Contact -->
+      <section>
+        <h1 style="color: var(--mill-green);">Mill</h1>
+        <p style="font-size: 1.2em; color: #666;">Closing the loop on food waste.</p>
+        <br><br>
+        <p>
+          <strong>Website:</strong> mill.com<br>
+          <strong>Email:</strong> partnerships@mill.com
+        </p>
+        <br>
+        <p style="font-size: 0.8em; color: #aaa;">
+          "Waste doesn't exist in nature, yet we create it everywhere.<br>
+          Mill is here to change that."
+        </p>
+        <aside class="notes">
+          End with the environmental mission. This resonates deeply with sustainability leaders.
+        </aside>
+      </section>
+
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      transition: 'fade',
+      transitionSpeed: 'fast',
+      showNotes: false,
+      controls: true,
+      progress: true,
+      center: true,
+      width: 1200,
+      height: 700
+    });
+  </script>
+</body>
+</html>
