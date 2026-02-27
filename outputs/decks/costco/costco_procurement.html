@@ -1,148 +1,301 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Costco + Mill: Turn Waste Data into Procurement Intelligence</title>
+  <title>Mill + Costco | Procurement intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css">
+
   <style>
     :root {
-      --mill-green: #1a472a;
-      --mill-light: #2d5a3d;
-      --mill-accent: #4a7c59;
-      --costco-red: #e31837;
-      --costco-blue: #005daa;
+      --white: #ffffff;
+      --off-white: #fafafa;
+      --light-gray: #f5f5f5;
+      --border: #e5e5e5;
+      --text: #1a1a1a;
+      --text-secondary: #666666;
+      --text-muted: #999999;
+      --costco-red: #E31837;
+      --bg-canvas: #e8e8e8;
+      --blue-accent: #1976d2;
     }
-    .reveal h1 { color: var(--mill-green); font-size: 2.2em; font-weight: 700; }
-    .reveal h2 { color: var(--mill-light); font-size: 1.6em; }
-    .reveal h3 { color: var(--mill-accent); }
-    .reveal .mill-green { color: var(--mill-green); }
-    .reveal .costco-red { color: var(--costco-red); }
-    .reveal .highlight {
-      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+    body {
+      background: var(--bg-canvas);
+      margin: 0;
+      padding: 0;
     }
-    .reveal .stat {
-      font-size: 4em;
-      font-weight: 800;
-      color: var(--mill-green);
-      line-height: 1;
+
+    .reveal-viewport {
+      background: var(--bg-canvas);
     }
-    .reveal .stat-label {
-      font-size: 0.9em;
-      color: #555;
-      margin-top: 10px;
+
+    .reveal {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      color: var(--text);
     }
-    .reveal .two-col {
-      display: flex;
-      justify-content: space-around;
-      align-items: flex-start;
-      gap: 40px;
-    }
-    .reveal .col {
-      flex: 1;
+
+    .reveal .slides {
       text-align: left;
     }
-    .reveal ul { text-align: left; }
-    .reveal li { margin-bottom: 15px; }
-    .reveal .quote {
-      font-style: italic;
-      font-size: 1.1em;
-      color: #444;
-      border-left: 4px solid var(--mill-green);
-      padding-left: 20px;
-      margin: 20px 0;
+
+    .reveal .slides section {
+      width: 1280px !important;
+      height: 720px !important;
+      padding: 60px 80px !important;
+      background: var(--white);
+      box-sizing: border-box;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+      border-radius: 4px;
     }
-    .reveal .cta {
-      background: var(--mill-green);
-      color: white;
-      padding: 20px 40px;
-      border-radius: 8px;
-      font-size: 1.2em;
-      display: inline-block;
+
+    .slide-title {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 40px;
+      line-height: 1.3;
+      max-width: 900px;
     }
-    .reveal .metric-grid {
+
+    .slide-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-top: -30px;
+      margin-bottom: 40px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      text-transform: none !important;
+      letter-spacing: normal !important;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .stat-large {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 72px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-medium {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      flex: 1;
+    }
+
+    .three-col {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin: 20px 0;
+      gap: 32px;
     }
-    .reveal .metric-box {
-      background: #f5f5f5;
-      padding: 20px;
-      border-radius: 8px;
+
+    .card {
+      background: var(--off-white);
+      border-radius: 12px;
+      padding: 24px;
     }
-    .reveal .metric-box .stat {
-      font-size: 2.5em;
+
+    .card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
     }
-    .reveal .timeline {
+
+    .card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 14px;
+    }
+
+    .highlight {
+      background: var(--off-white);
+      border-left: 3px solid var(--blue-accent);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .highlight h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .highlight p {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+
+    .step {
       display: flex;
-      justify-content: space-between;
-      position: relative;
-      margin: 40px 0;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
     }
-    .reveal .timeline::before {
-      content: '';
-      position: absolute;
-      top: 20px;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--mill-green);
-    }
-    .reveal .timeline-item {
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    .reveal .timeline-dot {
-      width: 40px;
-      height: 40px;
-      background: var(--mill-green);
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      background: var(--blue-accent);
+      color: var(--white);
       border-radius: 50%;
-      margin: 0 auto 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 14px;
+      flex-shrink: 0;
     }
-    .reveal .circular-flow {
+
+    .step-content h4 {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 12px;
+      background: var(--off-white);
+    }
+
+    .timeline {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      margin: 30px 0;
+      gap: 24px;
+      margin-top: 32px;
     }
-    .reveal .flow-item {
-      text-align: center;
+
+    .timeline-phase {
+      flex: 1;
+      background: var(--off-white);
+      border-radius: 12px;
       padding: 20px;
-      background: #f8f8f8;
-      border-radius: 50%;
-      width: 140px;
-      height: 140px;
+    }
+
+    .timeline-phase h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-phase p {
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .cover-slide {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: flex-start;
+    }
+
+    .cover-title {
+      font-size: 56px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .cover-subtitle {
+      font-size: 24px;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+    }
+
+    .cover-logos {
+      display: flex;
       align-items: center;
+      gap: 24px;
     }
-    .reveal .flow-arrow {
-      font-size: 2em;
-      color: var(--mill-green);
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 28px;
     }
-    .reveal .source-note {
-      font-size: 0.7em;
-      color: #999;
-      margin-top: 10px;
+
+    .logo-costco {
+      color: var(--costco-red);
     }
-    .reveal .kpi-highlight {
-      background: #fff3e0;
-      border-left: 4px solid #ff9800;
-      padding: 15px;
-      margin: 15px 0;
-      text-align: left;
+
+    .source {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .roi-box {
+      background: var(--text);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .roi-box .stat-large {
+      color: var(--white);
+    }
+
+    .roi-box p {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .kpi-highlight {
+      background: #e3f2fd;
+      border-left: 3px solid var(--blue-accent);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+    }
+
+    .kpi-highlight p {
+      margin: 0;
+      font-size: 15px;
     }
   </style>
 </head>
@@ -150,526 +303,407 @@
   <div class="reveal">
     <div class="slides">
 
-      <!-- SLIDE 1: Cover - Procurement Framing -->
-      <section>
-        <h1>Costco + Mill</h1>
-        <h2 style="color: #666; font-weight: 400;">Turn Waste Data into Procurement Intelligence</h2>
-        <br><br>
-        <p style="color: #888;">Operational Excellence Partnership</p>
-        <p style="color: #aaa; font-size: 0.8em;">February 2026</p>
-        <aside class="notes">
-          Opening: Lead with operational efficiency. This is about giving your procurement teams data they've never had - real-time feedback on ordering accuracy.
-        </aside>
+      <!-- Slide 1: Cover -->
+      <section class="cover-slide">
+        <div class="cover-logos">
+          <span class="logo-text">mill</span>
+          <span style="color: var(--text-muted);">+</span>
+          <span class="logo-text logo-costco">Costco</span>
+        </div>
+        <h1 class="cover-title">Turn waste data into<br>procurement intelligence</h1>
+        <p class="cover-subtitle">A founding partnership for operational excellence and order optimization.</p>
+        <p style="font-size: 14px; color: var(--text-muted);">February 2026 · Procurement leader briefing · Mill Commercial launching 2027</p>
       </section>
 
-      <!-- SLIDE 2: The Procurement Blind Spot -->
+      <!-- Slide 2: The blind spot -->
       <section>
-        <h2>The Procurement Blind Spot</h2>
-        <div class="highlight">
-          <p style="font-size: 1.3em; margin: 0;">What gets wasted tells you what got over-ordered.</p>
-        </div>
-        <br>
+        <h2 class="slide-title">The procurement blind spot</h2>
+        <p class="slide-subtitle">What gets wasted tells you what got over-ordered</p>
         <div class="two-col">
-          <div class="col">
-            <h3>What you measure today:</h3>
-            <ul>
-              <li>Inventory on hand</li>
-              <li>Sales velocity</li>
-              <li>Order fulfillment</li>
-              <li>Supplier performance</li>
-            </ul>
+          <div>
+            <p>Procurement teams optimize on inventory, sales velocity, and supplier performance. But without waste data, you're missing a critical feedback signal.</p>
+            <div class="highlight" style="margin-top: 24px;">
+              <h4>The missing KPI</h4>
+              <p>What's being wasted, when, and why. This closes the loop on ordering accuracy.</p>
+            </div>
           </div>
-          <div class="col">
-            <h3 style="color: var(--costco-red);">What you don't:</h3>
-            <ul>
-              <li>What's being wasted (item-level)</li>
-              <li>When it's being wasted (day/hour)</li>
-              <li>Why it's being wasted (overproduction vs. spoilage)</li>
-              <li>Store-by-store variance</li>
-            </ul>
+          <div>
+            <table>
+              <tr>
+                <th>What you measure today</th>
+              </tr>
+              <tr>
+                <td>Inventory on hand</td>
+              </tr>
+              <tr>
+                <td>Sales velocity</td>
+              </tr>
+              <tr>
+                <td>Order fulfillment</td>
+              </tr>
+              <tr>
+                <td>Supplier performance</td>
+              </tr>
+            </table>
+            <table style="margin-top: 16px;">
+              <tr>
+                <th style="color: var(--costco-red);">What you don't</th>
+              </tr>
+              <tr>
+                <td>Item-level waste</td>
+              </tr>
+              <tr>
+                <td>Day/hour waste timing</td>
+              </tr>
+              <tr>
+                <td>Overproduction vs. spoilage</td>
+              </tr>
+              <tr>
+                <td>Location-by-location variance</td>
+              </tr>
+            </table>
           </div>
         </div>
-        <p class="fragment kpi-highlight">
-          <strong>Without waste data, your order optimization is incomplete.</strong> You're only seeing half the inventory picture.
-        </p>
-        <aside class="notes">
-          Frame waste as a procurement KPI problem. This is about closing the feedback loop on ordering - not about sustainability.
-        </aside>
       </section>
 
-      <!-- SLIDE 3: The Data Opportunity - Procurement Framing -->
+      <!-- Slide 3: Data pipeline -->
       <section>
-        <h2>Waste Stream = Procurement Intelligence</h2>
-        <p style="font-size: 1.1em;">Every item wasted is a signal about your ordering accuracy.</p>
-        <br>
-        <div style="background: #f8f8f8; padding: 30px; border-radius: 12px;">
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-dot">1</div>
-              <strong>Waste Captured</strong><br>
-              <small>Item-level data</small>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot">2</div>
-              <strong>Patterns Identified</strong><br>
-              <small>AI analysis</small>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot">3</div>
-              <strong>Insights Generated</strong><br>
-              <small>Procurement alerts</small>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot">4</div>
-              <strong>Orders Optimized</strong><br>
-              <small>Reduced overproduction</small>
-            </div>
+        <h2 class="slide-title">Waste stream becomes procurement intelligence</h2>
+        <p class="slide-subtitle">Every item wasted is a signal about ordering accuracy</p>
+        <div class="timeline" style="margin-top: 48px;">
+          <div class="timeline-phase" style="text-align: center;">
+            <div class="stat-medium" style="color: var(--blue-accent);">1</div>
+            <h4 style="margin-top: 12px;">Waste captured</h4>
+            <p>Item-level data with AI identification</p>
+          </div>
+          <div class="timeline-phase" style="text-align: center;">
+            <div class="stat-medium" style="color: var(--blue-accent);">2</div>
+            <h4 style="margin-top: 12px;">Patterns identified</h4>
+            <p>AI analysis of timing and volume</p>
+          </div>
+          <div class="timeline-phase" style="text-align: center;">
+            <div class="stat-medium" style="color: var(--blue-accent);">3</div>
+            <h4 style="margin-top: 12px;">Insights generated</h4>
+            <p>Procurement alerts and recommendations</p>
+          </div>
+          <div class="timeline-phase" style="text-align: center;">
+            <div class="stat-medium" style="color: var(--blue-accent);">4</div>
+            <h4 style="margin-top: 12px;">Orders optimized</h4>
+            <p>Data-driven order adjustments</p>
           </div>
         </div>
-        <p class="fragment" style="margin-top: 30px;"><strong>Result:</strong> Data-driven order optimization, not guesswork.</p>
-        <aside class="notes">
-          Position Mill as a data platform that closes the loop on procurement. Waste data is the missing feedback signal for inventory optimization.
-        </aside>
+        <div class="highlight" style="margin-top: 48px;">
+          <p><strong>Result:</strong> Data-driven order optimization, not guesswork. Every waste event becomes a learning signal.</p>
+        </div>
       </section>
 
-      <!-- SLIDE 4: Operational KPIs -->
+      <!-- Slide 4: Example insights -->
       <section>
-        <h2>Procurement KPIs You'll Gain</h2>
-        <div class="metric-grid">
-          <div class="metric-box">
-            <div class="stat" style="color: #27ae60;">15-25%</div>
-            <div class="stat-label">Waste reduction<br>from order optimization</div>
+        <h2 class="slide-title">What procurement insights could look like</h2>
+        <p class="slide-subtitle">Hypothetical examples based on common food service patterns</p>
+        <div class="three-col" style="margin-top: 24px;">
+          <div class="card">
+            <div class="card-label">Day-of-week pattern</div>
+            <h3>Thursday over-ordering</h3>
+            <p>"Bakery croissants consistently over-ordered Thursdays. Recommend reducing order by 15 units."</p>
           </div>
-          <div class="metric-box">
-            <div class="stat" style="color: #27ae60;">2x</div>
-            <div class="stat-label">ROI from procurement<br>efficiency gains</div>
+          <div class="card">
+            <div class="card-label">End-of-day pattern</div>
+            <h3>Rotisserie timing</h3>
+            <p>"7pm rotisserie waste suggests final batch should move 30 minutes earlier."</p>
           </div>
-          <div class="metric-box">
-            <div class="stat" style="color: #27ae60;">Real-time</div>
-            <div class="stat-label">Visibility into<br>inventory accuracy</div>
+          <div class="card">
+            <div class="card-label">Location variance</div>
+            <h3>Store benchmarking</h3>
+            <p>"Store A wastes 40% less pizza than Store B. Investigate prep practices."</p>
           </div>
         </div>
-        <br>
-        <div class="kpi-highlight">
-          <strong>Example insight:</strong> "Bakery croissants over-ordered by 23% on Thursdays at Store #427. Recommend reducing Thursday order by 15 units."
+        <div class="kpi-highlight" style="margin-top: 32px;">
+          <p><strong>These are hypotheticals.</strong> Real insights will come from pilot data. The point: item-level waste data enables specific, actionable procurement recommendations.</p>
         </div>
-        <p class="source-note">Source: Mill commercial pilot data, 2025.</p>
-        <aside class="notes">
-          Lead with operational metrics. Procurement leaders want specific, actionable KPIs - not vague promises.
-        </aside>
+        <p class="source">Mill consumer data from 100K+ households shows 89% of waste follows predictable patterns. We expect similar patterns in commercial settings.</p>
       </section>
 
-      <!-- SLIDE 5: Cost Savings Breakdown -->
+      <!-- Slide 5: Industry benchmarks -->
       <section>
-        <h2>Hard Dollar Savings</h2>
+        <h2 class="slide-title">Industry benchmarks: what's achievable</h2>
+        <p class="slide-subtitle">Based on Leanpath, Winnow, and ReFED research</p>
         <div class="two-col">
-          <div class="col">
-            <div class="highlight" style="text-align: center;">
-              <h3 style="margin-top: 0;">Pilot (50 warehouses)</h3>
-              <div class="stat" style="font-size: 2.5em;">$7.5-25M</div>
-              <div class="stat-label">Annual savings</div>
+          <div>
+            <table>
+              <tr>
+                <th colspan="2">Waste tracking ROI benchmarks</th>
+              </tr>
+              <tr>
+                <td>Typical waste reduction</td>
+                <td>20-50%</td>
+              </tr>
+              <tr>
+                <td>Payback period</td>
+                <td>3-12 months</td>
+              </tr>
+              <tr>
+                <td>Annual ROI range</td>
+                <td>2-7x</td>
+              </tr>
+            </table>
+            <p class="source">Sources: Leanpath case studies, Winnow public data, ReFED</p>
+            <div class="highlight" style="margin-top: 24px;">
+              <h4>Procurement multiplier</h4>
+              <p>ReFED estimates procurement optimization can add 1-3x the value of waste reduction alone.</p>
             </div>
           </div>
-          <div class="col">
-            <div class="metric-box" style="text-align: center;">
-              <h3 style="margin-top: 0;">Full Rollout (890 warehouses)</h3>
-              <div class="stat" style="font-size: 2.5em;">$135-445M</div>
-              <div class="stat-label">Annual savings potential</div>
+          <div>
+            <div class="card" style="margin-bottom: 20px;">
+              <div class="card-label">Conservative estimate</div>
+              <h3>15-25% waste reduction</h3>
+              <p>Adjusted for Mill's automation advantage minus commercial newness.</p>
+            </div>
+            <div class="card">
+              <div class="card-label">What we'll measure</div>
+              <h3>Actual Costco ROI</h3>
+              <p>90 days of pilot data will replace estimates with location-specific facts.</p>
             </div>
           </div>
         </div>
-        <br>
-        <table style="width: 100%; font-size: 0.8em;">
-          <tr style="background: #f5f5f5;">
-            <th style="padding: 10px; text-align: left;">Savings Source</th>
-            <th style="padding: 10px; text-align: right;">Conservative</th>
-            <th style="padding: 10px; text-align: right;">Optimistic</th>
+      </section>
+
+      <!-- Slide 6: Procurement value chain -->
+      <section>
+        <h2 class="slide-title">Beyond waste reduction: procurement leverage</h2>
+        <p class="slide-subtitle">The real value of item-level waste data</p>
+        <div class="two-col">
+          <div>
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Order optimization</h4>
+                <p>If you consistently waste 15% of romaine orders, order 15% less.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Supplier intelligence</h4>
+                <p>SKU-level waste data by supplier for negotiation leverage.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Shelf-life tracking</h4>
+                <p>Correlate waste with delivery schedules to optimize frequency.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Store benchmarking</h4>
+                <p>Identify top performers and replicate their practices.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="roi-box">
+              <p style="font-size: 14px; margin-bottom: 16px;">Procurement multiplier</p>
+              <div class="stat-large" style="font-size: 56px;">1-3x</div>
+              <p style="margin-top: 8px;">Additional value from procurement optimization</p>
+              <p style="font-size: 12px; margin-top: 16px; color: rgba(255,255,255,0.5);">Source: ReFED Roadmap 2030</p>
+            </div>
+            <div class="kpi-highlight" style="margin-top: 24px; background: var(--off-white);">
+              <p>Waste data creates negotiation leverage you've never had. Supplier A's bread waste rate vs. Supplier B becomes a data point.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 7: Before/after -->
+      <section>
+        <h2 class="slide-title">Before and after: procurement visibility</h2>
+        <table style="margin-top: 32px;">
+          <tr>
+            <th style="width: 45%;">Current state</th>
+            <th style="width: 45%;">With Mill data</th>
           </tr>
           <tr>
-            <td style="padding: 10px;">Direct waste reduction (15-25%)</td>
-            <td style="padding: 10px; text-align: right;">$75K/warehouse</td>
-            <td style="padding: 10px; text-align: right;">$250K/warehouse</td>
+            <td>"Bakery seems to have waste issues"</td>
+            <td>"Croissants over-ordered by X% on Thursdays, adjusting order"</td>
           </tr>
           <tr>
-            <td style="padding: 10px;">Procurement optimization (2x multiplier)</td>
-            <td style="padding: 10px; text-align: right;">$75K/warehouse</td>
-            <td style="padding: 10px; text-align: right;">$250K/warehouse</td>
+            <td>"We think we're ordering right"</td>
+            <td>"7pm rotisserie peak waste identified, testing earlier production cutoff"</td>
           </tr>
-          <tr style="background: #e8f5e9; font-weight: bold;">
-            <td style="padding: 10px;">Total per-warehouse annual value</td>
-            <td style="padding: 10px; text-align: right;">$150K</td>
-            <td style="padding: 10px; text-align: right;">$500K</td>
+          <tr>
+            <td>"Store performance varies"</td>
+            <td>"Store A wastes X% less than Store B, replicating best practices"</td>
+          </tr>
+          <tr>
+            <td>"Supplier discussions are qualitative"</td>
+            <td>"SKU-level waste data for supplier negotiations"</td>
           </tr>
         </table>
-        <p class="source-note">Based on grocery retail industry benchmarks for prepared foods operations. Methodology available upon request.</p>
-        <aside class="notes">
-          Show the math. Procurement leaders want transparency on how savings are calculated. The 2x procurement multiplier is the key differentiator.
-        </aside>
+        <div class="highlight" style="margin-top: 32px;">
+          <p><strong>The difference:</strong> Vague observations vs. actionable data. The X% values will come from pilot measurement.</p>
+        </div>
       </section>
 
-      <!-- SLIDE 6: Costco's Operational Scale -->
+      <!-- Slide 8: Costco operational fit -->
       <section>
-        <h2>Costco's Procurement Opportunity</h2>
-        <p style="font-size: 1.1em;">You have the scale and operational discipline to capture this value.</p>
-        <div class="metric-grid">
-          <div class="metric-box">
-            <div class="stat">890+</div>
-            <div class="stat-label">Warehouses - consistent operations</div>
-          </div>
-          <div class="metric-box">
-            <div class="stat">$254B</div>
-            <div class="stat-label">Revenue - at scale</div>
-          </div>
-          <div class="metric-box">
-            <div class="stat">117M</div>
-            <div class="stat-label">Rotisserie chickens/year</div>
-          </div>
-        </div>
-        <p class="fragment" style="margin-top: 20px;">Bakery, deli, food court, prepared foods - <strong>concentrated, high-volume operations you can optimize.</strong></p>
-        <div class="fragment kpi-highlight">
-          <strong>Your advantage:</strong> Standardized operations mean learnings from one store apply across all stores.
-        </div>
-        <aside class="notes">
-          Acknowledge their operational excellence. Costco's standardization makes them an ideal candidate for rapid scaling of optimization insights.
-        </aside>
-      </section>
-
-      <!-- SLIDE 7: Mill Solution - Operations Framing -->
-      <section>
-        <h2>Mill: The Data Platform for Procurement</h2>
-        <p style="font-size: 1.2em;">Turn waste streams into actionable procurement insights.</p>
-        <br>
+        <h2 class="slide-title">Costco's operational advantage</h2>
+        <p class="slide-subtitle">Standardization enables scalable optimization</p>
         <div class="two-col">
-          <div class="col">
-            <h3>Data you capture:</h3>
-            <ul>
-              <li>Item-level waste identification</li>
-              <li>Timing patterns (day/hour)</li>
-              <li>Location comparisons</li>
-              <li>Trend analysis</li>
-              <li>Ordering variance tracking</li>
-            </ul>
-          </div>
-          <div class="col">
-            <h3>Actions you take:</h3>
-            <ul>
-              <li>Adjust ordering quantities</li>
-              <li>Optimize production schedules</li>
-              <li>Identify underperforming SKUs</li>
-              <li>Benchmark store performance</li>
-              <li>Reduce carrying costs</li>
-            </ul>
-          </div>
-        </div>
-        <aside class="notes">
-          Frame Mill as a procurement intelligence platform. The waste handling is the mechanism; the insights are the value.
-        </aside>
-      </section>
-
-      <!-- SLIDE 8: Operational Before/After -->
-      <section>
-        <h2>Before and After: Procurement Visibility</h2>
-        <table style="width: 100%; font-size: 0.9em;">
-          <tr style="background: var(--mill-green); color: white;">
-            <th style="padding: 15px;">Current State</th>
-            <th style="padding: 15px;">With Mill</th>
-          </tr>
-          <tr>
-            <td style="padding: 15px; border-bottom: 1px solid #ddd;">"Bakery seems to have waste issues"</td>
-            <td style="padding: 15px; border-bottom: 1px solid #ddd;">"Croissants over-ordered by 23% on Thursdays - adjusting order"</td>
-          </tr>
-          <tr>
-            <td style="padding: 15px; border-bottom: 1px solid #ddd;">"We think we're ordering right"</td>
-            <td style="padding: 15px; border-bottom: 1px solid #ddd;">"7pm rotisserie peak waste identified - testing earlier markdowns"</td>
-          </tr>
-          <tr>
-            <td style="padding: 15px; border-bottom: 1px solid #ddd;">"Store performance varies"</td>
-            <td style="padding: 15px; border-bottom: 1px solid #ddd;">"Store #427 wastes 40% less than #312 - replicating best practices"</td>
-          </tr>
-          <tr>
-            <td style="padding: 15px;">"Supplier discussions are qualitative"</td>
-            <td style="padding: 15px;">"SKU-level waste data for supplier negotiations"</td>
-          </tr>
-        </table>
-        <aside class="notes">
-          Concrete examples resonate with operations leaders. Show the difference between vague observations and actionable data.
-        </aside>
-      </section>
-
-      <!-- SLIDE 9: Behavior Change = Process Improvement -->
-      <section>
-        <h2>Driving Process Improvement at Scale</h2>
-        <p>When teams see waste data in real-time, behavior changes immediately.</p>
-        <br>
-        <div class="metric-grid">
-          <div class="metric-box">
-            <div class="stat" style="color: #27ae60;">20%+</div>
-            <div class="stat-label">Waste reduction within first 4 months</div>
-          </div>
-          <div class="metric-box">
-            <div class="stat" style="color: #27ae60;">60%</div>
-            <div class="stat-label">Of staff changed ordering/prep behavior</div>
-          </div>
-          <div class="metric-box">
-            <div class="stat" style="color: #27ae60;">30 days</div>
-            <div class="stat-label">Time to first actionable insights</div>
-          </div>
-        </div>
-        <p class="fragment kpi-highlight">
-          <strong>Operational insight:</strong> The 20% reduction comes from awareness alone - before any formal process changes.
-        </p>
-        <p class="source-note">Source: Mill deployment data, 2025. Commercial pilots showing similar patterns.</p>
-        <aside class="notes">
-          Frame behavior change as process improvement. Operations leaders appreciate that visibility drives accountability.
-        </aside>
-      </section>
-
-      <!-- SLIDE 10: Proven at Scale -->
-      <section>
-        <h2>Validated at Grocery Scale</h2>
-        <div class="highlight">
-          <p style="font-size: 1.1em; margin: 0;">Mill is partnering with Amazon and Whole Foods (deployment begins 2027)</p>
-        </div>
-        <br>
-        <div class="two-col">
-          <div class="col">
-            <h3>The operational proof:</h3>
-            <ul>
-              <li>Back-of-house deployment at scale</li>
-              <li>Similar operational profile to Costco</li>
-              <li>Procurement optimization validated</li>
-              <li>Integration with existing systems</li>
-            </ul>
-          </div>
-          <div class="col">
-            <h3>What this means:</h3>
-            <ul>
-              <li>Proven at grocery retail scale</li>
-              <li>Operational complexity solved</li>
-              <li>De-risked implementation</li>
-              <li>Best practices established</li>
-            </ul>
-          </div>
-        </div>
-        <p class="fragment" style="margin-top: 20px;"><em>Detailed operational metrics available under mutual NDA.</em></p>
-        <aside class="notes">
-          Whole Foods validation de-risks the decision. Similar scale, similar operations, similar complexity.
-        </aside>
-      </section>
-
-      <!-- SLIDE 11: Supplier Intelligence -->
-      <section>
-        <h2>Supplier Intelligence: The Hidden Value</h2>
-        <p style="font-size: 1.1em;">Waste data gives you leverage you've never had.</p>
-        <br>
-        <div class="two-col">
-          <div class="col">
-            <h3>Supplier negotiations:</h3>
-            <ul>
-              <li>SKU-level waste data by supplier</li>
-              <li>Shelf-life performance tracking</li>
-              <li>Pack-size optimization insights</li>
-              <li>Quality variance documentation</li>
-            </ul>
-          </div>
-          <div class="col">
-            <h3>Internal optimization:</h3>
-            <ul>
-              <li>High-waste SKU identification</li>
-              <li>Menu/product mix optimization</li>
-              <li>Production schedule refinement</li>
-              <li>Store-by-store benchmarking</li>
-            </ul>
-          </div>
-        </div>
-        <p class="fragment kpi-highlight">
-          <strong>Example:</strong> "Supplier A's bread waste rate is 18% vs. Supplier B at 12%. Worth revisiting supplier mix."
-        </p>
-        <aside class="notes">
-          Supplier intelligence is unique to Mill. This gives procurement teams data for negotiations they've never had access to.
-        </aside>
-      </section>
-
-      <!-- SLIDE 12: Circular Economy as Bonus -->
-      <section>
-        <h2>Bonus: Waste Becomes an Asset</h2>
-        <div class="circular-flow">
-          <div class="flow-item" style="background: var(--mill-green); color: white;">
-            <strong>Food Prep</strong><br>
-            <small>Bakery, Deli</small>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-item">
-            <strong>Mill System</strong><br>
-            <small>AI + Processing</small>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-item" style="background: #fff3e0;">
-            <strong>Chicken Feed</strong><br>
-            <small>Output Product</small>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-item" style="background: var(--mill-green); color: white;">
-            <strong>Costco Chickens</strong><br>
-            <small>Supply Chain</small>
-          </div>
-        </div>
-        <p style="margin-top: 20px;">Your unavoidable waste becomes input for your own supply chain - chicken feed for your 117M annual rotisserie chickens.</p>
-        <p class="fragment" style="font-size: 0.9em; color: #666;"><em>The sustainability story is a bonus. The core value is procurement intelligence.</em></p>
-        <aside class="notes">
-          Position circular economy as a bonus benefit, not the lead. Procurement leaders care about the data; the waste handling is just the mechanism.
-        </aside>
-      </section>
-
-      <!-- SLIDE 13: Implementation - Operations Focus -->
-      <section>
-        <h2>Implementation Roadmap</h2>
-        <div class="timeline" style="margin-top: 50px;">
-          <div class="timeline-item" style="flex: 1;">
-            <div class="timeline-dot">Q2</div>
-            <strong>Pilot</strong><br>
-            <small>5-10 warehouses<br>West Coast</small>
-          </div>
-          <div class="timeline-item" style="flex: 1;">
-            <div class="timeline-dot">Q3</div>
-            <strong>Validate</strong><br>
-            <small>Measure KPIs<br>Refine integrations</small>
-          </div>
-          <div class="timeline-item" style="flex: 1;">
-            <div class="timeline-dot">Q4</div>
-            <strong>Expand</strong><br>
-            <small>50+ warehouses<br>Regional rollout</small>
-          </div>
-          <div class="timeline-item" style="flex: 1;">
-            <div class="timeline-dot">2027</div>
-            <strong>Scale</strong><br>
-            <small>Full US rollout<br>890+ warehouses</small>
-          </div>
-        </div>
-        <br>
-        <p class="fragment"><strong>Time to insights:</strong> First procurement recommendations within 30 days of deployment.</p>
-        <aside class="notes">
-          Start small, prove value, scale fast. This de-risks the operational change for Costco.
-        </aside>
-      </section>
-
-      <!-- SLIDE 14: Partnership Options -->
-      <section>
-        <h2>Engagement Options</h2>
-        <div class="two-col">
-          <div class="col">
-            <div class="metric-box" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
-              <h3 style="margin-top: 0;">Option A: Pilot Program</h3>
-              <ul style="font-size: 0.9em;">
-                <li>5-10 warehouse deployment</li>
-                <li>90-day evaluation period</li>
-                <li>Dedicated success team</li>
-                <li>No long-term commitment</li>
-                <li>KPI dashboard access</li>
-              </ul>
+          <div>
+            <p>Costco's operational discipline makes it an ideal candidate for procurement optimization. Standardized operations mean learnings transfer across locations.</p>
+            <div class="card" style="margin-top: 24px;">
+              <div class="card-label">Scale advantage</div>
+              <h3>600+ food operations</h3>
+              <p>Insights from one location apply to all. Small percentage gains multiply across the network.</p>
+            </div>
+            <div class="card" style="margin-top: 16px;">
+              <div class="card-label">Consistency advantage</div>
+              <h3>Standardized menus</h3>
+              <p>Rotisserie chickens, pizza, hot dogs, the same everywhere. Data compounds.</p>
             </div>
           </div>
-          <div class="col">
-            <div class="metric-box">
-              <h3 style="margin-top: 0;">Option B: Strategic Partnership</h3>
-              <ul style="font-size: 0.9em;">
-                <li>Multi-year agreement</li>
-                <li>Volume-based pricing</li>
-                <li>Full data integration</li>
-                <li>Custom reporting</li>
-                <li>Priority feature development</li>
-              </ul>
+          <div>
+            <div class="three-col" style="gap: 16px;">
+              <div class="card" style="text-align: center; padding: 20px;">
+                <div class="stat-medium">600+</div>
+                <p style="font-size: 12px; margin-top: 8px;">Food courts</p>
+              </div>
+              <div class="card" style="text-align: center; padding: 20px;">
+                <div class="stat-medium">$254B</div>
+                <p style="font-size: 12px; margin-top: 8px;">Revenue scale</p>
+              </div>
+              <div class="card" style="text-align: center; padding: 20px;">
+                <div class="stat-medium">100M+</div>
+                <p style="font-size: 12px; margin-top: 8px;">Rotisseries/yr</p>
+              </div>
+            </div>
+            <div class="highlight" style="margin-top: 24px;">
+              <h4>Why this matters for procurement</h4>
+              <p>Standardized operations mean pattern recognition scales. One insight can optimize ordering across hundreds of locations.</p>
             </div>
           </div>
         </div>
-        <p class="fragment" style="margin-top: 30px;">We recommend starting with <strong>Option A</strong> - prove value with data, then scale.</p>
-        <aside class="notes">
-          Always lead with the low-commitment option. Let the data and KPIs sell the bigger deal.
-        </aside>
       </section>
 
-      <!-- SLIDE 15: Why Now - Operations Framing -->
+      <!-- Slide 9: Pilot timeline -->
       <section>
-        <h2>Why Now?</h2>
-        <div style="text-align: left; max-width: 800px; margin: 0 auto;">
-          <p style="font-size: 1.1em; margin-bottom: 25px;">
-            <span style="color: var(--mill-green); font-weight: bold;">1.</span>
-            <strong>Your competitors are gaining this intelligence.</strong> Amazon/Whole Foods deployment begins 2027.
-          </p>
-          <p style="font-size: 1.1em; margin-bottom: 25px;">
-            <span style="color: var(--mill-green); font-weight: bold;">2.</span>
-            <strong>Data compounds over time.</strong> Seasonal patterns, trend analysis, and benchmarking require historical data.
-          </p>
-          <p style="font-size: 1.1em; margin-bottom: 25px;">
-            <span style="color: var(--mill-green); font-weight: bold;">3.</span>
-            <strong>Costco's operational discipline</strong> makes you ideal for rapid scaling of insights.
-          </p>
-          <p style="font-size: 1.1em;">
-            <span style="color: var(--mill-green); font-weight: bold;">4.</span>
-            <strong>890 warehouses = massive optimization opportunity.</strong> Small percentage gains multiply.
-          </p>
+        <h2 class="slide-title">Pilot: prove the procurement value</h2>
+        <p class="slide-subtitle">5 locations, 90 days, validated ROI</p>
+        <div class="timeline">
+          <div class="timeline-phase">
+            <h4>Month 1</h4>
+            <p>Deploy Mill units. Capture baseline waste data. Begin pattern identification.</p>
+          </div>
+          <div class="timeline-phase">
+            <h4>Month 2</h4>
+            <p>Share initial procurement insights. Test ordering adjustments. Measure impact.</p>
+          </div>
+          <div class="timeline-phase">
+            <h4>Month 3</h4>
+            <p>Validate waste reduction %. Calculate ROI. Decide on expansion together.</p>
+          </div>
         </div>
-        <aside class="notes">
-          For procurement leaders, competitive intelligence and data accumulation are compelling drivers. The math on scale is undeniable.
-        </aside>
+        <div class="two-col" style="margin-top: 32px;">
+          <div class="card">
+            <div class="card-label">Time to first insights</div>
+            <h3>30 days</h3>
+            <p>Procurement patterns emerge within a month of data collection.</p>
+          </div>
+          <div class="card">
+            <div class="card-label">Pilot terms</div>
+            <h3>Founding partner pricing</h3>
+            <p>Hardware at cost, no subscription during pilot. If ROI doesn't validate, return units, no cost.</p>
+          </div>
+        </div>
       </section>
 
-      <!-- SLIDE 16: Call to Action -->
+      <!-- Slide 10: Why now -->
       <section>
-        <h2>Next Steps</h2>
-        <br>
-        <div class="highlight">
-          <p style="font-size: 1.2em; margin-bottom: 20px;">Let's prove the procurement value.</p>
-          <div class="cta">Schedule a Data Deep-Dive</div>
+        <h2 class="slide-title">The procurement case for starting now</h2>
+        <div class="two-col" style="margin-top: 32px;">
+          <div>
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Data compounds over time</h4>
+                <p>Seasonal patterns, year-over-year trends, benchmarking all require historical data.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Costco's scale multiplies gains</h4>
+                <p>600+ locations means small percentage improvements = large dollar impact.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Founding partner advantage</h4>
+                <p>Shape the product for your procurement needs. Lock in pricing before GA.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Low-risk validation</h4>
+                <p>90-day pilot proves value before any large commitment.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="roi-box">
+              <p style="font-size: 14px; margin-bottom: 16px;">Founding partner benefits</p>
+              <p style="font-size: 18px; color: var(--white); margin-bottom: 24px;">Shape the product. Lock in pricing. Lead in operational excellence.</p>
+              <p style="font-size: 14px; color: rgba(255,255,255,0.5); margin: 0;">The pilot is low-risk. The upside is procurement intelligence at scale.</p>
+            </div>
+          </div>
         </div>
-        <br><br>
-        <div style="font-size: 0.9em; color: #666;">
-          <p><strong>What we'll cover:</strong></p>
-          <ul style="display: inline-block; text-align: left;">
-            <li>Integration with your procurement systems</li>
-            <li>Detailed KPI modeling with your data</li>
-            <li>Pilot warehouse selection criteria</li>
-            <li>Rollout timeline and milestones</li>
-          </ul>
-        </div>
-        <aside class="notes">
-          Frame the next step around data and KPIs. Procurement leaders want to see the integration and measurement details.
-        </aside>
       </section>
 
-      <!-- SLIDE 17: Contact -->
-      <section>
-        <h1 style="color: var(--mill-green);">Mill</h1>
-        <p style="font-size: 1.2em; color: #666;">Turning waste data into procurement intelligence.</p>
-        <br><br>
-        <p>
-          <strong>Website:</strong> mill.com<br>
-          <strong>Email:</strong> partnerships@mill.com
-        </p>
-        <br>
-        <p style="font-size: 0.8em; color: #aaa;">
-          "What gets measured gets managed.<br>
-          What gets wasted tells you what got over-ordered."
-        </p>
-        <aside class="notes">
-          End with the operational insight. Procurement leaders appreciate the data-driven philosophy.
-        </aside>
+      <!-- Slide 11: Contact -->
+      <section style="display: flex; flex-direction: column; justify-content: center;">
+        <h2 class="slide-title" style="font-size: 40px;">Let's prove the procurement value</h2>
+        <div class="two-col" style="max-width: 800px; margin-top: 48px;">
+          <div>
+            <p style="margin-bottom: 32px;">Interested in being a founding partner for procurement intelligence? Let's discuss the pilot program.</p>
+            <p style="font-size: 16px; color: var(--text-muted); margin-bottom: 8px;">What we'll cover</p>
+            <ul style="color: var(--text-secondary); font-size: 16px; padding-left: 20px;">
+              <li>Integration with procurement systems</li>
+              <li>Detailed KPI modeling</li>
+              <li>Pilot warehouse selection</li>
+              <li>ROI validation methodology</li>
+            </ul>
+          </div>
+          <div>
+            <div class="card" style="background: var(--text); color: var(--white);">
+              <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 16px;">Next steps</p>
+              <p style="color: var(--white); font-size: 16px; margin-bottom: 12px;">1. 30-min data deep-dive</p>
+              <p style="color: var(--white); font-size: 16px; margin-bottom: 12px;">2. Integration requirements review</p>
+              <p style="color: var(--white); font-size: 16px; margin-bottom: 0;">3. Define pilot scope together</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top: 64px; font-size: 28px; font-weight: 700;">mill</p>
+        <p style="font-size: 14px; color: var(--text-muted);">Turning waste data into procurement intelligence.</p>
       </section>
 
     </div>
   </div>
+
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
   <script>
     Reveal.initialize({
       hash: true,
-      transition: 'fade',
-      transitionSpeed: 'fast',
-      showNotes: false,
-      controls: true,
-      progress: true,
+      width: 1280,
+      height: 720,
+      margin: 0.04,
       center: true,
-      width: 1200,
-      height: 700
+      transition: 'none',
+      backgroundTransition: 'none'
     });
   </script>
 </body>
