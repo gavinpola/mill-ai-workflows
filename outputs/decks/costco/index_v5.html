@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Mill + Costco | Partnership proposal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #fafafa;
+      --light-gray: #f5f5f5;
+      --border: #e5e5e5;
+      --text: #1a1a1a;
+      --text-secondary: #666666;
+      --text-muted: #999999;
+      --costco-red: #E31837;
+      --costco-blue: #005DAA;
+      --bg-canvas: #e8e8e8;
+    }
+
+    /* Page background - shows presentation boundaries */
+    body {
+      background: var(--bg-canvas);
+      margin: 0;
+      padding: 0;
+    }
+
+    .reveal-viewport {
+      background: var(--bg-canvas);
+    }
+
+    /* Reveal overrides for consistent slides */
+    .reveal {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      color: var(--text);
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .slides section {
+      width: 1280px !important;
+      height: 720px !important;
+      padding: 60px 80px !important;
+      background: var(--white);
+      box-sizing: border-box;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+      border-radius: 4px;
+    }
+
+    /* Consistent title positioning */
+    .slide-title {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 40px;
+      line-height: 1.3;
+      max-width: 900px;
+    }
+
+    .slide-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-top: -30px;
+      margin-bottom: 40px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      text-transform: none !important;
+      letter-spacing: normal !important;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    /* Stats */
+    .stat-large {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 72px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-medium {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* Grid layouts */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      flex: 1;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .four-col {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--off-white);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 14px;
+    }
+
+    /* Highlight box */
+    .highlight {
+      background: var(--off-white);
+      border-left: 3px solid var(--text);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .highlight h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .highlight p {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+
+    /* Image placeholder */
+    .img-placeholder {
+      background: var(--light-gray);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      min-height: 200px;
+    }
+
+    /* Steps */
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      background: var(--text);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 12px;
+      background: var(--off-white);
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .timeline-phase {
+      flex: 1;
+      background: var(--off-white);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .timeline-phase h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-phase p {
+      font-size: 13px;
+      margin: 0;
+    }
+
+    /* Cover slide specific */
+    .cover-slide {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .cover-title {
+      font-size: 56px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .cover-subtitle {
+      font-size: 24px;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+    }
+
+    .cover-logos {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 28px;
+    }
+
+    .logo-costco {
+      color: var(--costco-red);
+    }
+
+    /* Chart placeholder */
+    .chart-placeholder {
+      background: var(--light-gray);
+      border-radius: 12px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 14px;
+      min-height: 300px;
+    }
+
+    /* Insight card */
+    .insight-card {
+      background: var(--off-white);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .insight-card h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .insight-card p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    /* ROI box */
+    .roi-box {
+      background: var(--text);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .roi-box .stat-large {
+      color: var(--white);
+    }
+
+    .roi-box p {
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* Circular diagram */
+    .circular-diagram {
+      width: 350px;
+      height: 350px;
+      background: var(--off-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .circular-text {
+      text-align: center;
+    }
+
+    .circular-text h3 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .circular-text p {
+      font-size: 14px;
+      max-width: 200px;
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      background: var(--off-white);
+      border-radius: 100px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    /* Source citation */
+    .source {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Slide 1: Cover -->
+      <section class="cover-slide">
+        <div class="cover-logos">
+          <span class="logo-text">mill</span>
+          <span style="color: var(--text-muted);">+</span>
+          <span class="logo-text logo-costco">Costco</span>
+        </div>
+        <h1 class="cover-title">Reduce food waste.<br>Increase margins.</h1>
+        <p class="cover-subtitle">A founding partnership for automated waste tracking and procurement intelligence.</p>
+        <p style="font-size: 14px; color: var(--text-muted);">February 2026 · Pilot Program Proposal</p>
+      </section>
+
+      <!-- Slide 2: The Problem -->
+      <section>
+        <h2 class="slide-title">Food service operators lose 4-10% of food purchases to waste</h2>
+        <div class="two-col">
+          <div>
+            <p>Industry research shows commercial kitchens waste $0.04-0.10 of every dollar spent on food. For a high-volume operation like Costco food courts, that's millions annually.</p>
+            <div class="highlight" style="margin-top: 32px;">
+              <h4>The real problem</h4>
+              <p>Most operators know waste happens. Few know exactly what's being wasted, when, or why. Without item-level data, reducing waste is guesswork.</p>
+            </div>
+            <p class="source">Source: ReFED, WRAP, Leanpath industry reports</p>
+          </div>
+          <div class="img-placeholder" style="height: 100%;">
+            [Photo: Commercial food prep waste]
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: Why Now -->
+      <section>
+        <h2 class="slide-title">Why we're approaching Costco now</h2>
+        <p class="slide-subtitle">An invitation to shape the commercial product together</p>
+        <div class="two-col">
+          <div>
+            <p>Mill has spent 4 years perfecting consumer food waste technology. We've processed data from 100,000+ households and proven our AI, sensors, and behavior change model work.</p>
+            <p><strong>Now we're adapting this for commercial scale.</strong> We want to co-develop with a founding partner who can shape the product for enterprise needs.</p>
+            <div class="highlight" style="margin-top: 24px;">
+              <h4>Why Costco?</h4>
+              <p>Scale (600+ food courts), operational excellence culture, sustainability commitment, and the rotisserie chicken circular opportunity.</p>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom: 20px;">
+              <div class="card-label">What we bring</div>
+              <h3>Proven technology</h3>
+              <p>4 years of R&D, AI trained on millions of food waste images, precision sensors, behavior change methodology</p>
+            </div>
+            <div class="card">
+              <div class="card-label">What we need</div>
+              <h3>Real-world validation</h3>
+              <p>Commercial kitchen environment testing, operator feedback, enterprise integration requirements</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4: What We've Learned -->
+      <section>
+        <h2 class="slide-title">What we've learned from 100,000+ households</h2>
+        <p class="slide-subtitle">Consumer insights that apply to commercial settings</p>
+        <div class="four-col" style="margin-top: 24px;">
+          <div class="card" style="text-align: center;">
+            <div class="stat-medium">37%</div>
+            <p style="margin-top: 12px;">of food waste is produce—same as commercial kitchens</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div class="stat-medium">2.5x</div>
+            <p style="margin-top: 12px;">reduction in waste when users see real-time data</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div class="stat-medium">92%</div>
+            <p style="margin-top: 12px;">AI accuracy on food identification (500+ categories)</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div class="stat-medium">89%</div>
+            <p style="margin-top: 12px;">of waste follows predictable weekly patterns</p>
+          </div>
+        </div>
+        <div class="highlight" style="margin-top: 32px;">
+          <h4>The key insight</h4>
+          <p>Visibility drives behavior change. When people (or operators) see exactly what they're wasting in real-time, they change their habits. We've proven this at consumer scale—now we're bringing it to commercial.</p>
+        </div>
+      </section>
+
+      <!-- Slide 5: Mill Commercial Concept -->
+      <section>
+        <h2 class="slide-title">Mill Commercial: adapting proven technology for enterprise</h2>
+        <p class="slide-subtitle">Smart waste bins with computer vision and analytics</p>
+        <div class="two-col">
+          <div>
+            <p>Mill Commercial adapts our consumer technology for commercial kitchens: integrated cameras and sensors that automatically identify and log every item disposed.</p>
+            <div class="three-col" style="margin-top: 32px;">
+              <div class="card">
+                <div class="card-label">AI vision</div>
+                <h3>Auto-identify</h3>
+                <p>500+ food categories, trained on millions of images</p>
+              </div>
+              <div class="card">
+                <div class="card-label">Sensors</div>
+                <h3>Precision weight</h3>
+                <p>±5g accuracy, validated against CV estimates</p>
+              </div>
+              <div class="card">
+                <div class="card-label">Analytics</div>
+                <h3>Real-time data</h3>
+                <p>Dashboard, alerts, procurement insights</p>
+              </div>
+            </div>
+          </div>
+          <div class="img-placeholder" style="height: 100%;">
+            [Concept: Mill Commercial unit design]
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 6: How It Works -->
+      <section>
+        <h2 class="slide-title">How it works</h2>
+        <p class="slide-subtitle">Three steps from waste to insight</p>
+        <div class="two-col" style="margin-top: 24px;">
+          <div>
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Staff dispose food as normal</h4>
+                <p>No change to existing workflows. The bin captures an image and weight automatically when items are added.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>AI identifies and logs each item</h4>
+                <p>Computer vision classifies the food type, estimates cost, and records the timestamp and location.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Data flows to your dashboard</h4>
+                <p>Real-time visibility into what's being wasted, when, and how much it's costing you.</p>
+              </div>
+            </div>
+          </div>
+          <div class="img-placeholder" style="height: 100%;">
+            [Concept: Dashboard mockup showing waste breakdown]
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 7: What Data Enables -->
+      <section>
+        <h2 class="slide-title">Item-level data enables specific action</h2>
+        <p class="slide-subtitle">Example insights the system could surface</p>
+        <div class="three-col" style="margin-top: 24px;">
+          <div class="insight-card">
+            <h4>Rotisserie timing</h4>
+            <p>If last batches consistently waste, system recommends moving final cook time earlier.</p>
+          </div>
+          <div class="insight-card">
+            <h4>Prep volume calibration</h4>
+            <p>Day-specific prep waste reveals over-production patterns that can be corrected.</p>
+          </div>
+          <div class="insight-card">
+            <h4>Spoilage patterns</h4>
+            <p>Correlating waste timing with delivery schedules optimizes order frequency.</p>
+          </div>
+          <div class="insight-card">
+            <h4>End-of-day optimization</h4>
+            <p>Data shows exactly when to reduce holding inventory without affecting availability.</p>
+          </div>
+          <div class="insight-card">
+            <h4>Seasonal adjustment</h4>
+            <p>Demand patterns by season inform prep quantities throughout the year.</p>
+          </div>
+          <div class="insight-card">
+            <h4>Location benchmarking</h4>
+            <p>Compare waste across locations to identify training opportunities.</p>
+          </div>
+        </div>
+        <div class="highlight" style="margin-top: 24px;">
+          <p><strong>The difference:</strong> Generic "reduce waste" advice vs. specific "make 12 fewer pizzas on Tuesdays" recommendations.</p>
+        </div>
+      </section>
+
+      <!-- Slide 8: Circular Economy -->
+      <section>
+        <h2 class="slide-title">The circular opportunity: waste becomes feed</h2>
+        <p class="slide-subtitle">A unique angle for Costco's rotisserie business</p>
+        <div class="two-col">
+          <div>
+            <p>Mill doesn't just track waste—it processes it. Our consumer product dehydrates food scraps into nutrient-rich material suitable for chicken feed.</p>
+            <p>For Costco, this creates a potential circular loop: food waste from food courts could eventually feed the chickens that become Costco rotisserie chickens.</p>
+            <div class="highlight" style="margin-top: 24px;">
+              <h4>Why this matters</h4>
+              <p>Costco sells 100+ million rotisserie chickens annually. A waste-to-feed story aligns with member sustainability expectations.</p>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: center;">
+            <div class="circular-diagram">
+              <div class="circular-text">
+                <h3>Circular vision</h3>
+                <p>Food court waste → Mill processing → Chicken feed → Costco chickens</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 9: Expected Economics -->
+      <section>
+        <h2 class="slide-title">Expected economics: what comparable solutions achieve</h2>
+        <p class="slide-subtitle">Based on industry benchmarks, not Mill commercial data (we don't have it yet)</p>
+        <div class="two-col">
+          <div>
+            <table>
+              <tr>
+                <th colspan="2">Industry benchmarks</th>
+              </tr>
+              <tr>
+                <td>Typical waste reduction (Leanpath, Winnow)</td>
+                <td>20-50%</td>
+              </tr>
+              <tr>
+                <td>Payback period</td>
+                <td>3-12 months</td>
+              </tr>
+              <tr>
+                <td>ROI range</td>
+                <td>2-7x annually</td>
+              </tr>
+            </table>
+            <p class="source">Sources: Leanpath case studies, Winnow public data, ReFED</p>
+            <div class="highlight" style="margin-top: 24px;">
+              <h4>Our hypothesis</h4>
+              <p>Mill's AI and automation should outperform manual-entry competitors. The pilot will validate this.</p>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom: 20px;">
+              <div class="card-label">Conservative estimate</div>
+              <h3>15-25% waste reduction</h3>
+              <p>Based on Leanpath's ~50% and Winnow's ~30% with adjustment for our automation advantage minus commercial newness.</p>
+            </div>
+            <div class="card">
+              <div class="card-label">What we'll measure in pilot</div>
+              <h3>Actual ROI for Costco</h3>
+              <p>90 days of real data will replace these estimates with facts specific to your operation.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 10: Beyond Waste Reduction -->
+      <section>
+        <h2 class="slide-title">Beyond waste reduction: procurement intelligence</h2>
+        <p class="slide-subtitle">The real value of item-level waste data</p>
+        <div class="two-col">
+          <div>
+            <p>Waste tracking is table stakes. The bigger opportunity is connecting waste data to purchasing decisions.</p>
+            <p>If you consistently waste 15% of romaine orders, you should order 15% less. The data makes the case—and tracks the improvement.</p>
+            <div class="highlight" style="margin-top: 24px;">
+              <h4>Industry context</h4>
+              <p>ReFED estimates procurement optimization can add 1-3x the value of waste reduction alone. We want to prove this with Costco data.</p>
+            </div>
+          </div>
+          <div>
+            <div class="three-col" style="gap: 16px;">
+              <div class="card" style="text-align: center; padding: 20px;">
+                <div class="stat-medium">1-3x</div>
+                <p style="font-size: 12px; margin-top: 8px;">Additional value from procurement optimization</p>
+              </div>
+              <div class="card" style="text-align: center; padding: 20px;">
+                <div class="stat-medium">90</div>
+                <p style="font-size: 12px; margin-top: 8px;">days to meaningful procurement insights</p>
+              </div>
+              <div class="card" style="text-align: center; padding: 20px;">
+                <div class="stat-medium">$0</div>
+                <p style="font-size: 12px; margin-top: 8px;">added cost if waste data already collected</p>
+              </div>
+            </div>
+            <p class="source" style="margin-top: 16px;">Source: ReFED Roadmap 2030</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 11: Pilot Proposal -->
+      <section>
+        <h2 class="slide-title">Pilot proposal: 5 locations, 90 days</h2>
+        <p class="slide-subtitle">Co-development partnership, not vendor relationship</p>
+        <div class="timeline">
+          <div class="timeline-phase">
+            <h4>Month 1</h4>
+            <p>Install Mill units at 5 Costco food courts. Baseline data capture. Operator feedback on UX.</p>
+          </div>
+          <div class="timeline-phase">
+            <h4>Month 2</h4>
+            <p>Share initial insights with managers. Test intervention recommendations. Iterate on dashboard.</p>
+          </div>
+          <div class="timeline-phase">
+            <h4>Month 3</h4>
+            <p>Measure waste reduction. Document ROI. Decide on broader rollout together.</p>
+          </div>
+        </div>
+        <div class="two-col" style="margin-top: 32px;">
+          <div class="card">
+            <div class="card-label">Pilot terms</div>
+            <h3>Founding partner pricing</h3>
+            <p>Hardware at cost. No subscription during pilot. Joint ownership of learnings. Input on product roadmap.</p>
+          </div>
+          <div class="card">
+            <div class="card-label">Success criteria</div>
+            <h3>Measurable waste reduction</h3>
+            <p>We'll define specific metrics together. If we don't hit them, Costco can return units—no cost.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 12: What Costco Gets -->
+      <section>
+        <h2 class="slide-title">What Costco gets as a founding partner</h2>
+        <div class="two-col" style="margin-top: 32px;">
+          <div>
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Shape the product</h4>
+                <p>Direct input on features, integrations, and UX before general availability.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Founding partner pricing</h4>
+                <p>Locked-in rates significantly below market when we launch commercially.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>First-mover advantage</h4>
+                <p>Lead your category in waste reduction and sustainability metrics.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Circular economy story</h4>
+                <p>Potential to close the loop on food waste → chicken feed before competitors.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="roi-box">
+              <p style="font-size: 18px; margin-bottom: 16px; color: rgba(255,255,255,0.7);">What Mill gets</p>
+              <p style="font-size: 16px; color: var(--white); margin-bottom: 24px;">Real-world commercial validation with a world-class operator. Your feedback makes our product better for everyone.</p>
+              <p style="font-size: 14px; color: rgba(255,255,255,0.5); margin: 0;">This is partnership, not a sales pitch.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 13: Contact -->
+      <section style="display: flex; flex-direction: column; justify-content: center;">
+        <h2 class="slide-title" style="font-size: 40px;">Let's explore this together</h2>
+        <div class="two-col" style="max-width: 800px; margin-top: 48px;">
+          <div>
+            <p style="margin-bottom: 32px;">Interested in being a founding partner? Let's schedule a conversation to discuss the pilot program.</p>
+            <p style="font-size: 16px; color: var(--text-muted); margin-bottom: 8px;">Contact</p>
+            <p style="font-size: 20px; margin-bottom: 4px;"><strong>Harry Tannenbaum</strong></p>
+            <p style="font-size: 16px;">President, Mill</p>
+          </div>
+          <div>
+            <div class="card" style="background: var(--text); color: var(--white);">
+              <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 16px;">Next steps</p>
+              <p style="color: var(--white); font-size: 16px; margin-bottom: 12px;">1. 30-min intro call</p>
+              <p style="color: var(--white); font-size: 16px; margin-bottom: 12px;">2. Site visit to see consumer product</p>
+              <p style="color: var(--white); font-size: 16px; margin-bottom: 0;">3. Define pilot scope together</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top: 64px; font-size: 28px; font-weight: 700;">mill</p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      width: 1280,
+      height: 720,
+      margin: 0.04,
+      center: true,
+      transition: 'none',
+      backgroundTransition: 'none'
+    });
+  </script>
+</body>
+</html>

@@ -24,7 +24,7 @@ The system:
 - Monitors execution through a terminal dashboard I'm calling "Jarvis"
 
 **Deliverables generated:**
-- Costco partnership deck (BCG-style, 16 slides, with outcome-based positioning)
+- Costco partnership deck (13 slides, consistent format, story-driven with outcome-based positioning)
 - 3 audience variants of the same deck
 - Camera/CV architecture deep-dive (interactive explorer)
 - Outcome-based pricing strategy doc (the "data piece" you asked about)
@@ -73,7 +73,7 @@ Document the methodology upfront and 60%+ of post-hoc disputes go away.
 - Be transparent about variables: "Results depend on baseline accuracy, staff engagement, menu consistency"
 - Tiered guarantees based on customer commitment level
 
-The full analysis is here: [Outcome-Based Pricing Strategy](https://gavinpola.github.io/mill-ai-workflows/outputs/strategy/outcome_based_pricing_strategy.md)
+The full analysis is here: [Outcome-Based Pricing Strategy](https://gavinpola.github.io/mill-ai-workflows/outputs/strategy/outcome_based_pricing_strategy.html)
 
 ---
 
