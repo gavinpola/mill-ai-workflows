@@ -3,22 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mill AI Workflow System | Portfolio</title>
-
+  <title>Mill AI workflow system</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Fraunces:wght@400;600;900&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --mill-black: #0a0a0a;
-      --mill-charcoal: #1a1a1a;
-      --mill-slate: #2d2d2d;
-      --mill-gray: #4a4a4a;
-      --mill-light: #888;
-      --mill-cream: #fafaf8;
-      --accent-lime: #84cc16;
-      --accent-cyan: #06b6d4;
+      --white: #ffffff;
+      --off-white: #fafafa;
+      --light-gray: #f5f5f5;
+      --border: #e5e5e5;
+      --text: #1a1a1a;
+      --text-secondary: #666666;
+      --text-muted: #999999;
     }
 
     * {
@@ -29,77 +26,48 @@
 
     body {
       font-family: 'Space Grotesk', sans-serif;
-      background: var(--mill-black);
-      color: var(--mill-cream);
+      background: var(--white);
+      color: var(--text);
       line-height: 1.6;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
     /* Hero */
     .hero {
-      min-height: 60vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 80px 0;
-      position: relative;
+      padding: 80px 0 64px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(ellipse at 30% 20%, rgba(132, 204, 22, 0.1) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 8px 16px;
-      background: rgba(132, 204, 22, 0.1);
-      border: 1px solid rgba(132, 204, 22, 0.3);
-      border-radius: 100px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent-lime);
-      margin-bottom: 24px;
-    }
-
-    h1 {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 24px;
-    }
-
-    h1 span {
-      background: linear-gradient(135deg, var(--accent-lime), var(--accent-cyan));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle {
-      font-size: 1.2rem;
-      color: var(--mill-light);
-      max-width: 600px;
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
       margin-bottom: 32px;
     }
 
-    .stats-row {
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 48px;
+    }
+
+    /* Stats */
+    .stats {
       display: flex;
       gap: 48px;
-      margin-top: 48px;
       flex-wrap: wrap;
     }
 
@@ -109,90 +77,86 @@
 
     .stat-value {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 600;
-      color: var(--accent-lime);
+      color: var(--text);
     }
 
     .stat-label {
-      font-size: 0.85rem;
-      color: var(--mill-light);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 4px;
     }
 
     /* Sections */
     section {
-      padding: 80px 0;
-      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 64px 0;
+      border-bottom: 1px solid var(--border);
     }
 
-    .section-header {
-      margin-bottom: 48px;
+    section:last-of-type {
+      border-bottom: none;
     }
 
-    .section-num {
+    .section-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      color: var(--accent-lime);
-      letter-spacing: 0.15em;
-      margin-bottom: 12px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
     }
 
     h2 {
-      font-family: 'Fraunces', serif;
-      font-size: 2rem;
-      font-weight: 700;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 32px;
     }
 
-    /* Cards Grid */
-    .cards-grid {
+    /* Card grid */
+    .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
     }
 
     .card {
-      background: var(--mill-charcoal);
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 16px;
-      padding: 32px;
-      transition: all 0.3s ease;
+      display: block;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
       text-decoration: none;
       color: inherit;
-      display: block;
+      transition: all 0.2s;
     }
 
     .card:hover {
-      border-color: var(--accent-lime);
-      transform: translateY(-4px);
+      border-color: var(--text);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
     }
 
     .card-type {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
-      color: var(--accent-lime);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
     }
 
     .card h3 {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 8px;
     }
 
     .card p {
       font-size: 0.9rem;
-      color: var(--mill-light);
+      color: var(--text-secondary);
     }
 
-    /* Agent List */
-    .agent-list {
+    /* Agent list */
+    .agent-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
     }
 
     .agent-item {
@@ -200,44 +164,45 @@
       align-items: center;
       gap: 12px;
       padding: 16px;
-      background: var(--mill-charcoal);
+      background: var(--off-white);
       border-radius: 8px;
     }
 
     .agent-dot {
       width: 8px;
       height: 8px;
-      background: var(--accent-lime);
+      background: var(--text);
       border-radius: 50%;
+      flex-shrink: 0;
     }
 
     .agent-name {
       font-weight: 500;
+      font-size: 0.95rem;
     }
 
     .agent-model {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--mill-light);
+      font-size: 0.7rem;
+      color: var(--text-muted);
     }
 
-    /* Context Box */
+    /* Context box */
     .context-box {
-      background: linear-gradient(135deg, rgba(132, 204, 22, 0.08) 0%, rgba(6, 182, 212, 0.05) 100%);
-      border-left: 3px solid var(--accent-lime);
+      background: var(--off-white);
+      border-left: 3px solid var(--text);
+      padding: 24px 28px;
       border-radius: 0 12px 12px 0;
-      padding: 32px;
-      margin-top: 48px;
+      margin-top: 32px;
     }
 
     .context-box h3 {
-      font-size: 1.1rem;
-      margin-bottom: 16px;
-      color: var(--accent-lime);
+      font-size: 1rem;
+      margin-bottom: 8px;
     }
 
     .context-box p {
-      color: var(--mill-light);
+      color: var(--text-secondary);
       font-size: 0.95rem;
     }
 
@@ -245,28 +210,36 @@
     footer {
       padding: 48px 0;
       text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.05);
+      border-top: 1px solid var(--border);
     }
 
     .footer-logo {
-      font-family: 'Fraunces', serif;
-      font-size: 1.5rem;
-      font-weight: 900;
+      font-size: 1.25rem;
+      font-weight: 700;
       margin-bottom: 8px;
     }
 
     .footer-text {
-      font-size: 0.85rem;
-      color: var(--mill-light);
+      font-size: 0.875rem;
+      color: var(--text-muted);
     }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .stats-row {
+      .hero {
+        padding: 48px 0;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .stats {
         gap: 32px;
       }
       .stat-value {
-        font-size: 2rem;
+        font-size: 1.5rem;
+      }
+      section {
+        padding: 48px 0;
       }
     }
   </style>
@@ -276,87 +249,85 @@
   <div class="container">
     <!-- Hero -->
     <section class="hero">
-      <div class="badge">AI Workflow Demonstration</div>
-      <h1>Mill <span>AI Workflow</span> System</h1>
+      <div class="logo">mill</div>
+      <h1>AI workflow system</h1>
       <p class="subtitle">
         A multi-agent system for automated target research, marketing deck generation,
-        strategic analysis, and self-review—built in a few hours to demonstrate
+        strategic analysis, and self-review. Built in a few hours to demonstrate
         reusable AI workflows for Mill's commercial operations.
       </p>
 
-      <div class="stats-row">
+      <div class="stats">
         <div class="stat">
           <div class="stat-value">~3hrs</div>
-          <div class="stat-label">Build Time</div>
+          <div class="stat-label">Build time</div>
         </div>
         <div class="stat">
           <div class="stat-value">7</div>
-          <div class="stat-label">Specialized Agents</div>
+          <div class="stat-label">Specialized agents</div>
         </div>
         <div class="stat">
           <div class="stat-value">5</div>
-          <div class="stat-label">Deck Variants</div>
+          <div class="stat-label">Deck variants</div>
         </div>
         <div class="stat">
           <div class="stat-value">3</div>
-          <div class="stat-label">Reusable Frameworks</div>
+          <div class="stat-label">Reusable frameworks</div>
         </div>
       </div>
     </section>
 
     <!-- Deliverables -->
     <section>
-      <div class="section-header">
-        <div class="section-num">01 · DELIVERABLES</div>
-        <h2>Generated Outputs</h2>
-      </div>
+      <div class="section-label">01 · Deliverables</div>
+      <h2>Generated outputs</h2>
 
-      <div class="cards-grid">
-        <a href="outputs/decks/costco/index_v3.html" class="card">
-          <div class="card-type">Marketing Deck</div>
-          <h3>Costco Partnership Proposal</h3>
-          <p>16-slide reveal.js presentation with BCG-style design, outcome-based positioning, and circular economy narrative.</p>
+      <div class="card-grid">
+        <a href="outputs/decks/costco/index_v4.html" class="card">
+          <div class="card-type">Marketing deck</div>
+          <h3>Costco partnership proposal</h3>
+          <p>13-slide presentation with consistent formatting, story flow, and outcome-based positioning.</p>
         </a>
 
         <a href="outputs/decks/costco/costco_sustainability.html" class="card">
-          <div class="card-type">Audience Variant</div>
-          <h3>Sustainability Leader Version</h3>
+          <div class="card-type">Audience variant</div>
+          <h3>Sustainability leader version</h3>
           <p>Reordered to lead with environmental impact, ESG certification, and emissions reduction.</p>
         </a>
 
         <a href="outputs/decks/costco/costco_procurement.html" class="card">
-          <div class="card-type">Audience Variant</div>
-          <h3>Procurement Leader Version</h3>
+          <div class="card-type">Audience variant</div>
+          <h3>Procurement leader version</h3>
           <p>Leads with operational efficiency, supplier intelligence, and inventory optimization.</p>
         </a>
 
         <a href="outputs/decks/costco/costco_cfo.html" class="card">
-          <div class="card-type">Audience Variant</div>
-          <h3>CFO Version</h3>
+          <div class="card-type">Audience variant</div>
+          <h3>CFO version</h3>
           <p>Leads with ROI, payback period, 5-year TCO analysis, and risk mitigation framework.</p>
         </a>
 
         <a href="outputs/technical/camera_architecture_explorer.html" class="card">
-          <div class="card-type">Technical Analysis</div>
-          <h3>Camera/CV Architecture Explorer</h3>
-          <p>Interactive deep-dive on computer vision hardware, specs, cost calculator, and competitive analysis.</p>
+          <div class="card-type">Technical analysis</div>
+          <h3>Camera/CV architecture explorer</h3>
+          <p>Interactive deep-dive on computer vision hardware, software, and cost analysis.</p>
         </a>
 
         <a href="outputs/dashboards/sample_dashboard.html" class="card">
-          <div class="card-type">Data Visualization</div>
-          <h3>Sample Customer Dashboard</h3>
+          <div class="card-type">Data visualization</div>
+          <h3>Sample customer dashboard</h3>
           <p>Auto-generated analytics dashboard demonstrating the dashboard workflow capability.</p>
         </a>
 
-        <a href="outputs/strategy/outcome_based_pricing_strategy.md" class="card">
-          <div class="card-type">Strategic Analysis</div>
-          <h3>Outcome-Based Pricing Strategy</h3>
-          <p>Deep-dive on data monetization, attribution methodology, and "service as software" positioning.</p>
+        <a href="outputs/strategy/outcome_based_pricing_strategy.html" class="card">
+          <div class="card-type">Strategic analysis</div>
+          <h3>Outcome-based pricing strategy</h3>
+          <p>Deep-dive on data monetization, attribution methodology, and service as software positioning.</p>
         </a>
 
-        <a href="outputs/strategy/data_strategy_memo.md" class="card">
-          <div class="card-type">Strategic Analysis</div>
-          <h3>Data Strategy Memo</h3>
+        <a href="outputs/strategy/data_strategy_memo.html" class="card">
+          <div class="card-type">Strategic analysis</div>
+          <h3>Data strategy memo</h3>
           <p>Positioning Mill's data as the core value driver, with tiered application roadmap.</p>
         </a>
       </div>
@@ -364,12 +335,10 @@
 
     <!-- System Architecture -->
     <section>
-      <div class="section-header">
-        <div class="section-num">02 · SYSTEM</div>
-        <h2>Agent Architecture</h2>
-      </div>
+      <div class="section-label">02 · System</div>
+      <h2>Agent architecture</h2>
 
-      <div class="agent-list">
+      <div class="agent-grid">
         <div class="agent-item">
           <div class="agent-dot"></div>
           <div>
@@ -387,21 +356,21 @@
         <div class="agent-item">
           <div class="agent-dot"></div>
           <div>
-            <div class="agent-name">Deck Builder</div>
+            <div class="agent-name">Deck builder</div>
             <div class="agent-model">sonnet · reveal.js</div>
           </div>
         </div>
         <div class="agent-item">
           <div class="agent-dot"></div>
           <div>
-            <div class="agent-name">Deck Variants</div>
+            <div class="agent-name">Deck variants</div>
             <div class="agent-model">sonnet · audience targeting</div>
           </div>
         </div>
         <div class="agent-item">
           <div class="agent-dot"></div>
           <div>
-            <div class="agent-name">Dashboard Gen</div>
+            <div class="agent-name">Dashboard gen</div>
             <div class="agent-model">sonnet · data viz</div>
           </div>
         </div>
@@ -422,11 +391,11 @@
       </div>
 
       <div class="context-box">
-        <h3>How It Works</h3>
+        <h3>How it works</h3>
         <p>
           The system uses a Facilitator agent (Opus) to orchestrate specialized workers.
           Research agents gather competitive intelligence and company data in parallel.
-          The Deck Builder generates reveal.js presentations following BCG-style principles.
+          The Deck Builder generates reveal.js presentations following consistent design principles.
           A "Harry Tannenbaum" reviewer persona provides quality feedback before human review.
           All prompts, frameworks, and outputs are documented for reuse by Mill's team.
         </p>
@@ -435,33 +404,31 @@
 
     <!-- Documentation -->
     <section>
-      <div class="section-header">
-        <div class="section-num">03 · DOCUMENTATION</div>
-        <h2>System Documentation</h2>
-      </div>
+      <div class="section-label">03 · Documentation</div>
+      <h2>System documentation</h2>
 
-      <div class="cards-grid">
-        <a href="SYSTEM_ARCHITECTURE.md" class="card">
-          <div class="card-type">Technical Doc</div>
-          <h3>System Architecture</h3>
+      <div class="card-grid">
+        <a href="SYSTEM_ARCHITECTURE.html" class="card">
+          <div class="card-type">Technical doc</div>
+          <h3>System architecture</h3>
           <p>Complete technical blueprint with diagrams, pipelines, and extensibility patterns.</p>
         </a>
 
-        <a href="WORKFLOW_WALKTHROUGH.md" class="card">
-          <div class="card-type">Teaching Doc</div>
-          <h3>Workflow Walkthrough</h3>
+        <a href="WORKFLOW_WALKTHROUGH.html" class="card">
+          <div class="card-type">Teaching doc</div>
+          <h3>Workflow walkthrough</h3>
           <p>Step-by-step guide showing the prompting process and execution timeline.</p>
         </a>
 
-        <a href="frameworks/visual_design_system.md" class="card">
+        <a href="frameworks/visual_design_system.html" class="card">
           <div class="card-type">Framework</div>
-          <h3>Visual Design System</h3>
-          <p>Typography, color system, and BCG-style principles for deck generation.</p>
+          <h3>Visual design system</h3>
+          <p>Typography, color system, and design principles for deck generation.</p>
         </a>
 
-        <a href="frameworks/opportunity_scoring.md" class="card">
+        <a href="frameworks/opportunity_scoring.html" class="card">
           <div class="card-type">Framework</div>
-          <h3>MECE Scoring Framework</h3>
+          <h3>Opportunity scoring framework</h3>
           <p>5-dimension scoring system for evaluating and prioritizing enterprise targets.</p>
         </a>
       </div>
