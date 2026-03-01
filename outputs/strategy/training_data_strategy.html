@@ -1280,21 +1280,26 @@
             just $100/bin/year - and the data flywheel is self-sustaining.
         </p>
 
-        <div class="cost-grid">
+        <div class="cost-grid" style="grid-template-columns: repeat(2, 1fr);">
             <div class="cost-card">
-                <div class="label">Bootstrap (Pre-Launch)</div>
-                <div class="value">$135-225K</div>
-                <div class="context">One-time investment</div>
+                <div class="label">Bootstrap (Traditional)</div>
+                <div class="value" style="text-decoration: line-through; color: var(--text-muted);">$135-225K</div>
+                <div class="context">One-time, hiring contractors</div>
+            </div>
+            <div class="cost-card" style="border: 2px solid var(--green);">
+                <div class="label" style="color: var(--green);">Bootstrap (Gavin + Agents)</div>
+                <div class="value" style="color: var(--green);">$35-62K</div>
+                <div class="context">~70% savings with automation</div>
             </div>
             <div class="cost-card">
-                <div class="label">Operations (500 bins)</div>
-                <div class="value">$450-600</div>
-                <div class="context">Per bin per year</div>
+                <div class="label">Annual (Traditional)</div>
+                <div class="value" style="text-decoration: line-through; color: var(--text-muted);">$225-300K</div>
+                <div class="context">500 bins, 3 FTE labelers</div>
             </div>
-            <div class="cost-card">
-                <div class="label">Operations (5,000 bins)</div>
-                <div class="value">$100</div>
-                <div class="context">Per bin per year</div>
+            <div class="cost-card" style="border: 2px solid var(--green);">
+                <div class="label" style="color: var(--green);">Annual (Gavin + Agents)</div>
+                <div class="value" style="color: var(--green);">$103-165K</div>
+                <div class="context">~50% savings with LLM pre-labeling</div>
             </div>
         </div>
 
@@ -1302,53 +1307,136 @@
             <thead>
                 <tr>
                     <th>Item</th>
-                    <th>Bootstrap Cost</th>
-                    <th>Annual (500 bins)</th>
+                    <th>Traditional</th>
+                    <th style="color: var(--green);">Gavin + Agents</th>
+                    <th>How It's Automated</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Seed dataset collection (15K images)</td>
-                    <td>$50,000-75,000</td>
-                    <td>-</td>
+                    <td colspan="4" style="background: var(--light-gray); font-weight: 600; font-size: 0.85rem;">Bootstrap (One-Time)</td>
                 </tr>
                 <tr>
-                    <td>3D modeling for synthetic data</td>
+                    <td>Seed dataset (15K images)</td>
+                    <td>$50,000-75,000</td>
+                    <td class="check">$15,000-25,000</td>
+                    <td style="font-size: 0.8rem; color: var(--text-secondary);">Web scraping + GPT-4V filtering + batch QA</td>
+                </tr>
+                <tr>
+                    <td>3D modeling</td>
                     <td>$15,000-20,000</td>
-                    <td>-</td>
+                    <td class="check">$8,000-12,000</td>
+                    <td style="font-size: 0.8rem; color: var(--text-secondary);">AI-assisted Blender + artist cleanup</td>
                 </tr>
                 <tr>
                     <td>ML engineering</td>
                     <td>$50,000-100,000</td>
-                    <td>-</td>
+                    <td class="check">$10,000-20,000</td>
+                    <td style="font-size: 0.8rem; color: var(--text-secondary);">Claude Code writes pipelines, Gavin debugs</td>
                 </tr>
                 <tr>
                     <td>Labeling interface</td>
                     <td>$20,000-30,000</td>
-                    <td>-</td>
+                    <td class="check">$2,000-5,000</td>
+                    <td style="font-size: 0.8rem; color: var(--text-secondary);">Label Studio (free) + agent customizations</td>
+                </tr>
+                <tr style="font-weight: 600; background: var(--accent-light);">
+                    <td>Bootstrap Total</td>
+                    <td>$135,000-225,000</td>
+                    <td style="color: var(--green);">$35,000-62,000</td>
+                    <td style="font-size: 0.85rem; color: var(--accent);">~70% reduction</td>
                 </tr>
                 <tr>
-                    <td>Human labelers (3 FTE)</td>
-                    <td>-</td>
-                    <td>$150,000</td>
+                    <td colspan="4" style="background: var(--light-gray); font-weight: 600; font-size: 0.85rem;">Annual Operations (500 bins)</td>
+                </tr>
+                <tr>
+                    <td>Human labelers</td>
+                    <td>$150,000 (3 FTE)</td>
+                    <td class="check">$65,000-90,000</td>
+                    <td style="font-size: 0.8rem; color: var(--text-secondary);">1 FTE + $15K LLM API (pre-labels + 1-click confirm)</td>
                 </tr>
                 <tr>
                     <td>Labeling platform</td>
-                    <td>-</td>
                     <td>$25,000-50,000</td>
+                    <td class="check">$3,000-5,000</td>
+                    <td style="font-size: 0.8rem; color: var(--text-secondary);">Label Studio + hosting only</td>
                 </tr>
                 <tr>
                     <td>Cloud compute</td>
-                    <td>-</td>
                     <td>$50,000-100,000</td>
+                    <td class="check">$35,000-70,000</td>
+                    <td style="font-size: 0.8rem; color: var(--text-secondary);">Spot instances + agent-optimized batching</td>
                 </tr>
-                <tr style="font-weight: 600; background: var(--light-gray);">
-                    <td>Total</td>
-                    <td>$135,000-225,000</td>
+                <tr style="font-weight: 600; background: var(--accent-light);">
+                    <td>Annual Total</td>
                     <td>$225,000-300,000</td>
+                    <td style="color: var(--green);">$103,000-165,000</td>
+                    <td style="font-size: 0.85rem; color: var(--accent);">~50% reduction</td>
                 </tr>
             </tbody>
         </table>
+
+        <h3 style="margin-top: 48px; margin-bottom: 16px;">The Automated Workflow</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;">
+            How agents handle most of the heavy lifting, with humans in the loop for decisions and edge cases.
+        </p>
+
+        <div class="phase-grid">
+            <div class="phase-card">
+                <div class="phase-label">Agent #1</div>
+                <div class="phase-title">Dataset Collection</div>
+                <div class="phase-content" style="margin-top: 12px;">
+                    <p>Scrapes existing food datasets, GPT-4V filters/categorizes candidates, handles augmentation pipeline.</p>
+                    <ul>
+                        <li>Gavin reviews batches of 100 (not individual images)</li>
+                        <li>Quality control via random sampling</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="phase-card">
+                <div class="phase-label">Agent #2</div>
+                <div class="phase-title">ML Pipeline</div>
+                <div class="phase-content" style="margin-top: 12px;">
+                    <p>Claude Code writes training infrastructure, data loaders, evaluation scripts.</p>
+                    <ul>
+                        <li>Auto hyperparameter sweeps (Optuna/Ray)</li>
+                        <li>Reports results, Gavin picks config</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="phase-card">
+                <div class="phase-label">Agent #3</div>
+                <div class="phase-title">Labeling Automation</div>
+                <div class="phase-content" style="margin-top: 12px;">
+                    <p>Model predicts → LLM reviews → if both agree → auto-accept. Human only sees genuinely ambiguous.</p>
+                    <ul>
+                        <li>30 seconds/image → 3 seconds/image</li>
+                        <li>Only 10-20% needs full human review</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="phase-card">
+                <div class="phase-label">Agent #4</div>
+                <div class="phase-title">Retraining Loop</div>
+                <div class="phase-content" style="margin-top: 12px;">
+                    <p>Runs on cron (Sunday nights). Pulls labels, retrains, evaluates, packages OTA updates.</p>
+                    <ul>
+                        <li>Only alerts Gavin if something breaks</li>
+                        <li>Handles rollback automatically</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout" style="background: var(--orange-light); border-left-color: var(--orange); margin-top: 32px;">
+            <h3 style="color: var(--orange);">What Still Needs Humans</h3>
+            <p>
+                <strong>Architecture decisions</strong> (agent proposes, Gavin decides) •
+                <strong>Edge case debugging</strong> (when accuracy drops unexpectedly) •
+                <strong>Quality audits</strong> (random sampling of auto-accepted labels) •
+                <strong>Genuinely ambiguous images</strong> (partial foods even LLMs struggle with)
+            </p>
+        </div>
     </section>
 
     <!-- Section 6: Metrics -->
