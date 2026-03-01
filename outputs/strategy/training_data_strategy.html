@@ -520,6 +520,402 @@
             .cost-grid { grid-template-columns: 1fr; }
             .metrics-grid { grid-template-columns: repeat(2, 1fr); }
         }
+
+        /* Training Loop Animation */
+        .training-loop {
+            background: var(--off-white);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+        }
+
+        .loop-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .loop-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: -1px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .loop-step:hover {
+            border-color: var(--accent);
+            z-index: 1;
+            transform: translateX(4px);
+        }
+
+        .loop-step:first-child { border-radius: 12px 12px 0 0; }
+        .loop-step:last-child { border-radius: 0 0 12px 12px; margin-bottom: 0; }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .step-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .step-arrow {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+        }
+
+        /* Architecture Diagram */
+        .architecture-diagram {
+            background: var(--off-white);
+            border-radius: 16px;
+            padding: 40px 32px;
+            margin: 32px 0;
+        }
+
+        .arch-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .arch-row {
+            display: flex;
+            gap: 48px;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .arch-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .arch-box {
+            padding: 16px 24px;
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+            min-width: 160px;
+        }
+
+        .arch-box.highlight {
+            border-color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .arch-box.green {
+            border-color: var(--green);
+            background: var(--green-light);
+        }
+
+        .arch-box .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .arch-box .value {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .arch-arrow {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+        }
+
+        .arch-fusion {
+            padding: 20px 40px;
+            background: var(--purple-light);
+            border: 2px solid var(--purple);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .arch-fusion .label {
+            font-size: 0.7rem;
+            color: var(--purple);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .arch-fusion .value {
+            font-weight: 600;
+            color: var(--purple);
+        }
+
+        /* Pipeline Timeline */
+        .pipeline-timeline {
+            background: var(--off-white);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+        }
+
+        .pipeline-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pipeline-step:last-child {
+            border-bottom: none;
+        }
+
+        .pipeline-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+            width: 80px;
+            flex-shrink: 0;
+            text-align: right;
+        }
+
+        .pipeline-content h4 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .pipeline-content p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Data Flow Diagram */
+        .data-flow {
+            margin: 32px 0;
+        }
+
+        .flow-section {
+            background: var(--off-white);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 16px;
+        }
+
+        .flow-section.edge {
+            border-left: 4px solid var(--green);
+        }
+
+        .flow-section.cloud {
+            border-left: 4px solid var(--accent);
+        }
+
+        .flow-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .flow-badge {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .flow-badge.edge { background: var(--green-light); color: var(--green); }
+        .flow-badge.cloud { background: var(--accent-light); color: var(--accent); }
+
+        .flow-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .flow-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .flow-item {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.85rem;
+        }
+
+        .flow-item.stays {
+            border-left: 3px solid var(--green);
+        }
+
+        .flow-item.uploads {
+            border-left: 3px solid var(--orange);
+        }
+
+        .flow-connector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 16px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .flow-connector span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            background: var(--light-gray);
+            padding: 4px 12px;
+            border-radius: 4px;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: flex;
+            gap: 16px;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--light-gray);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .stat-chip .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        /* Retraining Schedule */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .schedule-card {
+            background: var(--off-white);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .schedule-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .schedule-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .schedule-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* OTA Flow */
+        .ota-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 32px 0;
+        }
+
+        .ota-step {
+            display: flex;
+            gap: 20px;
+            padding: 16px 20px;
+            background: var(--off-white);
+            border-left: 3px solid var(--border);
+            position: relative;
+        }
+
+        .ota-step:not(:last-child)::after {
+            content: "↓";
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-muted);
+            z-index: 1;
+        }
+
+        .ota-step.cloud { border-left-color: var(--accent); background: var(--accent-light); }
+        .ota-step.device { border-left-color: var(--green); background: var(--green-light); }
+
+        .ota-number {
+            width: 24px;
+            height: 24px;
+            background: var(--text);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .ota-content {
+            flex: 1;
+        }
+
+        .ota-content h4 {
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .ota-content p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 900px) {
+            .arch-row { flex-direction: column; gap: 16px; }
+            .flow-items { grid-template-columns: 1fr; }
+            .schedule-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -1018,6 +1414,450 @@
                     <div class="timeline-deliverable">Deliverable: 92% accuracy, &lt;10% review rate</div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Section 7: How ML Training Actually Works -->
+    <section>
+        <div class="section-label">07 - How ML Training Actually Works</div>
+        <h2>From raw data to deployed model</h2>
+        <p class="section-intro">
+            Understanding the mechanics: how the model learns, what happens on the chip during inference,
+            and how data flows between edge devices and cloud.
+        </p>
+
+        <!-- 7.1 The Training Loop -->
+        <h3 style="margin-top: 40px; margin-bottom: 16px;">The Training Loop</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;">
+            Training a neural network is an iterative optimization process. For each batch of images,
+            the model makes predictions, calculates error, and adjusts its weights to improve.
+        </p>
+
+        <div class="training-loop">
+            <div class="loop-steps">
+                <div class="loop-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-name">Forward Pass</div>
+                        <div class="step-desc">Images flow through network layers → model outputs predictions</div>
+                    </div>
+                    <div class="step-arrow">→</div>
+                </div>
+                <div class="loop-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-name">Loss Calculation</div>
+                        <div class="step-desc">Compare predictions to true labels → compute error score</div>
+                    </div>
+                    <div class="step-arrow">→</div>
+                </div>
+                <div class="loop-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-name">Backpropagation</div>
+                        <div class="step-desc">Calculate gradients → how much each weight contributed to error</div>
+                    </div>
+                    <div class="step-arrow">→</div>
+                </div>
+                <div class="loop-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-name">Optimizer Step</div>
+                        <div class="step-desc">Update weights to reduce error → model improves slightly</div>
+                    </div>
+                    <div class="step-arrow">→</div>
+                </div>
+                <div class="loop-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <div class="step-name">Repeat</div>
+                        <div class="step-desc">Next batch of images → thousands of iterations until convergence</div>
+                    </div>
+                    <div class="step-arrow">↺</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-chip">
+                <span>Batch size:</span>
+                <span class="stat-value">32-64 images</span>
+            </div>
+            <div class="stat-chip">
+                <span>Epochs:</span>
+                <span class="stat-value">50-100 passes</span>
+            </div>
+            <div class="stat-chip">
+                <span>Training time:</span>
+                <span class="stat-value">4-8 hours</span>
+            </div>
+            <div class="stat-chip">
+                <span>Total iterations:</span>
+                <span class="stat-value">~50,000-100,000</span>
+            </div>
+        </div>
+
+        <!-- 7.2 Transfer Learning -->
+        <h3 style="margin-top: 48px; margin-bottom: 16px;">Transfer Learning: Standing on Giants' Shoulders</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;">
+            We don't train from scratch. We start with a model pre-trained on millions of images,
+            then fine-tune it for our specific task. This dramatically reduces data requirements.
+        </p>
+
+        <div class="flywheel-container">
+            <div class="flywheel" style="max-width: 400px;">
+                <div class="flywheel-step">
+                    <div class="flywheel-box">
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">Step 1</div>
+                        <strong>ImageNet</strong>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">14M images, 1000 classes</div>
+                        <div style="font-size: 0.75rem; color: var(--green); margin-top: 4px;">Learns edges, textures, shapes</div>
+                    </div>
+                </div>
+                <div class="flywheel-arrow">↓</div>
+                <div class="flywheel-step">
+                    <div class="flywheel-box">
+                        <div style="font-size: 0.75rem; color: var(--text-muted);">Step 2</div>
+                        <strong>Food-101</strong>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">101K food images, 101 classes</div>
+                        <div style="font-size: 0.75rem; color: var(--green); margin-top: 4px;">Learns food-specific features</div>
+                    </div>
+                </div>
+                <div class="flywheel-arrow">↓</div>
+                <div class="flywheel-step">
+                    <div class="flywheel-box highlight">
+                        <div style="font-size: 0.75rem; color: var(--accent);">Step 3 - Mill</div>
+                        <strong>Mill Waste Dataset</strong>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">105K images, 30 classes</div>
+                        <div style="font-size: 0.75rem; color: var(--green); margin-top: 4px;">Learns partial foods + waste context</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout">
+            <h3>Cost Savings</h3>
+            <p>
+                Training from scratch would require 10x more data and compute. Transfer learning lets us
+                achieve 80% accuracy with just 15,000 labeled images instead of 150,000+.
+            </p>
+        </div>
+
+        <!-- 7.3 Sensor Fusion Architecture -->
+        <h3 style="margin-top: 48px; margin-bottom: 16px;">Sensor Fusion Architecture</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;">
+            The model combines vision and weight data using intermediate fusion. Each modality processes
+            independently, then features merge in a fusion layer that learns when to trust each signal.
+        </p>
+
+        <div class="architecture-diagram">
+            <div class="arch-container">
+                <div class="arch-row">
+                    <div class="arch-branch">
+                        <div class="arch-box">
+                            <div class="label">Input</div>
+                            <div class="value">6 Camera Angles</div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <div class="arch-box highlight">
+                            <div class="label">CNN Encoder</div>
+                            <div class="value">EfficientNet</div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <div class="arch-box">
+                            <div class="label">Output</div>
+                            <div class="value">512-dim vector</div>
+                        </div>
+                    </div>
+                    <div class="arch-branch">
+                        <div class="arch-box">
+                            <div class="label">Input</div>
+                            <div class="value">Weight Signal</div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <div class="arch-box highlight">
+                            <div class="label">Signal Processing</div>
+                            <div class="value">FFT + Statistics</div>
+                        </div>
+                        <div class="arch-arrow">↓</div>
+                        <div class="arch-box">
+                            <div class="label">Output</div>
+                            <div class="value">128-dim vector</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="arch-arrow" style="margin: 8px 0;">↓ ↓</div>
+                <div class="arch-fusion">
+                    <div class="label">Fusion Layer</div>
+                    <div class="value">Concatenate + Attention</div>
+                </div>
+                <div class="arch-arrow">↓</div>
+                <div class="arch-box green">
+                    <div class="label">Final Output</div>
+                    <div class="value">food_class + confidence + mass</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="phase-grid" style="margin-top: 32px;">
+            <div class="phase-card">
+                <div class="phase-label">Weight Signal Processing</div>
+                <div class="phase-title">How load cell data becomes features</div>
+                <div class="phase-content" style="margin-top: 12px;">
+                    <p>Raw signal → 100Hz sampling → 0.5s window</p>
+                    <ul>
+                        <li>Statistical: mean, std, peak, skewness</li>
+                        <li>FFT: dominant frequency, power spectrum</li>
+                        <li>Output: 128-dimensional feature vector</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="phase-card">
+                <div class="phase-label">Why Intermediate Fusion</div>
+                <div class="phase-title">Best of both worlds</div>
+                <div class="phase-content" style="margin-top: 12px;">
+                    <p>Each modality learns independently, then fusion layer learns trust weighting:</p>
+                    <ul>
+                        <li>Vision confident → trust vision</li>
+                        <li>Vision uncertain → weight signal votes higher</li>
+                        <li>Disagreement → flag for human review</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7.4 On-Chip Inference -->
+        <h3 style="margin-top: 48px; margin-bottom: 16px;">What Happens On-Chip (Jetson Orin NX)</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;">
+            When food is dropped into the bin, here's exactly what happens on the edge device -
+            from weight trigger to classification result in under 600ms.
+        </p>
+
+        <div class="pipeline-timeline">
+            <div class="pipeline-step">
+                <div class="pipeline-time">0 ms</div>
+                <div class="pipeline-content">
+                    <h4>Weight Trigger</h4>
+                    <p>Load cells detect >50g change. System triggers burst capture mode.</p>
+                </div>
+            </div>
+            <div class="pipeline-step">
+                <div class="pipeline-time">0-500 ms</div>
+                <div class="pipeline-content">
+                    <h4>Image Capture</h4>
+                    <p>6-angle Kaleidoscope captures 10 fps burst. Before/after images stored locally.</p>
+                </div>
+            </div>
+            <div class="pipeline-step">
+                <div class="pipeline-time">500-520 ms</div>
+                <div class="pipeline-content">
+                    <h4>Preprocessing</h4>
+                    <p>Resize images to 224x224. Normalize pixel values. Extract weight features from signal.</p>
+                </div>
+            </div>
+            <div class="pipeline-step">
+                <div class="pipeline-time">520-550 ms</div>
+                <div class="pipeline-content">
+                    <h4>Inference</h4>
+                    <p>Forward pass through TensorRT engine. INT8 quantized model (~50MB). Output: class probabilities.</p>
+                </div>
+            </div>
+            <div class="pipeline-step">
+                <div class="pipeline-time">550-560 ms</div>
+                <div class="pipeline-content">
+                    <h4>Post-Processing</h4>
+                    <p>Apply menu constraints (mask invalid classes). Compare vision + weight predictions. Flag disagreements.</p>
+                </div>
+            </div>
+            <div class="pipeline-step">
+                <div class="pipeline-time">560 ms</div>
+                <div class="pipeline-content">
+                    <h4>Result</h4>
+                    <p>Classification + confidence score. Decision: auto-accept, sample, or full review.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-box" style="background: var(--off-white); border-color: var(--text);">
+            <h3 style="color: var(--text);">Model Optimization for Edge</h3>
+            <div style="display: flex; align-items: center; gap: 16px; margin-top: 16px; flex-wrap: wrap;">
+                <div class="arch-box" style="flex: 1; min-width: 150px;">
+                    <div class="label">PyTorch</div>
+                    <div class="value">~200MB, FP32</div>
+                </div>
+                <div style="color: var(--text-muted);">→</div>
+                <div class="arch-box" style="flex: 1; min-width: 150px;">
+                    <div class="label">ONNX Export</div>
+                    <div class="value">~200MB, FP32</div>
+                </div>
+                <div style="color: var(--text-muted);">→</div>
+                <div class="arch-box" style="flex: 1; min-width: 150px; border-color: var(--green); background: var(--green-light);">
+                    <div class="label" style="color: var(--green);">TensorRT INT8</div>
+                    <div class="value" style="color: var(--green);">~50MB, 2x faster</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7.5 Edge vs Cloud -->
+        <h3 style="margin-top: 48px; margin-bottom: 16px;">Edge vs Cloud: What Goes Where</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;">
+            Privacy-first architecture. Raw images never leave the device unless the model is uncertain.
+            Cloud handles training, labeling, and fleet-wide analytics.
+        </p>
+
+        <div class="data-flow">
+            <div class="flow-section edge">
+                <div class="flow-header">
+                    <span class="flow-badge edge">Edge Device</span>
+                    <span class="flow-title">Jetson Orin NX (in each bin)</span>
+                </div>
+                <div class="flow-items">
+                    <div class="flow-item stays">Raw images (never leave by default)</div>
+                    <div class="flow-item stays">Real-time inference (<100ms)</div>
+                    <div class="flow-item stays">Local buffering (48+ hrs offline)</div>
+                    <div class="flow-item stays">Weight signal capture + processing</div>
+                    <div class="flow-item uploads">Uncertain predictions (conf <0.70)</div>
+                    <div class="flow-item uploads">Prediction metadata + telemetry</div>
+                </div>
+            </div>
+
+            <div class="flow-connector">
+                <span>MQTT + S3</span>
+                ↓ Only uncertain predictions upload ↓
+                <span>Encrypted</span>
+            </div>
+
+            <div class="flow-section cloud">
+                <div class="flow-header">
+                    <span class="flow-badge cloud">Cloud</span>
+                    <span class="flow-title">Mill Central (AWS/GCP)</span>
+                </div>
+                <div class="flow-items">
+                    <div class="flow-item">Human labeling interface</div>
+                    <div class="flow-item">Training infrastructure (GPU cluster)</div>
+                    <div class="flow-item">Model versioning + validation</div>
+                    <div class="flow-item">Fleet-wide analytics</div>
+                    <div class="flow-item">OTA update distribution</div>
+                    <div class="flow-item">Customer dashboards</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7.6 Weekly Retraining -->
+        <h3 style="margin-top: 48px; margin-bottom: 16px;">Weekly Retraining Pipeline</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;">
+            Every Sunday night, the model retrains on new labeled data from the past week.
+            By Monday morning, improved models roll out to the fleet.
+        </p>
+
+        <div class="schedule-grid">
+            <div class="schedule-card">
+                <div class="schedule-time">Sunday 6pm</div>
+                <div class="schedule-title">Data Aggregation</div>
+                <div class="schedule-desc">Pull human-labeled images from past week. Combine with existing training set. Balance classes.</div>
+            </div>
+            <div class="schedule-card">
+                <div class="schedule-time">Sunday 7pm</div>
+                <div class="schedule-title">Dataset Preparation</div>
+                <div class="schedule-desc">Split 80/10/10 (train/val/test). Apply augmentation pipeline. Convert to TFRecord.</div>
+            </div>
+            <div class="schedule-card">
+                <div class="schedule-time">Sunday 8pm - 2am</div>
+                <div class="schedule-title">Training</div>
+                <div class="schedule-desc">4x A100 GPUs. Fine-tune from previous week's model. ~50 epochs, 6 hours.</div>
+            </div>
+            <div class="schedule-card">
+                <div class="schedule-time">Sunday 2am - 4am</div>
+                <div class="schedule-title">Evaluation</div>
+                <div class="schedule-desc">Run on held-out test set. Compare to previous version. Flag if accuracy regressed.</div>
+            </div>
+            <div class="schedule-card">
+                <div class="schedule-time">Sunday 4am - 5am</div>
+                <div class="schedule-title">Optimization</div>
+                <div class="schedule-desc">Export to ONNX. TensorRT optimization. INT8 calibration. Package for OTA.</div>
+            </div>
+            <div class="schedule-card">
+                <div class="schedule-time">Monday 6am</div>
+                <div class="schedule-title">Staged Rollout</div>
+                <div class="schedule-desc">Deploy to 5% fleet (canary). Monitor 4 hours. If stable → 25% → 100%.</div>
+            </div>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-chip">
+                <span>GPU cost:</span>
+                <span class="stat-value">~$150/week</span>
+            </div>
+            <div class="stat-chip">
+                <span>Storage:</span>
+                <span class="stat-value">~$50/month</span>
+            </div>
+            <div class="stat-chip">
+                <span>Total:</span>
+                <span class="stat-value">~$800/month</span>
+            </div>
+        </div>
+
+        <!-- 7.7 OTA Updates -->
+        <h3 style="margin-top: 48px; margin-bottom: 16px;">OTA Model Updates</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;">
+            Safe, atomic updates with automatic rollback. New models download in the background
+            and swap in without interrupting inference.
+        </p>
+
+        <div class="ota-flow">
+            <div class="ota-step cloud">
+                <div class="ota-number">1</div>
+                <div class="ota-content">
+                    <h4>New model ready</h4>
+                    <p>Cloud packages signed model (~50MB) with hash verification</p>
+                </div>
+            </div>
+            <div class="ota-step device">
+                <div class="ota-number">2</div>
+                <div class="ota-content">
+                    <h4>Download in background</h4>
+                    <p>Device downloads while inference continues uninterrupted</p>
+                </div>
+            </div>
+            <div class="ota-step device">
+                <div class="ota-number">3</div>
+                <div class="ota-content">
+                    <h4>Verify signature + hash</h4>
+                    <p>Cryptographic verification prevents tampered models</p>
+                </div>
+            </div>
+            <div class="ota-step device">
+                <div class="ota-number">4</div>
+                <div class="ota-content">
+                    <h4>Atomic swap</h4>
+                    <p>Old model → backup partition. New model → active partition.</p>
+                </div>
+            </div>
+            <div class="ota-step device">
+                <div class="ota-number">5</div>
+                <div class="ota-content">
+                    <h4>Post-update validation</h4>
+                    <p>Run inference on test images. If fails → automatic rollback to previous version.</p>
+                </div>
+            </div>
+            <div class="ota-step cloud">
+                <div class="ota-number">6</div>
+                <div class="ota-content">
+                    <h4>Report success</h4>
+                    <p>Device confirms update. Cloud tracks fleet-wide deployment status.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="callout" style="background: var(--green-light); border-left-color: var(--green);">
+            <h3 style="color: var(--green);">Safety Features</h3>
+            <p>
+                <strong>Dual partitions:</strong> Always have working fallback.
+                <strong>Signature verification:</strong> Prevent tampered models.
+                <strong>Post-update validation:</strong> Test before committing.
+                <strong>Automatic rollback:</strong> If accuracy drops significantly.
+            </p>
         </div>
     </section>
 
