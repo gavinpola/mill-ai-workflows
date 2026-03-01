@@ -22,13 +22,11 @@
             --accent-light: #dbeafe;
             --green: #16a34a;
             --green-light: #dcfce7;
+            --orange: #ea580c;
+            --orange-light: #ffedd5;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Space Grotesk', sans-serif;
@@ -38,445 +36,402 @@
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 32px;
         }
 
         /* Header */
         header {
-            padding: 48px 0 32px;
+            padding: 48px 0 40px;
             border-bottom: 1px solid var(--border);
         }
 
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-        }
+        .logo { font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; }
 
         h1 {
-            font-size: 2.25rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 16px;
             letter-spacing: -0.02em;
+            line-height: 1.2;
         }
 
         .subtitle {
             color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
+            font-size: 1.15rem;
+            max-width: 700px;
         }
 
-        /* Section styling */
+        /* Section */
         section {
-            padding: 72px 0;
+            padding: 64px 0;
             border-bottom: 1px solid var(--border);
         }
 
         .section-label {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             margin-bottom: 8px;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
         }
 
         h2 {
             font-size: 1.75rem;
             font-weight: 600;
-            margin-bottom: 16px;
-            letter-spacing: -0.01em;
+            margin-bottom: 12px;
         }
 
         .section-intro {
             color: var(--text-secondary);
-            font-size: 1.05rem;
+            font-size: 1rem;
             max-width: 700px;
             margin-bottom: 40px;
         }
 
+        /* The Problem */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .problem-visual {
+            background: var(--off-white);
+            border-radius: 16px;
+            padding: 32px;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .problem-points {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .problem-point {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .problem-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--orange-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .problem-point h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .problem-point p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
         /* Image Placeholder */
         .image-placeholder {
-            background: linear-gradient(135deg, var(--light-gray) 0%, var(--off-white) 100%);
+            background: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
             border: 2px dashed var(--border);
-            border-radius: 16px;
-            padding: 48px 32px;
-            text-align: center;
-            margin-bottom: 32px;
+            border-radius: 12px;
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .image-placeholder.hero {
-            padding: 64px 48px;
-            background: linear-gradient(135deg, var(--accent-light) 0%, var(--white) 50%, var(--green-light) 100%);
-        }
-
-        .placeholder-icon {
-            font-size: 3rem;
+        .placeholder-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             margin-bottom: 16px;
         }
 
-        .placeholder-label {
+        .placeholder-icon {
+            font-size: 1.5rem;
+        }
+
+        .placeholder-title {
             font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
+            font-size: 0.95rem;
         }
 
         .placeholder-prompt {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             color: var(--text-muted);
             background: var(--white);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: 16px;
-            text-align: left;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.5;
+            border-radius: 6px;
+            padding: 12px;
+            line-height: 1.6;
         }
 
         .placeholder-hint {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
-            margin-top: 12px;
-        }
-
-        /* Value Story */
-        .value-flow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            margin-top: 40px;
-        }
-
-        .value-step {
-            text-align: center;
-            position: relative;
-        }
-
-        .value-step:not(:last-child)::after {
-            content: '→';
-            position: absolute;
-            right: -18px;
-            top: 24px;
-            font-size: 1.5rem;
-            color: var(--text-muted);
-        }
-
-        .value-icon {
-            width: 64px;
-            height: 64px;
-            background: var(--off-white);
-            border: 2px solid var(--border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 12px;
-            font-size: 1.5rem;
-        }
-
-        .value-step h4 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .value-step p {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        /* Quote */
-        .quote-box {
-            background: var(--text);
-            color: var(--white);
-            padding: 32px 40px;
-            border-radius: 12px;
-            margin: 40px 0;
-        }
-
-        .quote-box blockquote {
-            font-size: 1.3rem;
-            font-weight: 500;
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
-
-        .quote-box cite {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            font-style: normal;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin: 40px 0;
-        }
-
-        .stat-card {
-            background: var(--off-white);
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-        }
-
-        .stat-card.highlight {
-            background: var(--green-light);
-            border: 2px solid var(--green);
-        }
-
-        .stat-value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        .stat-card.highlight .stat-value {
-            color: var(--green);
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
-
-        /* Baseline System */
-        .baseline-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            margin-top: 32px;
-        }
-
-        .baseline-image {
-            background: var(--off-white);
-            border-radius: 12px;
-            padding: 24px;
-        }
-
-        .baseline-specs h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .spec-table {
-            width: 100%;
-            font-size: 0.9rem;
-        }
-
-        .spec-table tr {
-            border-bottom: 1px solid var(--border);
-        }
-
-        .spec-table td {
-            padding: 10px 0;
-        }
-
-        .spec-table td:first-child {
-            color: var(--text-secondary);
-            width: 45%;
-        }
-
-        .spec-table td:last-child {
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: 500;
-        }
-
-        .spec-total {
-            background: var(--off-white);
-            padding: 16px;
-            border-radius: 8px;
-            margin-top: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .spec-total .label {
-            font-weight: 600;
-        }
-
-        .spec-total .value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
-
-        .spec-total .note {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* Performance Targets */
-        .perf-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-top: 24px;
-        }
-
-        .perf-item {
-            text-align: center;
-            padding: 16px;
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-        }
-
-        .perf-item .value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--accent);
-        }
-
-        .perf-item .label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
-
-        /* Alternatives Grid */
-        .alternatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 32px;
-        }
-
-        .alt-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.2s;
-        }
-
-        .alt-card:hover {
-            border-color: var(--text);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-        }
-
-        .alt-card .image-placeholder {
-            border: none;
-            border-radius: 0;
-            margin: 0;
-            padding: 32px 20px;
-        }
-
-        .alt-card-content {
-            padding: 20px;
-        }
-
-        .alt-card h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .alt-card .alt-subtitle {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-        }
-
-        .alt-card .best-for {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .alt-card .best-for strong {
-            color: var(--text);
-        }
-
-        .alt-card .cost-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            padding: 4px 8px;
-            border-radius: 4px;
-            background: var(--light-gray);
-            display: inline-block;
-            margin-top: 12px;
+            margin-top: 8px;
+            font-style: italic;
         }
 
         /* Comparison Table */
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
+        .table-wrapper {
+            overflow-x: auto;
             margin-top: 32px;
         }
 
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            min-width: 900px;
+        }
+
         .comparison-table th {
-            text-align: left;
-            padding: 14px 12px;
+            text-align: center;
+            padding: 12px 8px;
             border-bottom: 2px solid var(--text);
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+        }
+
+        .comparison-table th:first-child {
+            text-align: left;
+            width: 18%;
+        }
+
+        .comparison-table th:last-child {
+            width: 10%;
+            background: var(--off-white);
         }
 
         .comparison-table td {
-            padding: 14px 12px;
+            padding: 12px 8px;
             border-bottom: 1px solid var(--border);
+            text-align: center;
             vertical-align: middle;
         }
 
-        .comparison-table tr:hover {
+        .comparison-table td:first-child {
+            text-align: left;
+        }
+
+        .comparison-table td:last-child {
             background: var(--off-white);
+            font-weight: 600;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--light-gray);
+        }
+
+        .comparison-table tr:hover td:last-child {
+            background: #e8e8e8;
+        }
+
+        .comparison-table tr.rank-1 {
+            background: var(--green-light);
+        }
+        .comparison-table tr.rank-1:hover {
+            background: #c6f6d5;
+        }
+        .comparison-table tr.rank-1 td:last-child {
+            background: var(--green);
+            color: white;
         }
 
         .comparison-table tr.baseline-row {
             background: var(--accent-light);
         }
-
         .comparison-table tr.baseline-row:hover {
-            background: var(--accent-light);
+            background: #bfdbfe;
         }
 
-        .comparison-table .design-name {
+        .design-name {
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .comparison-table .design-name .badge {
-            font-size: 0.65rem;
-            background: var(--accent);
-            color: white;
+        .badge {
+            font-size: 0.6rem;
             padding: 2px 6px;
             border-radius: 3px;
+            font-weight: 600;
         }
 
-        .cost-tag {
+        .badge-baseline {
+            background: var(--accent);
+            color: white;
+        }
+
+        .badge-top {
+            background: var(--green);
+            color: white;
+        }
+
+        .score-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin: 0 1px;
+        }
+
+        .score-dot.filled { background: var(--text); }
+        .score-dot.empty { background: var(--border); }
+
+        .score-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        /* Top 3 Section */
+        .top-three {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .top-card {
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .top-card:first-child {
+            border-color: var(--green);
+        }
+
+        .top-card:hover {
+            border-color: var(--text);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .top-card-rank {
+            padding: 12px 20px;
+            background: var(--off-white);
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.75rem;
-            padding: 4px 8px;
-            border-radius: 4px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-card:first-child .top-card-rank {
+            background: var(--green);
+            color: white;
+        }
+
+        .top-card-image {
+            padding: 20px;
             background: var(--light-gray);
+            min-height: 200px;
         }
 
-        .cost-tag.same { background: var(--light-gray); }
-        .cost-tag.higher { background: #fff3e0; color: #e65100; }
+        .top-card-content {
+            padding: 20px;
+        }
 
-        .best-for-text {
+        .top-card h4 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .top-card .subtitle {
             font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .top-card .description {
+            font-size: 0.9rem;
             color: var(--text-secondary);
+            margin-bottom: 16px;
         }
 
-        .adds-text {
+        .top-card-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .top-stat {
+            text-align: center;
+            padding: 8px;
+            background: var(--off-white);
+            border-radius: 6px;
+        }
+
+        .top-stat .value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .top-stat .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Criteria Legend */
+        .criteria-legend {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+            padding: 24px;
+            background: var(--off-white);
+            border-radius: 12px;
+        }
+
+        .criteria-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .criteria-weight {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--text);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .criteria-item h5 {
             font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .criteria-item p {
+            font-size: 0.75rem;
             color: var(--text-secondary);
         }
 
@@ -484,7 +439,6 @@
         footer {
             padding: 48px 0;
             text-align: center;
-            border-top: 1px solid var(--border);
         }
 
         .footer-text {
@@ -494,353 +448,418 @@
 
         /* Responsive */
         @media (max-width: 900px) {
-            .value-flow {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .value-step:nth-child(2)::after {
-                display: none;
-            }
-            .baseline-grid {
-                grid-template-columns: 1fr;
-            }
-            .alternatives-grid {
-                grid-template-columns: 1fr;
-            }
-            .perf-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .value-flow {
-                grid-template-columns: 1fr;
-            }
-            .value-step::after {
-                display: none;
-            }
+            .problem-grid { grid-template-columns: 1fr; }
+            .top-three { grid-template-columns: 1fr; }
+            .criteria-legend { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <div class="logo">mill</div>
-            <h1>CV infrastructure explorer</h1>
-            <p class="subtitle">Understanding the computer vision system powering Mill's food waste intelligence platform</p>
-        </header>
+<div class="container">
+    <header>
+        <div class="logo">mill</div>
+        <h1>How should we see food waste?</h1>
+        <p class="subtitle">
+            12 engineering approaches for classifying food waste in commercial kitchens.
+            Ranked by accuracy, friction, feasibility, cost, maintenance, and differentiation.
+        </p>
+    </header>
 
-        <!-- Section 1: The Value Story -->
-        <section>
-            <div class="section-label">01 - The value story</div>
-            <h2>The CV system isn't the product. The data is.</h2>
-            <p class="section-intro">
-                Mill isn't a camera company or a food waste diversion company. Mill is a data company that happens to use hardware to collect the most accurate, granular food waste data ever assembled.
-            </p>
+    <!-- Section 1: The Problem -->
+    <section>
+        <div class="section-label">01 — The challenge</div>
+        <h2>Food waste classification is hard</h2>
+        <p class="section-intro">
+            When a kitchen worker dumps a plate of scraps, we need to identify what's being thrown away.
+            This data becomes procurement intelligence. But the physics are challenging.
+        </p>
 
-            <div class="image-placeholder hero">
-                <div class="placeholder-icon">📊</div>
-                <div class="placeholder-label">Hero Image: The Value Flow</div>
-                <div class="placeholder-prompt">
-                    Prompt for Bing Image Creator:<br><br>
-                    "Infographic style illustration showing food waste transformation journey: left side shows food scraps, middle shows smart bin with glowing sensors and data streams, right side shows analytics dashboard and compost. Clean white background, minimal style, blue and green accents, professional business presentation quality"
-                </div>
-                <div class="placeholder-hint">Go to bing.com/images/create → paste prompt → download best result → save as images/hero-value-story.png</div>
-            </div>
-
-            <div class="value-flow">
-                <div class="value-step">
-                    <div class="value-icon">🍎</div>
-                    <h4>Waste</h4>
-                    <p>Food scraps are discarded</p>
-                </div>
-                <div class="value-step">
-                    <div class="value-icon">📷</div>
-                    <h4>Classification</h4>
-                    <p>CV identifies what was thrown away</p>
-                </div>
-                <div class="value-step">
-                    <div class="value-icon">📈</div>
-                    <h4>Intelligence</h4>
-                    <p>Data becomes procurement insight</p>
-                </div>
-                <div class="value-step">
-                    <div class="value-icon">🌱</div>
-                    <h4>Value</h4>
-                    <p>Compost + chicken feed + less waste</p>
-                </div>
-            </div>
-
-            <div class="quote-box">
-                <blockquote>"Waste data becomes ordering intelligence. A 5% improvement in ordering accuracy can reduce waste costs by 10-15%."</blockquote>
-                <cite>— Mill Commercial Value Proposition</cite>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card highlight">
-                    <div class="stat-value">20%</div>
-                    <div class="stat-label">Waste reduction from awareness alone</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">90%</div>
-                    <div class="stat-label">Recovery rates proven in households</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value">10%</div>
-                    <div class="stat-label">Of global emissions from food waste</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 2: The Baseline System -->
-        <section>
-            <div class="section-label">02 - The baseline</div>
-            <h2>What we're actually building</h2>
-            <p class="section-intro">
-                The production system uses proven components optimized for commercial kitchen environments. This is the baseline against which all alternatives are compared.
-            </p>
-
-            <div class="baseline-grid">
-                <div class="baseline-image">
-                    <div class="image-placeholder" style="margin: 0;">
-                        <div class="placeholder-icon">🗑️</div>
-                        <div class="placeholder-label">Baseline System Render</div>
-                        <div class="placeholder-prompt">
-                            Prompt for Bing Image Creator:<br><br>
-                            "Isometric 3D render of smart commercial waste bin with integrated camera system on top, depth sensor, LED ring illumination, sleek industrial design, white/gray color scheme, NVIDIA Jetson computer visible, professional product visualization, clean white background, soft shadows, 8K quality"
-                        </div>
+        <div class="problem-grid">
+            <div class="problem-points">
+                <div class="problem-point">
+                    <div class="problem-icon">🍝</div>
+                    <div>
+                        <h4>Mixed pile occlusion</h4>
+                        <p>Food gets dumped as a pile. Items on top hide items below. A single camera angle misses 30-50% of the waste.</p>
                     </div>
                 </div>
-
-                <div class="baseline-specs">
-                    <h3>Hardware Bill of Materials</h3>
-                    <table class="spec-table">
-                        <tr>
-                            <td>Camera</td>
-                            <td>Basler ace2 8MP — $900</td>
-                        </tr>
-                        <tr>
-                            <td>Depth sensor</td>
-                            <td>Intel RealSense D455 — $349</td>
-                        </tr>
-                        <tr>
-                            <td>Edge compute</td>
-                            <td>NVIDIA Jetson Orin NX — $599</td>
-                        </tr>
-                        <tr>
-                            <td>Carrier board</td>
-                            <td>Connect Tech Boson — $349</td>
-                        </tr>
-                        <tr>
-                            <td>Scale</td>
-                            <td>Load cell + HX711 — $75</td>
-                        </tr>
-                        <tr>
-                            <td>Lighting</td>
-                            <td>Smart Vision Lights — $250</td>
-                        </tr>
-                        <tr>
-                            <td>Enclosure</td>
-                            <td>Custom IP67 aluminum — $200</td>
-                        </tr>
-                    </table>
-
-                    <div class="spec-total">
-                        <div>
-                            <div class="label">Total per unit</div>
-                            <div class="note">At scale (1000+): $1,800-2,200</div>
-                        </div>
-                        <div class="value">~$2,947</div>
+                <div class="problem-point">
+                    <div class="problem-icon">⚡</div>
+                    <div>
+                        <h4>Zero friction tolerance</h4>
+                        <p>Back-of-house staff can't slow down. Any system that changes their workflow will fail adoption. 10/10 friction score or nothing.</p>
+                    </div>
+                </div>
+                <div class="problem-point">
+                    <div class="problem-icon">💡</div>
+                    <div>
+                        <h4>Variable conditions</h4>
+                        <p>Kitchen lighting changes. Surfaces are wet, greasy, reflective. Items are crushed, mixed, steaming. No controlled environment.</p>
+                    </div>
+                </div>
+                <div class="problem-point">
+                    <div class="problem-icon">🎯</div>
+                    <div>
+                        <h4>85%+ accuracy required</h4>
+                        <p>Below 85%, the data isn't actionable. Procurement decisions need confidence. False positives erode trust.</p>
                     </div>
                 </div>
             </div>
 
-            <h3 style="margin-top: 40px; margin-bottom: 8px;">Performance targets</h3>
-            <div class="perf-grid">
-                <div class="perf-item">
-                    <div class="value">85%+</div>
-                    <div class="label">Classification accuracy</div>
-                </div>
-                <div class="perf-item">
-                    <div class="value">±10%</div>
-                    <div class="label">Volume estimation</div>
-                </div>
-                <div class="perf-item">
-                    <div class="value">30+ fps</div>
-                    <div class="label">Real-time processing</div>
-                </div>
-                <div class="perf-item">
-                    <div class="value">>99%</div>
-                    <div class="label">System uptime</div>
+            <div class="problem-visual">
+                <div class="image-placeholder">
+                    <div class="placeholder-header">
+                        <span class="placeholder-icon">📷</span>
+                        <span class="placeholder-title">The occlusion problem</span>
+                    </div>
+                    <div class="placeholder-prompt">
+                        PROMPT: Create a technical cross-section illustration showing the food waste occlusion problem. Show a commercial kitchen waste bin from the side, cutaway view. Inside the bin, show layers of different food items - vegetables, bread, meat scraps, pasta - piled on top of each other. Use dotted lines to show a camera's field of view from above, with red X marks on items that are hidden/occluded by items on top. Style: clean technical diagram, isometric perspective, muted colors with the bin in gray/white, food items in natural colors, white background, no shadows, minimal line art style like a patent drawing. Include small labels pointing to "visible items" and "occluded items". Professional engineering illustration quality.
+                    </div>
+                    <div class="placeholder-hint">→ bing.com/images/create</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Section 3: Alternatives -->
-        <section>
-            <div class="section-label">03 - Alternatives</div>
-            <h2>What if we need more?</h2>
-            <p class="section-intro">
-                Three leading alternatives that could enhance specific dimensions of the baseline system. Each adds capability without fundamentally changing the user experience.
-            </p>
+    <!-- Section 2: The Approaches -->
+    <section>
+        <div class="section-label">02 — The approaches</div>
+        <h2>12 engineering solutions, ranked</h2>
+        <p class="section-intro">
+            We evaluated 12 different approaches across 6 weighted criteria.
+            The baseline (structured light) is what we're currently building — but it's not necessarily the best option.
+        </p>
 
-            <div class="alternatives-grid">
-                <!-- Kaleidoscope -->
-                <div class="alt-card">
-                    <div class="image-placeholder">
-                        <div class="placeholder-icon">🪞</div>
-                        <div class="placeholder-label">Kaleidoscope</div>
-                        <div class="placeholder-prompt" style="font-size: 0.65rem;">
-                            "Technical cutaway diagram of smart waste bin showing single camera with multiple angled mirrors creating kaleidoscope effect, light rays bouncing off mirrors, isometric view, clean minimal technical illustration, blue accent lighting"
-                        </div>
-                    </div>
-                    <div class="alt-card-content">
-                        <h4>The Kaleidoscope</h4>
-                        <p class="alt-subtitle">Mirror multi-angle system</p>
-                        <p class="best-for"><strong>Best for:</strong> Multiple viewing angles from single camera, better handling of occlusion</p>
-                        <span class="cost-tag same">Same cost</span>
-                    </div>
-                </div>
-
-                <!-- Photo Booth -->
-                <div class="alt-card">
-                    <div class="image-placeholder">
-                        <div class="placeholder-icon">📸</div>
-                        <div class="placeholder-label">Photo Booth</div>
-                        <div class="placeholder-prompt" style="font-size: 0.65rem;">
-                            "Cross-section view of waste bin with vertical drop tunnel, multiple cameras positioned around the tunnel circumference, food items falling through being photographed, technical diagram style, clean minimal"
-                        </div>
-                    </div>
-                    <div class="alt-card-content">
-                        <h4>The Photo Booth</h4>
-                        <p class="alt-subtitle">Drop-through tunnel</p>
-                        <p class="best-for"><strong>Best for:</strong> Maximum classification accuracy, natural item separation via gravity</p>
-                        <span class="cost-tag higher">+30% cost</span>
-                    </div>
-                </div>
-
-                <!-- Weighmaster -->
-                <div class="alt-card">
-                    <div class="image-placeholder">
-                        <div class="placeholder-icon">⚖️</div>
-                        <div class="placeholder-label">Weighmaster</div>
-                        <div class="placeholder-prompt" style="font-size: 0.65rem;">
-                            "Isometric technical diagram of smart waste bin on precision load cells, showing weight measurement graph overlay, digital scale display, technical illustration style, clean white background"
-                        </div>
-                    </div>
-                    <div class="alt-card-content">
-                        <h4>The Weighmaster</h4>
-                        <p class="alt-subtitle">Weight dynamics</p>
-                        <p class="best-for"><strong>Best for:</strong> Validation layer, cross-check vision with weight signatures</p>
-                        <span class="cost-tag same">+5% cost</span>
-                    </div>
+        <div class="criteria-legend">
+            <div class="criteria-item">
+                <span class="criteria-weight">25%</span>
+                <div>
+                    <h5>Accuracy</h5>
+                    <p>Classification precision potential</p>
                 </div>
             </div>
-        </section>
+            <div class="criteria-item">
+                <span class="criteria-weight">25%</span>
+                <div>
+                    <h5>Friction</h5>
+                    <p>Impact on user workflow</p>
+                </div>
+            </div>
+            <div class="criteria-item">
+                <span class="criteria-weight">20%</span>
+                <div>
+                    <h5>Feasibility</h5>
+                    <p>Technical risk, time-to-market</p>
+                </div>
+            </div>
+            <div class="criteria-item">
+                <span class="criteria-weight">15%</span>
+                <div>
+                    <h5>Cost</h5>
+                    <p>Hardware + integration expense</p>
+                </div>
+            </div>
+            <div class="criteria-item">
+                <span class="criteria-weight">10%</span>
+                <div>
+                    <h5>Maintenance</h5>
+                    <p>Ongoing operational burden</p>
+                </div>
+            </div>
+            <div class="criteria-item">
+                <span class="criteria-weight">5%</span>
+                <div>
+                    <h5>Differentiation</h5>
+                    <p>Competitive moat, patentability</p>
+                </div>
+            </div>
+        </div>
 
-        <!-- Section 4: Comparison Table -->
-        <section>
-            <div class="section-label">04 - All approaches</div>
-            <h2>Compare all 12 designs vs baseline</h2>
-            <p class="section-intro">
-                Every alternative is evaluated against the baseline system. Cost shown as delta from ~$2,947 baseline.
-            </p>
-
+        <div class="table-wrapper">
             <table class="comparison-table">
                 <thead>
                     <tr>
-                        <th style="width: 20%">Design</th>
-                        <th style="width: 28%">What it adds</th>
-                        <th style="width: 12%">Cost Δ</th>
-                        <th style="width: 40%">Best for</th>
+                        <th>Design</th>
+                        <th>Accuracy<br><small style="font-weight:400;color:var(--text-muted)">25%</small></th>
+                        <th>Friction<br><small style="font-weight:400;color:var(--text-muted)">25%</small></th>
+                        <th>Feasibility<br><small style="font-weight:400;color:var(--text-muted)">20%</small></th>
+                        <th>Cost<br><small style="font-weight:400;color:var(--text-muted)">15%</small></th>
+                        <th>Maintenance<br><small style="font-weight:400;color:var(--text-muted)">10%</small></th>
+                        <th>Differentiation<br><small style="font-weight:400;color:var(--text-muted)">5%</small></th>
+                        <th>Score</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Rank 1: Kaleidoscope -->
+                    <tr class="rank-1">
+                        <td class="design-name"><span class="badge badge-top">#1</span> Kaleidoscope</td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td class="score-value">4.20</td>
+                    </tr>
+                    <!-- Rank 2: Photo Booth -->
+                    <tr>
+                        <td class="design-name"><span class="badge" style="background:#666;color:white">#2</span> Photo Booth</td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td class="score-value">4.05</td>
+                    </tr>
+                    <!-- Rank 3: Weighmaster -->
+                    <tr>
+                        <td class="design-name"><span class="badge" style="background:#666;color:white">#3</span> Weighmaster</td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td class="score-value">4.05</td>
+                    </tr>
+                    <!-- Rank 4: Sculptor (Baseline) -->
                     <tr class="baseline-row">
-                        <td class="design-name"><span class="badge">BASELINE</span> Sculptor</td>
-                        <td class="adds-text">RGB + depth + structured light (current design)</td>
-                        <td><span class="cost-tag same">—</span></td>
-                        <td class="best-for-text">What we're shipping. 85%+ accuracy, volume estimation.</td>
+                        <td class="design-name"><span class="badge badge-baseline">BASELINE</span> Sculptor</td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td class="score-value">4.00</td>
                     </tr>
+                    <!-- Rank 5: Fingerprinter -->
                     <tr>
-                        <td class="design-name">Kaleidoscope</td>
-                        <td class="adds-text">Mirror array for 4-6 simultaneous views</td>
-                        <td><span class="cost-tag same">Same</span></td>
-                        <td class="best-for-text">Multi-angle capture from single camera. Patentable.</td>
+                        <td class="design-name"><span class="badge" style="background:#999;color:white">#5</span> Fingerprinter</td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td class="score-value">3.95</td>
                     </tr>
+                    <!-- Rank 6: Listener -->
                     <tr>
-                        <td class="design-name">Weighmaster</td>
-                        <td class="adds-text">High-frequency load cells (100+ Hz)</td>
-                        <td><span class="cost-tag same">+5%</span></td>
-                        <td class="best-for-text">Validation layer. Weight signatures cross-check vision.</td>
+                        <td class="design-name"><span class="badge" style="background:#999;color:white">#6</span> Listener</td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td class="score-value">3.80</td>
                     </tr>
+                    <!-- Rank 7: Heat Map -->
                     <tr>
-                        <td class="design-name">Listener</td>
-                        <td class="adds-text">MEMS microphones for acoustic sensing</td>
-                        <td><span class="cost-tag same">+2%</span></td>
-                        <td class="best-for-text">Very cheap add-on. Novel physics channel. $5/mic.</td>
+                        <td class="design-name"><span class="badge" style="background:#999;color:white">#7</span> Heat Map</td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td class="score-value">3.75</td>
                     </tr>
+                    <!-- Rank 8: Tumbler -->
                     <tr>
-                        <td class="design-name">Photo Booth</td>
-                        <td class="adds-text">Vertical tunnel with 360° cameras</td>
-                        <td><span class="cost-tag higher">+30%</span></td>
-                        <td class="best-for-text">Highest accuracy (92-97%). Gravity separates items.</td>
+                        <td class="design-name"><span class="badge" style="background:#999;color:white">#8</span> Tumbler</td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td class="score-value">3.55</td>
                     </tr>
+                    <!-- Rank 9: Scanner -->
                     <tr>
-                        <td class="design-name">Tumbler</td>
-                        <td class="adds-text">Rotating sieve for mechanical separation</td>
-                        <td><span class="cost-tag higher">+40%</span></td>
-                        <td class="best-for-text">Your original idea. Creative, but jam risk.</td>
+                        <td class="design-name"><span class="badge" style="background:#ccc;color:#666">#9</span> Scanner</td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td class="score-value">3.45</td>
                     </tr>
+                    <!-- Rank 10: Penetrator -->
                     <tr>
-                        <td class="design-name">Cascade</td>
-                        <td class="adds-text">Inclined conveyor for temporal spread</td>
-                        <td><span class="cost-tag higher">+50%</span></td>
-                        <td class="best-for-text">Converts instant dump to time-spread capture.</td>
+                        <td class="design-name"><span class="badge" style="background:#ccc;color:#666">#10</span> Penetrator</td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td class="score-value">3.40</td>
                     </tr>
+                    <!-- Rank 11: Cascade -->
                     <tr>
-                        <td class="design-name">Heat Map</td>
-                        <td class="adds-text">LWIR thermal imaging</td>
-                        <td><span class="cost-tag higher">+20%</span></td>
-                        <td class="best-for-text">Fresh vs cold waste. Works in any lighting.</td>
+                        <td class="design-name"><span class="badge" style="background:#ccc;color:#666">#11</span> Cascade</td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td class="score-value">3.30</td>
                     </tr>
+                    <!-- Rank 12: Polarizer -->
                     <tr>
-                        <td class="design-name">Fingerprinter</td>
-                        <td class="adds-text">NIR spectral imaging</td>
-                        <td><span class="cost-tag higher">+25%</span></td>
-                        <td class="best-for-text">Material chemistry (water, sugar, protein).</td>
-                    </tr>
-                    <tr>
-                        <td class="design-name">Scanner</td>
-                        <td class="adds-text">Capacitive/RF sensing in bin walls</td>
-                        <td><span class="cost-tag higher">+15%</span></td>
-                        <td class="best-for-text">See through occlusion. No line-of-sight needed.</td>
-                    </tr>
-                    <tr>
-                        <td class="design-name">Polarizer</td>
-                        <td class="adds-text">Polarimetric imaging</td>
-                        <td><span class="cost-tag higher">+80%</span></td>
-                        <td class="best-for-text">Detect plastic contamination. Cut glare.</td>
-                    </tr>
-                    <tr>
-                        <td class="design-name">Penetrator</td>
-                        <td class="adds-text">mmWave radar</td>
-                        <td><span class="cost-tag higher">+20%</span></td>
-                        <td class="best-for-text">Penetrate surface. See through pile.</td>
+                        <td class="design-name"><span class="badge" style="background:#ccc;color:#666">#12</span> Polarizer</td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
+                        <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
+                        <td class="score-value">3.25</td>
                     </tr>
                 </tbody>
             </table>
-        </section>
-    </div>
-
-    <footer>
-        <div class="container">
-            <p class="footer-text">Mill AI Workflow System | Internal use only | March 2026</p>
         </div>
-    </footer>
+    </section>
+
+    <!-- Section 3: Top 3 Deep Dive -->
+    <section>
+        <div class="section-label">03 — Top 3 recommendations</div>
+        <h2>The best approaches explained</h2>
+        <p class="section-intro">
+            These three designs scored highest. Each solves the occlusion problem differently.
+            The baseline (Sculptor) ranks #4 — good, but not the best option.
+        </p>
+
+        <div class="top-three">
+            <!-- #1 Kaleidoscope -->
+            <div class="top-card">
+                <div class="top-card-rank">
+                    <span>#1 RECOMMENDED</span>
+                    <span>4.20</span>
+                </div>
+                <div class="top-card-image">
+                    <div class="image-placeholder" style="border:none;margin:0;padding:16px;background:transparent;">
+                        <div class="placeholder-header">
+                            <span class="placeholder-icon">🪞</span>
+                            <span class="placeholder-title">Mirror system</span>
+                        </div>
+                        <div class="placeholder-prompt">
+                            PROMPT: Technical illustration of a smart waste bin with a kaleidoscope mirror system. Show a single camera at the top center pointing down. Around the camera, show 4-6 angled first-surface mirrors arranged in a ring formation. Draw light ray lines from the mirrors down into the bin, showing how a single camera captures multiple angles simultaneously. Cutaway side view. Style: clean engineering diagram, patent illustration aesthetic, thin precise lines, white background, minimal colors (gray bin, blue light rays, silver mirrors). Label "single camera" and "mirror array". Professional technical drawing quality.
+                        </div>
+                    </div>
+                </div>
+                <div class="top-card-content">
+                    <h4>The Kaleidoscope</h4>
+                    <p class="subtitle">Mirror multi-angle system</p>
+                    <p class="description">Single high-res camera + precision angled mirrors = 4-6 simultaneous views. Light physics replaces multiple cameras.</p>
+                    <div class="top-card-stats">
+                        <div class="top-stat">
+                            <div class="value">85-92%</div>
+                            <div class="label">Accuracy</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value">10/10</div>
+                            <div class="label">Friction</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value">Same</div>
+                            <div class="label">Cost</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #2 Photo Booth -->
+            <div class="top-card">
+                <div class="top-card-rank">
+                    <span>#2</span>
+                    <span>4.05</span>
+                </div>
+                <div class="top-card-image">
+                    <div class="image-placeholder" style="border:none;margin:0;padding:16px;background:transparent;">
+                        <div class="placeholder-header">
+                            <span class="placeholder-icon">📸</span>
+                            <span class="placeholder-title">Drop tunnel</span>
+                        </div>
+                        <div class="placeholder-prompt">
+                            PROMPT: Technical cross-section diagram of a waste bin with vertical drop-through tunnel design. Show the bin from the side, cutaway view. Inside, show a vertical transparent tube/tunnel running from the lid opening to the bottom. Around the tunnel, show 3-4 small cameras positioned at different heights pointing inward. Show a piece of food (like an apple) falling through the tunnel with motion blur lines. Style: clean engineering illustration, patent drawing aesthetic, precise lines, white background, gray bin structure, cameras in black. Label "360° camera array" and "freefall zone". Professional technical diagram.
+                        </div>
+                    </div>
+                </div>
+                <div class="top-card-content">
+                    <h4>The Photo Booth</h4>
+                    <p class="subtitle">Drop-through tunnel</p>
+                    <p class="description">Vertical tube with cameras around circumference. Items imaged during freefall. Gravity does sequencing for free.</p>
+                    <div class="top-card-stats">
+                        <div class="top-stat">
+                            <div class="value">92-97%</div>
+                            <div class="label">Accuracy</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value">9/10</div>
+                            <div class="label">Friction</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value">+30%</div>
+                            <div class="label">Cost</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #3 Weighmaster -->
+            <div class="top-card">
+                <div class="top-card-rank">
+                    <span>#3</span>
+                    <span>4.05</span>
+                </div>
+                <div class="top-card-image">
+                    <div class="image-placeholder" style="border:none;margin:0;padding:16px;background:transparent;">
+                        <div class="placeholder-header">
+                            <span class="placeholder-icon">⚖️</span>
+                            <span class="placeholder-title">Weight dynamics</span>
+                        </div>
+                        <div class="placeholder-prompt">
+                            PROMPT: Technical diagram showing a smart waste bin with precision weight sensing system. Isometric view. Show the bin sitting on 4 cylindrical load cells at the corners. Include a small inset graph showing a weight signature curve (sharp spike then plateau pattern). Show a camera on top for reference. Style: clean technical illustration, engineering diagram aesthetic, white background, gray bin, load cells in dark gray/black. Include small weight measurement display showing "1.247 kg" on the side. Label "load cells (100+ Hz)" and "impact signature". Patent drawing quality.
+                        </div>
+                    </div>
+                </div>
+                <div class="top-card-content">
+                    <h4>The Weighmaster</h4>
+                    <p class="subtitle">Weight dynamics</p>
+                    <p class="description">High-frequency load cell sampling (100+ Hz). Impact curves are diagnostic. Weight signatures validate or correct vision.</p>
+                    <div class="top-card-stats">
+                        <div class="top-stat">
+                            <div class="value">90-95%</div>
+                            <div class="label">w/ fusion</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value">10/10</div>
+                            <div class="label">Friction</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value">+5%</div>
+                            <div class="label">Cost</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <div class="container">
+        <p class="footer-text">Mill CV Infrastructure Explorer | Internal | March 2026</p>
+    </div>
+</footer>
 
 </body>
 </html>
