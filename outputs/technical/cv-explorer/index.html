@@ -18,7 +18,10 @@
             --text: #1a1a1a;
             --text-secondary: #666666;
             --text-muted: #999999;
-            --accent: #3498db;
+            --accent: #2563eb;
+            --accent-light: #dbeafe;
+            --green: #16a34a;
+            --green-light: #dcfce7;
         }
 
         * {
@@ -53,7 +56,7 @@
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.25rem;
             font-weight: 700;
             margin-bottom: 8px;
             letter-spacing: -0.02em;
@@ -61,12 +64,13 @@
 
         .subtitle {
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 1.1rem;
+            max-width: 600px;
         }
 
         /* Section styling */
         section {
-            padding: 64px 0;
+            padding: 72px 0;
             border-bottom: 1px solid var(--border);
         }
 
@@ -75,141 +79,355 @@
             font-size: 0.75rem;
             color: var(--text-muted);
             margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         h2 {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .section-intro {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+
+        /* Image Placeholder */
+        .image-placeholder {
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--off-white) 100%);
+            border: 2px dashed var(--border);
+            border-radius: 16px;
+            padding: 48px 32px;
+            text-align: center;
             margin-bottom: 32px;
         }
 
-        /* Top 3 Designs */
-        .hero-design {
-            background: var(--off-white);
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 24px;
+        .image-placeholder.hero {
+            padding: 64px 48px;
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--white) 50%, var(--green-light) 100%);
         }
 
-        .hero-design-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 24px;
+        .placeholder-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
         }
 
-        .badge {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            background: var(--text);
-            color: var(--white);
-            padding: 4px 10px;
-            border-radius: 4px;
-        }
-
-        .hero-design h3 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .hero-design .design-subtitle {
-            color: var(--text-secondary);
-            font-size: 1rem;
+        .placeholder-label {
+            font-weight: 600;
+            font-size: 1.1rem;
             margin-bottom: 8px;
         }
 
-        .best-for {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .best-for strong {
-            color: var(--text);
-        }
-
-        .diagram-container {
+        .placeholder-prompt {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
             background: var(--white);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 32px;
-            margin: 24px 0;
-            display: flex;
-            justify-content: center;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        .placeholder-hint {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 12px;
+        }
+
+        /* Value Story */
+        .value-flow {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .value-step {
+            text-align: center;
             position: relative;
         }
 
-        .diagram-container svg {
-            max-width: 400px;
-            width: 100%;
-            height: auto;
-        }
-
-        .hover-hint {
-            text-align: center;
-            font-size: 0.85rem;
+        .value-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -18px;
+            top: 24px;
+            font-size: 1.5rem;
             color: var(--text-muted);
-            margin-top: 16px;
         }
 
-        /* Secondary designs row */
-        .secondary-designs {
+        .value-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--off-white);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 1.5rem;
+        }
+
+        .value-step h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .value-step p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Quote */
+        .quote-box {
+            background: var(--text);
+            color: var(--white);
+            padding: 32px 40px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+
+        .quote-box blockquote {
+            font-size: 1.3rem;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .quote-box cite {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            font-style: normal;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
+            margin: 40px 0;
         }
 
-        .secondary-design {
-            background: var(--white);
-            border: 1px solid var(--border);
+        .stat-card {
+            background: var(--off-white);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-card.highlight {
+            background: var(--green-light);
+            border: 2px solid var(--green);
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .stat-card.highlight .stat-value {
+            color: var(--green);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* Baseline System */
+        .baseline-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 32px;
+        }
+
+        .baseline-image {
+            background: var(--off-white);
             border-radius: 12px;
             padding: 24px;
         }
 
-        .secondary-design .badge {
-            background: var(--text-secondary);
+        .baseline-specs h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
             margin-bottom: 16px;
-            display: inline-block;
         }
 
-        .secondary-design h3 {
+        .spec-table {
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        .spec-table tr {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .spec-table td {
+            padding: 10px 0;
+        }
+
+        .spec-table td:first-child {
+            color: var(--text-secondary);
+            width: 45%;
+        }
+
+        .spec-table td:last-child {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+        }
+
+        .spec-total {
+            background: var(--off-white);
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .spec-total .label {
+            font-weight: 600;
+        }
+
+        .spec-total .value {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .spec-total .note {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Performance Targets */
+        .perf-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .perf-item {
+            text-align: center;
+            padding: 16px;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .perf-item .value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .perf-item .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* Alternatives Grid */
+        .alternatives-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .alt-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .alt-card:hover {
+            border-color: var(--text);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        .alt-card .image-placeholder {
+            border: none;
+            border-radius: 0;
+            margin: 0;
+            padding: 32px 20px;
+        }
+
+        .alt-card-content {
+            padding: 20px;
+        }
+
+        .alt-card h4 {
+            font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 4px;
         }
 
-        .secondary-design .design-subtitle {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+        .alt-card .alt-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
             margin-bottom: 12px;
         }
 
-        .secondary-design .diagram-container {
-            padding: 20px;
-            margin: 16px 0;
+        .alt-card .best-for {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
 
-        .secondary-design .diagram-container svg {
-            max-width: 280px;
+        .alt-card .best-for strong {
+            color: var(--text);
+        }
+
+        .alt-card .cost-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: var(--light-gray);
+            display: inline-block;
+            margin-top: 12px;
         }
 
         /* Comparison Table */
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            margin-top: 32px;
         }
 
         .comparison-table th {
             text-align: left;
-            padding: 16px 12px;
+            padding: 14px 12px;
             border-bottom: 2px solid var(--text);
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         .comparison-table td {
-            padding: 16px 12px;
+            padding: 14px 12px;
             border-bottom: 1px solid var(--border);
             vertical-align: middle;
         }
@@ -218,87 +436,55 @@
             background: var(--off-white);
         }
 
-        .comparison-table .design-name {
-            font-weight: 600;
+        .comparison-table tr.baseline-row {
+            background: var(--accent-light);
         }
 
-        .comparison-table .design-name.top-pick {
+        .comparison-table tr.baseline-row:hover {
+            background: var(--accent-light);
+        }
+
+        .comparison-table .design-name {
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .comparison-table .design-name .star {
-            color: var(--text);
-        }
-
-        .dots {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
-            letter-spacing: 2px;
-        }
-
-        .dots .filled {
-            color: var(--text);
-        }
-
-        .dots .empty {
-            color: var(--border);
+        .comparison-table .design-name .badge {
+            font-size: 0.65rem;
+            background: var(--accent);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
         }
 
         .cost-tag {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             padding: 4px 8px;
             border-radius: 4px;
             background: var(--light-gray);
         }
 
-        .cost-tag.lower { background: #e8f5e9; color: #2e7d32; }
         .cost-tag.same { background: var(--light-gray); }
         .cost-tag.higher { background: #fff3e0; color: #e65100; }
 
-        .best-for-tag {
+        .best-for-text {
             font-size: 0.85rem;
             color: var(--text-secondary);
         }
 
-        /* Tooltip */
-        .tooltip {
-            position: fixed;
-            background: var(--text);
-            color: var(--white);
-            padding: 12px 16px;
-            border-radius: 8px;
+        .adds-text {
             font-size: 0.85rem;
-            max-width: 280px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.15s;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        }
-
-        .tooltip.visible {
-            opacity: 1;
-        }
-
-        .tooltip h4 {
-            font-size: 0.9rem;
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
-
-        .tooltip p {
-            font-size: 0.8rem;
-            opacity: 0.9;
-            line-height: 1.5;
+            color: var(--text-secondary);
         }
 
         /* Footer */
         footer {
             padding: 48px 0;
             text-align: center;
+            border-top: 1px solid var(--border);
         }
 
         .footer-text {
@@ -307,17 +493,33 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .secondary-designs {
+        @media (max-width: 900px) {
+            .value-flow {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .value-step:nth-child(2)::after {
+                display: none;
+            }
+            .baseline-grid {
                 grid-template-columns: 1fr;
             }
-
-            .comparison-table {
-                font-size: 0.85rem;
+            .alternatives-grid {
+                grid-template-columns: 1fr;
             }
+            .perf-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
 
-            .hero-design {
-                padding: 24px;
+        @media (max-width: 600px) {
+            .value-flow {
+                grid-template-columns: 1fr;
+            }
+            .value-step::after {
+                display: none;
             }
         }
     </style>
@@ -328,170 +530,306 @@
         <header>
             <div class="logo">mill</div>
             <h1>CV infrastructure explorer</h1>
-            <p class="subtitle">12 creative engineering approaches for food waste classification</p>
+            <p class="subtitle">Understanding the computer vision system powering Mill's food waste intelligence platform</p>
         </header>
 
-        <!-- Top 3 Designs Section -->
+        <!-- Section 1: The Value Story -->
         <section>
-            <div class="section-label">01 - Top recommendations</div>
-            <h2>Best approaches based on accuracy, friction, and feasibility</h2>
+            <div class="section-label">01 - The value story</div>
+            <h2>The CV system isn't the product. The data is.</h2>
+            <p class="section-intro">
+                Mill isn't a camera company or a food waste diversion company. Mill is a data company that happens to use hardware to collect the most accurate, granular food waste data ever assembled.
+            </p>
 
-            <!-- #1 Kaleidoscope -->
-            <div class="hero-design">
-                <div class="hero-design-header">
-                    <div>
-                        <h3>The Kaleidoscope</h3>
-                        <p class="design-subtitle">Mirror multi-angle system</p>
-                        <p class="best-for"><strong>Best for:</strong> Zero friction, single camera simplicity, patentable design</p>
-                    </div>
-                    <span class="badge">#1 Recommended</span>
+            <div class="image-placeholder hero">
+                <div class="placeholder-icon">📊</div>
+                <div class="placeholder-label">Hero Image: The Value Flow</div>
+                <div class="placeholder-prompt">
+                    Prompt for Bing Image Creator:<br><br>
+                    "Infographic style illustration showing food waste transformation journey: left side shows food scraps, middle shows smart bin with glowing sensors and data streams, right side shows analytics dashboard and compost. Clean white background, minimal style, blue and green accents, professional business presentation quality"
                 </div>
-
-                <div class="diagram-container" id="kaleidoscope-diagram">
-                    <!-- SVG loaded here -->
-                </div>
-
-                <p class="hover-hint">Hover on diagram parts to learn more</p>
+                <div class="placeholder-hint">Go to bing.com/images/create → paste prompt → download best result → save as images/hero-value-story.png</div>
             </div>
 
-            <!-- #2 and #3 -->
-            <div class="secondary-designs">
-                <div class="secondary-design">
-                    <span class="badge">#2</span>
-                    <h3>The Photo Booth</h3>
-                    <p class="design-subtitle">Drop-through tunnel</p>
-                    <p class="best-for"><strong>Best for:</strong> Maximum accuracy, gravity-based separation</p>
+            <div class="value-flow">
+                <div class="value-step">
+                    <div class="value-icon">🍎</div>
+                    <h4>Waste</h4>
+                    <p>Food scraps are discarded</p>
+                </div>
+                <div class="value-step">
+                    <div class="value-icon">📷</div>
+                    <h4>Classification</h4>
+                    <p>CV identifies what was thrown away</p>
+                </div>
+                <div class="value-step">
+                    <div class="value-icon">📈</div>
+                    <h4>Intelligence</h4>
+                    <p>Data becomes procurement insight</p>
+                </div>
+                <div class="value-step">
+                    <div class="value-icon">🌱</div>
+                    <h4>Value</h4>
+                    <p>Compost + chicken feed + less waste</p>
+                </div>
+            </div>
 
-                    <div class="diagram-container" id="photobooth-diagram">
-                        <!-- SVG loaded here -->
+            <div class="quote-box">
+                <blockquote>"Waste data becomes ordering intelligence. A 5% improvement in ordering accuracy can reduce waste costs by 10-15%."</blockquote>
+                <cite>— Mill Commercial Value Proposition</cite>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card highlight">
+                    <div class="stat-value">20%</div>
+                    <div class="stat-label">Waste reduction from awareness alone</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">90%</div>
+                    <div class="stat-label">Recovery rates proven in households</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">10%</div>
+                    <div class="stat-label">Of global emissions from food waste</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Baseline System -->
+        <section>
+            <div class="section-label">02 - The baseline</div>
+            <h2>What we're actually building</h2>
+            <p class="section-intro">
+                The production system uses proven components optimized for commercial kitchen environments. This is the baseline against which all alternatives are compared.
+            </p>
+
+            <div class="baseline-grid">
+                <div class="baseline-image">
+                    <div class="image-placeholder" style="margin: 0;">
+                        <div class="placeholder-icon">🗑️</div>
+                        <div class="placeholder-label">Baseline System Render</div>
+                        <div class="placeholder-prompt">
+                            Prompt for Bing Image Creator:<br><br>
+                            "Isometric 3D render of smart commercial waste bin with integrated camera system on top, depth sensor, LED ring illumination, sleek industrial design, white/gray color scheme, NVIDIA Jetson computer visible, professional product visualization, clean white background, soft shadows, 8K quality"
+                        </div>
                     </div>
                 </div>
 
-                <div class="secondary-design">
-                    <span class="badge">#3</span>
-                    <h3>The Weighmaster</h3>
-                    <p class="design-subtitle">Weight dynamics</p>
-                    <p class="best-for"><strong>Best for:</strong> Validation layer, high reliability, easy add-on</p>
+                <div class="baseline-specs">
+                    <h3>Hardware Bill of Materials</h3>
+                    <table class="spec-table">
+                        <tr>
+                            <td>Camera</td>
+                            <td>Basler ace2 8MP — $900</td>
+                        </tr>
+                        <tr>
+                            <td>Depth sensor</td>
+                            <td>Intel RealSense D455 — $349</td>
+                        </tr>
+                        <tr>
+                            <td>Edge compute</td>
+                            <td>NVIDIA Jetson Orin NX — $599</td>
+                        </tr>
+                        <tr>
+                            <td>Carrier board</td>
+                            <td>Connect Tech Boson — $349</td>
+                        </tr>
+                        <tr>
+                            <td>Scale</td>
+                            <td>Load cell + HX711 — $75</td>
+                        </tr>
+                        <tr>
+                            <td>Lighting</td>
+                            <td>Smart Vision Lights — $250</td>
+                        </tr>
+                        <tr>
+                            <td>Enclosure</td>
+                            <td>Custom IP67 aluminum — $200</td>
+                        </tr>
+                    </table>
 
-                    <div class="diagram-container" id="weighmaster-diagram">
-                        <!-- SVG loaded here -->
+                    <div class="spec-total">
+                        <div>
+                            <div class="label">Total per unit</div>
+                            <div class="note">At scale (1000+): $1,800-2,200</div>
+                        </div>
+                        <div class="value">~$2,947</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 40px; margin-bottom: 8px;">Performance targets</h3>
+            <div class="perf-grid">
+                <div class="perf-item">
+                    <div class="value">85%+</div>
+                    <div class="label">Classification accuracy</div>
+                </div>
+                <div class="perf-item">
+                    <div class="value">±10%</div>
+                    <div class="label">Volume estimation</div>
+                </div>
+                <div class="perf-item">
+                    <div class="value">30+ fps</div>
+                    <div class="label">Real-time processing</div>
+                </div>
+                <div class="perf-item">
+                    <div class="value">>99%</div>
+                    <div class="label">System uptime</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Alternatives -->
+        <section>
+            <div class="section-label">03 - Alternatives</div>
+            <h2>What if we need more?</h2>
+            <p class="section-intro">
+                Three leading alternatives that could enhance specific dimensions of the baseline system. Each adds capability without fundamentally changing the user experience.
+            </p>
+
+            <div class="alternatives-grid">
+                <!-- Kaleidoscope -->
+                <div class="alt-card">
+                    <div class="image-placeholder">
+                        <div class="placeholder-icon">🪞</div>
+                        <div class="placeholder-label">Kaleidoscope</div>
+                        <div class="placeholder-prompt" style="font-size: 0.65rem;">
+                            "Technical cutaway diagram of smart waste bin showing single camera with multiple angled mirrors creating kaleidoscope effect, light rays bouncing off mirrors, isometric view, clean minimal technical illustration, blue accent lighting"
+                        </div>
+                    </div>
+                    <div class="alt-card-content">
+                        <h4>The Kaleidoscope</h4>
+                        <p class="alt-subtitle">Mirror multi-angle system</p>
+                        <p class="best-for"><strong>Best for:</strong> Multiple viewing angles from single camera, better handling of occlusion</p>
+                        <span class="cost-tag same">Same cost</span>
+                    </div>
+                </div>
+
+                <!-- Photo Booth -->
+                <div class="alt-card">
+                    <div class="image-placeholder">
+                        <div class="placeholder-icon">📸</div>
+                        <div class="placeholder-label">Photo Booth</div>
+                        <div class="placeholder-prompt" style="font-size: 0.65rem;">
+                            "Cross-section view of waste bin with vertical drop tunnel, multiple cameras positioned around the tunnel circumference, food items falling through being photographed, technical diagram style, clean minimal"
+                        </div>
+                    </div>
+                    <div class="alt-card-content">
+                        <h4>The Photo Booth</h4>
+                        <p class="alt-subtitle">Drop-through tunnel</p>
+                        <p class="best-for"><strong>Best for:</strong> Maximum classification accuracy, natural item separation via gravity</p>
+                        <span class="cost-tag higher">+30% cost</span>
+                    </div>
+                </div>
+
+                <!-- Weighmaster -->
+                <div class="alt-card">
+                    <div class="image-placeholder">
+                        <div class="placeholder-icon">⚖️</div>
+                        <div class="placeholder-label">Weighmaster</div>
+                        <div class="placeholder-prompt" style="font-size: 0.65rem;">
+                            "Isometric technical diagram of smart waste bin on precision load cells, showing weight measurement graph overlay, digital scale display, technical illustration style, clean white background"
+                        </div>
+                    </div>
+                    <div class="alt-card-content">
+                        <h4>The Weighmaster</h4>
+                        <p class="alt-subtitle">Weight dynamics</p>
+                        <p class="best-for"><strong>Best for:</strong> Validation layer, cross-check vision with weight signatures</p>
+                        <span class="cost-tag same">+5% cost</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Comparison Table -->
+        <!-- Section 4: Comparison Table -->
         <section>
-            <div class="section-label">02 - All designs</div>
-            <h2>Compare all 12 approaches</h2>
+            <div class="section-label">04 - All approaches</div>
+            <h2>Compare all 12 designs vs baseline</h2>
+            <p class="section-intro">
+                Every alternative is evaluated against the baseline system. Cost shown as delta from ~$2,947 baseline.
+            </p>
 
             <table class="comparison-table">
                 <thead>
                     <tr>
-                        <th style="width: 22%">Design</th>
-                        <th style="width: 15%">Accuracy</th>
-                        <th style="width: 15%">Friction</th>
-                        <th style="width: 15%">Reliability</th>
-                        <th style="width: 12%">Cost</th>
-                        <th style="width: 21%">Best for</th>
+                        <th style="width: 20%">Design</th>
+                        <th style="width: 28%">What it adds</th>
+                        <th style="width: 12%">Cost Δ</th>
+                        <th style="width: 40%">Best for</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="design-name top-pick"><span class="star">★</span> Kaleidoscope</td>
-                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
-                        <td class="dots"><span class="filled">●●●●●</span></td>
-                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
-                        <td><span class="cost-tag same">Same</span></td>
-                        <td class="best-for-tag">Zero friction, simplicity</td>
+                    <tr class="baseline-row">
+                        <td class="design-name"><span class="badge">BASELINE</span> Sculptor</td>
+                        <td class="adds-text">RGB + depth + structured light (current design)</td>
+                        <td><span class="cost-tag same">—</span></td>
+                        <td class="best-for-text">What we're shipping. 85%+ accuracy, volume estimation.</td>
                     </tr>
                     <tr>
-                        <td class="design-name top-pick"><span class="star">★</span> Photo Booth</td>
-                        <td class="dots"><span class="filled">●●●●●</span></td>
-                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
-                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
-                        <td><span class="cost-tag higher">+30%</span></td>
-                        <td class="best-for-tag">Maximum accuracy</td>
+                        <td class="design-name">Kaleidoscope</td>
+                        <td class="adds-text">Mirror array for 4-6 simultaneous views</td>
+                        <td><span class="cost-tag same">Same</span></td>
+                        <td class="best-for-text">Multi-angle capture from single camera. Patentable.</td>
                     </tr>
                     <tr>
-                        <td class="design-name top-pick"><span class="star">★</span> Weighmaster</td>
-                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
-                        <td class="dots"><span class="filled">●●●●●</span></td>
-                        <td class="dots"><span class="filled">●●●●●</span></td>
-                        <td><span class="cost-tag same">Same</span></td>
-                        <td class="best-for-tag">Validation layer</td>
+                        <td class="design-name">Weighmaster</td>
+                        <td class="adds-text">High-frequency load cells (100+ Hz)</td>
+                        <td><span class="cost-tag same">+5%</span></td>
+                        <td class="best-for-text">Validation layer. Weight signatures cross-check vision.</td>
                     </tr>
                     <tr>
                         <td class="design-name">Listener</td>
-                        <td class="dots"><span class="filled">●●</span><span class="empty">○○○</span></td>
-                        <td class="dots"><span class="filled">●●●●●</span></td>
-                        <td class="dots"><span class="filled">●●●●●</span></td>
-                        <td><span class="cost-tag same">Same</span></td>
-                        <td class="best-for-tag">Cheap add-on, novel</td>
+                        <td class="adds-text">MEMS microphones for acoustic sensing</td>
+                        <td><span class="cost-tag same">+2%</span></td>
+                        <td class="best-for-text">Very cheap add-on. Novel physics channel. $5/mic.</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Photo Booth</td>
+                        <td class="adds-text">Vertical tunnel with 360° cameras</td>
+                        <td><span class="cost-tag higher">+30%</span></td>
+                        <td class="best-for-text">Highest accuracy (92-97%). Gravity separates items.</td>
                     </tr>
                     <tr>
                         <td class="design-name">Tumbler</td>
-                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
-                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
-                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
+                        <td class="adds-text">Rotating sieve for mechanical separation</td>
                         <td><span class="cost-tag higher">+40%</span></td>
-                        <td class="best-for-tag">Creative mechanical</td>
-                    </tr>
-                    <tr>
-                        <td class="design-name">Sculptor</td>
-                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
-                        <td class="dots"><span class="filled">●●●●●</span></td>
-                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
-                        <td><span class="cost-tag same">Baseline</span></td>
-                        <td class="best-for-tag">Volume measurement</td>
+                        <td class="best-for-text">Your original idea. Creative, but jam risk.</td>
                     </tr>
                     <tr>
                         <td class="design-name">Cascade</td>
-                        <td class="dots"><span class="filled">●●●●●</span></td>
-                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
-                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
+                        <td class="adds-text">Inclined conveyor for temporal spread</td>
                         <td><span class="cost-tag higher">+50%</span></td>
-                        <td class="best-for-tag">Temporal spread</td>
+                        <td class="best-for-text">Converts instant dump to time-spread capture.</td>
                     </tr>
                     <tr>
                         <td class="design-name">Heat Map</td>
-                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
-                        <td class="dots"><span class="filled">●●●●●</span></td>
-                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td class="adds-text">LWIR thermal imaging</td>
                         <td><span class="cost-tag higher">+20%</span></td>
-                        <td class="best-for-tag">Thermal signatures</td>
+                        <td class="best-for-text">Fresh vs cold waste. Works in any lighting.</td>
                     </tr>
                     <tr>
                         <td class="design-name">Fingerprinter</td>
-                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
-                        <td class="dots"><span class="filled">●●●●●</span></td>
-                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td class="adds-text">NIR spectral imaging</td>
                         <td><span class="cost-tag higher">+25%</span></td>
-                        <td class="best-for-tag">Material chemistry</td>
+                        <td class="best-for-text">Material chemistry (water, sugar, protein).</td>
                     </tr>
                     <tr>
                         <td class="design-name">Scanner</td>
-                        <td class="dots"><span class="filled">●●</span><span class="empty">○○○</span></td>
-                        <td class="dots"><span class="filled">●●●●●</span></td>
-                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td class="adds-text">Capacitive/RF sensing in bin walls</td>
                         <td><span class="cost-tag higher">+15%</span></td>
-                        <td class="best-for-tag">See through occlusion</td>
+                        <td class="best-for-text">See through occlusion. No line-of-sight needed.</td>
                     </tr>
                     <tr>
                         <td class="design-name">Polarizer</td>
-                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
-                        <td class="dots"><span class="filled">●●●●●</span></td>
-                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
+                        <td class="adds-text">Polarimetric imaging</td>
                         <td><span class="cost-tag higher">+80%</span></td>
-                        <td class="best-for-tag">Detect contamination</td>
+                        <td class="best-for-text">Detect plastic contamination. Cut glare.</td>
                     </tr>
                     <tr>
                         <td class="design-name">Penetrator</td>
-                        <td class="dots"><span class="filled">●●</span><span class="empty">○○○</span></td>
-                        <td class="dots"><span class="filled">●●●●●</span></td>
-                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td class="adds-text">mmWave radar</td>
                         <td><span class="cost-tag higher">+20%</span></td>
-                        <td class="best-for-tag">Radar/microwave</td>
+                        <td class="best-for-text">Penetrate surface. See through pile.</td>
                     </tr>
                 </tbody>
             </table>
@@ -503,112 +841,6 @@
             <p class="footer-text">Mill AI Workflow System | Internal use only | March 2026</p>
         </div>
     </footer>
-
-    <!-- Tooltip element -->
-    <div class="tooltip" id="tooltip">
-        <h4 id="tooltip-title"></h4>
-        <p id="tooltip-desc"></p>
-    </div>
-
-    <script>
-        // Component descriptions for tooltips
-        const componentInfo = {
-            // Kaleidoscope
-            'camera': {
-                title: 'Single camera',
-                desc: '8MP global shutter sensor. Captures all mirror reflections in a single frame. Global shutter eliminates motion blur from falling items.'
-            },
-            'mirrors': {
-                title: 'Mirror array',
-                desc: '4-6 first-surface mirrors at precise angles. Creates multiple viewpoints from single camera position. Light physics replaces multiple cameras.'
-            },
-            'bin': {
-                title: 'Collection bin',
-                desc: 'Standard food waste bin. No modification needed for user workflow. Items dumped naturally, mirrors provide multi-angle capture.'
-            },
-            'leds': {
-                title: 'LED illumination',
-                desc: 'Ring of diffused LEDs around opening. Provides consistent lighting regardless of kitchen ambient conditions.'
-            },
-            'rays': {
-                title: 'Light paths',
-                desc: 'Reflected light from mirrors converges at camera. Each mirror angle captures different perspective of waste pile.'
-            },
-            // Photo Booth
-            'tunnel': {
-                title: 'Drop tunnel',
-                desc: 'Vertical transparent tube. Items fall through at ~3m/s. Gravity naturally sequences items that were dumped together.'
-            },
-            'cameras': {
-                title: 'Camera array',
-                desc: '3-4 cameras positioned around circumference. Each captures item from different angle during freefall. 360° coverage.'
-            },
-            // Weighmaster
-            'loadcells': {
-                title: 'Load cells',
-                desc: 'High-frequency strain gauges (100+ Hz sampling). Captures weight impact curves. Different items have unique "weight signatures."'
-            },
-            'signature': {
-                title: 'Weight signatures',
-                desc: 'Impact curves are diagnostic. Apples hit differently than lettuce. Validates or corrects vision-based classification.'
-            }
-        };
-
-        // Load SVG diagrams
-        async function loadDiagram(containerId, svgPath) {
-            try {
-                const response = await fetch(svgPath);
-                const svgText = await response.text();
-                document.getElementById(containerId).innerHTML = svgText;
-                attachHoverListeners(containerId);
-            } catch (e) {
-                console.error(`Failed to load ${svgPath}:`, e);
-            }
-        }
-
-        // Attach hover listeners to diagram components
-        function attachHoverListeners(containerId) {
-            const container = document.getElementById(containerId);
-            const components = container.querySelectorAll('.component');
-            const tooltip = document.getElementById('tooltip');
-            const tooltipTitle = document.getElementById('tooltip-title');
-            const tooltipDesc = document.getElementById('tooltip-desc');
-
-            components.forEach(comp => {
-                const partId = comp.dataset.part;
-                const info = componentInfo[partId];
-
-                if (info) {
-                    comp.addEventListener('mouseenter', (e) => {
-                        tooltipTitle.textContent = info.title;
-                        tooltipDesc.textContent = info.desc;
-                        tooltip.classList.add('visible');
-                    });
-
-                    comp.addEventListener('mousemove', (e) => {
-                        const x = e.clientX + 15;
-                        const y = e.clientY + 15;
-                        // Keep tooltip on screen
-                        const maxX = window.innerWidth - 300;
-                        const maxY = window.innerHeight - 150;
-                        tooltip.style.left = Math.min(x, maxX) + 'px';
-                        tooltip.style.top = Math.min(y, maxY) + 'px';
-                    });
-
-                    comp.addEventListener('mouseleave', () => {
-                        tooltip.classList.remove('visible');
-                    });
-                }
-            });
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            loadDiagram('kaleidoscope-diagram', 'diagrams/kaleidoscope.svg');
-            loadDiagram('photobooth-diagram', 'diagrams/photobooth.svg');
-            loadDiagram('weighmaster-diagram', 'diagrams/weighmaster.svg');
-        });
-    </script>
 
 </body>
 </html>
