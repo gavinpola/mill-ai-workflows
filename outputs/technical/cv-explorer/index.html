@@ -36,7 +36,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 32px;
         }
@@ -102,10 +102,14 @@
         .problem-visual {
             background: var(--off-white);
             border-radius: 16px;
-            padding: 32px;
+            padding: 24px;
             min-height: 320px;
-            display: flex;
-            flex-direction: column;
+        }
+
+        .problem-visual img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
         }
 
         .problem-points {
@@ -143,50 +147,195 @@
             color: var(--text-secondary);
         }
 
-        /* Image Placeholder */
+        /* Image placeholder */
         .image-placeholder {
             background: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
             border: 2px dashed var(--border);
             border-radius: 12px;
-            padding: 24px;
-            flex: 1;
+            padding: 32px;
+            min-height: 280px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
-        .placeholder-header {
+        .image-placeholder-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .image-placeholder-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .image-placeholder-path {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+            background: var(--accent-light);
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-top: 8px;
+        }
+
+        /* Top Pick - Full Width */
+        .top-pick {
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+
+        .top-pick:first-of-type {
+            border-color: var(--green);
+        }
+
+        .top-pick-header {
+            padding: 16px 24px;
+            background: var(--off-white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .top-pick:first-of-type .top-pick-header {
+            background: var(--green);
+            color: white;
+            border-bottom-color: var(--green);
+        }
+
+        .top-pick-rank {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .top-pick-score {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .top-pick-body {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 0;
+        }
+
+        .top-pick-image {
+            background: var(--light-gray);
+            padding: 24px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            min-height: 300px;
+        }
+
+        .top-pick-image img {
+            max-width: 100%;
+            max-height: 280px;
+            border-radius: 8px;
+        }
+
+        .top-pick-content {
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-pick-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .top-pick-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
             margin-bottom: 16px;
         }
 
-        .placeholder-icon {
-            font-size: 1.5rem;
-        }
-
-        .placeholder-title {
-            font-weight: 600;
+        .top-pick-description {
             font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
         }
 
-        .placeholder-prompt {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
+        .top-pick-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .spec-group h5 {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             color: var(--text-muted);
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 12px;
-            line-height: 1.6;
+            margin-bottom: 8px;
         }
 
-        .placeholder-hint {
+        .spec-group ul {
+            list-style: none;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .spec-group li {
+            margin-bottom: 4px;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .spec-group li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 4px;
+            height: 4px;
+            background: var(--text-muted);
+            border-radius: 50%;
+        }
+
+        .top-pick-stats {
+            display: flex;
+            gap: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+
+        .top-stat {
+            text-align: center;
+        }
+
+        .top-stat .value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .top-stat .label {
             font-size: 0.7rem;
             color: var(--text-muted);
-            margin-top: 8px;
-            font-style: italic;
+            text-transform: uppercase;
+        }
+
+        .stat-highlight {
+            color: var(--green);
+        }
+
+        .stat-warning {
+            color: var(--orange);
         }
 
         /* Comparison Table */
@@ -303,99 +452,6 @@
             font-weight: 600;
         }
 
-        /* Top 3 Section */
-        .top-three {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 40px;
-        }
-
-        .top-card {
-            background: var(--white);
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.2s;
-        }
-
-        .top-card:first-child {
-            border-color: var(--green);
-        }
-
-        .top-card:hover {
-            border-color: var(--text);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-        }
-
-        .top-card-rank {
-            padding: 12px 20px;
-            background: var(--off-white);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .top-card:first-child .top-card-rank {
-            background: var(--green);
-            color: white;
-        }
-
-        .top-card-image {
-            padding: 20px;
-            background: var(--light-gray);
-            min-height: 200px;
-        }
-
-        .top-card-content {
-            padding: 20px;
-        }
-
-        .top-card h4 {
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .top-card .subtitle {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-        }
-
-        .top-card .description {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-        }
-
-        .top-card-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        .top-stat {
-            text-align: center;
-            padding: 8px;
-            background: var(--off-white);
-            border-radius: 6px;
-        }
-
-        .top-stat .value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .top-stat .label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-        }
-
         /* Criteria Legend */
         .criteria-legend {
             display: grid;
@@ -435,6 +491,98 @@
             color: var(--text-secondary);
         }
 
+        /* Expandable Details */
+        .option-details {
+            margin-top: 32px;
+        }
+
+        .option-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .option-card-header {
+            padding: 16px 20px;
+            background: var(--off-white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .option-card-header:hover {
+            background: var(--light-gray);
+        }
+
+        .option-card-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option-card-title h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .option-card-title .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .option-card-score {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .option-card-body {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .option-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .option-specs {
+            font-size: 0.85rem;
+        }
+
+        .option-specs h5 {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            margin-top: 12px;
+        }
+
+        .option-specs h5:first-child {
+            margin-top: 0;
+        }
+
+        .option-specs p {
+            color: var(--text-secondary);
+        }
+
+        .option-risk {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: var(--orange-light);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--orange);
+        }
+
         /* Footer */
         footer {
             padding: 48px 0;
@@ -449,8 +597,10 @@
         /* Responsive */
         @media (max-width: 900px) {
             .problem-grid { grid-template-columns: 1fr; }
-            .top-three { grid-template-columns: 1fr; }
+            .top-pick-body { grid-template-columns: 1fr; }
+            .top-pick-image { min-height: 200px; }
             .criteria-legend { grid-template-columns: 1fr; }
+            .option-card-body { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -468,7 +618,7 @@
 
     <!-- Section 1: The Problem -->
     <section>
-        <div class="section-label">01 — The challenge</div>
+        <div class="section-label">01 - The challenge</div>
         <h2>Food waste classification is hard</h2>
         <p class="section-intro">
             When a kitchen worker dumps a plate of scraps, we need to identify what's being thrown away.
@@ -478,28 +628,28 @@
         <div class="problem-grid">
             <div class="problem-points">
                 <div class="problem-point">
-                    <div class="problem-icon">🍝</div>
+                    <div class="problem-icon">*</div>
                     <div>
                         <h4>Mixed pile occlusion</h4>
                         <p>Food gets dumped as a pile. Items on top hide items below. A single camera angle misses 30-50% of the waste.</p>
                     </div>
                 </div>
                 <div class="problem-point">
-                    <div class="problem-icon">⚡</div>
+                    <div class="problem-icon">!</div>
                     <div>
                         <h4>Zero friction tolerance</h4>
                         <p>Back-of-house staff can't slow down. Any system that changes their workflow will fail adoption. 10/10 friction score or nothing.</p>
                     </div>
                 </div>
                 <div class="problem-point">
-                    <div class="problem-icon">💡</div>
+                    <div class="problem-icon">~</div>
                     <div>
                         <h4>Variable conditions</h4>
                         <p>Kitchen lighting changes. Surfaces are wet, greasy, reflective. Items are crushed, mixed, steaming. No controlled environment.</p>
                     </div>
                 </div>
                 <div class="problem-point">
-                    <div class="problem-icon">🎯</div>
+                    <div class="problem-icon">></div>
                     <div>
                         <h4>85%+ accuracy required</h4>
                         <p>Below 85%, the data isn't actionable. Procurement decisions need confidence. False positives erode trust.</p>
@@ -508,27 +658,216 @@
             </div>
 
             <div class="problem-visual">
+                <!-- Replace with your generated image -->
                 <div class="image-placeholder">
-                    <div class="placeholder-header">
-                        <span class="placeholder-icon">📷</span>
-                        <span class="placeholder-title">The occlusion problem</span>
-                    </div>
-                    <div class="placeholder-prompt">
-                        PROMPT: Create a technical cross-section illustration showing the food waste occlusion problem. Show a commercial kitchen waste bin from the side, cutaway view. Inside the bin, show layers of different food items - vegetables, bread, meat scraps, pasta - piled on top of each other. Use dotted lines to show a camera's field of view from above, with red X marks on items that are hidden/occluded by items on top. Style: clean technical diagram, isometric perspective, muted colors with the bin in gray/white, food items in natural colors, white background, no shadows, minimal line art style like a patent drawing. Include small labels pointing to "visible items" and "occluded items". Professional engineering illustration quality.
-                    </div>
-                    <div class="placeholder-hint">→ bing.com/images/create</div>
+                    <div class="image-placeholder-icon">*</div>
+                    <div class="image-placeholder-text">The Occlusion Problem Image</div>
+                    <div class="image-placeholder-path">images/occlusion-problem.png</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Section 2: The Approaches -->
+    <!-- Section 2: Top 3 Recommendations (Full Width) -->
     <section>
-        <div class="section-label">02 — The approaches</div>
-        <h2>12 engineering solutions, ranked</h2>
+        <div class="section-label">02 - Top recommendations</div>
+        <h2>The best approaches, in depth</h2>
         <p class="section-intro">
-            We evaluated 12 different approaches across 6 weighted criteria.
-            The baseline (structured light) is what we're currently building — but it's not necessarily the best option.
+            These three designs scored highest across our weighted criteria. Each solves the occlusion problem differently.
+            The baseline (Sculptor/Structured Light) ranks #4 - good, but not the best option.
+        </p>
+
+        <!-- #1 Kaleidoscope -->
+        <div class="top-pick">
+            <div class="top-pick-header">
+                <span class="top-pick-rank">#1 RECOMMENDED</span>
+                <span class="top-pick-score">4.20</span>
+            </div>
+            <div class="top-pick-body">
+                <div class="top-pick-image">
+                    <!-- Replace with your generated image -->
+                    <div class="image-placeholder" style="border:none;background:transparent;min-height:auto;padding:0;">
+                        <div class="image-placeholder-icon">*</div>
+                        <div class="image-placeholder-text">Kaleidoscope Image</div>
+                        <div class="image-placeholder-path">images/kaleidoscope.png</div>
+                    </div>
+                </div>
+                <div class="top-pick-content">
+                    <h3 class="top-pick-title">The Kaleidoscope</h3>
+                    <p class="top-pick-subtitle">Mirror Multi-Angle System</p>
+                    <p class="top-pick-description">
+                        Single high-resolution camera combined with 4-6 precision-angled first-surface mirrors captures 4-6 simultaneous viewing angles in a single frame. Light physics replaces the need for multiple cameras. The mirror array mounts directly to the existing camera housing in the lid - no change to the bin body, no additional compute load, no extra wiring.
+                    </p>
+                    <div class="top-pick-specs">
+                        <div class="spec-group">
+                            <h5>What it adds to base system</h5>
+                            <ul>
+                                <li>Mirror array ring around camera mount</li>
+                                <li>Minor lid redesign for mirror bracket</li>
+                                <li>No additional computing power</li>
+                            </ul>
+                        </div>
+                        <div class="spec-group">
+                            <h5>Hardware</h5>
+                            <ul>
+                                <li>4-6 first-surface mirrors (~$50 total)</li>
+                                <li>Custom machined aluminum bracket</li>
+                                <li>Same camera, processor, lighting as baseline</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="top-pick-stats">
+                        <div class="top-stat">
+                            <div class="value stat-highlight">85-92%</div>
+                            <div class="label">Accuracy</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value stat-highlight">10/10</div>
+                            <div class="label">Friction</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value">Same</div>
+                            <div class="label">Cost vs Baseline</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value stat-warning">Mirror fouling</div>
+                            <div class="label">Key Risk</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #2 Photo Booth -->
+        <div class="top-pick">
+            <div class="top-pick-header">
+                <span class="top-pick-rank">#2</span>
+                <span class="top-pick-score">4.05</span>
+            </div>
+            <div class="top-pick-body">
+                <div class="top-pick-image">
+                    <!-- Replace with your generated image -->
+                    <div class="image-placeholder" style="border:none;background:transparent;min-height:auto;padding:0;">
+                        <div class="image-placeholder-icon">*</div>
+                        <div class="image-placeholder-text">Photo Booth Image</div>
+                        <div class="image-placeholder-path">images/photobooth.png</div>
+                    </div>
+                </div>
+                <div class="top-pick-content">
+                    <h3 class="top-pick-title">The Photo Booth</h3>
+                    <p class="top-pick-subtitle">Drop-Through Tunnel System</p>
+                    <p class="top-pick-description">
+                        A vertical transparent polycarbonate tube creates a "freefall zone" inside the bin. Items fall through and are imaged by 3-4 cameras positioned around the tunnel circumference. Gravity naturally sequences items that were dumped together - solving occlusion through physics rather than algorithms. Highest potential accuracy of all options.
+                    </p>
+                    <div class="top-pick-specs">
+                        <div class="spec-group">
+                            <h5>What it adds to base system</h5>
+                            <ul>
+                                <li>Vertical tube structure inside bin</li>
+                                <li>3-4 additional small cameras around tunnel</li>
+                                <li>Slightly raised opening with funnel guide</li>
+                            </ul>
+                        </div>
+                        <div class="spec-group">
+                            <h5>Hardware</h5>
+                            <ul>
+                                <li>Polycarbonate tube (~$80)</li>
+                                <li>3-4 cameras (~$300 each = $900-1200)</li>
+                                <li>LED strip illumination inside tube</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="top-pick-stats">
+                        <div class="top-stat">
+                            <div class="value stat-highlight">92-97%</div>
+                            <div class="label">Accuracy</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value">9/10</div>
+                            <div class="label">Friction</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value stat-warning">+30%</div>
+                            <div class="label">Cost vs Baseline</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value stat-warning">Tube cleaning</div>
+                            <div class="label">Key Risk</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- #3 Weighmaster -->
+        <div class="top-pick">
+            <div class="top-pick-header">
+                <span class="top-pick-rank">#3</span>
+                <span class="top-pick-score">4.05</span>
+            </div>
+            <div class="top-pick-body">
+                <div class="top-pick-image">
+                    <!-- Replace with your generated image -->
+                    <div class="image-placeholder" style="border:none;background:transparent;min-height:auto;padding:0;">
+                        <div class="image-placeholder-icon">*</div>
+                        <div class="image-placeholder-text">Weighmaster Image</div>
+                        <div class="image-placeholder-path">images/weighmaster.png</div>
+                    </div>
+                </div>
+                <div class="top-pick-content">
+                    <h3 class="top-pick-title">The Weighmaster</h3>
+                    <p class="top-pick-subtitle">High-Frequency Weight Dynamics</p>
+                    <p class="top-pick-description">
+                        Four precision load cells under the bin corners sample at 100+ Hz, capturing "impact signatures" when items are dropped. Each food type creates a unique weight fingerprint - the curve of impact, oscillation, and settling. This data validates or corrects vision-based classification, achieving sensor fusion without adding visual complexity.
+                    </p>
+                    <div class="top-pick-specs">
+                        <div class="spec-group">
+                            <h5>What it adds to base system</h5>
+                            <ul>
+                                <li>4 load cells under bin corners</li>
+                                <li>Signal processing board</li>
+                                <li>Sensor fusion software layer</li>
+                            </ul>
+                        </div>
+                        <div class="spec-group">
+                            <h5>Hardware</h5>
+                            <ul>
+                                <li>4x precision load cells (~$25 ea = $100)</li>
+                                <li>HX711 amplifier (~$5)</li>
+                                <li>Custom mounting plate (~$50)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="top-pick-stats">
+                        <div class="top-stat">
+                            <div class="value">55-70%</div>
+                            <div class="label">Standalone</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value stat-highlight">90-95%</div>
+                            <div class="label">Fused w/ Vision</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value stat-highlight">+5%</div>
+                            <div class="label">Cost vs Baseline</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value stat-warning">Vibration</div>
+                            <div class="label">Key Risk</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: All 12 Approaches -->
+    <section>
+        <div class="section-label">03 - All approaches ranked</div>
+        <h2>Complete comparison</h2>
+        <p class="section-intro">
+            All 12 engineering approaches evaluated across 6 weighted criteria.
+            Expand each option below for full technical details.
         </p>
 
         <div class="criteria-legend">
@@ -591,7 +930,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Rank 1: Kaleidoscope -->
                     <tr class="rank-1">
                         <td class="design-name"><span class="badge badge-top">#1</span> Kaleidoscope</td>
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
@@ -602,7 +940,6 @@
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
                         <td class="score-value">4.20</td>
                     </tr>
-                    <!-- Rank 2: Photo Booth -->
                     <tr>
                         <td class="design-name"><span class="badge" style="background:#666;color:white">#2</span> Photo Booth</td>
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
@@ -613,7 +950,6 @@
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
                         <td class="score-value">4.05</td>
                     </tr>
-                    <!-- Rank 3: Weighmaster -->
                     <tr>
                         <td class="design-name"><span class="badge" style="background:#666;color:white">#3</span> Weighmaster</td>
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
@@ -624,7 +960,6 @@
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
                         <td class="score-value">4.05</td>
                     </tr>
-                    <!-- Rank 4: Sculptor (Baseline) -->
                     <tr class="baseline-row">
                         <td class="design-name"><span class="badge badge-baseline">BASELINE</span> Sculptor</td>
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
@@ -635,7 +970,6 @@
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
                         <td class="score-value">4.00</td>
                     </tr>
-                    <!-- Rank 5: Fingerprinter -->
                     <tr>
                         <td class="design-name"><span class="badge" style="background:#999;color:white">#5</span> Fingerprinter</td>
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
@@ -646,7 +980,6 @@
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
                         <td class="score-value">3.95</td>
                     </tr>
-                    <!-- Rank 6: Listener -->
                     <tr>
                         <td class="design-name"><span class="badge" style="background:#999;color:white">#6</span> Listener</td>
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
@@ -657,7 +990,6 @@
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
                         <td class="score-value">3.80</td>
                     </tr>
-                    <!-- Rank 7: Heat Map -->
                     <tr>
                         <td class="design-name"><span class="badge" style="background:#999;color:white">#7</span> Heat Map</td>
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
@@ -668,7 +1000,6 @@
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
                         <td class="score-value">3.75</td>
                     </tr>
-                    <!-- Rank 8: Tumbler -->
                     <tr>
                         <td class="design-name"><span class="badge" style="background:#999;color:white">#8</span> Tumbler</td>
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
@@ -679,7 +1010,6 @@
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
                         <td class="score-value">3.55</td>
                     </tr>
-                    <!-- Rank 9: Scanner -->
                     <tr>
                         <td class="design-name"><span class="badge" style="background:#ccc;color:#666">#9</span> Scanner</td>
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
@@ -690,7 +1020,6 @@
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
                         <td class="score-value">3.45</td>
                     </tr>
-                    <!-- Rank 10: Penetrator -->
                     <tr>
                         <td class="design-name"><span class="badge" style="background:#ccc;color:#666">#10</span> Penetrator</td>
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
@@ -701,7 +1030,6 @@
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
                         <td class="score-value">3.40</td>
                     </tr>
-                    <!-- Rank 11: Cascade -->
                     <tr>
                         <td class="design-name"><span class="badge" style="background:#ccc;color:#666">#11</span> Cascade</td>
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span></td>
@@ -712,7 +1040,6 @@
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span></td>
                         <td class="score-value">3.30</td>
                     </tr>
-                    <!-- Rank 12: Polarizer -->
                     <tr>
                         <td class="design-name"><span class="badge" style="background:#ccc;color:#666">#12</span> Polarizer</td>
                         <td><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot filled"></span><span class="score-dot empty"></span><span class="score-dot empty"></span></td>
@@ -726,131 +1053,335 @@
                 </tbody>
             </table>
         </div>
-    </section>
 
-    <!-- Section 3: Top 3 Deep Dive -->
-    <section>
-        <div class="section-label">03 — Top 3 recommendations</div>
-        <h2>The best approaches explained</h2>
-        <p class="section-intro">
-            These three designs scored highest. Each solves the occlusion problem differently.
-            The baseline (Sculptor) ranks #4 — good, but not the best option.
-        </p>
+        <!-- Detailed descriptions for all 12 -->
+        <div class="option-details">
+            <h3 style="font-size:1.1rem;margin-bottom:20px;margin-top:48px;">Technical details for each approach</h3>
 
-        <div class="top-three">
             <!-- #1 Kaleidoscope -->
-            <div class="top-card">
-                <div class="top-card-rank">
-                    <span>#1 RECOMMENDED</span>
-                    <span>4.20</span>
-                </div>
-                <div class="top-card-image">
-                    <div class="image-placeholder" style="border:none;margin:0;padding:16px;background:transparent;">
-                        <div class="placeholder-header">
-                            <span class="placeholder-icon">🪞</span>
-                            <span class="placeholder-title">Mirror system</span>
-                        </div>
-                        <div class="placeholder-prompt">
-                            PROMPT: Technical illustration of a smart waste bin with a kaleidoscope mirror system. Show a single camera at the top center pointing down. Around the camera, show 4-6 angled first-surface mirrors arranged in a ring formation. Draw light ray lines from the mirrors down into the bin, showing how a single camera captures multiple angles simultaneously. Cutaway side view. Style: clean engineering diagram, patent illustration aesthetic, thin precise lines, white background, minimal colors (gray bin, blue light rays, silver mirrors). Label "single camera" and "mirror array". Professional technical drawing quality.
-                        </div>
+            <div class="option-card">
+                <div class="option-card-header">
+                    <div class="option-card-title">
+                        <span class="badge badge-top">#1</span>
+                        <h4>The Kaleidoscope</h4>
+                        <span class="subtitle">Mirror Multi-Angle</span>
                     </div>
+                    <span class="option-card-score">4.20</span>
                 </div>
-                <div class="top-card-content">
-                    <h4>The Kaleidoscope</h4>
-                    <p class="subtitle">Mirror multi-angle system</p>
-                    <p class="description">Single high-res camera + precision angled mirrors = 4-6 simultaneous views. Light physics replaces multiple cameras.</p>
-                    <div class="top-card-stats">
-                        <div class="top-stat">
-                            <div class="value">85-92%</div>
-                            <div class="label">Accuracy</div>
-                        </div>
-                        <div class="top-stat">
-                            <div class="value">10/10</div>
-                            <div class="label">Friction</div>
-                        </div>
-                        <div class="top-stat">
-                            <div class="value">Same</div>
-                            <div class="label">Cost</div>
-                        </div>
+                <div class="option-card-body">
+                    <div class="option-description">
+                        <p><strong>How it works:</strong> Single camera + 4-6 angled first-surface mirrors capture 4-6 simultaneous viewpoints. Light physics replaces the need for multiple cameras.</p>
+                        <p style="margin-top:12px;"><strong>Why it's interesting:</strong> Maximum multi-angle coverage with zero additional compute or cameras. The mirror array is passive - no electronics, no failure modes beyond fouling.</p>
+                    </div>
+                    <div class="option-specs">
+                        <h5>Hardware</h5>
+                        <p>4-6 first-surface mirrors (~$50), custom aluminum bracket, same baseline camera/processor</p>
+                        <h5>Accuracy</h5>
+                        <p>85-92% standalone</p>
+                        <h5>Cost Delta</h5>
+                        <p>Same as baseline</p>
+                        <div class="option-risk">Risk: Mirror fouling from grease/steam; requires periodic cleaning protocol</div>
                     </div>
                 </div>
             </div>
 
             <!-- #2 Photo Booth -->
-            <div class="top-card">
-                <div class="top-card-rank">
-                    <span>#2</span>
-                    <span>4.05</span>
-                </div>
-                <div class="top-card-image">
-                    <div class="image-placeholder" style="border:none;margin:0;padding:16px;background:transparent;">
-                        <div class="placeholder-header">
-                            <span class="placeholder-icon">📸</span>
-                            <span class="placeholder-title">Drop tunnel</span>
-                        </div>
-                        <div class="placeholder-prompt">
-                            PROMPT: Technical cross-section diagram of a waste bin with vertical drop-through tunnel design. Show the bin from the side, cutaway view. Inside, show a vertical transparent tube/tunnel running from the lid opening to the bottom. Around the tunnel, show 3-4 small cameras positioned at different heights pointing inward. Show a piece of food (like an apple) falling through the tunnel with motion blur lines. Style: clean engineering illustration, patent drawing aesthetic, precise lines, white background, gray bin structure, cameras in black. Label "360° camera array" and "freefall zone". Professional technical diagram.
-                        </div>
+            <div class="option-card">
+                <div class="option-card-header">
+                    <div class="option-card-title">
+                        <span class="badge" style="background:#666;color:white">#2</span>
+                        <h4>The Photo Booth</h4>
+                        <span class="subtitle">Drop-Through Tunnel</span>
                     </div>
+                    <span class="option-card-score">4.05</span>
                 </div>
-                <div class="top-card-content">
-                    <h4>The Photo Booth</h4>
-                    <p class="subtitle">Drop-through tunnel</p>
-                    <p class="description">Vertical tube with cameras around circumference. Items imaged during freefall. Gravity does sequencing for free.</p>
-                    <div class="top-card-stats">
-                        <div class="top-stat">
-                            <div class="value">92-97%</div>
-                            <div class="label">Accuracy</div>
-                        </div>
-                        <div class="top-stat">
-                            <div class="value">9/10</div>
-                            <div class="label">Friction</div>
-                        </div>
-                        <div class="top-stat">
-                            <div class="value">+30%</div>
-                            <div class="label">Cost</div>
-                        </div>
+                <div class="option-card-body">
+                    <div class="option-description">
+                        <p><strong>How it works:</strong> Vertical transparent tube creates a "freefall zone." Items fall through and are imaged by cameras around the circumference. Gravity naturally sequences items dumped together.</p>
+                        <p style="margin-top:12px;"><strong>Why it's interesting:</strong> Highest accuracy potential of all options (92-97%). Solves occlusion through physics - items physically separate during freefall.</p>
+                    </div>
+                    <div class="option-specs">
+                        <h5>Hardware</h5>
+                        <p>Polycarbonate tube (~$80), 3-4 cameras (~$300 ea), LED strips, raised funnel opening</p>
+                        <h5>Accuracy</h5>
+                        <p>92-97% (highest)</p>
+                        <h5>Cost Delta</h5>
+                        <p>+30% vs baseline</p>
+                        <div class="option-risk">Risk: Tube cleaning requirements; food residue on walls; slightly modified user interaction</div>
                     </div>
                 </div>
             </div>
 
             <!-- #3 Weighmaster -->
-            <div class="top-card">
-                <div class="top-card-rank">
-                    <span>#3</span>
-                    <span>4.05</span>
-                </div>
-                <div class="top-card-image">
-                    <div class="image-placeholder" style="border:none;margin:0;padding:16px;background:transparent;">
-                        <div class="placeholder-header">
-                            <span class="placeholder-icon">⚖️</span>
-                            <span class="placeholder-title">Weight dynamics</span>
-                        </div>
-                        <div class="placeholder-prompt">
-                            PROMPT: Technical diagram showing a smart waste bin with precision weight sensing system. Isometric view. Show the bin sitting on 4 cylindrical load cells at the corners. Include a small inset graph showing a weight signature curve (sharp spike then plateau pattern). Show a camera on top for reference. Style: clean technical illustration, engineering diagram aesthetic, white background, gray bin, load cells in dark gray/black. Include small weight measurement display showing "1.247 kg" on the side. Label "load cells (100+ Hz)" and "impact signature". Patent drawing quality.
-                        </div>
+            <div class="option-card">
+                <div class="option-card-header">
+                    <div class="option-card-title">
+                        <span class="badge" style="background:#666;color:white">#3</span>
+                        <h4>The Weighmaster</h4>
+                        <span class="subtitle">Weight Dynamics</span>
                     </div>
+                    <span class="option-card-score">4.05</span>
                 </div>
-                <div class="top-card-content">
-                    <h4>The Weighmaster</h4>
-                    <p class="subtitle">Weight dynamics</p>
-                    <p class="description">High-frequency load cell sampling (100+ Hz). Impact curves are diagnostic. Weight signatures validate or correct vision.</p>
-                    <div class="top-card-stats">
-                        <div class="top-stat">
-                            <div class="value">90-95%</div>
-                            <div class="label">w/ fusion</div>
-                        </div>
-                        <div class="top-stat">
-                            <div class="value">10/10</div>
-                            <div class="label">Friction</div>
-                        </div>
-                        <div class="top-stat">
-                            <div class="value">+5%</div>
-                            <div class="label">Cost</div>
-                        </div>
+                <div class="option-card-body">
+                    <div class="option-description">
+                        <p><strong>How it works:</strong> High-frequency load cells (100+ Hz sampling) capture impact signatures. Each food type creates a unique "weight fingerprint" that validates or corrects vision classification.</p>
+                        <p style="margin-top:12px;"><strong>Why it's interesting:</strong> Cheapest add-on (+5% cost), zero user friction, and provides orthogonal data channel for sensor fusion. Weight data also enables mass-based pricing.</p>
+                    </div>
+                    <div class="option-specs">
+                        <h5>Hardware</h5>
+                        <p>4x precision load cells (~$100 total), HX711 amplifier (~$5), mounting plate (~$50)</p>
+                        <h5>Accuracy</h5>
+                        <p>55-70% standalone, 90-95% fused with vision</p>
+                        <h5>Cost Delta</h5>
+                        <p>+5% vs baseline</p>
+                        <div class="option-risk">Risk: Kitchen vibration interference; requires calibration; floor must be level</div>
                     </div>
                 </div>
             </div>
+
+            <!-- #4 Sculptor (Baseline) -->
+            <div class="option-card">
+                <div class="option-card-header">
+                    <div class="option-card-title">
+                        <span class="badge badge-baseline">BASELINE</span>
+                        <h4>The Sculptor</h4>
+                        <span class="subtitle">Structured Light (Current Plan)</span>
+                    </div>
+                    <span class="option-card-score">4.00</span>
+                </div>
+                <div class="option-card-body">
+                    <div class="option-description">
+                        <p><strong>How it works:</strong> IR pattern projection + camera for precise 3D reconstruction. Tracks volume changes between dumps. This is the current baseline being built.</p>
+                        <p style="margin-top:12px;"><strong>Why it's the baseline:</strong> Proven technology (Intel RealSense), known integration path, reliable depth sensing, good balance across all criteria.</p>
+                    </div>
+                    <div class="option-specs">
+                        <h5>Hardware</h5>
+                        <p>Basler ace2 8MP ($900), Intel RealSense D455 ($349), NVIDIA Jetson Orin NX ($599), LED ring ($250)</p>
+                        <h5>Accuracy</h5>
+                        <p>85-92% classification, +/-2-5% volume</p>
+                        <h5>Total Cost</h5>
+                        <p>~$2,947/unit (baseline reference)</p>
+                        <div class="option-risk">Risk: Wet surface failure with liquids/soups; depth noise in steam</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #5 Fingerprinter -->
+            <div class="option-card">
+                <div class="option-card-header">
+                    <div class="option-card-title">
+                        <span class="badge" style="background:#999;color:white">#5</span>
+                        <h4>The Fingerprinter</h4>
+                        <span class="subtitle">NIR Spectral Imaging</span>
+                    </div>
+                    <span class="option-card-score">3.95</span>
+                </div>
+                <div class="option-card-body">
+                    <div class="option-description">
+                        <p><strong>How it works:</strong> Near-infrared imaging captures material composition (water, sugar, protein content). Identifies food by chemistry, not just appearance.</p>
+                        <p style="margin-top:12px;"><strong>Why it's interesting:</strong> Can differentiate foods that look identical (chicken vs pork, different apple varieties). Orthogonal to visual classification.</p>
+                    </div>
+                    <div class="option-specs">
+                        <h5>Hardware</h5>
+                        <p>NIR LED array (~$150), NIR camera module (~$400-800), updated ML model</p>
+                        <h5>Accuracy</h5>
+                        <p>80-92% standalone, 94-98% fused with vision</p>
+                        <h5>Cost Delta</h5>
+                        <p>+25% vs baseline</p>
+                        <div class="option-risk">Risk: SWIR version extremely expensive ($10K+); NIR limited to surface composition</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #6 Listener -->
+            <div class="option-card">
+                <div class="option-card-header">
+                    <div class="option-card-title">
+                        <span class="badge" style="background:#999;color:white">#6</span>
+                        <h4>The Listener</h4>
+                        <span class="subtitle">Acoustic Sensing</span>
+                    </div>
+                    <span class="option-card-score">3.80</span>
+                </div>
+                <div class="option-card-body">
+                    <div class="option-description">
+                        <p><strong>How it works:</strong> MEMS microphones capture impact sounds. Different foods have different acoustic signatures when hitting the bin - a carrot sounds different from pasta.</p>
+                        <p style="margin-top:12px;"><strong>Why it's interesting:</strong> Cheapest add-on (2% cost increase), zero user friction, and provides temporal sequencing data. Could distinguish items hitting simultaneously.</p>
+                    </div>
+                    <div class="option-specs">
+                        <h5>Hardware</h5>
+                        <p>4-8 MEMS microphones (~$5 each = $20-40), audio ADC board (~$30)</p>
+                        <h5>Accuracy</h5>
+                        <p>50-70% standalone, 90-95% fused with vision</p>
+                        <h5>Cost Delta</h5>
+                        <p>+2% vs baseline</p>
+                        <div class="option-risk">Risk: Kitchen background noise; requires careful acoustic isolation; limited standalone accuracy</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #7 Heat Map -->
+            <div class="option-card">
+                <div class="option-card-header">
+                    <div class="option-card-title">
+                        <span class="badge" style="background:#999;color:white">#7</span>
+                        <h4>The Heat Map</h4>
+                        <span class="subtitle">Thermal Differential</span>
+                    </div>
+                    <span class="option-card-score">3.75</span>
+                </div>
+                <div class="option-card-body">
+                    <div class="option-description">
+                        <p><strong>How it works:</strong> LWIR thermal camera detects temperature signatures. Fresh waste is warm; thermal contrast aids segmentation between recently discarded items and older waste.</p>
+                        <p style="margin-top:12px;"><strong>Why it's interesting:</strong> Provides temporal information (fresh vs old waste) and aids segmentation. Works in any lighting condition.</p>
+                    </div>
+                    <div class="option-specs">
+                        <h5>Hardware</h5>
+                        <p>LWIR thermal camera (~$300-500), thermal-RGB fusion software</p>
+                        <h5>Accuracy</h5>
+                        <p>60-75% standalone, 88-94% fused with vision</p>
+                        <h5>Cost Delta</h5>
+                        <p>+20% vs baseline</p>
+                        <div class="option-risk">Risk: Cold waste from refrigerators breaks thermal assumptions; soup/liquid thermal bleed</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #8 Tumbler -->
+            <div class="option-card">
+                <div class="option-card-header">
+                    <div class="option-card-title">
+                        <span class="badge" style="background:#999;color:white">#8</span>
+                        <h4>The Tumbler</h4>
+                        <span class="subtitle">Rotating Sieve</span>
+                    </div>
+                    <span class="option-card-score">3.55</span>
+                </div>
+                <div class="option-card-body">
+                    <div class="option-description">
+                        <p><strong>How it works:</strong> Motorized rotating sieve in lid separates items as they fall through. High-speed camera captures individual items during separation.</p>
+                        <p style="margin-top:12px;"><strong>Why it's interesting:</strong> Mechanical separation solves occlusion definitively. Each item imaged individually before reaching the pile.</p>
+                    </div>
+                    <div class="option-specs">
+                        <h5>Hardware</h5>
+                        <p>Stainless steel sieve drum (~$200), stepper motor + controller (~$100), high-speed camera (~$500 upgrade)</p>
+                        <h5>Accuracy</h5>
+                        <p>88-94%</p>
+                        <h5>Cost Delta</h5>
+                        <p>+40% vs baseline</p>
+                        <div class="option-risk">Risk: Jamming with large items; mechanical failure; different user experience; 7/10 friction</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #9 Scanner -->
+            <div class="option-card">
+                <div class="option-card-header">
+                    <div class="option-card-title">
+                        <span class="badge" style="background:#ccc;color:#666">#9</span>
+                        <h4>The Scanner</h4>
+                        <span class="subtitle">Capacitive/RF Sensing</span>
+                    </div>
+                    <span class="option-card-score">3.45</span>
+                </div>
+                <div class="option-card-body">
+                    <div class="option-description">
+                        <p><strong>How it works:</strong> Capacitive antenna array in bin walls measures dielectric properties. Can "see" through the pile without line-of-sight.</p>
+                        <p style="margin-top:12px;"><strong>Why it's interesting:</strong> Only approach that can see buried items without physical manipulation. Theoretically solves occlusion completely.</p>
+                    </div>
+                    <div class="option-specs">
+                        <h5>Hardware</h5>
+                        <p>Custom capacitive array (~$200), signal processing board (~$150), RF shielding</p>
+                        <h5>Accuracy</h5>
+                        <p>40-55% standalone, 85-92% fused with vision</p>
+                        <h5>Cost Delta</h5>
+                        <p>+15% vs baseline</p>
+                        <div class="option-risk">Risk: Similar water content = similar dielectric signature; limited food differentiation; novel tech</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #10 Penetrator -->
+            <div class="option-card">
+                <div class="option-card-header">
+                    <div class="option-card-title">
+                        <span class="badge" style="background:#ccc;color:#666">#10</span>
+                        <h4>The Penetrator</h4>
+                        <span class="subtitle">Radar/Microwave</span>
+                    </div>
+                    <span class="option-card-score">3.40</span>
+                </div>
+                <div class="option-card-body">
+                    <div class="option-description">
+                        <p><strong>How it works:</strong> mmWave radar penetrates surface layer, seeing items buried in the pile. Similar to automotive radar but tuned for organic materials.</p>
+                        <p style="margin-top:12px;"><strong>Why it's interesting:</strong> Radar works through steam, grease, and variable lighting. Proven sensor technology from automotive industry.</p>
+                    </div>
+                    <div class="option-specs">
+                        <h5>Hardware</h5>
+                        <p>TI IWR1443 mmWave sensor (~$100-200), signal processing integration</p>
+                        <h5>Accuracy</h5>
+                        <p>50-65% standalone, 88-93% fused with vision</p>
+                        <h5>Cost Delta</h5>
+                        <p>+20% vs baseline</p>
+                        <div class="option-risk">Risk: Limited spatial resolution; water absorption; novel application domain</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #11 Cascade -->
+            <div class="option-card">
+                <div class="option-card-header">
+                    <div class="option-card-title">
+                        <span class="badge" style="background:#ccc;color:#666">#11</span>
+                        <h4>The Cascade</h4>
+                        <span class="subtitle">Multi-Stage Conveyor</span>
+                    </div>
+                    <span class="option-card-score">3.30</span>
+                </div>
+                <div class="option-card-body">
+                    <div class="option-description">
+                        <p><strong>How it works:</strong> Short inclined conveyor belt spreads items over time. Converts instantaneous dump into temporal sequence for individual imaging.</p>
+                        <p style="margin-top:12px;"><strong>Why it's interesting:</strong> Very high accuracy potential (90-95%). Each item physically separated and imaged individually. Similar to industrial sorting systems.</p>
+                    </div>
+                    <div class="option-specs">
+                        <h5>Hardware</h5>
+                        <p>Food-grade belt (~$150), motor system (~$200), extended housing</p>
+                        <h5>Accuracy</h5>
+                        <p>90-95%</p>
+                        <h5>Cost Delta</h5>
+                        <p>+50% vs baseline</p>
+                        <div class="option-risk">Risk: Belt cleaning critical; bacteria harbor risk; significant form factor change; 8/10 friction</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- #12 Polarizer -->
+            <div class="option-card">
+                <div class="option-card-header">
+                    <div class="option-card-title">
+                        <span class="badge" style="background:#ccc;color:#666">#12</span>
+                        <h4>The Polarizer</h4>
+                        <span class="subtitle">Polarimetric Imaging</span>
+                    </div>
+                    <span class="option-card-score">3.25</span>
+                </div>
+                <div class="option-card-body">
+                    <div class="option-description">
+                        <p><strong>How it works:</strong> Polarizing filter differentiates organic vs synthetic materials. Cuts through glare and reflections that confuse standard cameras.</p>
+                        <p style="margin-top:12px;"><strong>Why it's interesting:</strong> Can distinguish plastic contamination, identify material types by surface properties, reduce reflection-induced classification errors.</p>
+                    </div>
+                    <div class="option-specs">
+                        <h5>Hardware</h5>
+                        <p>Polarizing filter array (~$100), filter rotation mechanism (~$150), updated image processing</p>
+                        <h5>Accuracy</h5>
+                        <p>70-85% standalone, 90-94% fused with vision</p>
+                        <h5>Cost Delta</h5>
+                        <p>+80% vs baseline</p>
+                        <div class="option-risk">Risk: High cost for marginal accuracy gain; slower dual-capture; complex calibration</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 </div>
