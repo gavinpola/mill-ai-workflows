@@ -5,200 +5,610 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV Infrastructure Explorer | Mill Commercial</title>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- Charts -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
-    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        :root {
+            --white: #ffffff;
+            --off-white: #fafafa;
+            --light-gray: #f5f5f5;
+            --border: #e5e5e5;
+            --text: #1a1a1a;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --accent: #3498db;
+        }
 
-    <link rel="stylesheet" href="styles/main.css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--white);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* Header */
+        header {
+            padding: 48px 0 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Section styling */
+        section {
+            padding: 64px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+        }
+
+        /* Top 3 Designs */
+        .hero-design {
+            background: var(--off-white);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 24px;
+        }
+
+        .hero-design-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            background: var(--text);
+            color: var(--white);
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .hero-design h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .hero-design .design-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .best-for {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .best-for strong {
+            color: var(--text);
+        }
+
+        .diagram-container {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 24px 0;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .diagram-container svg {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+        }
+
+        .hover-hint {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 16px;
+        }
+
+        /* Secondary designs row */
+        .secondary-designs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .secondary-design {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .secondary-design .badge {
+            background: var(--text-secondary);
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .secondary-design h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .secondary-design .design-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .secondary-design .diagram-container {
+            padding: 20px;
+            margin: 16px 0;
+        }
+
+        .secondary-design .diagram-container svg {
+            max-width: 280px;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table th {
+            text-align: left;
+            padding: 16px 12px;
+            border-bottom: 2px solid var(--text);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .comparison-table td {
+            padding: 16px 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--off-white);
+        }
+
+        .comparison-table .design-name {
+            font-weight: 600;
+        }
+
+        .comparison-table .design-name.top-pick {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .comparison-table .design-name .star {
+            color: var(--text);
+        }
+
+        .dots {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .dots .filled {
+            color: var(--text);
+        }
+
+        .dots .empty {
+            color: var(--border);
+        }
+
+        .cost-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: var(--light-gray);
+        }
+
+        .cost-tag.lower { background: #e8f5e9; color: #2e7d32; }
+        .cost-tag.same { background: var(--light-gray); }
+        .cost-tag.higher { background: #fff3e0; color: #e65100; }
+
+        .best-for-tag {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: fixed;
+            background: var(--text);
+            color: var(--white);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            max-width: 280px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        .tooltip h4 {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .tooltip p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            padding: 48px 0;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .secondary-designs {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .hero-design {
+                padding: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="header-left">
-                <h1>CV Infrastructure Explorer</h1>
-                <p class="header-subtitle">Mill Commercial | 12 Engineering Approaches</p>
+
+    <div class="container">
+        <header>
+            <div class="logo">mill</div>
+            <h1>CV infrastructure explorer</h1>
+            <p class="subtitle">12 creative engineering approaches for food waste classification</p>
+        </header>
+
+        <!-- Top 3 Designs Section -->
+        <section>
+            <div class="section-label">01 - Top recommendations</div>
+            <h2>Best approaches based on accuracy, friction, and feasibility</h2>
+
+            <!-- #1 Kaleidoscope -->
+            <div class="hero-design">
+                <div class="hero-design-header">
+                    <div>
+                        <h3>The Kaleidoscope</h3>
+                        <p class="design-subtitle">Mirror multi-angle system</p>
+                        <p class="best-for"><strong>Best for:</strong> Zero friction, single camera simplicity, patentable design</p>
+                    </div>
+                    <span class="badge">#1 Recommended</span>
+                </div>
+
+                <div class="diagram-container" id="kaleidoscope-diagram">
+                    <!-- SVG loaded here -->
+                </div>
+
+                <p class="hover-hint">Hover on diagram parts to learn more</p>
             </div>
-            <div class="header-right">
-                <button class="btn btn-secondary" id="exportCsv">Export CSV</button>
-                <button class="btn btn-primary" id="exportPdf">Export Summary</button>
+
+            <!-- #2 and #3 -->
+            <div class="secondary-designs">
+                <div class="secondary-design">
+                    <span class="badge">#2</span>
+                    <h3>The Photo Booth</h3>
+                    <p class="design-subtitle">Drop-through tunnel</p>
+                    <p class="best-for"><strong>Best for:</strong> Maximum accuracy, gravity-based separation</p>
+
+                    <div class="diagram-container" id="photobooth-diagram">
+                        <!-- SVG loaded here -->
+                    </div>
+                </div>
+
+                <div class="secondary-design">
+                    <span class="badge">#3</span>
+                    <h3>The Weighmaster</h3>
+                    <p class="design-subtitle">Weight dynamics</p>
+                    <p class="best-for"><strong>Best for:</strong> Validation layer, high reliability, easy add-on</p>
+
+                    <div class="diagram-container" id="weighmaster-diagram">
+                        <!-- SVG loaded here -->
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section>
+            <div class="section-label">02 - All designs</div>
+            <h2>Compare all 12 approaches</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th style="width: 22%">Design</th>
+                        <th style="width: 15%">Accuracy</th>
+                        <th style="width: 15%">Friction</th>
+                        <th style="width: 15%">Reliability</th>
+                        <th style="width: 12%">Cost</th>
+                        <th style="width: 21%">Best for</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="design-name top-pick"><span class="star">★</span> Kaleidoscope</td>
+                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td class="dots"><span class="filled">●●●●●</span></td>
+                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td><span class="cost-tag same">Same</span></td>
+                        <td class="best-for-tag">Zero friction, simplicity</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name top-pick"><span class="star">★</span> Photo Booth</td>
+                        <td class="dots"><span class="filled">●●●●●</span></td>
+                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
+                        <td><span class="cost-tag higher">+30%</span></td>
+                        <td class="best-for-tag">Maximum accuracy</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name top-pick"><span class="star">★</span> Weighmaster</td>
+                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
+                        <td class="dots"><span class="filled">●●●●●</span></td>
+                        <td class="dots"><span class="filled">●●●●●</span></td>
+                        <td><span class="cost-tag same">Same</span></td>
+                        <td class="best-for-tag">Validation layer</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Listener</td>
+                        <td class="dots"><span class="filled">●●</span><span class="empty">○○○</span></td>
+                        <td class="dots"><span class="filled">●●●●●</span></td>
+                        <td class="dots"><span class="filled">●●●●●</span></td>
+                        <td><span class="cost-tag same">Same</span></td>
+                        <td class="best-for-tag">Cheap add-on, novel</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Tumbler</td>
+                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
+                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
+                        <td><span class="cost-tag higher">+40%</span></td>
+                        <td class="best-for-tag">Creative mechanical</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Sculptor</td>
+                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td class="dots"><span class="filled">●●●●●</span></td>
+                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td><span class="cost-tag same">Baseline</span></td>
+                        <td class="best-for-tag">Volume measurement</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Cascade</td>
+                        <td class="dots"><span class="filled">●●●●●</span></td>
+                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
+                        <td><span class="cost-tag higher">+50%</span></td>
+                        <td class="best-for-tag">Temporal spread</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Heat Map</td>
+                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
+                        <td class="dots"><span class="filled">●●●●●</span></td>
+                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td><span class="cost-tag higher">+20%</span></td>
+                        <td class="best-for-tag">Thermal signatures</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Fingerprinter</td>
+                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td class="dots"><span class="filled">●●●●●</span></td>
+                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td><span class="cost-tag higher">+25%</span></td>
+                        <td class="best-for-tag">Material chemistry</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Scanner</td>
+                        <td class="dots"><span class="filled">●●</span><span class="empty">○○○</span></td>
+                        <td class="dots"><span class="filled">●●●●●</span></td>
+                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td><span class="cost-tag higher">+15%</span></td>
+                        <td class="best-for-tag">See through occlusion</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Polarizer</td>
+                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
+                        <td class="dots"><span class="filled">●●●●●</span></td>
+                        <td class="dots"><span class="filled">●●●</span><span class="empty">○○</span></td>
+                        <td><span class="cost-tag higher">+80%</span></td>
+                        <td class="best-for-tag">Detect contamination</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Penetrator</td>
+                        <td class="dots"><span class="filled">●●</span><span class="empty">○○○</span></td>
+                        <td class="dots"><span class="filled">●●●●●</span></td>
+                        <td class="dots"><span class="filled">●●●●</span><span class="empty">○</span></td>
+                        <td><span class="cost-tag higher">+20%</span></td>
+                        <td class="best-for-tag">Radar/microwave</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">Mill AI Workflow System | Internal use only | March 2026</p>
         </div>
-    </header>
-
-    <!-- Navigation -->
-    <nav class="sidebar-nav" id="sideNav">
-        <a href="#summary" class="nav-item active">Summary</a>
-        <a href="#weights" class="nav-item">Criteria</a>
-        <a href="#options" class="nav-item">Options</a>
-        <a href="#comparison" class="nav-item">Compare</a>
-        <a href="#details" class="nav-item">Details</a>
-        <a href="#research" class="nav-item">Research</a>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main-content">
-
-        <!-- Section 1: Executive Summary -->
-        <section id="summary" class="section">
-            <div class="section-header">
-                <span class="section-label">Executive summary</span>
-                <h2>Top recommendation based on your criteria</h2>
-            </div>
-
-            <div class="recommendation-card" id="topRecommendation">
-                <div class="recommendation-header">
-                    <span class="recommendation-badge">Recommended</span>
-                    <span class="recommendation-score" id="topScore">4.2 / 5.0</span>
-                </div>
-                <h3 class="recommendation-title" id="topName">The Kaleidoscope</h3>
-                <p class="recommendation-subtitle" id="topSubtitle">Mirror Multi-Angle</p>
-                <p class="recommendation-description" id="topDescription">Single high-res camera + precision angled mirrors = 4-6 simultaneous views</p>
-
-                <div class="recommendation-metrics">
-                    <div class="metric-item">
-                        <span class="metric-value" id="topAccuracy">85-92%</span>
-                        <span class="metric-label">Accuracy</span>
-                    </div>
-                    <div class="metric-item">
-                        <span class="metric-value" id="topFriction">10/10</span>
-                        <span class="metric-label">Friction</span>
-                    </div>
-                    <div class="metric-item">
-                        <span class="metric-value" id="topCost">$2,200-3,200</span>
-                        <span class="metric-label">Cost</span>
-                    </div>
-                </div>
-
-                <div class="recommendation-why">
-                    <strong>Why this option:</strong>
-                    <span id="topWhy">Light physics replaces multiple cameras; single failure point</span>
-                </div>
-            </div>
-
-            <!-- Quick stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="stat-value">12</span>
-                    <span class="stat-label">Design options</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-value">6</span>
-                    <span class="stat-label">Evaluation criteria</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-value">$2.2K-$18K</span>
-                    <span class="stat-label">Cost range</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-value">85-97%</span>
-                    <span class="stat-label">Accuracy range</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 2: Criteria Weights -->
-        <section id="weights" class="section">
-            <div class="section-header">
-                <span class="section-label">Criteria weights</span>
-                <h2>Adjust importance of each factor</h2>
-            </div>
-
-            <div class="presets-row">
-                <span class="presets-label">Presets:</span>
-                <button class="preset-btn" data-preset="balanced">Balanced</button>
-                <button class="preset-btn" data-preset="accuracy-first">Accuracy-first</button>
-                <button class="preset-btn" data-preset="cost-conscious">Cost-conscious</button>
-                <button class="preset-btn" data-preset="pilot-ready">Pilot-ready</button>
-            </div>
-
-            <div class="sliders-grid" id="slidersContainer">
-                <!-- Sliders will be populated by JS -->
-            </div>
-
-            <div class="weights-total">
-                <span>Total:</span>
-                <span id="weightsTotal">100%</span>
-            </div>
-        </section>
-
-        <!-- Section 3: Options Grid -->
-        <section id="options" class="section">
-            <div class="section-header">
-                <span class="section-label">Design options</span>
-                <h2>All 12 engineering approaches ranked by your criteria</h2>
-            </div>
-
-            <div class="options-grid" id="optionsGrid">
-                <!-- Option cards will be populated by JS -->
-            </div>
-        </section>
-
-        <!-- Section 4: Comparison View -->
-        <section id="comparison" class="section">
-            <div class="section-header">
-                <span class="section-label">Trade-off analysis</span>
-                <h2>Compare options across all criteria</h2>
-            </div>
-
-            <div class="comparison-tabs">
-                <button class="tab-btn active" data-tab="parallel">Parallel coordinates</button>
-                <button class="tab-btn" data-tab="scatter">Cost vs accuracy</button>
-                <button class="tab-btn" data-tab="matrix">Score matrix</button>
-            </div>
-
-            <div class="chart-container" id="parallelChart" style="height: 400px;"></div>
-            <div class="chart-container" id="scatterChart" style="height: 400px; display: none;"></div>
-            <div class="matrix-container" id="matrixView" style="display: none;"></div>
-        </section>
-
-        <!-- Section 5: Detailed Specs -->
-        <section id="details" class="section">
-            <div class="section-header">
-                <span class="section-label">Technical specifications</span>
-                <h2>Deep dive into each option</h2>
-            </div>
-
-            <div class="accordion" id="detailsAccordion">
-                <!-- Accordion items will be populated by JS -->
-            </div>
-        </section>
-
-        <!-- Section 6: Research Library -->
-        <section id="research" class="section">
-            <div class="section-header">
-                <span class="section-label">Research library</span>
-                <h2>Supporting evidence and citations</h2>
-            </div>
-
-            <div class="research-grid">
-                <div class="research-category">
-                    <h3>Competitors</h3>
-                    <div id="competitorsList" class="research-list"></div>
-                </div>
-                <div class="research-category">
-                    <h3>Benchmarks</h3>
-                    <div id="benchmarksList" class="research-list"></div>
-                </div>
-                <div class="research-category">
-                    <h3>Hardware specs</h3>
-                    <div id="hardwareList" class="research-list"></div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>Mill AI Workflow System | Internal use only | Generated March 2026</p>
     </footer>
 
-    <script src="scripts/app.js"></script>
+    <!-- Tooltip element -->
+    <div class="tooltip" id="tooltip">
+        <h4 id="tooltip-title"></h4>
+        <p id="tooltip-desc"></p>
+    </div>
+
+    <script>
+        // Component descriptions for tooltips
+        const componentInfo = {
+            // Kaleidoscope
+            'camera': {
+                title: 'Single camera',
+                desc: '8MP global shutter sensor. Captures all mirror reflections in a single frame. Global shutter eliminates motion blur from falling items.'
+            },
+            'mirrors': {
+                title: 'Mirror array',
+                desc: '4-6 first-surface mirrors at precise angles. Creates multiple viewpoints from single camera position. Light physics replaces multiple cameras.'
+            },
+            'bin': {
+                title: 'Collection bin',
+                desc: 'Standard food waste bin. No modification needed for user workflow. Items dumped naturally, mirrors provide multi-angle capture.'
+            },
+            'leds': {
+                title: 'LED illumination',
+                desc: 'Ring of diffused LEDs around opening. Provides consistent lighting regardless of kitchen ambient conditions.'
+            },
+            'rays': {
+                title: 'Light paths',
+                desc: 'Reflected light from mirrors converges at camera. Each mirror angle captures different perspective of waste pile.'
+            },
+            // Photo Booth
+            'tunnel': {
+                title: 'Drop tunnel',
+                desc: 'Vertical transparent tube. Items fall through at ~3m/s. Gravity naturally sequences items that were dumped together.'
+            },
+            'cameras': {
+                title: 'Camera array',
+                desc: '3-4 cameras positioned around circumference. Each captures item from different angle during freefall. 360° coverage.'
+            },
+            // Weighmaster
+            'loadcells': {
+                title: 'Load cells',
+                desc: 'High-frequency strain gauges (100+ Hz sampling). Captures weight impact curves. Different items have unique "weight signatures."'
+            },
+            'signature': {
+                title: 'Weight signatures',
+                desc: 'Impact curves are diagnostic. Apples hit differently than lettuce. Validates or corrects vision-based classification.'
+            }
+        };
+
+        // Load SVG diagrams
+        async function loadDiagram(containerId, svgPath) {
+            try {
+                const response = await fetch(svgPath);
+                const svgText = await response.text();
+                document.getElementById(containerId).innerHTML = svgText;
+                attachHoverListeners(containerId);
+            } catch (e) {
+                console.error(`Failed to load ${svgPath}:`, e);
+            }
+        }
+
+        // Attach hover listeners to diagram components
+        function attachHoverListeners(containerId) {
+            const container = document.getElementById(containerId);
+            const components = container.querySelectorAll('.component');
+            const tooltip = document.getElementById('tooltip');
+            const tooltipTitle = document.getElementById('tooltip-title');
+            const tooltipDesc = document.getElementById('tooltip-desc');
+
+            components.forEach(comp => {
+                const partId = comp.dataset.part;
+                const info = componentInfo[partId];
+
+                if (info) {
+                    comp.addEventListener('mouseenter', (e) => {
+                        tooltipTitle.textContent = info.title;
+                        tooltipDesc.textContent = info.desc;
+                        tooltip.classList.add('visible');
+                    });
+
+                    comp.addEventListener('mousemove', (e) => {
+                        const x = e.clientX + 15;
+                        const y = e.clientY + 15;
+                        // Keep tooltip on screen
+                        const maxX = window.innerWidth - 300;
+                        const maxY = window.innerHeight - 150;
+                        tooltip.style.left = Math.min(x, maxX) + 'px';
+                        tooltip.style.top = Math.min(y, maxY) + 'px';
+                    });
+
+                    comp.addEventListener('mouseleave', () => {
+                        tooltip.classList.remove('visible');
+                    });
+                }
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDiagram('kaleidoscope-diagram', 'diagrams/kaleidoscope.svg');
+            loadDiagram('photobooth-diagram', 'diagrams/photobooth.svg');
+            loadDiagram('weighmaster-diagram', 'diagrams/weighmaster.svg');
+        });
+    </script>
+
 </body>
 </html>
