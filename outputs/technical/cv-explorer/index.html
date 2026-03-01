@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Infrastructure Explorer | Mill Commercial</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1>CV Infrastructure Explorer</h1>
+                <p class="header-subtitle">Mill Commercial | 12 Engineering Approaches</p>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-secondary" id="exportCsv">Export CSV</button>
+                <button class="btn btn-primary" id="exportPdf">Export Summary</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="sidebar-nav" id="sideNav">
+        <a href="#summary" class="nav-item active">Summary</a>
+        <a href="#weights" class="nav-item">Criteria</a>
+        <a href="#options" class="nav-item">Options</a>
+        <a href="#comparison" class="nav-item">Compare</a>
+        <a href="#details" class="nav-item">Details</a>
+        <a href="#research" class="nav-item">Research</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Section 1: Executive Summary -->
+        <section id="summary" class="section">
+            <div class="section-header">
+                <span class="section-label">Executive summary</span>
+                <h2>Top recommendation based on your criteria</h2>
+            </div>
+
+            <div class="recommendation-card" id="topRecommendation">
+                <div class="recommendation-header">
+                    <span class="recommendation-badge">Recommended</span>
+                    <span class="recommendation-score" id="topScore">4.2 / 5.0</span>
+                </div>
+                <h3 class="recommendation-title" id="topName">The Kaleidoscope</h3>
+                <p class="recommendation-subtitle" id="topSubtitle">Mirror Multi-Angle</p>
+                <p class="recommendation-description" id="topDescription">Single high-res camera + precision angled mirrors = 4-6 simultaneous views</p>
+
+                <div class="recommendation-metrics">
+                    <div class="metric-item">
+                        <span class="metric-value" id="topAccuracy">85-92%</span>
+                        <span class="metric-label">Accuracy</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-value" id="topFriction">10/10</span>
+                        <span class="metric-label">Friction</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-value" id="topCost">$2,200-3,200</span>
+                        <span class="metric-label">Cost</span>
+                    </div>
+                </div>
+
+                <div class="recommendation-why">
+                    <strong>Why this option:</strong>
+                    <span id="topWhy">Light physics replaces multiple cameras; single failure point</span>
+                </div>
+            </div>
+
+            <!-- Quick stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value">12</span>
+                    <span class="stat-label">Design options</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">6</span>
+                    <span class="stat-label">Evaluation criteria</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">$2.2K-$18K</span>
+                    <span class="stat-label">Cost range</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">85-97%</span>
+                    <span class="stat-label">Accuracy range</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Criteria Weights -->
+        <section id="weights" class="section">
+            <div class="section-header">
+                <span class="section-label">Criteria weights</span>
+                <h2>Adjust importance of each factor</h2>
+            </div>
+
+            <div class="presets-row">
+                <span class="presets-label">Presets:</span>
+                <button class="preset-btn" data-preset="balanced">Balanced</button>
+                <button class="preset-btn" data-preset="accuracy-first">Accuracy-first</button>
+                <button class="preset-btn" data-preset="cost-conscious">Cost-conscious</button>
+                <button class="preset-btn" data-preset="pilot-ready">Pilot-ready</button>
+            </div>
+
+            <div class="sliders-grid" id="slidersContainer">
+                <!-- Sliders will be populated by JS -->
+            </div>
+
+            <div class="weights-total">
+                <span>Total:</span>
+                <span id="weightsTotal">100%</span>
+            </div>
+        </section>
+
+        <!-- Section 3: Options Grid -->
+        <section id="options" class="section">
+            <div class="section-header">
+                <span class="section-label">Design options</span>
+                <h2>All 12 engineering approaches ranked by your criteria</h2>
+            </div>
+
+            <div class="options-grid" id="optionsGrid">
+                <!-- Option cards will be populated by JS -->
+            </div>
+        </section>
+
+        <!-- Section 4: Comparison View -->
+        <section id="comparison" class="section">
+            <div class="section-header">
+                <span class="section-label">Trade-off analysis</span>
+                <h2>Compare options across all criteria</h2>
+            </div>
+
+            <div class="comparison-tabs">
+                <button class="tab-btn active" data-tab="parallel">Parallel coordinates</button>
+                <button class="tab-btn" data-tab="scatter">Cost vs accuracy</button>
+                <button class="tab-btn" data-tab="matrix">Score matrix</button>
+            </div>
+
+            <div class="chart-container" id="parallelChart" style="height: 400px;"></div>
+            <div class="chart-container" id="scatterChart" style="height: 400px; display: none;"></div>
+            <div class="matrix-container" id="matrixView" style="display: none;"></div>
+        </section>
+
+        <!-- Section 5: Detailed Specs -->
+        <section id="details" class="section">
+            <div class="section-header">
+                <span class="section-label">Technical specifications</span>
+                <h2>Deep dive into each option</h2>
+            </div>
+
+            <div class="accordion" id="detailsAccordion">
+                <!-- Accordion items will be populated by JS -->
+            </div>
+        </section>
+
+        <!-- Section 6: Research Library -->
+        <section id="research" class="section">
+            <div class="section-header">
+                <span class="section-label">Research library</span>
+                <h2>Supporting evidence and citations</h2>
+            </div>
+
+            <div class="research-grid">
+                <div class="research-category">
+                    <h3>Competitors</h3>
+                    <div id="competitorsList" class="research-list"></div>
+                </div>
+                <div class="research-category">
+                    <h3>Benchmarks</h3>
+                    <div id="benchmarksList" class="research-list"></div>
+                </div>
+                <div class="research-category">
+                    <h3>Hardware specs</h3>
+                    <div id="hardwareList" class="research-list"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Mill AI Workflow System | Internal use only | Generated March 2026</p>
+    </footer>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>

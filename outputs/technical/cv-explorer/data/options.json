@@ -1,0 +1,426 @@
+{
+  "options": [
+    {
+      "id": "tumbler",
+      "name": "The Tumbler",
+      "subtitle": "Rotating Sieve",
+      "description": "Motorized rotating sieve/grate in lid; items pass through one-by-one; high-speed camera captures during fall",
+      "whyNonObvious": "Gravity + rotation = natural separation (no complex vision needed)",
+      "badge": "user-idea",
+      "scores": {
+        "accuracy": 4,
+        "friction": 3,
+        "feasibility": 3,
+        "cost": 2,
+        "maintenance": 2,
+        "differentiation": 4
+      },
+      "metrics": {
+        "accuracyRange": "88-94%",
+        "frictionScore": "7/10",
+        "costRange": "$3,500-4,500",
+        "costDelta": "+20-50%"
+      },
+      "hardware": [
+        { "component": "Food-grade motor", "spec": "IP67, 20-60 RPM variable", "price": 150 },
+        { "component": "Stainless mesh sieve", "spec": "1-2\" openings, 304SS", "price": 200 },
+        { "component": "High-speed camera", "spec": "200+ fps, global shutter", "price": 800 },
+        { "component": "Custom housing", "spec": "Motorized lid assembly", "price": 400 },
+        { "component": "Base system", "spec": "Jetson + depth + weight", "price": 1950 }
+      ],
+      "risks": [
+        { "risk": "Jamming", "probability": "Medium", "impact": "High", "mitigation": "Jam detection sensor + easy clear mechanism" },
+        { "risk": "Motor failure", "probability": "Low", "impact": "High", "mitigation": "Industrial-grade sealed motor" },
+        { "risk": "Cleaning complexity", "probability": "Medium", "impact": "Medium", "mitigation": "Removable sieve for dishwasher" }
+      ],
+      "howItWorks": "User dumps food waste onto rotating sieve grate. As the sieve rotates (20-60 RPM), items naturally separate and fall through gaps one at a time. High-speed camera captures each item during the ~300ms freefall through the sieve. Weight sensors validate classification. Items land in standard collection bin below.",
+      "researchRefs": ["gravity-separation", "industrial-sorting"]
+    },
+    {
+      "id": "cascade",
+      "name": "The Cascade",
+      "subtitle": "Multi-Stage Conveyor",
+      "description": "Short inclined conveyor belt spreads items; camera captures at viewing zone",
+      "whyNonObvious": "Converts instantaneous dump into temporal spread",
+      "badge": null,
+      "scores": {
+        "accuracy": 5,
+        "friction": 4,
+        "feasibility": 3,
+        "cost": 2,
+        "maintenance": 2,
+        "differentiation": 4
+      },
+      "metrics": {
+        "accuracyRange": "90-95%",
+        "frictionScore": "8/10",
+        "costRange": "$4,000-5,500",
+        "costDelta": "+35-85%"
+      },
+      "hardware": [
+        { "component": "Food-grade conveyor", "spec": "6-12\" belt, 6\"/sec", "price": 900 },
+        { "component": "Belt motor", "spec": "DC brushless, variable speed", "price": 120 },
+        { "component": "Camera array", "spec": "2x RGB cameras at viewing zone", "price": 600 },
+        { "component": "LED array", "spec": "Diffuse illumination panel", "price": 150 },
+        { "component": "Base system", "spec": "Jetson + depth + weight", "price": 1950 }
+      ],
+      "risks": [
+        { "risk": "Belt cleaning", "probability": "High", "impact": "Medium", "mitigation": "Antimicrobial belt material + automated washdown" },
+        { "risk": "Food adhesion", "probability": "Medium", "impact": "Medium", "mitigation": "Non-stick belt coating" },
+        { "risk": "Bacterial growth", "probability": "Medium", "impact": "High", "mitigation": "Daily sanitization protocol required" }
+      ],
+      "howItWorks": "Waste falls onto short inclined conveyor belt. Belt moves at ~6 inches/second, naturally spreading items as they travel due to different rolling/sliding rates. Camera captures spread items at dedicated viewing zone with controlled lighting. Items cascade off belt end into collection bin.",
+      "researchRefs": ["conveyor-sorting", "industrial-food-processing"]
+    },
+    {
+      "id": "kaleidoscope",
+      "name": "The Kaleidoscope",
+      "subtitle": "Mirror Multi-Angle",
+      "description": "Single high-res camera + precision angled mirrors = 4-6 simultaneous views",
+      "whyNonObvious": "Light physics replaces multiple cameras; single failure point",
+      "badge": "top-ranked",
+      "scores": {
+        "accuracy": 4,
+        "friction": 5,
+        "feasibility": 4,
+        "cost": 4,
+        "maintenance": 3,
+        "differentiation": 5
+      },
+      "metrics": {
+        "accuracyRange": "85-92%",
+        "frictionScore": "10/10",
+        "costRange": "$2,200-3,200",
+        "costDelta": "-25% to +10%"
+      },
+      "hardware": [
+        { "component": "High-res camera", "spec": "16-24MP, global shutter", "price": 1200 },
+        { "component": "Precision mirrors", "spec": "4-6 first-surface mirrors, 45°", "price": 300 },
+        { "component": "Mirror housing", "spec": "Aluminum frame, adjustable", "price": 150 },
+        { "component": "LED ring", "spec": "360° diffuse illumination", "price": 100 },
+        { "component": "Base system", "spec": "Jetson + depth + weight", "price": 1200 }
+      ],
+      "risks": [
+        { "risk": "Mirror fouling", "probability": "Medium", "impact": "Medium", "mitigation": "Hydrophobic coating + air curtain" },
+        { "risk": "Calibration drift", "probability": "Low", "impact": "Medium", "mitigation": "Fixed mount + periodic software calibration" },
+        { "risk": "Optical distortion", "probability": "Low", "impact": "Low", "mitigation": "Software distortion correction" }
+      ],
+      "howItWorks": "Single high-resolution camera mounted above bin. Precision angled mirrors arranged around bin opening capture 4-6 simultaneous views of the waste pile in a single frame. Software separates views and reconstructs multi-angle understanding. All views perfectly synchronized (same exposure).",
+      "researchRefs": ["multi-view-stereo", "computational-photography"]
+    },
+    {
+      "id": "listener",
+      "name": "The Listener",
+      "subtitle": "Acoustic Sensing",
+      "description": "4-8 MEMS microphones capture impact sounds; ML trained on acoustic signatures",
+      "whyNonObvious": "Different physics channel - doesn't care about occlusion; $5/mic",
+      "badge": "quick-win",
+      "scores": {
+        "accuracy": 3,
+        "friction": 5,
+        "feasibility": 3,
+        "cost": 4,
+        "maintenance": 5,
+        "differentiation": 5
+      },
+      "metrics": {
+        "accuracyRange": "50-70% standalone, 90-95% fused",
+        "frictionScore": "10/10",
+        "costRange": "$2,950-3,200",
+        "costDelta": "~0%"
+      },
+      "hardware": [
+        { "component": "MEMS microphones", "spec": "6x I2S digital mics", "price": 30 },
+        { "component": "Audio ADC", "spec": "Multi-channel, 48kHz", "price": 25 },
+        { "component": "Breakout boards", "spec": "I2C/I2S interface", "price": 20 },
+        { "component": "Base system", "spec": "Full baseline (camera + Jetson + depth)", "price": 2947 }
+      ],
+      "risks": [
+        { "risk": "Kitchen noise", "probability": "High", "impact": "Medium", "mitigation": "Trigger-based capture only during dump events" },
+        { "risk": "Training data", "probability": "Medium", "impact": "Medium", "mitigation": "Requires 500+ labeled impact recordings" },
+        { "risk": "Wet items", "probability": "Medium", "impact": "Low", "mitigation": "Different acoustic signature = still identifiable" }
+      ],
+      "howItWorks": "Array of 4-8 MEMS microphones arranged around bin opening. When items are dumped, each makes distinct impact sound (splat for wet, clatter for hard, thud for soft). ML model trained on acoustic signatures classifies material types. Time-of-arrival differences provide spatial information. Fused with vision for high accuracy.",
+      "researchRefs": ["acoustic-ml", "mems-microphones"]
+    },
+    {
+      "id": "photobooth",
+      "name": "The Photo Booth",
+      "subtitle": "Drop-Through Tunnel",
+      "description": "Vertical tube with cameras around circumference; items imaged during freefall",
+      "whyNonObvious": "Gravity does sequencing for free; zero moving parts",
+      "badge": null,
+      "scores": {
+        "accuracy": 5,
+        "friction": 4,
+        "feasibility": 4,
+        "cost": 2,
+        "maintenance": 2,
+        "differentiation": 5
+      },
+      "metrics": {
+        "accuracyRange": "92-97%",
+        "frictionScore": "9/10",
+        "costRange": "$3,500-4,500",
+        "costDelta": "+20-50%"
+      },
+      "hardware": [
+        { "component": "Imaging tube", "spec": "12-18\" polycarbonate cylinder", "price": 200 },
+        { "component": "Side cameras", "spec": "3-4x industrial cameras", "price": 1500 },
+        { "component": "Ring illumination", "spec": "360° LED strips", "price": 100 },
+        { "component": "Breakbeam sensors", "spec": "IR trigger array", "price": 50 },
+        { "component": "Base system", "spec": "Jetson + depth + weight", "price": 1950 }
+      ],
+      "risks": [
+        { "risk": "Tube cleaning", "probability": "High", "impact": "Medium", "mitigation": "Splash guards + automated mist washdown" },
+        { "risk": "Clump separation", "probability": "Medium", "impact": "Medium", "mitigation": "Staggered baffles to break clumps" },
+        { "risk": "Raised opening", "probability": "Low", "impact": "Low", "mitigation": "Ergonomic height design" }
+      ],
+      "howItWorks": "Vertical transparent tube (12-18 inches) between dump opening and bin. Items fall through tube past multiple cameras positioned around circumference. High-speed imaging captures each item in freefall (natural separation). Breakbeam sensors trigger capture. 3D shape reconstructed from multiple simultaneous angles.",
+      "researchRefs": ["freefall-imaging", "multi-camera-triangulation"]
+    },
+    {
+      "id": "heatmap",
+      "name": "The Heat Map",
+      "subtitle": "Thermal Differential",
+      "description": "LWIR thermal camera + RGB; fresh waste has distinct thermal signature",
+      "whyNonObvious": "Thermal contrast makes segmentation easier; works in any lighting",
+      "badge": null,
+      "scores": {
+        "accuracy": 3,
+        "friction": 5,
+        "feasibility": 4,
+        "cost": 3,
+        "maintenance": 4,
+        "differentiation": 4
+      },
+      "metrics": {
+        "accuracyRange": "60-75% standalone, 88-94% fused",
+        "frictionScore": "10/10",
+        "costRange": "$3,200-4,000",
+        "costDelta": "+10-35%"
+      },
+      "hardware": [
+        { "component": "Thermal camera", "spec": "FLIR Lepton 3.5 or higher", "price": 300 },
+        { "component": "Thermal optics", "spec": "Wide-angle thermal lens", "price": 100 },
+        { "component": "Base system", "spec": "Full baseline + thermal processing", "price": 2947 }
+      ],
+      "risks": [
+        { "risk": "Cold waste limitation", "probability": "High", "impact": "Medium", "mitigation": "Best for hot food operations (delis, bakeries)" },
+        { "risk": "Temperature equilibration", "probability": "Medium", "impact": "Low", "mitigation": "Capture immediately on dump" },
+        { "risk": "Thermal crosstalk", "probability": "Low", "impact": "Low", "mitigation": "Background subtraction algorithms" }
+      ],
+      "howItWorks": "LWIR (Long-Wave Infrared) thermal camera mounted alongside RGB camera. Fresh waste has thermal signature different from bin/existing waste. Hot cooked food clearly distinct from cold produce. Temperature decay rate provides additional diagnostic (meat vs vegetable). Fused with RGB for comprehensive classification.",
+      "researchRefs": ["thermal-imaging", "ir-food-inspection"]
+    },
+    {
+      "id": "fingerprinter",
+      "name": "The Fingerprinter",
+      "subtitle": "NIR/SWIR Spectral",
+      "description": "Near-infrared captures material composition (water, sugar, protein)",
+      "whyNonObvious": "Identifies food by chemistry, not appearance; proven in agriculture",
+      "badge": null,
+      "scores": {
+        "accuracy": 4,
+        "friction": 5,
+        "feasibility": 4,
+        "cost": 3,
+        "maintenance": 4,
+        "differentiation": 5
+      },
+      "metrics": {
+        "accuracyRange": "80-92% standalone, 94-98% fused",
+        "frictionScore": "10/10",
+        "costRange": "$3,200-3,800 (NIR), $10K-18K (SWIR)",
+        "costDelta": "+10-30% (NIR)"
+      },
+      "hardware": [
+        { "component": "NIR camera/filter", "spec": "850-1000nm sensitivity", "price": 400 },
+        { "component": "NIR illumination", "spec": "850nm LED array", "price": 100 },
+        { "component": "Base system", "spec": "Full baseline", "price": 2947 }
+      ],
+      "risks": [
+        { "risk": "SWIR cost", "probability": "High", "impact": "High", "mitigation": "Start with NIR, SWIR for premium tier" },
+        { "risk": "Surface moisture", "probability": "Medium", "impact": "Low", "mitigation": "Multi-wavelength analysis" },
+        { "risk": "Spectral ML maturity", "probability": "Low", "impact": "Medium", "mitigation": "Transfer learning from agricultural applications" }
+      ],
+      "howItWorks": "NIR (Near-Infrared) or SWIR (Short-Wave Infrared) camera captures beyond visible spectrum. Different organic materials have distinct spectral signatures based on water content, sugar, protein composition. Identifies material by chemical composition, not visual appearance. Can distinguish visually identical items (different apple varieties).",
+      "researchRefs": ["nir-spectroscopy", "agricultural-sorting", "hyperspectral-imaging"]
+    },
+    {
+      "id": "scanner",
+      "name": "The Scanner",
+      "subtitle": "Capacitive/RF Sensing",
+      "description": "Capacitive antenna array in bin walls; measures dielectric properties",
+      "whyNonObvious": "No line-of-sight needed - works through full occlusion",
+      "badge": null,
+      "scores": {
+        "accuracy": 2,
+        "friction": 5,
+        "feasibility": 3,
+        "cost": 4,
+        "maintenance": 5,
+        "differentiation": 4
+      },
+      "metrics": {
+        "accuracyRange": "40-55% standalone, 85-92% fused",
+        "frictionScore": "10/10",
+        "costRange": "$3,100-3,600",
+        "costDelta": "+5-25%"
+      },
+      "hardware": [
+        { "component": "Capacitive array", "spec": "8-16 electrode patches", "price": 100 },
+        { "component": "Capacitance ADC", "spec": "High-precision measurement IC", "price": 50 },
+        { "component": "Shielded wiring", "spec": "EMI-resistant cables", "price": 30 },
+        { "component": "Base system", "spec": "Full baseline", "price": 2947 }
+      ],
+      "risks": [
+        { "risk": "Specificity limit", "probability": "High", "impact": "Medium", "mitigation": "Must combine with vision for item-level ID" },
+        { "risk": "Moisture variation", "probability": "Medium", "impact": "Low", "mitigation": "Calibration across humidity range" },
+        { "risk": "Metal interference", "probability": "Low", "impact": "Low", "mitigation": "Frequency-shift detection" }
+      ],
+      "howItWorks": "Capacitive or RF antenna array built into bin walls. Different foods have different dielectric properties based on water content. As items are dumped, array measures changes in capacitive field. Works even with full occlusion - measures entire bin volume. Tracks fill level automatically as bonus.",
+      "researchRefs": ["capacitive-sensing", "dielectric-spectroscopy"]
+    },
+    {
+      "id": "sculptor",
+      "name": "The Sculptor",
+      "subtitle": "Structured Light Depth",
+      "description": "IR pattern projection + camera for precise 3D reconstruction",
+      "whyNonObvious": "Gets exact volume measurement, tracks changes between dumps",
+      "badge": "baseline",
+      "scores": {
+        "accuracy": 4,
+        "friction": 5,
+        "feasibility": 5,
+        "cost": 4,
+        "maintenance": 4,
+        "differentiation": 3
+      },
+      "metrics": {
+        "accuracyRange": "85-92% classification, +/-2-5% volume",
+        "frictionScore": "10/10",
+        "costRange": "$3,000-3,500",
+        "costDelta": "Baseline"
+      },
+      "hardware": [
+        { "component": "RealSense D455", "spec": "Stereo + structured light", "price": 349 },
+        { "component": "RGB Camera", "spec": "8MP global shutter", "price": 900 },
+        { "component": "Jetson Orin NX", "spec": "16GB, 100+ TOPS", "price": 599 },
+        { "component": "LED illumination", "spec": "Diffuse panel", "price": 250 },
+        { "component": "Load cells", "spec": "Industrial grade", "price": 100 }
+      ],
+      "risks": [
+        { "risk": "Wet surface failure", "probability": "Medium", "impact": "Medium", "mitigation": "Fallback to RGB-only for liquids/soups" },
+        { "risk": "Transparent items", "probability": "Low", "impact": "Low", "mitigation": "Weight validation" },
+        { "risk": "Ambient IR", "probability": "Low", "impact": "Low", "mitigation": "Pulsed illumination sync" }
+      ],
+      "howItWorks": "IR structured light projector casts known pattern onto waste. Camera captures distorted pattern. Real-time 3D surface reconstruction at high accuracy. Tracks changes between dumps to isolate new items. FOODCAM research achieved 94.4% portion size accuracy with this approach.",
+      "researchRefs": ["structured-light", "realsense", "foodcam"]
+    },
+    {
+      "id": "weighmaster",
+      "name": "The Weighmaster",
+      "subtitle": "Weight Dynamics",
+      "description": "High-frequency load cell sampling (100+ Hz); impact curves are diagnostic",
+      "whyNonObvious": "Weight signatures unique to item types; validates vision",
+      "badge": "top-ranked",
+      "scores": {
+        "accuracy": 3,
+        "friction": 5,
+        "feasibility": 5,
+        "cost": 4,
+        "maintenance": 5,
+        "differentiation": 4
+      },
+      "metrics": {
+        "accuracyRange": "55-70% standalone, 90-95% fused",
+        "frictionScore": "10/10",
+        "costRange": "$3,000-3,300",
+        "costDelta": "+2-12%"
+      },
+      "hardware": [
+        { "component": "Load cell upgrade", "spec": "4x precision cells, 100Hz ADC", "price": 150 },
+        { "component": "High-speed ADC", "spec": "24-bit, multi-channel", "price": 50 },
+        { "component": "Vibration isolation", "spec": "Rubber dampeners", "price": 30 },
+        { "component": "Base system", "spec": "Full baseline", "price": 2947 }
+      ],
+      "risks": [
+        { "risk": "Kitchen vibration", "probability": "Medium", "impact": "Medium", "mitigation": "Vibration filtering + isolated mount" },
+        { "risk": "Simultaneous impacts", "probability": "Medium", "impact": "Low", "mitigation": "Deconvolution algorithms" },
+        { "risk": "Scale drift", "probability": "Low", "impact": "Low", "mitigation": "Auto-zero calibration" }
+      ],
+      "howItWorks": "High-precision load cell array under bin with high temporal resolution sampling (100+ Hz). As items land, weight increase curve has characteristic shape. Apple lands differently than bread. Multiple impacts can be separated temporally. Validates visual classification - if vision says 'apple' but weight says 0.1 oz, flag it.",
+      "researchRefs": ["load-cell-dynamics", "impact-analysis"]
+    },
+    {
+      "id": "polarizer",
+      "name": "The Polarizer",
+      "subtitle": "Polarimetric Imaging",
+      "description": "Camera with polarizing filter; organic vs synthetic materials differ",
+      "whyNonObvious": "Cuts through glare/reflections; detects plastic contamination",
+      "badge": null,
+      "scores": {
+        "accuracy": 3,
+        "friction": 5,
+        "feasibility": 2,
+        "cost": 2,
+        "maintenance": 3,
+        "differentiation": 4
+      },
+      "metrics": {
+        "accuracyRange": "70-85% standalone, 90-94% fused",
+        "frictionScore": "10/10",
+        "costRange": "$4,500-7,000",
+        "costDelta": "+50-140%"
+      },
+      "hardware": [
+        { "component": "Polarization camera", "spec": "4-pol sensor or rotating filter", "price": 3500 },
+        { "component": "Polarized illumination", "spec": "Linear polarized LED array", "price": 300 },
+        { "component": "Base system", "spec": "Jetson + basic sensors", "price": 1500 }
+      ],
+      "risks": [
+        { "risk": "High cost", "probability": "High", "impact": "High", "mitigation": "Premium tier only" },
+        { "risk": "Specialized expertise", "probability": "Medium", "impact": "Medium", "mitigation": "Partner with optics specialists" },
+        { "risk": "Limited ML ecosystem", "probability": "Medium", "impact": "Medium", "mitigation": "Custom model development" }
+      ],
+      "howItWorks": "Camera with rotating polarizing filter or dual-polarization sensor. Different materials reflect polarized light differently. Organic materials have distinct polarization signatures vs non-organic. Cuts through surface reflections that confuse standard cameras. Excellent for detecting plastic contamination.",
+      "researchRefs": ["polarimetric-imaging", "plastics-detection"]
+    },
+    {
+      "id": "penetrator",
+      "name": "The Penetrator",
+      "subtitle": "Radar/Microwave Sensing",
+      "description": "mmWave radar penetrates surface layer; sees through pile",
+      "whyNonObvious": "Solves occlusion fundamentally; immune to visual confounders",
+      "badge": null,
+      "scores": {
+        "accuracy": 2,
+        "friction": 5,
+        "feasibility": 3,
+        "cost": 4,
+        "maintenance": 4,
+        "differentiation": 5
+      },
+      "metrics": {
+        "accuracyRange": "50-65% standalone, 88-93% fused",
+        "frictionScore": "10/10",
+        "costRange": "$3,200-3,800",
+        "costDelta": "+10-30%"
+      },
+      "hardware": [
+        { "component": "mmWave radar", "spec": "TI IWR1443 or similar, 76-81GHz", "price": 150 },
+        { "component": "Radar antenna", "spec": "Patch array", "price": 50 },
+        { "component": "Signal processing", "spec": "DSP module", "price": 100 },
+        { "component": "Base system", "spec": "Full baseline", "price": 2947 }
+      ],
+      "risks": [
+        { "risk": "Spatial resolution", "probability": "High", "impact": "Medium", "mitigation": "Coarse category classification only" },
+        { "risk": "Signal interpretation", "probability": "Medium", "impact": "Medium", "mitigation": "ML on radar returns" },
+        { "risk": "Regulatory", "probability": "Low", "impact": "Low", "mitigation": "Use approved bands (60GHz, 77GHz)" }
+      ],
+      "howItWorks": "Short-range mmWave radar or microwave sensor mounted on bin. Can penetrate surface layer to detect items underneath. Different materials have different radar cross-sections. Works through any visual obstruction - grease, condensation, piled items. Similar to automotive/robotics radar but miniaturized.",
+      "researchRefs": ["mmwave-sensing", "radar-imaging", "ti-radar"]
+    }
+  ]
+}
