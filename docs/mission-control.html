@@ -12,8 +12,8 @@
       animation: scratchboard-pulse 3s ease-in-out infinite;
     }
     @keyframes scratchboard-pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.7; }
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
     }
     .scratchboard-label {
       font-size: 12px;
@@ -28,20 +28,37 @@
 
     /* Subtle starfield background */
     #canvas {
-      background: radial-gradient(ellipse at center, #0f0f0f 0%, #0a0a0a 100%);
+      background: radial-gradient(ellipse at center, #121212 0%, #0a0a0a 70%);
     }
 
-    /* Grid pattern overlay */
-    #canvas::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
-      background-size: 40px 40px;
-      pointer-events: none;
+    /* Orbit rings decoration */
+    .orbit-ring {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.05);
+      stroke-width: 1;
+    }
+
+    /* Center glow effect */
+    .center-glow {
+      animation: center-breathe 4s ease-in-out infinite;
+    }
+    @keyframes center-breathe {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+
+    /* Progress ring animation */
+    .progress-ring-animated {
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Task circle hover glow */
+    .task-glow {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .node:hover .task-glow {
+      opacity: 0.5;
     }
   </style>
 </head>
@@ -410,13 +427,33 @@
       const orbitRadius = Math.min(width, height) * 0.3;
       const pillarRadius = 60;
       const centerRadius = 80;
+
+      // Decorative orbit rings
+      [0.5, 0.7, 1.0].forEach((scale, i) => {
+        connectionsGroup.append('circle')
+          .attr('cx', cx)
+          .attr('cy', cy)
+          .attr('r', orbitRadius * scale)
+          .attr('class', 'orbit-ring')
+          .attr('stroke-opacity', 0.03 + i * 0.02);
+      });
+
       const centerGroup = nodesGroup.append('g')
         .attr('class', 'node')
         .attr('transform', `translate(${cx}, ${cy})`);
+
+      // Outer glow
       centerGroup.append('circle')
-        .attr('r', centerRadius + 20)
+        .attr('r', centerRadius + 30)
         .attr('fill', 'url(#gradient-glow)')
-        .attr('class', 'glow');
+        .attr('class', 'center-glow');
+
+      // Inner glow
+      centerGroup.append('circle')
+        .attr('r', centerRadius + 15)
+        .attr('fill', 'url(#gradient-glow)')
+        .attr('opacity', 0.6);
+
       centerGroup.append('circle')
         .attr('r', centerRadius)
         .attr('class', 'node-circle thesis')
@@ -652,7 +689,48 @@
 
     function renderSubgoalView(subgoal, cx, cy, nodesGroup, connectionsGroup) {
       const tasks = (subgoal.children || []).filter(t => filterTask(t));
-      if (tasks.length === 0) return;
+      if (tasks.length === 0) {
+        // Show empty state
+        const emptyGroup = nodesGroup.append('g')
+          .attr('transform', `translate(${cx}, ${cy})`);
+        emptyGroup.append('circle')
+          .attr('r', 60)
+          .attr('fill', 'none')
+          .attr('stroke', 'var(--text-muted)')
+          .attr('stroke-width', 2)
+          .attr('stroke-dasharray', '8 4')
+          .attr('opacity', 0.3);
+        emptyGroup.append('text')
+          .attr('class', 'node-label pillar')
+          .attr('text-anchor', 'middle')
+          .attr('y', -10)
+          .attr('fill', '#71717a')
+          .attr('filter', 'url(#text-shadow)')
+          .text('No tasks');
+        emptyGroup.append('text')
+          .attr('class', 'node-tagline')
+          .attr('text-anchor', 'middle')
+          .attr('y', 15)
+          .text('Try a different filter');
+        // Add back button
+        const backGroup = nodesGroup.append('g')
+          .attr('class', 'node')
+          .attr('transform', `translate(60, 80)`);
+        backGroup.append('circle')
+          .attr('r', 20)
+          .attr('fill', '#262626')
+          .attr('stroke', '#3f3f46')
+          .attr('cursor', 'pointer')
+          .on('click', () => render(data));
+        backGroup.append('text')
+          .attr('text-anchor', 'middle')
+          .attr('y', 5)
+          .attr('fill', '#a1a1aa')
+          .attr('font-size', '16px')
+          .attr('pointer-events', 'none')
+          .text('\u2190');
+        return;
+      }
       const cols = Math.ceil(Math.sqrt(tasks.length * 1.5));
       const rows = Math.ceil(tasks.length / cols);
       const spacing = 100;
