@@ -64,6 +64,12 @@
 </head>
 <body>
 
+  <!-- Thesis Banner -->
+  <div id="thesis-banner">
+    <div class="thesis-title">$10B Food Intelligence Platform</div>
+    <div class="thesis-subtitle">Make the food system smarter through data</div>
+  </div>
+
   <!-- Breadcrumb Navigation -->
   <div id="breadcrumb">
     <span class="breadcrumb-item active" data-level="0">Mission Control</span>
@@ -169,7 +175,7 @@
         </div>
         <div class="legend-item">
           <div class="legend-color" style="background: #f59e0b;"></div>
-          <span>Gavin</span>
+          <span>Executive</span>
         </div>
       </div>
     </div>
@@ -211,8 +217,8 @@
     // Gavin's Scratchboard Data - Personal tasks outside the $10B roadmap
     const SCRATCHBOARD = {
       id: "scratchboard",
-      name: "Gavin's Tasks",
-      tagline: "Personal scratchboard",
+      name: "Executive Priorities",
+      tagline: "90-day focus areas",
       type: "scratchboard",
       color: "#f59e0b",
       children: [
@@ -513,7 +519,7 @@
         .attr('stroke-width', 2)
         .attr('cursor', 'pointer')
         .on('click', () => renderScratchboard(SCRATCHBOARD))
-        .on('mouseenter', (e) => showTooltip(e, { name: "Gavin's Scratchboard", type: "scratchboard" }))
+        .on('mouseenter', (e) => showTooltip(e, { name: "Executive Priorities", type: "scratchboard" }))
         .on('mouseleave', hideTooltip);
 
       // Label
@@ -523,14 +529,14 @@
         .attr('fill', '#fafafa')
         .attr('font-weight', '600')
         .attr('filter', 'url(#text-shadow)')
-        .text("Gavin's");
+        .text("Executive");
       sbGroup.append('text')
         .attr('class', 'scratchboard-label')
         .attr('y', 8)
         .attr('fill', '#fafafa')
         .attr('font-weight', '600')
         .attr('filter', 'url(#text-shadow)')
-        .text('Tasks');
+        .text('Priorities');
       sbGroup.append('text')
         .attr('class', 'node-tagline')
         .attr('y', sbRadius + 18)
@@ -889,13 +895,13 @@
         .attr('y', -8)
         .attr('filter', 'url(#text-shadow)')
         .attr('fill', '#ffffff')
-        .text("Gavin's");
+        .text("Executive");
       centerGroup.append('text')
         .attr('class', 'node-label pillar')
         .attr('y', 12)
         .attr('filter', 'url(#text-shadow)')
         .attr('fill', '#ffffff')
-        .text('Tasks');
+        .text('Priorities');
 
       const subgoals = scratchboard.children || [];
       subgoals.forEach((subgoal, i) => {
@@ -967,7 +973,7 @@
           .text(`${taskCount} tasks`);
       });
 
-      updateBreadcrumb({ type: 'scratchboard', name: "Gavin's Tasks" });
+      updateBreadcrumb({ type: 'scratchboard', name: "Executive Priorities" });
       resetZoom();
     }
 
@@ -1154,10 +1160,10 @@
         path.push({ name: 'Mission Control', node: data });
       } else if (node.type === 'scratchboard') {
         path.push({ name: 'Mission Control', node: data });
-        path.push({ name: "Gavin's Tasks", node: SCRATCHBOARD, action: () => renderScratchboard(SCRATCHBOARD) });
+        path.push({ name: "Exec Priorities", node: SCRATCHBOARD, action: () => renderScratchboard(SCRATCHBOARD) });
       } else if (node.type === 'scratchboard-subgoal') {
         path.push({ name: 'Mission Control', node: data });
-        path.push({ name: "Gavin's Tasks", node: SCRATCHBOARD, action: () => renderScratchboard(SCRATCHBOARD) });
+        path.push({ name: "Exec Priorities", node: SCRATCHBOARD, action: () => renderScratchboard(SCRATCHBOARD) });
         path.push({ name: node.name.substring(0, 15), node: node });
       } else if (node.type === 'pillar') {
         path.push({ name: 'Mission Control', node: data });
