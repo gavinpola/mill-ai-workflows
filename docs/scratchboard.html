@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gavin's Scratchboard | Mill</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Scratchboard-specific styles */
+    html, body {
+      overflow: auto;
+      height: auto;
+      min-height: 100vh;
+    }
+
+    .scratchboard-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 24px 40px;
+    }
+
+    .scratchboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 32px;
+    }
+
+    .scratchboard-title {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .scratchboard-subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--mill-green);
+      text-decoration: none;
+      font-size: 13px;
+      padding: 8px 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--mill-green);
+    }
+
+    .section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      cursor: pointer;
+    }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+    }
+
+    .section-toggle {
+      color: var(--text-muted);
+      font-size: 18px;
+      transition: transform 0.2s ease;
+    }
+
+    .section.collapsed .section-toggle {
+      transform: rotate(-90deg);
+    }
+
+    .section.collapsed .section-content {
+      display: none;
+    }
+
+    .task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px;
+      background: var(--bg-primary);
+      border-radius: var(--radius-md);
+      transition: all 0.2s ease;
+    }
+
+    .task-item:hover {
+      background: var(--bg-tertiary);
+    }
+
+    .task-checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: all 0.2s ease;
+    }
+
+    .task-checkbox:hover {
+      border-color: var(--mill-green);
+    }
+
+    .task-checkbox.checked {
+      background: var(--mill-green);
+      border-color: var(--mill-green);
+    }
+
+    .task-checkbox.checked::after {
+      content: '✓';
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .task-content {
+      flex: 1;
+    }
+
+    .task-title {
+      font-size: 14px;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    .task-item.completed .task-title {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .task-meta {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .task-tag {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+    }
+
+    .task-tag.priority {
+      background: var(--priority-p1);
+      color: black;
+    }
+
+    .task-tag.target {
+      background: transparent;
+      border: 1px solid var(--border-color);
+    }
+
+    .task-tag.lane-commercial { border-left: 3px solid var(--color-commercial); }
+    .task-tag.lane-ai { border-left: 3px solid var(--color-ai); }
+    .task-tag.lane-relationships { border-left: 3px solid var(--color-outcomes); }
+
+    /* Add task input */
+    .add-task-container {
+      margin-top: 12px;
+    }
+
+    .add-task-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 13px;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: var(--radius-md);
+      transition: all 0.2s ease;
+    }
+
+    .add-task-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-primary);
+    }
+
+    .add-task-input {
+      display: none;
+      width: 100%;
+    }
+
+    .add-task-input.visible {
+      display: flex;
+      gap: 8px;
+    }
+
+    .add-task-input input {
+      flex: 1;
+      padding: 10px 14px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: 'Space Grotesk', sans-serif;
+      outline: none;
+    }
+
+    .add-task-input input:focus {
+      border-color: var(--mill-green);
+    }
+
+    .add-task-input input::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* Progress summary */
+    .progress-summary {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 24px;
+      padding: 16px 20px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+    }
+
+    .progress-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .progress-value {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .progress-value.highlight {
+      color: var(--mill-green);
+    }
+
+    .progress-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .progress-bar-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--mill-green);
+      border-radius: var(--radius-full);
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+    }
+
+    /* Subsections */
+    .subsection {
+      margin-bottom: 20px;
+    }
+
+    .subsection:last-child {
+      margin-bottom: 0;
+    }
+
+    .subsection-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Delete button */
+    .task-delete {
+      opacity: 0;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .task-item:hover .task-delete {
+      opacity: 1;
+    }
+
+    .task-delete:hover {
+      color: var(--priority-p0);
+    }
+
+    /* Notes section */
+    .notes-textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 12px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: 'Space Grotesk', sans-serif;
+      resize: vertical;
+      outline: none;
+    }
+
+    .notes-textarea:focus {
+      border-color: var(--mill-green);
+    }
+
+    .notes-textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .scratchboard-container {
+        padding: 70px 16px 24px;
+      }
+
+      .scratchboard-header {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .progress-summary {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .progress-bar-container {
+        width: 100%;
+        order: 3;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <div id="breadcrumb">
+    <a href="index.html" class="nav-link">← Mission Control</a>
+  </div>
+
+  <div class="scratchboard-container">
+    <div class="scratchboard-header">
+      <div>
+        <h1 class="scratchboard-title">Gavin's Scratchboard</h1>
+        <p class="scratchboard-subtitle">Personal tasks, ideas, and quick wins — separate from the $10B roadmap</p>
+      </div>
+    </div>
+
+    <!-- Progress Summary -->
+    <div class="progress-summary" id="progressSummary">
+      <div class="progress-stat">
+        <span class="progress-value highlight" id="completedCount">0</span>
+        <span class="progress-label">Completed</span>
+      </div>
+      <div class="progress-stat">
+        <span class="progress-value" id="totalCount">0</span>
+        <span class="progress-label">Total</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar">
+          <div class="progress-bar-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+        <span class="progress-text" id="progressText">0% complete</span>
+      </div>
+    </div>
+
+    <!-- Sections will be rendered here -->
+    <div id="sectionsContainer"></div>
+  </div>
+
+  <script>
+    // Initial data seeded from gavin_action_plan.md
+    const DEFAULT_DATA = {
+      sections: [
+        {
+          id: 'priorities-commercial',
+          title: '90-Day: Commercial Lane',
+          collapsed: false,
+          tasks: [
+            { id: 'c1', title: 'Deep dive on top 3 enterprise targets (Costco, Kroger, ?)', tags: ['Priority 1', 'Week 2'], completed: false },
+            { id: 'c2', title: 'Shadow 3 sales/partnership calls', tags: ['Priority 2', 'Week 3'], completed: false },
+            { id: 'c3', title: 'Own 1 prospect relationship directly', tags: ['Priority 3', 'Month 1'], completed: false },
+            { id: 'c4', title: 'Advance one deal from cold → warm or warm → close', tags: ['Priority 4', 'Month 3'], completed: false }
+          ]
+        },
+        {
+          id: 'priorities-ai',
+          title: '90-Day: AI Enablement Lane',
+          collapsed: false,
+          tasks: [
+            { id: 'a1', title: 'Launch AI Office Hours (weekly drop-in)', tags: ['Priority 1', 'Week 2'], completed: false },
+            { id: 'a2', title: 'Deploy prospect scoring framework internally', tags: ['Priority 2', 'Week 1'], completed: false },
+            { id: 'a3', title: 'Ship 3 adopted AI workflows', tags: ['Priority 3', 'Month 2'], completed: false },
+            { id: 'a4', title: 'Establish AI Steering Committee', tags: ['Priority 4', 'Month 2'], completed: false },
+            { id: 'a5', title: 'Create "Mill AI Playbook" v1', tags: ['Priority 5', 'Month 3'], completed: false }
+          ]
+        },
+        {
+          id: 'priorities-relationships',
+          title: '90-Day: Relationship Building',
+          collapsed: false,
+          tasks: [
+            { id: 'r1', title: '1:1s with every team lead', tags: ['Priority 1', 'Week 2'], completed: false },
+            { id: 'r2', title: 'Weekly recurring with Harry', tags: ['Priority 2', 'Week 1'], completed: false },
+            { id: 'r3', title: 'Coffee with Matt', tags: ['Priority 3', 'Month 1'], completed: false },
+            { id: 'r4', title: 'Build ally in each dept (product, ops, eng, data)', tags: ['Priority 4', 'Month 2'], completed: false }
+          ]
+        },
+        {
+          id: 'quick-wins',
+          title: 'Quick Wins (Week 1-2)',
+          collapsed: false,
+          tasks: [
+            { id: 'q1', title: 'Deploy Costco deck framework for immediate use', tags: ['Week 1'], completed: false },
+            { id: 'q2', title: 'Demo the opportunity scoring system to commercial team', tags: ['Week 1'], completed: false },
+            { id: 'q3', title: 'Set up Jarvis dashboard on my screen (conversation starter)', tags: ['Week 1'], completed: false },
+            { id: 'q4', title: 'Share this repo structure as "here\'s how I work"', tags: ['Week 1'], completed: false }
+          ]
+        },
+        {
+          id: 'meetings',
+          title: 'Meetings to Schedule (First 2 Weeks)',
+          collapsed: false,
+          tasks: [
+            { id: 'm1', title: 'AI/ML Engineering Team — Understand current AI stack, where can I help?', tags: ['CV Team'], completed: false },
+            { id: 'm2', title: 'Software Engineering — How do they build? What\'s automated? What\'s painful?', tags: ['Eng Lead'], completed: false },
+            { id: 'm3', title: 'Product Team — Roadmap context, where does AI fit?', tags: ['PM Lead'], completed: false },
+            { id: 'm4', title: 'Operations — Customer deployment process, pain points', tags: ['Ops Lead'], completed: false },
+            { id: 'm5', title: 'Sales/Partnerships — Current pipeline, how deals work', tags: ['Commercial'], completed: false },
+            { id: 'm6', title: 'Data Science — What analysis exists? Dashboard needs?', tags: ['Data Team'], completed: false },
+            { id: 'm7', title: 'Customer Success — What do customers actually ask for?', tags: ['CS Lead'], completed: false }
+          ]
+        },
+        {
+          id: 'leverage-repo',
+          title: 'Leverage What\'s Built (This Repo)',
+          collapsed: false,
+          tasks: [
+            { id: 'l1', title: 'Enterprise Targeting System — Demo to commercial team, get feedback', tags: ['Week 1', 'frameworks/'], completed: false },
+            { id: 'l2', title: 'Auto-Generated Decks — Use for next real prospect, show time savings', tags: ['Week 2', 'agents/'], completed: false },
+            { id: 'l3', title: 'Customer Dashboards — Meet with data team, how does this fit?', tags: ['Week 2', 'agents/'], completed: false },
+            { id: 'l4', title: 'Harry Reviewer Persona — Show Harry (might be funny/useful)', tags: ['Week 1', 'agents/'], completed: false },
+            { id: 'l5', title: 'Training Data Strategy — Meet with CV/ML team, is this useful?', tags: ['Week 2', 'outputs/'], completed: false },
+            { id: 'l6', title: 'Data Strategy Memo — Share with Harry as "here\'s my thinking"', tags: ['Week 1', 'outputs/'], completed: false }
+          ]
+        },
+        {
+          id: 'ideas',
+          title: 'Ideas Backlog',
+          collapsed: true,
+          tasks: [
+            { id: 'i1', title: 'Agent Dashboard Always On — Jarvis TUI on second monitor 24/7', tags: ['Low Effort', 'High Impact'], completed: false },
+            { id: 'i2', title: '"Ask Me About My Agents" Sign — Physical desk sign or Slack status', tags: ['Low Effort', 'Medium Impact'], completed: false },
+            { id: 'i3', title: 'Public GitHub Repo — Open-source non-confidential parts (discuss w/ Harry)', tags: ['Medium Effort', 'High Impact'], completed: false },
+            { id: 'i4', title: 'Everyone Works a Trash Shift — All employees spend 1 shift at customer site', tags: ['Medium Effort', 'High Impact'], completed: false },
+            { id: 'i5', title: '"Trash to Insight" Hackathon — Company-wide 1-day event', tags: ['High Effort', 'High Impact', 'Q2'], completed: false },
+            { id: 'i6', title: 'AI Wins Slack Channel — #ai-wins daily posts of AI helping', tags: ['Low Effort', 'Medium Impact', 'Week 2'], completed: false },
+            { id: 'i7', title: 'Mill GPT — Internal chatbot trained on Mill docs', tags: ['Medium Effort', 'High Impact'], completed: false },
+            { id: 'i8', title: 'Customer Site Ride-Along — Spend a day at Whole Foods watching bins', tags: ['Low Effort', 'High Impact', 'Month 1'], completed: false }
+          ]
+        },
+        {
+          id: 'bigger-swings',
+          title: 'Bigger Swings (Q2+)',
+          collapsed: true,
+          tasks: [
+            { id: 'b1', title: 'AI-Generated Investor Updates — Automate Series D investor emails', tags: ['High Value'], completed: false },
+            { id: 'b2', title: 'Competitive Intel Agent — Always-on monitoring of Lomi, Reencle, etc.', tags: ['Strategic'], completed: false },
+            { id: 'b3', title: 'Automated Customer Onboarding — AI-guided setup and training', tags: ['Scalability'], completed: false },
+            { id: 'b4', title: 'Sales Battlecards Generator — Auto-updated competitive positioning', tags: ['Commercial'], completed: false },
+            { id: 'b5', title: '"Mill Intelligence" Product — Package data insights as sellable add-on', tags: ['Revenue'], completed: false },
+            { id: 'b6', title: 'Procurement Optimization MVP — Prove waste data → better ordering thesis', tags: ['Core Strategy'], completed: false }
+          ]
+        },
+        {
+          id: 'notes',
+          title: 'Notes / Parking Lot',
+          collapsed: true,
+          isNotes: true,
+          content: ''
+        }
+      ]
+    };
+
+    // State
+    let data = loadData();
+
+    function loadData() {
+      const saved = localStorage.getItem('gavin-scratchboard');
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {
+          console.error('Failed to parse saved data:', e);
+        }
+      }
+      return JSON.parse(JSON.stringify(DEFAULT_DATA));
+    }
+
+    function saveData() {
+      localStorage.setItem('gavin-scratchboard', JSON.stringify(data));
+      updateProgress();
+    }
+
+    function updateProgress() {
+      let total = 0;
+      let completed = 0;
+
+      data.sections.forEach(section => {
+        if (section.tasks) {
+          total += section.tasks.length;
+          completed += section.tasks.filter(t => t.completed).length;
+        }
+      });
+
+      document.getElementById('completedCount').textContent = completed;
+      document.getElementById('totalCount').textContent = total;
+      const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+      document.getElementById('progressFill').style.width = percent + '%';
+      document.getElementById('progressText').textContent = percent + '% complete';
+    }
+
+    function toggleSection(sectionId) {
+      const section = data.sections.find(s => s.id === sectionId);
+      if (section) {
+        section.collapsed = !section.collapsed;
+        saveData();
+        render();
+      }
+    }
+
+    function toggleTask(sectionId, taskId) {
+      const section = data.sections.find(s => s.id === sectionId);
+      if (section && section.tasks) {
+        const task = section.tasks.find(t => t.id === taskId);
+        if (task) {
+          task.completed = !task.completed;
+          saveData();
+          render();
+        }
+      }
+    }
+
+    function deleteTask(sectionId, taskId) {
+      const section = data.sections.find(s => s.id === sectionId);
+      if (section && section.tasks) {
+        section.tasks = section.tasks.filter(t => t.id !== taskId);
+        saveData();
+        render();
+      }
+    }
+
+    function showAddTask(sectionId) {
+      const container = document.querySelector(`[data-section="${sectionId}"] .add-task-input`);
+      const btn = document.querySelector(`[data-section="${sectionId}"] .add-task-btn`);
+      if (container && btn) {
+        container.classList.add('visible');
+        btn.style.display = 'none';
+        container.querySelector('input').focus();
+      }
+    }
+
+    function hideAddTask(sectionId) {
+      const container = document.querySelector(`[data-section="${sectionId}"] .add-task-input`);
+      const btn = document.querySelector(`[data-section="${sectionId}"] .add-task-btn`);
+      if (container && btn) {
+        container.classList.remove('visible');
+        btn.style.display = 'flex';
+        container.querySelector('input').value = '';
+      }
+    }
+
+    function addTask(sectionId, title) {
+      if (!title.trim()) return;
+
+      const section = data.sections.find(s => s.id === sectionId);
+      if (section && section.tasks) {
+        const newId = 'custom-' + Date.now();
+        section.tasks.push({
+          id: newId,
+          title: title.trim(),
+          tags: ['Added'],
+          completed: false
+        });
+        saveData();
+        render();
+      }
+    }
+
+    function updateNotes(sectionId, content) {
+      const section = data.sections.find(s => s.id === sectionId);
+      if (section) {
+        section.content = content;
+        saveData();
+      }
+    }
+
+    function render() {
+      const container = document.getElementById('sectionsContainer');
+      container.innerHTML = '';
+
+      data.sections.forEach(section => {
+        const sectionEl = document.createElement('div');
+        sectionEl.className = 'section' + (section.collapsed ? ' collapsed' : '');
+        sectionEl.dataset.section = section.id;
+
+        const completedCount = section.tasks ? section.tasks.filter(t => t.completed).length : 0;
+        const totalCount = section.tasks ? section.tasks.length : 0;
+
+        sectionEl.innerHTML = `
+          <div class="section-header" onclick="toggleSection('${section.id}')">
+            <div class="section-title">
+              ${section.title}
+              ${section.tasks ? `<span class="section-badge">${completedCount}/${totalCount}</span>` : ''}
+            </div>
+            <span class="section-toggle">▼</span>
+          </div>
+          <div class="section-content">
+            ${section.isNotes ? `
+              <textarea
+                class="notes-textarea"
+                placeholder="Add notes, random ideas, things to revisit..."
+                onchange="updateNotes('${section.id}', this.value)"
+              >${section.content || ''}</textarea>
+            ` : `
+              <div class="task-list">
+                ${section.tasks.map(task => `
+                  <div class="task-item ${task.completed ? 'completed' : ''}">
+                    <div class="task-checkbox ${task.completed ? 'checked' : ''}" onclick="toggleTask('${section.id}', '${task.id}')"></div>
+                    <div class="task-content">
+                      <div class="task-title">${task.title}</div>
+                      ${task.tags && task.tags.length ? `
+                        <div class="task-meta">
+                          ${task.tags.map(tag => `<span class="task-tag">${tag}</span>`).join('')}
+                        </div>
+                      ` : ''}
+                    </div>
+                    <span class="task-delete" onclick="deleteTask('${section.id}', '${task.id}')" title="Delete task">×</span>
+                  </div>
+                `).join('')}
+              </div>
+              <div class="add-task-container">
+                <div class="add-task-btn" onclick="showAddTask('${section.id}')">
+                  + Add task
+                </div>
+                <div class="add-task-input">
+                  <input
+                    type="text"
+                    placeholder="Enter task and press Enter..."
+                    onkeydown="if(event.key === 'Enter') { addTask('${section.id}', this.value); hideAddTask('${section.id}'); } else if(event.key === 'Escape') { hideAddTask('${section.id}'); }"
+                    onblur="setTimeout(() => hideAddTask('${section.id}'), 200)"
+                  >
+                </div>
+              </div>
+            `}
+          </div>
+        `;
+
+        container.appendChild(sectionEl);
+      });
+
+      updateProgress();
+    }
+
+    // Initialize
+    render();
+  </script>
+</body>
+</html>
