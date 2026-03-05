@@ -139,6 +139,11 @@
       <filter id="soft-shadow" x="-50%" y="-50%" width="200%" height="200%">
         <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.1"/>
       </filter>
+
+      <!-- Text shadow for labels -->
+      <filter id="text-shadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#fff" flood-opacity="0.8"/>
+      </filter>
     </defs>
     <g id="zoom-container">
       <g id="connections"></g>
@@ -321,80 +326,489 @@
       }
     };
 
+    // ========================================
+    // INFINITE ZOOM: World Coordinate System
+    // ========================================
+
+    // Node world sizes (radius in world units)
+    const WORLD_SIZES = {
+      thesis: 70,
+      pillar: 45,
+      subgoal: 20,
+      task: 8
+    };
+
+    // Orbital distances from parent
+    const ORBIT_RADII = {
+      pillar: 280,    // Distance from thesis
+      subgoal: 120,   // Distance from pillar
+      task: 50        // Distance from subgoal
+    };
+
+    // Calculate world positions for all nodes
+    function calculateWorldPositions(rootNode) {
+      // Thesis at center
+      rootNode.worldX = 0;
+      rootNode.worldY = 0;
+      rootNode.worldRadius = WORLD_SIZES.thesis;
+      rootNode.depth = 0;
+
+      // Position pillars around thesis
+      const pillars = rootNode.children || [];
+      pillars.forEach((pillar, i) => {
+        const angle = (i / pillars.length) * 2 * Math.PI - Math.PI / 2;
+        pillar.worldX = Math.cos(angle) * ORBIT_RADII.pillar;
+        pillar.worldY = Math.sin(angle) * ORBIT_RADII.pillar;
+        pillar.worldRadius = WORLD_SIZES.pillar;
+        pillar.depth = 1;
+        pillar.parentAngle = angle;
+
+        // Position subgoals around pillar
+        const subgoals = pillar.children || [];
+        subgoals.forEach((subgoal, j) => {
+          const subAngle = (j / subgoals.length) * 2 * Math.PI - Math.PI / 2;
+          subgoal.worldX = pillar.worldX + Math.cos(subAngle) * ORBIT_RADII.subgoal;
+          subgoal.worldY = pillar.worldY + Math.sin(subAngle) * ORBIT_RADII.subgoal;
+          subgoal.worldRadius = WORLD_SIZES.subgoal;
+          subgoal.depth = 2;
+          subgoal.parentAngle = subAngle;
+          subgoal.parentPillar = pillar;
+
+          // Position tasks around subgoal
+          const tasks = subgoal.children || [];
+          tasks.forEach((task, k) => {
+            const taskAngle = (k / tasks.length) * 2 * Math.PI - Math.PI / 2;
+            task.worldX = subgoal.worldX + Math.cos(taskAngle) * ORBIT_RADII.task;
+            task.worldY = subgoal.worldY + Math.sin(taskAngle) * ORBIT_RADII.task;
+            task.worldRadius = WORLD_SIZES.task;
+            task.depth = 3;
+            task.parentSubgoal = subgoal;
+          });
+        });
+      });
+    }
+
+    // Flatten hierarchy for rendering
+    function getAllNodes(rootNode) {
+      const nodes = [rootNode];
+      (rootNode.children || []).forEach(pillar => {
+        nodes.push(pillar);
+        (pillar.children || []).forEach(subgoal => {
+          nodes.push(subgoal);
+          (subgoal.children || []).forEach(task => {
+            nodes.push(task);
+          });
+        });
+      });
+      return nodes;
+    }
+
+    // Get all connections (parent-child pairs)
+    function getAllConnections(rootNode) {
+      const connections = [];
+      (rootNode.children || []).forEach(pillar => {
+        connections.push({ from: rootNode, to: pillar, level: 1 });
+        (pillar.children || []).forEach(subgoal => {
+          connections.push({ from: pillar, to: subgoal, level: 2 });
+          (subgoal.children || []).forEach(task => {
+            connections.push({ from: subgoal, to: task, level: 3 });
+          });
+        });
+      });
+      return connections;
+    }
+
+    // LOD (Level of Detail) calculations
+    function getScreenRadius(worldRadius, zoomScale) {
+      return worldRadius * zoomScale;
+    }
+
+    function getNodeOpacity(screenRadius) {
+      if (screenRadius < 3) return 0;
+      if (screenRadius < 10) return (screenRadius - 3) / 7;
+      return 1;
+    }
+
+    function getLabelOpacity(screenRadius) {
+      if (screenRadius < 25) return 0;
+      if (screenRadius < 45) return (screenRadius - 25) / 20;
+      return 1;
+    }
+
+    function getDetailOpacity(screenRadius) {
+      if (screenRadius < 60) return 0;
+      if (screenRadius < 100) return (screenRadius - 60) / 40;
+      return 1;
+    }
+
+    // Store all nodes and connections after positioning
+    let allNodes = [];
+    let allConnections = [];
+
     let currentNode = null;
     let currentZoomLevel = 1;
     let currentFilter = 'all';
     let svg, container, zoom;
     let width, height;
+    let currentTransform = d3.zoomIdentity;
 
     function init() {
       loadState();
       svg = d3.select('#canvas');
       container = d3.select('#zoom-container');
       updateDimensions();
+
+      // Calculate world positions for ALL nodes
+      calculateWorldPositions(data);
+      allNodes = getAllNodes(data);
+      allConnections = getAllConnections(data);
+
+      // Set up infinite zoom (no level thresholds!)
+      zoom = d3.zoom()
+        .scaleExtent([0.3, 100])  // Much wider zoom range for infinite feel
+        .on('zoom', (event) => {
+          currentTransform = event.transform;
+          container.attr('transform', event.transform);
+          // Update LOD visibility on each zoom
+          updateLOD(event.transform.k);
+        });
+
+      svg.call(zoom);
+
+      // Initial render of all nodes
+      renderAll();
+
+      // Center on thesis and set initial zoom
+      const initialZoom = Math.min(width, height) / 800;
+      svg.call(zoom.transform, d3.zoomIdentity
+        .translate(width / 2, height / 2)
+        .scale(initialZoom)
+      );
+
       window.addEventListener('resize', () => {
         updateDimensions();
-        render(currentNode || data);
+        renderAll();
       });
-      let lastZoomScale = 1;
-      let zoomTimeout = null;
 
-      zoom = d3.zoom()
-        .scaleExtent([0.5, 4])
-        .on('zoom', (event) => {
-          container.attr('transform', event.transform);
-          const currentScale = event.transform.k;
-
-          // Clear any pending zoom navigation
-          if (zoomTimeout) clearTimeout(zoomTimeout);
-
-          // Zoom-to-navigate: zoom in past 2.5x triggers drill-down
-          if (currentScale > 2.5 && lastZoomScale <= 2.5 && currentZoomLevel < 3) {
-            zoomTimeout = setTimeout(() => {
-              // Find closest clickable node to viewport center
-              const centerX = width / 2;
-              const centerY = height / 2;
-              const nodes = document.querySelectorAll('.node');
-              let closest = null;
-              let closestDist = Infinity;
-
-              nodes.forEach(node => {
-                const transform = node.getAttribute('transform');
-                if (transform) {
-                  const match = transform.match(/translate\(([^,]+),\s*([^)]+)\)/);
-                  if (match) {
-                    const nx = parseFloat(match[1]);
-                    const ny = parseFloat(match[2]);
-                    const dist = Math.sqrt((nx - centerX) ** 2 + (ny - centerY) ** 2);
-                    if (dist < closestDist) {
-                      closestDist = dist;
-                      closest = node;
-                    }
-                  }
-                }
-              });
-
-              if (closest) {
-                // Trigger click on the closest node
-                const circle = closest.querySelector('circle');
-                if (circle) circle.dispatchEvent(new Event('click'));
-              }
-            }, 300);
-          }
-
-          // Zoom out past 0.7x triggers drill-up
-          if (currentScale < 0.7 && lastZoomScale >= 0.7 && currentZoomLevel > 1) {
-            zoomTimeout = setTimeout(() => {
-              render(data); // Go back to galaxy view
-            }, 300);
-          }
-
-          lastZoomScale = currentScale;
-        });
-      svg.call(zoom);
-      render(data);
       updateStats();
       setupEventListeners();
+    }
+
+    // Update Level of Detail based on zoom scale
+    function updateLOD(scale) {
+      // Update all node groups
+      d3.selectAll('.infinite-node').each(function() {
+        const g = d3.select(this);
+        const worldRadius = +g.attr('data-world-radius');
+        const screenRadius = getScreenRadius(worldRadius, scale);
+        const nodeOpacity = getNodeOpacity(screenRadius);
+        const labelOpacity = getLabelOpacity(screenRadius);
+        const detailOpacity = getDetailOpacity(screenRadius);
+
+        // Update node visibility
+        g.style('opacity', nodeOpacity);
+
+        // Update label visibility
+        g.select('.node-label').style('opacity', labelOpacity);
+
+        // Update detail elements visibility
+        g.selectAll('.node-detail').style('opacity', detailOpacity);
+
+        // Scale-dependent stroke width for connections
+        const baseStroke = 2;
+        const scaledStroke = Math.max(0.5, baseStroke / Math.sqrt(scale));
+        // Connection stroke scaling handled separately
+      });
+
+      // Update connections
+      d3.selectAll('.infinite-connection').each(function() {
+        const path = d3.select(this);
+        const fromRadius = +path.attr('data-from-radius');
+        const toRadius = +path.attr('data-to-radius');
+        const fromScreen = getScreenRadius(fromRadius, scale);
+        const toScreen = getScreenRadius(toRadius, scale);
+
+        // Show connection when both endpoints are visible enough
+        const minVisible = Math.min(fromScreen, toScreen);
+        const connectionOpacity = minVisible > 8 ? Math.min(1, (minVisible - 8) / 15) : 0;
+        path.style('opacity', connectionOpacity);
+
+        // Scale stroke width to maintain visual weight
+        const baseStroke = 2;
+        const scaledStroke = Math.max(0.5, Math.min(3, baseStroke / Math.pow(scale, 0.3)));
+        path.style('stroke-width', scaledStroke);
+      });
+    }
+
+    // Render ALL nodes at world positions (called once, then LOD updates visibility)
+    function renderAll() {
+      const nodesGroup = d3.select('#nodes');
+      const connectionsGroup = d3.select('#connections');
+
+      // Clear existing content
+      nodesGroup.selectAll('*').remove();
+      connectionsGroup.selectAll('*').remove();
+
+      // Add ambient particles (background decoration)
+      for (let i = 0; i < 30; i++) {
+        const particleX = (Math.random() - 0.5) * 1500;
+        const particleY = (Math.random() - 0.5) * 1500;
+        const size = 2 + Math.random() * 4;
+        const duration = 8 + Math.random() * 8;
+        const delay = Math.random() * 5;
+        connectionsGroup.append('circle')
+          .attr('class', 'ambient-particle')
+          .attr('cx', particleX)
+          .attr('cy', particleY)
+          .attr('r', size)
+          .attr('fill', `rgba(22, 163, 74, ${0.06 + Math.random() * 0.08})`)
+          .style('animation', `floatParticle ${duration}s ease-in-out infinite`)
+          .style('animation-delay', `${delay}s`);
+      }
+
+      // Render all connections
+      allConnections.forEach(conn => {
+        const path = connectionsGroup.append('path')
+          .attr('class', 'infinite-connection connection-curve')
+          .attr('d', createCurvedPath(conn.from.worldX, conn.from.worldY, conn.to.worldX, conn.to.worldY))
+          .attr('data-from-radius', conn.from.worldRadius)
+          .attr('data-to-radius', conn.to.worldRadius)
+          .attr('data-level', conn.level);
+      });
+
+      // Render all nodes
+      allNodes.forEach(node => {
+        const g = nodesGroup.append('g')
+          .attr('class', 'infinite-node node')
+          .attr('transform', `translate(${node.worldX}, ${node.worldY})`)
+          .attr('data-world-radius', node.worldRadius)
+          .attr('data-depth', node.depth)
+          .attr('data-type', node.type)
+          .attr('data-id', node.id);
+
+        // Get gradient ID for coloring
+        let gradientId = 'gradient-thesis';
+        let color = '#16a34a';
+        if (node.type === 'pillar') {
+          gradientId = `gradient-${node.id}`;
+          color = node.color || COLORS[node.id];
+        } else if (node.type === 'subgoal' || node.type === 'task') {
+          // Find parent pillar for color
+          const pillar = node.parentPillar || (node.parentSubgoal && node.parentSubgoal.parentPillar);
+          if (pillar) {
+            gradientId = `gradient-${pillar.id}`;
+            color = pillar.color || COLORS[pillar.id];
+          }
+        }
+
+        // Progress ring (for non-tasks)
+        if (node.type !== 'task') {
+          const progress = calculateProgress(node);
+          const ringRadius = node.worldRadius + 4;
+          const circumference = 2 * Math.PI * ringRadius;
+
+          // Background ring
+          g.append('circle')
+            .attr('class', 'node-detail progress-ring-bg')
+            .attr('r', ringRadius)
+            .attr('fill', 'none')
+            .attr('stroke', '#e2e8f0')
+            .attr('stroke-width', 3);
+
+          // Progress ring
+          g.append('circle')
+            .attr('class', 'node-detail progress-ring-fill')
+            .attr('r', ringRadius)
+            .attr('fill', 'none')
+            .attr('stroke', color)
+            .attr('stroke-width', 3)
+            .attr('stroke-dasharray', circumference)
+            .attr('stroke-dashoffset', circumference * (1 - progress))
+            .attr('transform', 'rotate(-90)')
+            .attr('stroke-linecap', 'round');
+        }
+
+        // Main circle
+        const circle = g.append('circle')
+          .attr('r', node.worldRadius)
+          .attr('class', `node-circle ${node.type}`)
+          .attr('fill', `url(#${gradientId})`)
+          .attr('cursor', 'pointer')
+          .attr('filter', node.depth < 2 ? 'url(#planet-shadow)' : 'url(#soft-shadow)');
+
+        // Status-based styling for tasks
+        if (node.type === 'task') {
+          const statusColor = STATUS_COLORS[node.status] || STATUS_COLORS.pending;
+          const fillOpacity = node.status === 'completed' ? 0.85 : 0.25;
+          circle
+            .attr('fill', color)
+            .attr('fill-opacity', fillOpacity)
+            .attr('stroke', node.status === 'completed' ? STATUS_COLORS.completed : color)
+            .attr('stroke-width', 1.5);
+
+          // Checkmark for completed
+          if (node.status === 'completed') {
+            g.append('text')
+              .attr('class', 'node-detail')
+              .attr('text-anchor', 'middle')
+              .attr('y', node.worldRadius * 0.35)
+              .attr('fill', 'white')
+              .attr('font-size', node.worldRadius * 1.2)
+              .attr('pointer-events', 'none')
+              .text('✓');
+          }
+
+          // Priority badge
+          if (node.priority) {
+            g.append('circle')
+              .attr('class', 'node-detail priority-badge')
+              .attr('cx', node.worldRadius * 0.7)
+              .attr('cy', -node.worldRadius * 0.7)
+              .attr('r', node.worldRadius * 0.4)
+              .attr('fill', PRIORITY_COLORS[node.priority] || '#666');
+          }
+
+          // Win star
+          if (node.isWin) {
+            g.append('text')
+              .attr('class', 'node-detail win-badge')
+              .attr('text-anchor', 'middle')
+              .attr('x', -node.worldRadius * 0.7)
+              .attr('y', -node.worldRadius * 0.5)
+              .attr('font-size', node.worldRadius * 0.8)
+              .text('⭐');
+          }
+        }
+
+        // Labels - different placement for different node types
+        if (node.type === 'thesis') {
+          // Thesis: text inside circle
+          g.append('text')
+            .attr('class', 'node-label thesis')
+            .attr('text-anchor', 'middle')
+            .attr('y', -8)
+            .attr('fill', '#ffffff')
+            .attr('font-size', 16)
+            .attr('font-weight', 700)
+            .text('Mill');
+          g.append('text')
+            .attr('class', 'node-label thesis node-detail')
+            .attr('text-anchor', 'middle')
+            .attr('y', 14)
+            .attr('fill', 'rgba(255,255,255,0.9)')
+            .attr('font-size', 11)
+            .text('$10B Vision');
+        } else if (node.type === 'pillar') {
+          // Pillar: name inside, stats below
+          g.append('text')
+            .attr('class', 'node-label pillar')
+            .attr('text-anchor', 'middle')
+            .attr('y', -4)
+            .attr('fill', '#ffffff')
+            .attr('font-size', 11)
+            .attr('font-weight', 600)
+            .text(node.name.split(' ')[0]);
+          g.append('text')
+            .attr('class', 'node-detail')
+            .attr('text-anchor', 'middle')
+            .attr('y', 12)
+            .attr('fill', 'rgba(255,255,255,0.85)')
+            .attr('font-size', 9)
+            .text(`${Math.round(calculateProgress(node) * 100)}%`);
+          // Name below circle
+          g.append('text')
+            .attr('class', 'node-label pillar node-detail')
+            .attr('text-anchor', 'middle')
+            .attr('y', node.worldRadius + 14)
+            .attr('fill', '#374151')
+            .attr('font-size', 8)
+            .attr('font-weight', 500)
+            .attr('filter', 'url(#text-shadow)')
+            .text(node.name);
+        } else if (node.type === 'subgoal') {
+          // Subgoal: small text inside, name below
+          g.append('text')
+            .attr('class', 'node-label subgoal')
+            .attr('text-anchor', 'middle')
+            .attr('y', 3)
+            .attr('fill', '#ffffff')
+            .attr('font-size', 7)
+            .attr('font-weight', 600)
+            .text(`${Math.round(calculateProgress(node) * 100)}%`);
+          g.append('text')
+            .attr('class', 'node-detail')
+            .attr('text-anchor', 'middle')
+            .attr('y', node.worldRadius + 10)
+            .attr('fill', '#475569')
+            .attr('font-size', 5)
+            .attr('font-weight', 500)
+            .text(node.name.length > 18 ? node.name.substring(0, 16) + '...' : node.name);
+        } else if (node.type === 'task') {
+          // Task: name below
+          g.append('text')
+            .attr('class', 'node-detail')
+            .attr('text-anchor', 'middle')
+            .attr('y', node.worldRadius + 6)
+            .attr('fill', '#64748b')
+            .attr('font-size', 3)
+            .attr('font-weight', 500)
+            .text(node.name.length > 25 ? node.name.substring(0, 22) + '...' : node.name);
+        }
+
+        // Event handlers
+        circle
+          .on('click', () => zoomToNode(node))
+          .on('mouseenter', (e) => showTooltip(e, node))
+          .on('mouseleave', hideTooltip);
+
+        // For tasks, also handle status toggle on click
+        if (node.type === 'task') {
+          circle.on('click', (e) => {
+            if (e.shiftKey) {
+              // Shift+click to toggle status
+              toggleTaskStatus(node);
+            } else {
+              zoomToNode(node);
+            }
+          });
+        }
+      });
+
+      // Initial LOD update
+      updateLOD(currentTransform.k || 1);
+    }
+
+    // Zoom smoothly to center on a node
+    function zoomToNode(node) {
+      const targetZoom = getIdealZoom(node.worldRadius);
+      const clampedZoom = Math.max(0.3, Math.min(100, targetZoom));
+
+      svg.transition()
+        .duration(750)
+        .ease(d3.easeQuadInOut)
+        .call(
+          zoom.transform,
+          d3.zoomIdentity
+            .translate(width / 2, height / 2)
+            .scale(clampedZoom)
+            .translate(-node.worldX, -node.worldY)
+        );
+    }
+
+    // Calculate ideal zoom to make node fill ~40% of viewport
+    function getIdealZoom(worldRadius) {
+      const targetScreenSize = Math.min(width, height) * 0.35;
+      return targetScreenSize / (worldRadius * 2);
+    }
+
+    // Toggle task status
+    function toggleTaskStatus(task) {
+      const states = ['pending', 'in_progress', 'completed'];
+      const currentIndex = states.indexOf(task.status || 'pending');
+      task.status = states[(currentIndex + 1) % states.length];
+      saveState();
+      renderAll();
+      updateStats();
     }
 
     function updateDimensions() {
