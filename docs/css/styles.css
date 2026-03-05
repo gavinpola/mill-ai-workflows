@@ -203,65 +203,61 @@ html, body {
   z-index: 150;
   text-align: center;
   pointer-events: none;
-  background: var(--bg-secondary);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 12px 28px;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-lg);
 }
 
 .thesis-title {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--mill-green);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .thesis-subtitle {
-  font-size: 12px;
-  color: var(--text-secondary);
-  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
   font-weight: 400;
 }
 
 /* Breadcrumb Navigation */
 #breadcrumb {
   position: fixed;
-  top: 20px;
+  top: 22px;
   left: 20px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   z-index: 100;
-  background: var(--bg-secondary);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 10px 18px;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
-  font-size: 13px;
-  box-shadow: var(--shadow-md);
+  font-size: 12px;
 }
 
 .breadcrumb-item {
-  color: var(--text-secondary);
+  color: var(--text-muted);
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.15s ease;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
 }
 
 .breadcrumb-item:hover {
   color: var(--text-primary);
+  border-color: var(--mill-green);
 }
 
 .breadcrumb-item.active {
   color: var(--mill-green);
-  font-weight: 500;
+  font-weight: 600;
+  border-color: var(--mill-green);
 }
 
 .breadcrumb-separator {
   color: var(--text-muted);
+  font-size: 10px;
 }
 
 /* Stats Panel */
@@ -270,12 +266,12 @@ html, body {
   top: 20px;
   right: 20px;
   display: flex;
-  gap: 24px;
+  gap: 20px;
   z-index: 100;
   background: var(--bg-secondary);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  padding: 14px 28px;
+  padding: 16px 24px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-md);
@@ -285,23 +281,27 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 50px;
 }
 
 .stat-value {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: 700;
   color: var(--text-primary);
+  line-height: 1;
 }
 
 .stat-label {
-  font-size: 10px;
-  color: var(--text-secondary);
+  font-size: 9px;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-top: 4px;
 }
 
 .stat.highlight .stat-value {
   color: var(--mill-green);
+  font-size: 28px;
 }
 
 .stat.highlight .stat-label {
@@ -309,16 +309,12 @@ html, body {
 }
 
 .stat.wins .stat-value {
-  color: #fbbf24;
+  color: #f59e0b;
+  font-size: 28px;
 }
 
 .stat.wins .stat-label {
-  color: #fbbf24;
-}
-
-.stat.wins .stat-value::before {
-  content: '★ ';
-  font-size: 14px;
+  color: #f59e0b;
 }
 
 /* Detail Panel */
