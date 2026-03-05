@@ -110,11 +110,13 @@ html, body {
 .node-circle.status-completed {
   fill: var(--status-completed);
   fill-opacity: 0.9;
+  filter: drop-shadow(0 0 4px rgba(22, 163, 74, 0.4));
 }
 
 .node-circle.status-in_progress {
   fill: var(--status-in-progress);
   fill-opacity: 0.7;
+  filter: drop-shadow(0 0 5px rgba(37, 99, 235, 0.5));
 }
 
 .node-circle.status-pending {
@@ -137,6 +139,20 @@ html, body {
 .progress-ring-fill {
   stroke: var(--mill-green);
   stroke-width: 3;
+}
+
+/* Enhanced progress visualization */
+.progress-ring-fill.complete {
+  filter: drop-shadow(0 0 4px rgba(22, 163, 74, 0.6));
+}
+
+@keyframes progressPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.node-circle.status-in_progress {
+  animation: progressPulse 2s ease-in-out infinite;
 }
 
 /* Labels */
@@ -181,17 +197,30 @@ html, body {
   pointer-events: none;
 }
 
-/* Connection Lines */
-.connection-line {
-  stroke: #e2e8f0;
-  stroke-width: 2;
+/* Connection Lines - Flowing Curves */
+.connection-curve {
   fill: none;
+  stroke: #cbd5e1;
+  stroke-width: 2;
+  stroke-dasharray: 8 6;
+  animation: flowPulse 2s linear infinite;
 }
 
-.connection-line.highlighted {
+@keyframes flowPulse {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -28; }
+}
+
+.connection-curve.highlighted {
   stroke: var(--mill-green);
-  stroke-opacity: 0.8;
+  stroke-opacity: 0.9;
   stroke-width: 2.5;
+  animation: flowPulseHighlight 1.5s linear infinite;
+}
+
+@keyframes flowPulseHighlight {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -28; }
 }
 
 /* Thesis Banner */
@@ -531,6 +560,16 @@ html, body {
 /* Win Badge */
 .win-badge {
   font-size: 12px;
+  filter: drop-shadow(0 0 3px rgba(234, 179, 8, 0.7));
+}
+
+@keyframes winGlow {
+  0%, 100% { filter: drop-shadow(0 0 3px rgba(234, 179, 8, 0.5)); }
+  50% { filter: drop-shadow(0 0 6px rgba(234, 179, 8, 0.9)); }
+}
+
+.node-circle.is-win.status-completed {
+  animation: winGlow 3s ease-in-out infinite;
 }
 
 /* Tooltip */
@@ -545,7 +584,7 @@ html, body {
   font-size: 12px;
   pointer-events: none;
   z-index: 200;
-  max-width: 280px;
+  max-width: 320px;
   box-shadow: var(--shadow-lg);
 }
 
@@ -558,6 +597,26 @@ html, body {
 .tooltip-meta {
   color: var(--text-secondary);
   font-size: 11px;
+  line-height: 1.4;
+}
+
+.tooltip-narrative {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(22, 163, 74, 0.2);
+}
+
+.tooltip-why {
+  font-style: italic;
+  color: var(--mill-green);
+  font-weight: 500;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.tooltip-insight {
+  font-size: 11px;
+  color: var(--text-secondary);
   line-height: 1.4;
 }
 
