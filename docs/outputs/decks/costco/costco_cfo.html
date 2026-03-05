@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Mill + Costco | Investment case</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #fafafa;
+      --light-gray: #f5f5f5;
+      --border: #e5e5e5;
+      --text: #1a1a1a;
+      --text-secondary: #666666;
+      --text-muted: #999999;
+      --costco-red: #E31837;
+      --bg-canvas: #e8e8e8;
+      --blue-accent: #1976d2;
+      --green-accent: #27ae60;
+      --orange-accent: #ff9800;
+    }
+
+    body {
+      background: var(--bg-canvas);
+      margin: 0;
+      padding: 0;
+    }
+
+    .reveal-viewport {
+      background: var(--bg-canvas);
+    }
+
+    .reveal {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      color: var(--text);
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .slides section {
+      width: 1280px !important;
+      height: 720px !important;
+      padding: 60px 80px !important;
+      background: var(--white);
+      box-sizing: border-box;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+      border-radius: 4px;
+    }
+
+    .slide-title {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 40px;
+      line-height: 1.3;
+      max-width: 900px;
+    }
+
+    .slide-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-top: -30px;
+      margin-bottom: 40px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      text-transform: none !important;
+      letter-spacing: normal !important;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .stat-large {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 72px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-medium {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      flex: 1;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .card {
+      background: var(--off-white);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 14px;
+    }
+
+    .highlight {
+      background: var(--off-white);
+      border-left: 3px solid var(--blue-accent);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .highlight h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .highlight p {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      background: var(--text);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 12px;
+      background: var(--off-white);
+    }
+
+    .timeline {
+      display: flex;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .timeline-phase {
+      flex: 1;
+      background: var(--off-white);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .timeline-phase h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-phase p {
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .cover-slide {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .cover-title {
+      font-size: 56px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .cover-subtitle {
+      font-size: 24px;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+    }
+
+    .cover-logos {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 28px;
+    }
+
+    .logo-costco {
+      color: var(--costco-red);
+    }
+
+    .source {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .roi-box {
+      background: var(--text);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .roi-box .stat-large {
+      color: var(--white);
+    }
+
+    .roi-box p {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .risk-callout {
+      background: #fff3e0;
+      border-left: 3px solid var(--orange-accent);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+    }
+
+    .risk-callout p {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .positive-callout {
+      background: #e8f5e9;
+      border-left: 3px solid var(--green-accent);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+    }
+
+    .positive-callout p {
+      margin: 0;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Slide 1: Cover -->
+      <section class="cover-slide">
+        <div class="cover-logos">
+          <span class="logo-text">mill</span>
+          <span style="color: var(--text-muted);">+</span>
+          <span class="logo-text logo-costco">Costco</span>
+        </div>
+        <h1 class="cover-title">Investment case<br>and ROI analysis</h1>
+        <p class="cover-subtitle">A founding partnership with transparent financial modeling.</p>
+        <p style="font-size: 14px; color: var(--text-muted);">February 2026 · CFO briefing · Mill Commercial launching 2027</p>
+      </section>
+
+      <!-- Slide 2: Executive summary -->
+      <section>
+        <h2 class="slide-title">Executive summary: the investment case</h2>
+        <p class="slide-subtitle">Based on industry benchmarks, to be validated by pilot</p>
+        <div class="three-col" style="margin-top: 24px;">
+          <div class="card" style="text-align: center;">
+            <div class="stat-medium" style="color: var(--blue-accent);">3-12 mo</div>
+            <p style="margin-top: 12px;">Payback period (industry benchmark)</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div class="stat-medium" style="color: var(--green-accent);">2-7x</div>
+            <p style="margin-top: 12px;">ROI range (industry benchmark)</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div class="stat-medium">90 days</div>
+            <p style="margin-top: 12px;">Pilot to validate actuals</p>
+          </div>
+        </div>
+        <div class="positive-callout" style="margin-top: 32px;">
+          <p><strong>Bottom line:</strong> Industry benchmarks suggest waste tracking solutions pay for themselves within the first year. Our pilot will validate this with Costco-specific data before any significant commitment.</p>
+        </div>
+        <p class="source">Sources: Leanpath case studies, Winnow public data, ReFED Roadmap 2030</p>
+      </section>
+
+      <!-- Slide 3: Industry benchmarks -->
+      <section>
+        <h2 class="slide-title">Industry benchmarks: what comparable solutions achieve</h2>
+        <p class="slide-subtitle">Transparent about what we're basing projections on</p>
+        <div class="two-col">
+          <div>
+            <table>
+              <tr>
+                <th colspan="2">Industry ROI benchmarks</th>
+              </tr>
+              <tr>
+                <td>Typical waste reduction (Leanpath, Winnow)</td>
+                <td>20-50%</td>
+              </tr>
+              <tr>
+                <td>Payback period</td>
+                <td>3-12 months</td>
+              </tr>
+              <tr>
+                <td>Annual ROI range</td>
+                <td>2-7x</td>
+              </tr>
+              <tr>
+                <td>Procurement multiplier (ReFED)</td>
+                <td>1-3x additional</td>
+              </tr>
+            </table>
+            <p class="source">Sources: Leanpath case studies, Winnow public data, ReFED Roadmap 2030</p>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom: 20px;">
+              <div class="card-label">Our hypothesis</div>
+              <h3>Mill should match or exceed</h3>
+              <p>AI automation reduces manual data entry friction. Consumer-trained models provide accuracy advantage.</p>
+            </div>
+            <div class="card">
+              <div class="card-label">Pilot purpose</div>
+              <h3>Validate with real data</h3>
+              <p>Replace benchmarks with Costco-specific metrics before any significant investment.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4: Conservative projection -->
+      <section>
+        <h2 class="slide-title">Conservative projection: per-location economics</h2>
+        <p class="slide-subtitle">Using low end of industry benchmarks</p>
+        <table style="margin-top: 24px;">
+          <tr>
+            <th style="width: 60%;">Component</th>
+            <th style="width: 20%;">Conservative</th>
+            <th style="width: 20%;">Optimistic</th>
+          </tr>
+          <tr>
+            <td>Estimated food waste per location/year*</td>
+            <td>$50K</td>
+            <td>$150K</td>
+          </tr>
+          <tr>
+            <td>Direct waste reduction (15-25%)</td>
+            <td>$7.5K</td>
+            <td>$37.5K</td>
+          </tr>
+          <tr>
+            <td>Procurement optimization (1-3x multiplier)</td>
+            <td>$7.5K</td>
+            <td>$112.5K</td>
+          </tr>
+          <tr style="background: var(--off-white);">
+            <td><strong>Total annual value per location</strong></td>
+            <td><strong>$15K</strong></td>
+            <td><strong>$150K</strong></td>
+          </tr>
+        </table>
+        <div class="risk-callout" style="margin-top: 24px;">
+          <p><strong>Important caveat:</strong> These are projections based on industry benchmarks. Actual Costco waste costs are unknown to us. The pilot will establish real baseline data.</p>
+        </div>
+        <p class="source">*Industry average for food service operations. Costco's actual waste profile will be measured in pilot.</p>
+      </section>
+
+      <!-- Slide 5: Cost structure -->
+      <section>
+        <h2 class="slide-title">Cost structure: OpEx-friendly model</h2>
+        <p class="slide-subtitle">Subscription-based, no capital equipment purchase</p>
+        <div class="two-col">
+          <div>
+            <table>
+              <tr>
+                <th>Traditional waste management</th>
+              </tr>
+              <tr>
+                <td>Capital equipment purchase</td>
+              </tr>
+              <tr>
+                <td>Maintenance contracts</td>
+              </tr>
+              <tr>
+                <td>Depreciation schedule</td>
+              </tr>
+              <tr>
+                <td>Upgrade cycles</td>
+              </tr>
+            </table>
+            <p style="font-size: 14px; color: var(--text-muted); margin-top: 16px;">CapEx heavy, unpredictable costs</p>
+          </div>
+          <div>
+            <table>
+              <tr>
+                <th style="background: var(--text); color: white;">Mill model</th>
+              </tr>
+              <tr>
+                <td>Subscription-based pricing</td>
+              </tr>
+              <tr>
+                <td>All-inclusive service</td>
+              </tr>
+              <tr>
+                <td>Predictable monthly costs</td>
+              </tr>
+              <tr>
+                <td>No equipment ownership</td>
+              </tr>
+            </table>
+            <p style="font-size: 14px; color: var(--green-accent); margin-top: 16px;">Pure OpEx, budget predictability</p>
+          </div>
+        </div>
+        <div class="positive-callout" style="margin-top: 24px;">
+          <p><strong>Budget benefit:</strong> No capital approval required for pilot. Subscription allows gradual scaling aligned with proven results.</p>
+        </div>
+      </section>
+
+      <!-- Slide 6: Risk mitigation -->
+      <section>
+        <h2 class="slide-title">Risk mitigation framework</h2>
+        <table style="margin-top: 32px;">
+          <tr>
+            <th style="width: 30%;">Risk</th>
+            <th style="width: 70%;">Mitigation</th>
+          </tr>
+          <tr>
+            <td><strong>Technology risk</strong></td>
+            <td>Mill has 4 years R&D and 100K+ consumer deployments. AI validated on millions of food images.</td>
+          </tr>
+          <tr>
+            <td><strong>Implementation risk</strong></td>
+            <td>90-day pilot with no long-term commitment. Prove ROI before scaling.</td>
+          </tr>
+          <tr>
+            <td><strong>ROI uncertainty</strong></td>
+            <td>Pilot measures actual Costco waste and savings. No large commitment without validated data.</td>
+          </tr>
+          <tr>
+            <td><strong>Operational disruption</strong></td>
+            <td>Non-disruptive installation. No workflow changes for staff.</td>
+          </tr>
+          <tr>
+            <td><strong>Vendor risk</strong></td>
+            <td>Founding partner gets favorable terms locked in. Mill seeking category-defining partners.</td>
+          </tr>
+        </table>
+        <div class="positive-callout" style="margin-top: 24px;">
+          <p><strong>Key point:</strong> The pilot structure de-risks the decision. Validate with real data before significant commitment.</p>
+        </div>
+      </section>
+
+      <!-- Slide 7: Scale potential -->
+      <section>
+        <h2 class="slide-title">Scale potential: illustrative projections</h2>
+        <p class="slide-subtitle">What validated ROI could mean at Costco scale</p>
+        <table style="margin-top: 24px;">
+          <tr>
+            <th>Deployment phase</th>
+            <th>Locations</th>
+            <th>Conservative annual value</th>
+            <th>Optimistic annual value</th>
+          </tr>
+          <tr>
+            <td>Pilot</td>
+            <td>5</td>
+            <td>$75K</td>
+            <td>$750K</td>
+          </tr>
+          <tr>
+            <td>Regional</td>
+            <td>50</td>
+            <td>$750K</td>
+            <td>$7.5M</td>
+          </tr>
+          <tr>
+            <td>US rollout</td>
+            <td>300</td>
+            <td>$4.5M</td>
+            <td>$45M</td>
+          </tr>
+          <tr style="background: var(--off-white);">
+            <td><strong>Full deployment</strong></td>
+            <td><strong>600</strong></td>
+            <td><strong>$9M</strong></td>
+            <td><strong>$90M</strong></td>
+          </tr>
+        </table>
+        <div class="risk-callout" style="margin-top: 24px;">
+          <p><strong>Transparency:</strong> These are illustrative projections. Actual value depends on Costco's real waste profile, which we'll measure in the pilot.</p>
+        </div>
+      </section>
+
+      <!-- Slide 8: Pilot investment -->
+      <section>
+        <h2 class="slide-title">Pilot investment: validate before committing</h2>
+        <p class="slide-subtitle">Low-risk path to real data</p>
+        <div class="two-col">
+          <div>
+            <div class="card" style="margin-bottom: 20px;">
+              <div class="card-label">Pilot scope</div>
+              <h3>5 locations, 90 days</h3>
+              <p>Enough scale to validate patterns while limiting commitment.</p>
+            </div>
+            <div class="card" style="margin-bottom: 20px;">
+              <div class="card-label">Pilot terms</div>
+              <h3>Founding partner pricing</h3>
+              <p>Hardware at cost. No subscription during pilot. Return units if ROI doesn't validate.</p>
+            </div>
+            <div class="card">
+              <div class="card-label">Success criteria</div>
+              <h3>Measurable waste reduction</h3>
+              <p>We'll define specific metrics together. Clear go/no-go decision at end of pilot.</p>
+            </div>
+          </div>
+          <div>
+            <div class="roi-box">
+              <p style="font-size: 14px; margin-bottom: 16px;">Pilot economics</p>
+              <div class="stat-large" style="font-size: 48px;">90 days</div>
+              <p style="margin-top: 8px;">To validated ROI data</p>
+              <p style="font-size: 14px; margin-top: 24px; color: rgba(255,255,255,0.5);">No significant commitment without proven results</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 9: Decision timeline -->
+      <section>
+        <h2 class="slide-title">Decision timeline: staged investment gates</h2>
+        <div class="timeline" style="margin-top: 48px;">
+          <div class="timeline-phase" style="text-align: center; border: 2px solid var(--blue-accent);">
+            <div class="stat-medium" style="color: var(--blue-accent); font-size: 32px;">Q2</div>
+            <h4 style="margin-top: 12px;">Pilot launch</h4>
+            <p>5 locations. Minimal investment. Baseline data.</p>
+          </div>
+          <div class="timeline-phase" style="text-align: center;">
+            <div class="stat-medium" style="color: var(--green-accent); font-size: 32px;">Q3</div>
+            <h4 style="margin-top: 12px;">ROI validation</h4>
+            <p>Measure actuals. Confirm model. Go/no-go decision.</p>
+          </div>
+          <div class="timeline-phase" style="text-align: center;">
+            <div class="stat-medium" style="color: var(--orange-accent); font-size: 32px;">Q4</div>
+            <h4 style="margin-top: 12px;">Scale decision</h4>
+            <p>If validated: regional expansion. If not: return units.</p>
+          </div>
+          <div class="timeline-phase" style="text-align: center;">
+            <div class="stat-medium" style="font-size: 32px;">2027+</div>
+            <h4 style="margin-top: 12px;">Full rollout</h4>
+            <p>Only with proven, Costco-specific ROI.</p>
+          </div>
+        </div>
+        <div class="positive-callout" style="margin-top: 48px;">
+          <p><strong>Decision gates:</strong> Each phase depends on validated results from the previous phase. No large commitment without proven returns.</p>
+        </div>
+      </section>
+
+      <!-- Slide 10: Why now -->
+      <section>
+        <h2 class="slide-title">The financial case for piloting now</h2>
+        <div class="two-col" style="margin-top: 32px;">
+          <div>
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Opportunity cost of delay</h4>
+                <p>If ROI validates, every month without the system is value not captured.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Data compounds over time</h4>
+                <p>Seasonal patterns, year-over-year trends require historical data to optimize.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Founding partner economics</h4>
+                <p>Lock in favorable pricing before general availability pricing.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Low downside risk</h4>
+                <p>Pilot structure means limited exposure. If it doesn't work, return units.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="roi-box">
+              <p style="font-size: 14px; margin-bottom: 16px;">The ask</p>
+              <p style="font-size: 20px; color: var(--white); margin-bottom: 24px;">Approve a 5-location, 90-day pilot to validate ROI with real Costco data.</p>
+              <p style="font-size: 14px; color: rgba(255,255,255,0.5); margin: 0;">No significant commitment until results are proven.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 11: Sustainability as risk -->
+      <section>
+        <h2 class="slide-title">Sustainability: a financial risk factor</h2>
+        <p class="slide-subtitle">Not the lead value prop, but material to consider</p>
+        <div class="two-col">
+          <div>
+            <table>
+              <tr>
+                <th>Compliance/risk factors</th>
+              </tr>
+              <tr>
+                <td>2030 zero waste commitments</td>
+              </tr>
+              <tr>
+                <td>Potential regulatory requirements</td>
+              </tr>
+              <tr>
+                <td>ESG reporting obligations</td>
+              </tr>
+              <tr>
+                <td>Investor/analyst scrutiny</td>
+              </tr>
+            </table>
+          </div>
+          <div>
+            <table>
+              <tr>
+                <th>Reputational factors</th>
+              </tr>
+              <tr>
+                <td>Member sustainability expectations</td>
+              </tr>
+              <tr>
+                <td>Competitive positioning</td>
+              </tr>
+              <tr>
+                <td>Media/activist attention</td>
+              </tr>
+              <tr>
+                <td>Brand value protection</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="risk-callout" style="margin-top: 32px;">
+          <p><strong>Not quantified:</strong> Sustainability value is risk mitigation and brand protection. Hard to quantify, but material to enterprise value. We're not leading with this, but it's a co-benefit.</p>
+        </div>
+      </section>
+
+      <!-- Slide 12: Contact -->
+      <section style="display: flex; flex-direction: column; justify-content: center;">
+        <h2 class="slide-title" style="font-size: 40px;">Let's validate the ROI</h2>
+        <div class="two-col" style="max-width: 800px; margin-top: 48px;">
+          <div>
+            <p style="margin-bottom: 32px;">Interested in validating the financial case with real data? Let's discuss the pilot program.</p>
+            <p style="font-size: 16px; color: var(--text-muted); margin-bottom: 8px;">What we'll cover</p>
+            <ul style="color: var(--text-secondary); font-size: 16px; padding-left: 20px;">
+              <li>Detailed financial model with your inputs</li>
+              <li>Pilot structure and investment</li>
+              <li>Success metrics and decision criteria</li>
+              <li>Risk mitigation terms</li>
+            </ul>
+          </div>
+          <div>
+            <div class="card" style="background: var(--text); color: var(--white);">
+              <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 16px;">Next steps</p>
+              <p style="color: var(--white); font-size: 16px; margin-bottom: 12px;">1. 30-min financial review</p>
+              <p style="color: var(--white); font-size: 16px; margin-bottom: 12px;">2. Refine model with Costco inputs</p>
+              <p style="color: var(--white); font-size: 16px; margin-bottom: 0;">3. Define pilot scope and terms</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top: 64px; font-size: 28px; font-weight: 700;">mill</p>
+        <p style="font-size: 14px; color: var(--text-muted);">Validate with data, then scale.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      width: 1280,
+      height: 720,
+      margin: 0.04,
+      center: true,
+      transition: 'none',
+      backgroundTransition: 'none'
+    });
+  </script>
+</body>
+</html>

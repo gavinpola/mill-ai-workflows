@@ -1,0 +1,91 @@
+<svg viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .component { cursor: pointer; }
+    .component:hover .highlight { opacity: 0.2; }
+    .label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; fill: #666; }
+    .part { fill: #1a1a1a; }
+    .part-light { fill: #4a4a4a; }
+    .bin { fill: #e5e5e5; stroke: #ccc; stroke-width: 1; }
+    .tube { fill: none; stroke: #1a1a1a; stroke-width: 3; }
+    .tube-inner { fill: #fafafa; stroke: #e5e5e5; stroke-width: 1; }
+    .camera-small { fill: #1a1a1a; }
+    .led-strip { fill: #fff3e0; stroke: #ffb74d; stroke-width: 1; }
+    .food-item { opacity: 0.7; }
+    .arrow { fill: none; stroke: #999; stroke-width: 1.5; marker-end: url(#arrowhead); }
+    .hotspot { fill: #3498db; opacity: 0; }
+    .highlight { fill: #3498db; opacity: 0; transition: opacity 0.2s; }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#999"/>
+    </marker>
+  </defs>
+
+  <!-- Bin body -->
+  <g class="component" data-part="bin">
+    <rect class="highlight" x="100" y="260" width="200" height="90" rx="8"/>
+    <rect class="bin" x="100" y="260" width="200" height="90" rx="8"/>
+    <rect class="bin" x="90" y="250" width="220" height="20" rx="4"/>
+    <text class="label" x="200" y="310" text-anchor="middle">Collection bin</text>
+  </g>
+
+  <!-- Drop tunnel structure -->
+  <g class="component" data-part="tunnel">
+    <rect class="highlight" x="140" y="55" width="120" height="195" rx="4"/>
+    <!-- Outer tube walls -->
+    <rect class="tube-inner" x="150" y="65" width="100" height="175" rx="2"/>
+    <line class="tube" x1="150" y1="65" x2="150" y2="240"/>
+    <line class="tube" x1="250" y1="65" x2="250" y2="240"/>
+    <!-- Top opening -->
+    <ellipse cx="200" cy="65" rx="50" ry="12" fill="#fafafa" stroke="#1a1a1a" stroke-width="2"/>
+    <text class="label" x="200" y="45" text-anchor="middle">Drop opening</text>
+  </g>
+
+  <!-- Cameras around tunnel -->
+  <g class="component" data-part="cameras">
+    <rect class="highlight" x="95" y="120" width="210" height="80" rx="4"/>
+    <!-- Left camera -->
+    <rect class="camera-small" x="115" y="140" width="30" height="25" rx="3"/>
+    <circle cx="130" cy="152" r="8" fill="#4a4a4a"/>
+    <circle cx="130" cy="152" r="5" fill="#333"/>
+    <line x1="145" y1="152" x2="150" y2="152" stroke="#1a1a1a" stroke-width="2"/>
+    <!-- Right camera -->
+    <rect class="camera-small" x="255" y="140" width="30" height="25" rx="3"/>
+    <circle cx="270" cy="152" r="8" fill="#4a4a4a"/>
+    <circle cx="270" cy="152" r="5" fill="#333"/>
+    <line x1="255" y1="152" x2="250" y2="152" stroke="#1a1a1a" stroke-width="2"/>
+    <!-- Front camera (implied, shown smaller) -->
+    <rect class="camera-small" x="185" y="75" width="30" height="20" rx="3"/>
+    <circle cx="200" cy="85" r="6" fill="#4a4a4a"/>
+    <circle cx="200" cy="85" r="4" fill="#333"/>
+    <text class="label" x="95" y="135" text-anchor="end">3-4 cameras</text>
+    <text class="label" x="305" y="135" text-anchor="start">360° coverage</text>
+  </g>
+
+  <!-- LED strips inside tunnel -->
+  <g class="component" data-part="leds">
+    <rect class="highlight" x="152" y="100" width="96" height="120" rx="2"/>
+    <!-- Left LED strip -->
+    <rect class="led-strip" x="152" y="110" width="8" height="100" rx="1"/>
+    <!-- Right LED strip -->
+    <rect class="led-strip" x="240" y="110" width="8" height="100" rx="1"/>
+    <text class="label" x="200" y="225" text-anchor="middle" font-size="9">LED strips</text>
+  </g>
+
+  <!-- Falling food items -->
+  <g class="food-item">
+    <circle cx="190" cy="120" r="8" fill="#8bc34a"/>
+    <circle cx="210" cy="155" r="10" fill="#ff9800"/>
+    <circle cx="195" cy="195" r="7" fill="#e91e63"/>
+  </g>
+
+  <!-- Fall direction arrow -->
+  <g>
+    <line class="arrow" x1="280" y1="100" x2="280" y2="200"/>
+    <text class="label" x="290" y="150" text-anchor="start">Freefall</text>
+  </g>
+
+  <!-- Caption -->
+  <text x="200" y="355" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" fill="#1a1a1a" font-weight="600">Items imaged during freefall through tunnel</text>
+</svg>

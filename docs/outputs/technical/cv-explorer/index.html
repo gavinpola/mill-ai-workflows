@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Infrastructure Explorer | Mill Commercial</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --white: #ffffff;
+            --off-white: #fafafa;
+            --light-gray: #f5f5f5;
+            --border: #e5e5e5;
+            --text: #1a1a1a;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --accent: #2563eb;
+            --accent-light: #dbeafe;
+            --green: #16a34a;
+            --green-light: #dcfce7;
+            --orange: #ea580c;
+            --orange-light: #ffedd5;
+            --red: #dc2626;
+            --red-light: #fef2f2;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--white);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        header {
+            padding: 48px 0 40px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 700px;
+        }
+
+        section {
+            padding: 64px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .section-intro {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+
+        /* Problem Grid */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .problem-visual {
+            background: var(--off-white);
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .problem-visual img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .problem-points {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .problem-point {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .problem-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--orange-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            font-weight: 600;
+        }
+
+        .problem-point h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .problem-point p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Constraint Box */
+        .constraint-box {
+            background: var(--accent-light);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 12px 12px 0;
+            padding: 24px 28px;
+            margin: 40px 0;
+        }
+
+        .constraint-box h3 {
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .constraint-box p {
+            color: var(--text-secondary);
+        }
+
+        /* Recommendation Box */
+        .recommendation-box {
+            background: var(--green-light);
+            border: 2px solid var(--green);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+        }
+
+        .recommendation-box h3 {
+            color: var(--green);
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+        }
+
+        .recommendation-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .recommendation-item h4 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .recommendation-item p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Top Pick - Full Width */
+        .top-pick {
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+
+        .top-pick.recommended {
+            border-color: var(--green);
+        }
+
+        .top-pick.caution {
+            border-color: var(--orange);
+        }
+
+        .top-pick-header {
+            padding: 16px 24px;
+            background: var(--off-white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .top-pick.recommended .top-pick-header {
+            background: var(--green);
+            color: white;
+            border-bottom-color: var(--green);
+        }
+
+        .top-pick.caution .top-pick-header {
+            background: var(--orange);
+            color: white;
+            border-bottom-color: var(--orange);
+        }
+
+        .top-pick-rank {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .top-pick-score {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .top-pick-body {
+            display: grid;
+            grid-template-columns: 420px 1fr;
+            gap: 0;
+        }
+
+        .top-pick-image {
+            background: var(--light-gray);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .top-pick-image img {
+            max-width: 100%;
+            max-height: 320px;
+            border-radius: 8px;
+        }
+
+        .top-pick-content {
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-pick-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .top-pick-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .top-pick-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .top-pick-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .spec-group h5 {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .spec-group ul {
+            list-style: none;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .spec-group li {
+            margin-bottom: 4px;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .spec-group li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 4px;
+            height: 4px;
+            background: var(--text-muted);
+            border-radius: 50%;
+        }
+
+        .top-pick-stats {
+            display: flex;
+            gap: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+            flex-wrap: wrap;
+        }
+
+        .top-stat {
+            text-align: center;
+        }
+
+        .top-stat .value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .top-stat .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .stat-highlight { color: var(--green); }
+        .stat-warning { color: var(--orange); }
+        .stat-danger { color: var(--red); }
+
+        /* Warning callout */
+        .warning-callout {
+            background: var(--orange-light);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: var(--orange);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Detection Strategy */
+        .strategy-box {
+            background: var(--off-white);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 40px;
+        }
+
+        .strategy-box h3 {
+            margin-bottom: 16px;
+        }
+
+        .strategy-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .strategy-option {
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+        }
+
+        .strategy-option.not-recommended {
+            opacity: 0.7;
+        }
+
+        .strategy-option.recommended {
+            border-color: var(--green);
+            background: var(--green-light);
+        }
+
+        .strategy-option h4 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .strategy-option p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .badge {
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .badge-green {
+            background: var(--green);
+            color: white;
+        }
+
+        .badge-gray {
+            background: var(--text-muted);
+            color: white;
+        }
+
+        /* Comparison Table */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 32px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .comparison-table th {
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid var(--text);
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .comparison-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .comparison-table tr:hover {
+            background: var(--light-gray);
+        }
+
+        .comparison-table tr.recommended {
+            background: var(--green-light);
+        }
+
+        .comparison-table tr.caution {
+            background: var(--orange-light);
+        }
+
+        .design-name {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .check { color: var(--green); }
+        .warning { color: var(--orange); }
+        .x { color: var(--red); }
+
+        footer {
+            padding: 48px 0;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 900px) {
+            .problem-grid { grid-template-columns: 1fr; }
+            .top-pick-body { grid-template-columns: 1fr; }
+            .recommendation-content { grid-template-columns: 1fr; }
+            .strategy-comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo">mill</div>
+        <h1>How should we see food waste?</h1>
+        <p class="subtitle">
+            Evaluating CV approaches for Mill Commercial that maximize partial food accuracy
+            while preserving core composting operations.
+        </p>
+        <p style="margin-top: 16px;">
+            <a href="thinking-process.html" style="color: var(--accent); text-decoration: none; font-size: 0.9rem; font-family: 'JetBrains Mono', monospace;">
+                View full analysis document &rarr;
+            </a>
+        </p>
+    </header>
+
+    <!-- Section 1: The Challenge -->
+    <section>
+        <div class="section-label">01 - The challenge</div>
+        <h2>Two hard problems, one system</h2>
+        <p class="section-intro">
+            Mill Commercial needs to identify food waste accurately. But the CV system
+            must work around Mill's core value: heating food waste and turning it into compost.
+        </p>
+
+        <div class="problem-grid">
+            <div class="problem-points">
+                <div class="problem-point">
+                    <div class="problem-icon">1</div>
+                    <div>
+                        <h4>Partial foods are the hardest</h4>
+                        <p>Half-eaten chicken, scraped rice, sauce-covered scraps. These don't look like reference images. This is our main accuracy challenge.</p>
+                    </div>
+                </div>
+                <div class="problem-point">
+                    <div class="problem-icon">2</div>
+                    <div>
+                        <h4>Occlusion hides 30-50%</h4>
+                        <p>When a plate is scraped, items pile on top of each other. A single camera angle misses a huge portion of what's thrown away.</p>
+                    </div>
+                </div>
+                <div class="problem-point">
+                    <div class="problem-icon">3</div>
+                    <div>
+                        <h4>Zero friction tolerance</h4>
+                        <p>Kitchen staff can't slow down. Any system that changes their workflow will fail. The bin must work exactly like a normal bin.</p>
+                    </div>
+                </div>
+                <div class="problem-point">
+                    <div class="problem-icon">4</div>
+                    <div>
+                        <h4>85%+ accuracy required</h4>
+                        <p>Below 85%, the data isn't actionable for procurement. False positives erode trust. We need high confidence.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="problem-visual">
+                <img src="images/occlusion-problem.png" alt="The occlusion problem - food items hidden beneath surface in commercial waste bin">
+            </div>
+        </div>
+
+        <div class="constraint-box">
+            <h3>Critical Constraint: Don't Touch the Interior</h3>
+            <p>
+                Mill's core operation happens inside the bin: heating food waste and converting it to compost.
+                <strong>Any CV solution must be external</strong> - it cannot obstruct the interior, interfere with heating,
+                or require modifications that affect composting. The camera boom system stays outside. Load cells go underneath.
+                Nothing goes inside.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 2: The Recommendation -->
+    <section>
+        <div class="section-label">02 - The recommendation</div>
+        <h2>Kaleidoscope + Weighmaster: External sensor fusion</h2>
+        <p class="section-intro">
+            The best solution combines two external sensing approaches. Neither interferes with composting operations,
+            and together they address partial food accuracy through multi-modal data fusion.
+        </p>
+
+        <div class="recommendation-box">
+            <h3>Why this combination wins</h3>
+            <div class="recommendation-content">
+                <div class="recommendation-item">
+                    <h4>Vision sees appearance</h4>
+                    <p>The Kaleidoscope mirror array captures 6 angles simultaneously. Multiple views help identify partial foods that are unrecognizable from one angle but clear from another. All from a single boom-mounted camera.</p>
+                </div>
+                <div class="recommendation-item">
+                    <h4>Weight sees density</h4>
+                    <p>The Weighmaster load cells capture impact signatures at 100+ Hz. Chicken has different density than bread has different density than rice. Weight data validates and corrects vision classification.</p>
+                </div>
+                <div class="recommendation-item">
+                    <h4>Both are external</h4>
+                    <p>Mirrors mount on the camera boom. Load cells go under the bin. Zero interference with heating/composting. The interior remains completely unobstructed.</p>
+                </div>
+                <div class="recommendation-item">
+                    <h4>Partial food accuracy: 92-97%</h4>
+                    <p>Vision alone hits 85-92%. Adding weight signatures for sensor fusion pushes accuracy into the 92-97% range - especially for partial foods where visual classification is ambiguous.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kaleidoscope -->
+        <div class="top-pick recommended">
+            <div class="top-pick-header">
+                <span class="top-pick-rank">RECOMMENDED - VISION</span>
+                <span class="top-pick-score">External</span>
+            </div>
+            <div class="top-pick-body">
+                <div class="top-pick-image">
+                    <img src="images/kaleidoscope.png" alt="Kaleidoscope mirror array system for multi-angle food waste imaging">
+                </div>
+                <div class="top-pick-content">
+                    <h3 class="top-pick-title">The Kaleidoscope</h3>
+                    <p class="top-pick-subtitle">Mirror Multi-Angle System</p>
+                    <p class="top-pick-description">
+                        Six first-surface mirrors arranged around the camera lens capture 6 simultaneous viewing angles in a single frame.
+                        A half-eaten chicken breast might be unrecognizable from above but clearly identifiable from a 45-degree angle.
+                        Multiple perspectives dramatically improve partial food recognition - all from the existing boom-mounted camera.
+                    </p>
+                    <div class="top-pick-specs">
+                        <div class="spec-group">
+                            <h5>Partial food benefit</h5>
+                            <ul>
+                                <li>6 angles catch features missed by single view</li>
+                                <li>Sauce-covered items visible from side angles</li>
+                                <li>Torn/crushed items recognizable from multiple views</li>
+                            </ul>
+                        </div>
+                        <div class="spec-group">
+                            <h5>Hardware (adds to boom)</h5>
+                            <ul>
+                                <li>6 first-surface mirrors (~$50 total)</li>
+                                <li>Machined aluminum bracket</li>
+                                <li>Same camera, no extra compute</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="top-pick-stats">
+                        <div class="top-stat">
+                            <div class="value stat-highlight">85-92%</div>
+                            <div class="label">Vision Accuracy</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value stat-highlight">10/10</div>
+                            <div class="label">Friction</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value stat-highlight">External</div>
+                            <div class="label">Interior Impact</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value">~$50</div>
+                            <div class="label">Added Cost</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weighmaster -->
+        <div class="top-pick recommended">
+            <div class="top-pick-header">
+                <span class="top-pick-rank">RECOMMENDED - WEIGHT</span>
+                <span class="top-pick-score">External</span>
+            </div>
+            <div class="top-pick-body">
+                <div class="top-pick-image">
+                    <img src="images/weighmaster.png" alt="Weighmaster load cell system for impact signature analysis">
+                </div>
+                <div class="top-pick-content">
+                    <h3 class="top-pick-title">The Weighmaster</h3>
+                    <p class="top-pick-subtitle">High-Frequency Weight Dynamics</p>
+                    <p class="top-pick-description">
+                        Four industrial load cells under the bin sample at 100+ Hz, capturing "impact signatures" when items are dropped.
+                        Each food type creates a unique weight fingerprint - the curve of impact, oscillation, and settling.
+                        A partial chicken breast still weighs like chicken. This data validates or corrects vision when appearance is ambiguous.
+                    </p>
+                    <div class="top-pick-specs">
+                        <div class="spec-group">
+                            <h5>Partial food benefit</h5>
+                            <ul>
+                                <li>Weight/density independent of appearance</li>
+                                <li>Sauce-covered chicken still weighs like chicken</li>
+                                <li>Validates uncertain visual classifications</li>
+                            </ul>
+                        </div>
+                        <div class="spec-group">
+                            <h5>Hardware (under bin)</h5>
+                            <ul>
+                                <li>4x industrial load cells (~$100)</li>
+                                <li>Signal processing unit (~$50)</li>
+                                <li>Heavy-duty scale platform</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="top-pick-stats">
+                        <div class="top-stat">
+                            <div class="value">55-70%</div>
+                            <div class="label">Standalone</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value stat-highlight">+5-10%</div>
+                            <div class="label">Fusion Boost</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value stat-highlight">External</div>
+                            <div class="label">Interior Impact</div>
+                        </div>
+                        <div class="top-stat">
+                            <div class="value">~$150</div>
+                            <div class="label">Added Cost</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo Booth - with caution -->
+        <div class="top-pick caution">
+            <div class="top-pick-header">
+                <span class="top-pick-rank">CAUTION - INTERIOR MODIFICATION</span>
+                <span class="top-pick-score">Conflicts with Core Ops</span>
+            </div>
+            <div class="top-pick-body">
+                <div class="top-pick-image">
+                    <img src="images/photobooth.png" alt="Photo Booth drop-through tunnel system">
+                </div>
+                <div class="top-pick-content">
+                    <h3 class="top-pick-title">The Photo Booth</h3>
+                    <p class="top-pick-subtitle">Drop-Through Tunnel (Not Recommended)</p>
+                    <p class="top-pick-description">
+                        A vertical polycarbonate tube inside the bin where items freefall past cameras. Gravity separates items naturally.
+                        <strong>Highest potential accuracy (92-97%)</strong> but comes with a critical problem:
+                        the tube occupies interior space needed for heating and composting.
+                    </p>
+                    <div class="top-pick-specs">
+                        <div class="spec-group">
+                            <h5>Why it's tempting</h5>
+                            <ul>
+                                <li>Items physically separate during freefall</li>
+                                <li>Each item imaged individually</li>
+                                <li>Solves occlusion completely</li>
+                            </ul>
+                        </div>
+                        <div class="spec-group">
+                            <h5>Why we can't use it</h5>
+                            <ul>
+                                <li>Tube occupies interior bin space</li>
+                                <li>Interferes with heating mechanism</li>
+                                <li>Polycarbonate may not survive heat</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="warning-callout">
+                        Interior obstruction conflicts with Mill's core composting operations. Not recommended despite high accuracy potential.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detection Strategy -->
+        <div class="strategy-box">
+            <h3>Detection strategy: Weight-triggered capture</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                Instead of "always on" video, use weight changes to trigger high-speed burst capture.
+            </p>
+            <div class="strategy-comparison">
+                <div class="strategy-option not-recommended">
+                    <h4><span class="badge badge-gray">Current Plan</span> Always-on video</h4>
+                    <p>Camera runs continuously, watching for new items. High data volume, constant processing, may miss fast dumps, power hungry.</p>
+                </div>
+                <div class="strategy-option recommended">
+                    <h4><span class="badge badge-green">Better</span> Weight-triggered burst</h4>
+                    <p>Load cells detect weight increase &rarr; triggers 0.5s high-speed burst capture &rarr; captures before/during/after states. Lower power, precise timing, diff analysis possible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Staged Deployment -->
+    <section>
+        <div class="section-label">03 - Deployment strategy</div>
+        <h2>Ship simple, learn fast, upgrade if needed</h2>
+        <p class="section-intro">
+            Don't over-engineer at launch. Deploy with good-enough hardware, learn from real data,
+            and make data-driven upgrade decisions.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px;">
+            <!-- Phase 1 -->
+            <div style="background: var(--green-light); border: 2px solid var(--green); border-radius: 12px; padding: 24px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--green); margin-bottom: 8px;">PHASE 1 - LAUNCH</div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 12px;">Kaleidoscope + Weighmaster</h3>
+                <ul style="font-size: 0.85rem; color: var(--text-secondary); list-style: none;">
+                    <li style="margin-bottom: 8px; padding-left: 16px; position: relative;"><span style="position: absolute; left: 0;">+</span> 6-angle vision (mirrors on boom)</li>
+                    <li style="margin-bottom: 8px; padding-left: 16px; position: relative;"><span style="position: absolute; left: 0;">+</span> Weight signatures (load cells under bin)</li>
+                    <li style="margin-bottom: 8px; padding-left: 16px; position: relative;"><span style="position: absolute; left: 0;">+</span> Sensor fusion model</li>
+                    <li style="margin-bottom: 8px; padding-left: 16px; position: relative;"><span style="position: absolute; left: 0;">+</span> Human-in-the-loop for low confidence</li>
+                </ul>
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--green);">
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 700; color: var(--green);">88-93%</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Expected launch accuracy</div>
+                </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div style="background: var(--off-white); border: 2px solid var(--border); border-radius: 12px; padding: 24px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 8px;">PHASE 2 - LEARN</div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 12px;">Watch the data</h3>
+                <ul style="font-size: 0.85rem; color: var(--text-secondary); list-style: none;">
+                    <li style="margin-bottom: 8px; padding-left: 16px; position: relative;"><span style="position: absolute; left: 0;">&bull;</span> Which categories have lowest accuracy?</li>
+                    <li style="margin-bottom: 8px; padding-left: 16px; position: relative;"><span style="position: absolute; left: 0;">&bull;</span> Are failures visual or density-based?</li>
+                    <li style="margin-bottom: 8px; padding-left: 16px; position: relative;"><span style="position: absolute; left: 0;">&bull;</span> What % need human review?</li>
+                    <li style="margin-bottom: 8px; padding-left: 16px; position: relative;"><span style="position: absolute; left: 0;">&bull;</span> Continuous model improvement</li>
+                </ul>
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 700;">92-97%</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">After learning period</div>
+                </div>
+            </div>
+
+            <!-- Phase 3 -->
+            <div style="background: var(--off-white); border: 2px solid var(--border); border-radius: 12px; padding: 24px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 8px;">PHASE 3 - UPGRADE (IF NEEDED)</div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 12px;">Add NIR spectral</h3>
+                <ul style="font-size: 0.85rem; color: var(--text-secondary); list-style: none;">
+                    <li style="margin-bottom: 8px; padding-left: 16px; position: relative;"><span style="position: absolute; left: 0;">&bull;</span> Only if fusion plateaus below 90%</li>
+                    <li style="margin-bottom: 8px; padding-left: 16px; position: relative;"><span style="position: absolute; left: 0;">&bull;</span> Targets specific failure categories</li>
+                    <li style="margin-bottom: 8px; padding-left: 16px; position: relative;"><span style="position: absolute; left: 0;">&bull;</span> Chemistry-based classification</li>
+                    <li style="margin-bottom: 8px; padding-left: 16px; position: relative;"><span style="position: absolute; left: 0;">&bull;</span> +$600/unit hardware cost</li>
+                </ul>
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 700;">95-99%</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">With chemistry sensing</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Insight Box -->
+        <div class="constraint-box" style="margin-top: 32px; background: var(--off-white); border-left-color: var(--text);">
+            <h3 style="color: var(--text);">The key insight: Partial foods have invariant features</h3>
+            <p>
+                A half-eaten chicken breast doesn't <em>look</em> like a whole chicken breast. But it still
+                <strong>weighs like chicken</strong> (density) and is <strong>made of protein</strong> (chemistry).
+                Visual appearance is unreliable for partial foods. Density and chemistry are invariant.
+                This is why we fuse vision with weight, and why NIR is the upgrade path.
+            </p>
+        </div>
+
+        <!-- Hybrid Designs -->
+        <h3 style="margin-top: 48px; margin-bottom: 24px;">Hybrid designs we evaluated</h3>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+            <div style="padding: 20px; border: 1px solid var(--border); border-radius: 12px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--green); margin-bottom: 4px;">RECOMMENDED</div>
+                <h4 style="font-size: 1rem; margin-bottom: 8px;">The Economist</h4>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">
+                    Kaleidoscope + Weighmaster. Best ROI: +$200 hardware for 92-97% accuracy. Launched with human-in-the-loop learning.
+                </p>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">+7% cost | 92-97% accuracy</div>
+            </div>
+            <div style="padding: 20px; border: 1px solid var(--border); border-radius: 12px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 4px;">FUTURE OPTION</div>
+                <h4 style="font-size: 1rem; margin-bottom: 8px;">The Oracle</h4>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">
+                    Kaleidoscope + Weighmaster + NIR. Full sensor suite. Overkill for launch but available as upgrade path.
+                </p>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">+35% cost | 95-99% accuracy</div>
+            </div>
+            <div style="padding: 20px; border: 1px solid var(--border); border-radius: 12px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 4px;">ALTERNATIVE</div>
+                <h4 style="font-size: 1rem; margin-bottom: 8px;">The Chemist</h4>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">
+                    Baseline vision + NIR spectral. Skips weight, adds chemistry. Higher cost but simpler fusion model.
+                </p>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">+25% cost | 94-98% accuracy</div>
+            </div>
+            <div style="padding: 20px; border: 1px solid var(--border); border-radius: 12px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--green); margin-bottom: 4px;">CAPTURE STRATEGY</div>
+                <h4 style="font-size: 1rem; margin-bottom: 8px;">The Temporal</h4>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px;">
+                    Weight-triggered burst capture instead of always-on. Load cells detect dump &rarr; 0.5s high-speed capture.
+                </p>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">100x less data | Better timing</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Full Comparison -->
+    <section>
+        <div class="section-label">04 - Full comparison</div>
+        <h2>All approaches evaluated</h2>
+        <p class="section-intro">
+            Evaluated against the core constraint: solutions must be external and cannot interfere with heating/composting.
+        </p>
+
+        <div class="table-wrapper">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th style="width:20%">Approach</th>
+                        <th style="width:15%">External?</th>
+                        <th style="width:15%">Partial Food Help</th>
+                        <th style="width:15%">Accuracy</th>
+                        <th style="width:35%">Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="recommended">
+                        <td class="design-name">Kaleidoscope + Weighmaster</td>
+                        <td><span class="check">Yes</span></td>
+                        <td><span class="check">High</span></td>
+                        <td>92-97%</td>
+                        <td>Recommended combo. Multi-angle vision + weight signatures. Both fully external.</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Kaleidoscope alone</td>
+                        <td><span class="check">Yes</span></td>
+                        <td>Medium</td>
+                        <td>85-92%</td>
+                        <td>Boom-mounted mirrors. Multiple angles help partial foods. Cheap (~$50).</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Weighmaster alone</td>
+                        <td><span class="check">Yes</span></td>
+                        <td>Medium</td>
+                        <td>55-70%</td>
+                        <td>Under-bin load cells. Best as fusion layer, not standalone.</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Baseline (structured light)</td>
+                        <td><span class="check">Yes</span></td>
+                        <td>Low</td>
+                        <td>85-92%</td>
+                        <td>Current plan. Single angle, occlusion remains a problem.</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Fingerprinter (NIR)</td>
+                        <td><span class="check">Yes</span></td>
+                        <td><span class="check">High</span></td>
+                        <td>80-92%</td>
+                        <td>Identifies by chemistry not appearance. Good for sauce-covered items. +25% cost.</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Listener (acoustic)</td>
+                        <td><span class="check">Yes</span></td>
+                        <td>Low</td>
+                        <td>50-70%</td>
+                        <td>Impact sounds. Cheap add-on (+2%). Kitchen noise is a challenge.</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Heat Map (thermal)</td>
+                        <td><span class="check">Yes</span></td>
+                        <td>Low</td>
+                        <td>60-75%</td>
+                        <td>Fresh waste is warm. Helps segmentation. Cold waste from fridge breaks it.</td>
+                    </tr>
+                    <tr class="caution">
+                        <td class="design-name">Photo Booth (tunnel)</td>
+                        <td><span class="x">No - Interior</span></td>
+                        <td><span class="check">Highest</span></td>
+                        <td>92-97%</td>
+                        <td>Best accuracy but tube obstructs interior. Conflicts with heating/composting.</td>
+                    </tr>
+                    <tr class="caution">
+                        <td class="design-name">Tumbler (sieve)</td>
+                        <td><span class="x">No - Interior</span></td>
+                        <td>High</td>
+                        <td>88-94%</td>
+                        <td>Rotating sieve separates items. Mechanical complexity, jamming risk.</td>
+                    </tr>
+                    <tr class="caution">
+                        <td class="design-name">Cascade (conveyor)</td>
+                        <td><span class="x">No - Interior</span></td>
+                        <td>High</td>
+                        <td>90-95%</td>
+                        <td>Mini conveyor spreads items. Major interior modification.</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Scanner (capacitive)</td>
+                        <td><span class="warning">Walls</span></td>
+                        <td>Low</td>
+                        <td>40-55%</td>
+                        <td>Antenna in walls. Sees through pile but low food differentiation.</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Penetrator (radar)</td>
+                        <td><span class="check">Yes</span></td>
+                        <td>Low</td>
+                        <td>50-65%</td>
+                        <td>mmWave sees buried items. Limited resolution for food classification.</td>
+                    </tr>
+                    <tr>
+                        <td class="design-name">Polarizer</td>
+                        <td><span class="check">Yes</span></td>
+                        <td>Low</td>
+                        <td>70-85%</td>
+                        <td>Cuts glare, differentiates organic/plastic. Niche benefit, high cost.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <div class="container">
+        <p class="footer-text">
+            Mill CV Infrastructure Explorer | Internal | March 2026<br>
+            <a href="../../../index.html" style="color: var(--text-muted);">&larr; Back to Mill AI Workflow System</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>

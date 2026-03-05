@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Infrastructure: The Thinking Process | Mill</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --white: #ffffff;
+            --off-white: #fafafa;
+            --light-gray: #f5f5f5;
+            --border: #e5e5e5;
+            --text: #1a1a1a;
+            --text-secondary: #666666;
+            --text-muted: #999999;
+            --accent: #2563eb;
+            --accent-light: #dbeafe;
+            --green: #16a34a;
+            --green-light: #dcfce7;
+            --orange: #ea580c;
+            --orange-light: #ffedd5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--white);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 48px 32px;
+        }
+
+        .back-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 32px;
+            display: inline-block;
+        }
+
+        .back-link:hover { color: var(--text); }
+
+        .doc-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 48px 0 24px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin: 32px 0 16px;
+        }
+
+        h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 24px 0 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        p strong { color: var(--text); }
+
+        ul, ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .callout {
+            background: var(--off-white);
+            border-left: 4px solid var(--text);
+            padding: 20px 24px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .callout p { margin-bottom: 0; }
+
+        .callout-warning {
+            background: var(--orange-light);
+            border-left-color: var(--orange);
+        }
+
+        .callout-success {
+            background: var(--green-light);
+            border-left-color: var(--green);
+        }
+
+        .callout-info {
+            background: var(--accent-light);
+            border-left-color: var(--accent);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 0.9rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 2px solid var(--text);
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        tr:hover { background: var(--light-gray); }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            background: var(--light-gray);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 48px 0;
+        }
+
+        em { color: var(--text); }
+
+        .highlight { background: var(--green-light); padding: 2px 4px; border-radius: 2px; }
+
+        footer {
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="back-link">&larr; Back to CV Explorer</a>
+
+    <div class="doc-label">Internal Analysis Document | March 2026</div>
+    <h1>Mill CV Infrastructure: The Thinking Process</h1>
+    <p class="subtitle">
+        This document captures the full reasoning process behind our CV infrastructure recommendations.
+        It's meant to show our work and help future decisions build on this analysis.
+    </p>
+
+    <h2>Starting Point: What Problem Are We Actually Solving?</h2>
+
+    <h3>The Surface Problem</h3>
+    <p>"How do we identify food waste in commercial kitchens?"</p>
+
+    <h3>The Real Problem</h3>
+    <p><strong>Partial foods don't look like reference images.</strong></p>
+
+    <p>
+        A whole apple is easy to classify. A half-eaten apple with bite marks, browning,
+        and maybe some peanut butter on it? That's what actually gets thrown away.
+        And it looks nothing like the training data.
+    </p>
+
+    <p>This is the core accuracy challenge:</p>
+    <ul>
+        <li>Half-eaten items (bites, tears, cuts)</li>
+        <li>Sauce-covered items (gravy, dressing, condiments)</li>
+        <li>Mixed items (rice with vegetables, pasta with meat)</li>
+        <li>Crushed/compressed items (smashed in serving tray)</li>
+        <li>Temperature-altered items (melted, congealed, dried out)</li>
+    </ul>
+
+    <h3>The Constraint We Almost Missed</h3>
+
+    <p>
+        Early in analysis, we nearly recommended the <strong>Photo Booth</strong> (a vertical imaging
+        tunnel inside the bin). It solves occlusion beautifully - items fall through and are imaged individually.
+    </p>
+
+    <p>But then we caught the critical constraint:</p>
+
+    <div class="callout callout-warning">
+        <p><strong>Mill's core operation happens inside the bin.</strong></p>
+    </div>
+
+    <p>
+        The bin heats food waste and converts it to compost. Any interior obstruction - a tube,
+        a conveyor, a sieve - interferes with this. The Photo Booth's polycarbonate tunnel would:
+    </p>
+    <ul>
+        <li>Reduce interior volume</li>
+        <li>Block heat distribution</li>
+        <li>Possibly melt under operating temperatures</li>
+        <li>Require redesigning the core product</li>
+    </ul>
+
+    <p>This constraint eliminates multiple high-accuracy approaches:</p>
+    <ul>
+        <li>Photo Booth (tunnel)</li>
+        <li>Tumbler (rotating sieve)</li>
+        <li>Cascade (mini conveyor)</li>
+    </ul>
+
+    <div class="callout">
+        <p><strong>Lesson:</strong> The best technical solution isn't always the right solution.</p>
+    </div>
+
+    <h2>What Features Are Invariant for Partial Foods?</h2>
+
+    <p>This is the key insight that shaped our recommendation.</p>
+
+    <p>When a chicken breast is half-eaten, what changes and what stays the same?</p>
+
+    <h3>Things That Change (Unreliable for Classification)</h3>
+    <table>
+        <thead>
+            <tr><th>Feature</th><th>Why It's Unreliable</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Shape</td><td>Bites remove recognizable contours</td></tr>
+            <tr><td>Color (visible)</td><td>Sauce, browning, mixing with other foods</td></tr>
+            <tr><td>Texture (visual)</td><td>Surface altered by handling, mixing</td></tr>
+            <tr><td>Size</td><td>Portions vary wildly</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Things That Stay the Same (Invariant)</h3>
+    <table>
+        <thead>
+            <tr><th>Feature</th><th>Why It Works</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Density</strong></td><td>Half a chicken breast still has chicken density</td></tr>
+            <tr><td><strong>Chemistry</strong></td><td>Protein is protein, carbs are carbs, fat is fat</td></tr>
+            <tr><td>Material composition</td><td>NIR spectral signature unchanged by shape</td></tr>
+            <tr><td>Impact dynamics</td><td>How it bounces/settles based on mass distribution</td></tr>
+        </tbody>
+    </table>
+
+    <div class="callout callout-success">
+        <p>
+            <strong>This is why we recommend sensor fusion.</strong> Vision catches what it can.
+            Weight/density catches what vision misses. Chemistry (NIR) is the nuclear option if needed.
+        </p>
+    </div>
+
+    <h2>The Approaches: Tiered Analysis</h2>
+
+    <h3>Tier 1: External, High Impact</h3>
+    <p>These can be implemented without touching the bin interior.</p>
+
+    <table>
+        <thead>
+            <tr><th>Approach</th><th>Partial Food Help</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Kaleidoscope</strong></td><td>Medium-High</td><td>6 angles catch features invisible from one view</td></tr>
+            <tr><td><strong>Weighmaster</strong></td><td>High</td><td>Density is invariant. Weight signatures validate vision</td></tr>
+            <tr><td><strong>Fingerprinter (NIR)</strong></td><td>Highest</td><td>Chemistry doesn't care about appearance</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Tier 2: External, Lower Impact</h3>
+    <p>Useful as additional fusion layers but not primary classifiers.</p>
+
+    <table>
+        <thead>
+            <tr><th>Approach</th><th>Partial Food Help</th><th>Why</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Listener (acoustic)</td><td>Low</td><td>Impact sounds help but kitchen is noisy</td></tr>
+            <tr><td>Heat Map (thermal)</td><td>Low</td><td>Fresh waste is warm, but cold items exist</td></tr>
+            <tr><td>Penetrator (radar)</td><td>Low</td><td>Sees through pile but can't classify well</td></tr>
+            <tr><td>Polarizer</td><td>Low</td><td>Cuts glare, niche benefit</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Tier 3: Interior Modifications (Eliminated)</h3>
+    <p>These have the highest accuracy but conflict with core operations.</p>
+
+    <table>
+        <thead>
+            <tr><th>Approach</th><th>Why Eliminated</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Photo Booth</td><td>Tube obstructs interior</td></tr>
+            <tr><td>Tumbler</td><td>Rotating mechanism in bin</td></tr>
+            <tr><td>Cascade</td><td>Conveyor system in bin</td></tr>
+        </tbody>
+    </table>
+
+    <h2>Hybrid Designs Explored</h2>
+
+    <p>We explored combining approaches in novel ways:</p>
+
+    <h3>The Oracle (Kaleidoscope + Weighmaster + NIR)</h3>
+    <ul>
+        <li>Full sensor suite: 6-angle vision + weight + spectral</li>
+        <li>Estimated accuracy: 95-99%</li>
+        <li>Cost: +35% over baseline</li>
+        <li><strong>Verdict: Overkill for launch.</strong> Save NIR as upgrade path.</li>
+    </ul>
+
+    <h3>The Economist (Kaleidoscope + Weighmaster)</h3>
+    <ul>
+        <li>Multi-angle vision + weight validation</li>
+        <li>Estimated accuracy: 92-97%</li>
+        <li>Cost: +7% over baseline ($200)</li>
+        <li><strong>Verdict: Recommended.</strong> Best ROI.</li>
+    </ul>
+
+    <h3>The Chemist (Baseline + NIR)</h3>
+    <ul>
+        <li>Standard vision + spectral chemistry</li>
+        <li>Estimated accuracy: 94-98%</li>
+        <li>Cost: +25% over baseline</li>
+        <li><strong>Verdict: Future upgrade.</strong> If Economist doesn't hit targets.</li>
+    </ul>
+
+    <h3>The Temporal (Weight-Triggered Burst)</h3>
+    <ul>
+        <li>Not a sensor hybrid - a capture strategy</li>
+        <li>Load cells trigger burst capture on weight change</li>
+        <li>Captures before/during/after states</li>
+        <li><strong>Verdict: Definitely implement.</strong> Better than always-on.</li>
+    </ul>
+
+    <h3>The Learner (Human-in-the-Loop)</h3>
+    <ul>
+        <li>Low-confidence items flagged for human review</li>
+        <li>Humans see 6-angle views + weight data</li>
+        <li>Their labels improve the model</li>
+        <li><strong>Verdict: Critical for Phase 1.</strong> How we get from 85% to 95%.</li>
+    </ul>
+
+    <h2>The Staged Deployment Strategy</h2>
+
+    <h3>Phase 1: Launch Smart, Learn Fast</h3>
+    <p><strong>Deploy: Kaleidoscope + Weighmaster</strong></p>
+
+    <p>Hardware:</p>
+    <ul>
+        <li>6 first-surface mirrors on camera boom (~$50)</li>
+        <li>4 industrial load cells under bin (~$100)</li>
+        <li>Signal processing board (~$50)</li>
+        <li>Total added cost: ~$200 per unit</li>
+    </ul>
+
+    <p>Software:</p>
+    <ul>
+        <li>Multi-angle image processing</li>
+        <li>Weight signature extraction</li>
+        <li>Sensor fusion model</li>
+        <li><strong>Uncertainty quantification</strong> - know when you don't know</li>
+    </ul>
+
+    <p>Human-in-the-loop:</p>
+    <ul>
+        <li>Items with &lt;80% confidence &rarr; flagged for review</li>
+        <li>Kitchen staff or remote reviewer confirms classification</li>
+        <li>Confirmed labels feed back into training</li>
+    </ul>
+
+    <p>Expected accuracy: <strong>88-93%</strong> at launch, improving to <strong>92-97%</strong> within months.</p>
+
+    <h3>Phase 2: Watch the Data</h3>
+
+    <p>After 3-6 months of operation, analyze:</p>
+    <ul>
+        <li>Which food categories have lowest accuracy?</li>
+        <li>Are failures visual (appearance) or density (weight)?</li>
+        <li>What percentage of items need human review?</li>
+    </ul>
+
+    <p>Key questions:</p>
+    <ul>
+        <li>If visual failures dominate &rarr; consider NIR upgrade</li>
+        <li>If density failures dominate &rarr; recalibrate weight models</li>
+        <li>If human review rate is &lt;5% &rarr; system is working</li>
+    </ul>
+
+    <h3>Phase 3: Data-Driven Hardware Upgrade (If Needed)</h3>
+
+    <p>Only add NIR spectral imaging if:</p>
+    <ul>
+        <li>Visual+weight fusion plateaus below 90%</li>
+        <li>Specific categories (sauces, mixed dishes) remain problematic</li>
+        <li>ROI justifies the +25% hardware cost</li>
+    </ul>
+
+    <div class="callout callout-info">
+        <p><strong>Don't over-engineer at launch.</strong> Let the data tell you what's needed.</p>
+    </div>
+
+    <h2>Why Not "Always On" Camera?</h2>
+
+    <p>The original plan was continuous video capture. Problems:</p>
+
+    <table>
+        <thead>
+            <tr><th>Issue</th><th>Impact</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Data volume</td><td>Terabytes per day per site</td></tr>
+            <tr><td>Processing load</td><td>Constant GPU utilization</td></tr>
+            <tr><td>Power consumption</td><td>Camera/processor always running</td></tr>
+            <tr><td>Missed events</td><td>Fast dumps between frames</td></tr>
+            <tr><td>No "before" state</td><td>Can't diff what changed</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Weight-Triggered Burst Capture</h3>
+
+    <p>Better approach:</p>
+    <ol>
+        <li>Load cells detect weight increase (threshold: 50g)</li>
+        <li>Trigger high-speed burst capture (10 fps for 0.5 seconds)</li>
+        <li>Capture includes before/during/after states</li>
+        <li>Only process frames that matter</li>
+    </ol>
+
+    <p>Benefits:</p>
+    <ul>
+        <li>100x less data to process</li>
+        <li>Precise timing - never miss a dump</li>
+        <li>Before/after diff enables volume tracking</li>
+        <li>Lower power consumption</li>
+        <li>Can use higher quality captures per event</li>
+    </ul>
+
+    <h2>Why Kaleidoscope Over Multiple Cameras?</h2>
+
+    <p>We considered multiple discrete cameras (3-4 around the bin). Kaleidoscope wins:</p>
+
+    <table>
+        <thead>
+            <tr><th>Factor</th><th>Multiple Cameras</th><th>Kaleidoscope</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Hardware cost</td><td>$900-1200</td><td>$50</td></tr>
+            <tr><td>Calibration</td><td>Complex multi-camera</td><td>Single camera</td></tr>
+            <tr><td>Synchronization</td><td>Required</td><td>Inherent (single frame)</td></tr>
+            <tr><td>Maintenance</td><td>Multiple failure points</td><td>Mirrors are robust</td></tr>
+            <tr><td>Installation</td><td>Multiple mounts</td><td>Single boom upgrade</td></tr>
+        </tbody>
+    </table>
+
+    <p>The mirrors are literally just optics. Light physics doesn't fail.</p>
+
+    <h2>Why Weighmaster As Validation, Not Primary?</h2>
+
+    <p>Weight alone achieves 55-70% accuracy. Why include it?</p>
+
+    <p>Because it catches what vision misses:</p>
+
+    <table>
+        <thead>
+            <tr><th>Vision Says</th><th>Weight Says</th><th>Likely Truth</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>"Bread"</td><td>Dense impact</td><td>Not bread (maybe meat)</td></tr>
+            <tr><td>"Chicken"</td><td>Light, scattered</td><td>Not chicken (maybe lettuce)</td></tr>
+            <tr><td>"Unknown"</td><td>Chicken-weight signature</td><td>Probably chicken</td></tr>
+        </tbody>
+    </table>
+
+    <p>The fusion model uses weight to:</p>
+    <ul>
+        <li>Validate high-confidence vision classifications</li>
+        <li>Override low-confidence vision with strong weight signal</li>
+        <li>Flag conflicting signals for human review</li>
+    </ul>
+
+    <p>Weight is the "lie detector" for vision.</p>
+
+    <h2>Risk Factors and Mitigations</h2>
+
+    <h3>Mirror Fouling (Kaleidoscope)</h3>
+    <p><strong>Risk:</strong> Grease/steam deposits on mirrors reduce image quality.</p>
+    <p><strong>Mitigation:</strong></p>
+    <ul>
+        <li>Hydrophobic coating on mirrors</li>
+        <li>Scheduled cleaning protocol (daily wipe)</li>
+        <li>Degradation detection in software (alert when image quality drops)</li>
+    </ul>
+
+    <h3>Kitchen Vibration (Weighmaster)</h3>
+    <p><strong>Risk:</strong> Nearby equipment causes weight noise.</p>
+    <p><strong>Mitigation:</strong></p>
+    <ul>
+        <li>High-pass filtering on weight signal</li>
+        <li>Baseline calibration per installation</li>
+        <li>Event detection tuned to environment</li>
+    </ul>
+
+    <h3>Model Drift</h3>
+    <p><strong>Risk:</strong> Food menu changes over time; model accuracy degrades.</p>
+    <p><strong>Mitigation:</strong></p>
+    <ul>
+        <li>Continuous learning from human-reviewed labels</li>
+        <li>Quarterly model refresh</li>
+        <li>Anomaly detection for novel food types</li>
+    </ul>
+
+    <h3>Human Review Fatigue</h3>
+    <p><strong>Risk:</strong> Too many items flagged &rarr; reviewers disengage.</p>
+    <p><strong>Mitigation:</strong></p>
+    <ul>
+        <li>Target &lt;10% review rate</li>
+        <li>Gamification of review interface</li>
+        <li>Prioritize high-value corrections (expensive foods)</li>
+    </ul>
+
+    <h2>Cost Analysis Summary</h2>
+
+    <table>
+        <thead>
+            <tr><th>Configuration</th><th>Added Hardware</th><th>Estimated Accuracy</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Baseline only</td><td>$0</td><td>85-92%</td><td>Single angle, occlusion issues</td></tr>
+            <tr><td>+ Kaleidoscope</td><td>+$50</td><td>85-92% (better partial food)</td><td>Multi-angle, same compute</td></tr>
+            <tr><td>+ Weighmaster</td><td>+$150</td><td>+5-10% fusion boost</td><td>Validates/corrects vision</td></tr>
+            <tr style="background: var(--green-light);"><td><strong>Recommended</strong></td><td><strong>+$200</strong></td><td><strong>92-97%</strong></td><td>Kaleidoscope + Weighmaster</td></tr>
+            <tr><td>+ NIR (future)</td><td>+$600</td><td>95-99%</td><td>Only if needed</td></tr>
+        </tbody>
+    </table>
+
+    <p>
+        ROI: $200 hardware investment pushes accuracy from ~87% average to ~94% average.
+        At scale, this is trivial per-unit cost for significant capability gain.
+    </p>
+
+    <hr>
+
+    <h2>Final Recommendation</h2>
+
+    <div class="callout callout-success">
+        <p><strong>Launch with Kaleidoscope + Weighmaster.</strong></p>
+    </div>
+
+    <ul>
+        <li>External only (no interior modifications)</li>
+        <li>Low cost (+$200/unit)</li>
+        <li>High accuracy (92-97% with fusion)</li>
+        <li>Weight-triggered capture (not always-on)</li>
+        <li>Human-in-the-loop for uncertainty</li>
+        <li>Data-driven upgrade path (NIR if needed later)</li>
+    </ul>
+
+    <p><strong>Don't over-engineer. Ship, learn, iterate.</strong></p>
+
+    <footer>
+        <p class="footer-text">
+            Document generated as part of Mill CV Infrastructure analysis.<br>
+            <a href="index.html" style="color: var(--text-muted);">&larr; Back to CV Explorer</a>
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>

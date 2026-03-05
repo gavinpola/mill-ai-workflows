@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Mill + Costco | Sustainability partnership</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #fafafa;
+      --light-gray: #f5f5f5;
+      --border: #e5e5e5;
+      --text: #1a1a1a;
+      --text-secondary: #666666;
+      --text-muted: #999999;
+      --costco-red: #E31837;
+      --bg-canvas: #e8e8e8;
+      --green-accent: #27ae60;
+    }
+
+    body {
+      background: var(--bg-canvas);
+      margin: 0;
+      padding: 0;
+    }
+
+    .reveal-viewport {
+      background: var(--bg-canvas);
+    }
+
+    .reveal {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      color: var(--text);
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .slides section {
+      width: 1280px !important;
+      height: 720px !important;
+      padding: 60px 80px !important;
+      background: var(--white);
+      box-sizing: border-box;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+      border-radius: 4px;
+    }
+
+    .slide-title {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 40px;
+      line-height: 1.3;
+      max-width: 900px;
+    }
+
+    .slide-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-top: -30px;
+      margin-bottom: 40px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      text-transform: none !important;
+      letter-spacing: normal !important;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .stat-large {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 72px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-medium {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      flex: 1;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .four-col {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--off-white);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 14px;
+    }
+
+    .highlight {
+      background: var(--off-white);
+      border-left: 3px solid var(--green-accent);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .highlight h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .highlight p {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      background: var(--green-accent);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 12px;
+      background: var(--off-white);
+    }
+
+    .timeline {
+      display: flex;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .timeline-phase {
+      flex: 1;
+      background: var(--off-white);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .timeline-phase h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-phase p {
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .cover-slide {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .cover-title {
+      font-size: 56px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .cover-subtitle {
+      font-size: 24px;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+    }
+
+    .cover-logos {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 28px;
+    }
+
+    .logo-costco {
+      color: var(--costco-red);
+    }
+
+    .circular-diagram {
+      width: 300px;
+      height: 300px;
+      background: var(--off-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .circular-text {
+      text-align: center;
+    }
+
+    .circular-text h3 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .circular-text p {
+      font-size: 13px;
+      max-width: 180px;
+    }
+
+    .source {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    .esg-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      background: var(--green-accent);
+      color: white;
+      border-radius: 100px;
+      font-size: 12px;
+      margin: 4px;
+    }
+
+    .roi-box {
+      background: var(--text);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .roi-box .stat-large {
+      color: var(--white);
+    }
+
+    .roi-box p {
+      color: rgba(255,255,255,0.7);
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Slide 1: Cover -->
+      <section class="cover-slide">
+        <div class="cover-logos">
+          <span class="logo-text">mill</span>
+          <span style="color: var(--text-muted);">+</span>
+          <span class="logo-text logo-costco">Costco</span>
+        </div>
+        <h1 class="cover-title">Close the loop<br>on food waste</h1>
+        <p class="cover-subtitle">A founding partnership for circular economy and zero waste goals.</p>
+        <p style="font-size: 14px; color: var(--text-muted);">February 2026 · Sustainability leader briefing · Mill Commercial launching 2027</p>
+      </section>
+
+      <!-- Slide 2: Environmental imperative -->
+      <section>
+        <h2 class="slide-title">Food waste is the largest category in US landfills</h2>
+        <div class="two-col">
+          <div>
+            <div class="stat-large">10%</div>
+            <p class="stat-label" style="margin-bottom: 32px;">of global greenhouse gas emissions from food waste</p>
+            <p>Food waste generates more emissions than the entire aviation industry. When organic matter decomposes in landfills, it produces methane with 28x the warming potential of CO2 over 100 years.</p>
+            <p class="source">Source: UNEP Food Waste Index Report 2024</p>
+            <div class="highlight" style="margin-top: 24px;">
+              <h4>The retail opportunity</h4>
+              <p>Food retailers are uniquely positioned to address this at scale. Visibility into waste streams enables both reduction and diversion.</p>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom: 20px;">
+              <div class="stat-medium">80B</div>
+              <p style="margin-top: 8px;">pounds of food wasted annually in the US</p>
+              <p class="source">Source: ReFED</p>
+            </div>
+            <div class="card">
+              <div class="stat-medium">35%</div>
+              <p style="margin-top: 8px;">of all food produced goes uneaten</p>
+              <p class="source">Source: USDA</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 3: Circular economy vision -->
+      <section>
+        <h2 class="slide-title">True circular economy: food waste becomes chicken feed</h2>
+        <p class="slide-subtitle">A unique angle for Costco's vertically integrated supply chain</p>
+        <div class="two-col">
+          <div>
+            <p>Mill doesn't just track waste, it processes it. Our technology dehydrates food scraps into nutrient-rich material suitable for animal feed.</p>
+            <p>For Costco, this creates a potential closed loop: food waste from food courts could feed the chickens that become rotisserie chickens.</p>
+            <div class="highlight" style="margin-top: 24px;">
+              <h4>Why this matters for ESG</h4>
+              <p>Complete circularity is the gold standard. "Waste becomes input" is a more powerful story than "waste diverted from landfill."</p>
+            </div>
+            <p class="source">Costco sells 100+ million rotisserie chickens annually</p>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: center;">
+            <div class="circular-diagram">
+              <div class="circular-text">
+                <h3>Circular vision</h3>
+                <p>Food court waste to Mill processing to Chicken feed to Costco chickens</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 4: ESG certifications -->
+      <section>
+        <h2 class="slide-title">Accelerate your path to sustainability certifications</h2>
+        <div class="two-col">
+          <div>
+            <p style="margin-bottom: 24px;">Mill provides the granular, auditable data required for third-party sustainability certifications.</p>
+            <p><strong>Certifications supported:</strong></p>
+            <p>
+              <span class="esg-badge">TRUE Zero Waste</span>
+              <span class="esg-badge">LEED Credits</span>
+              <span class="esg-badge">B Corp Points</span>
+            </p>
+            <div class="highlight" style="margin-top: 32px;">
+              <h4>2030 is 4 years away</h4>
+              <p>Building the data infrastructure for zero waste certification takes time. Starting now enables credible 2030 reporting.</p>
+            </div>
+          </div>
+          <div>
+            <div class="card">
+              <div class="card-label">Sustainability reporting you'll get</div>
+              <table style="margin-top: 16px;">
+                <tr>
+                  <td>CO2 avoided per location</td>
+                </tr>
+                <tr>
+                  <td>Pounds diverted from landfill</td>
+                </tr>
+                <tr>
+                  <td>Circular economy flow metrics</td>
+                </tr>
+                <tr>
+                  <td>Year-over-year trend analysis</td>
+                </tr>
+                <tr>
+                  <td>Location-by-location benchmarking</td>
+                </tr>
+                <tr>
+                  <td>Third-party auditable data trail</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 5: Industry environmental benchmarks -->
+      <section>
+        <h2 class="slide-title">Industry benchmarks: what's achievable</h2>
+        <p class="slide-subtitle">Based on Leanpath, Winnow, and ReFED research</p>
+        <div class="three-col" style="margin-top: 24px;">
+          <div class="card" style="text-align: center;">
+            <div class="stat-medium" style="color: var(--green-accent);">90%</div>
+            <p style="margin-top: 12px;">Waste diversion rate achievable with proper tracking and processing</p>
+            <p class="source">vs. 26% baseline</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div class="stat-medium" style="color: var(--green-accent);">20-50%</div>
+            <p style="margin-top: 12px;">Source reduction within first 4 months with visibility</p>
+            <p class="source">Leanpath, Winnow data</p>
+          </div>
+          <div class="card" style="text-align: center;">
+            <div class="stat-medium" style="color: var(--green-accent);">3-5x</div>
+            <p style="margin-top: 12px;">CO2 reduction multiplier vs. landfill baseline</p>
+            <p class="source">EPA food waste factors</p>
+          </div>
+        </div>
+        <div class="highlight" style="margin-top: 32px;">
+          <h4>Our hypothesis</h4>
+          <p>Mill's AI and automation should match or exceed these benchmarks. The founding partnership pilot will validate this with Costco-specific data.</p>
+        </div>
+      </section>
+
+      <!-- Slide 6: Behavior change -->
+      <section>
+        <h2 class="slide-title">Visibility drives sustainable behavior at scale</h2>
+        <p class="slide-subtitle">Insights from 100,000+ Mill consumer households</p>
+        <div class="two-col">
+          <div>
+            <p>When people see exactly what they're wasting in real-time, behavior changes immediately. This applies to households and commercial kitchens alike.</p>
+            <div class="card" style="margin-top: 24px;">
+              <div class="card-label">Consumer data insight</div>
+              <h3>2.5x waste reduction</h3>
+              <p>Users who regularly check their waste data reduce waste 2.5x more than those who don't.</p>
+            </div>
+            <div class="highlight" style="margin-top: 24px;">
+              <h4>The commercial hypothesis</h4>
+              <p>Operators who see real-time waste data will modify prep, ordering, and timing behaviors. We'll validate this in the pilot.</p>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom: 20px; text-align: center;">
+              <div class="stat-medium">89%</div>
+              <p style="margin-top: 8px;">of household waste follows predictable weekly patterns</p>
+            </div>
+            <div class="card" style="text-align: center;">
+              <div class="stat-medium">37%</div>
+              <p style="margin-top: 8px;">of waste is produce, consistent with commercial food service</p>
+            </div>
+            <p class="source">Source: Mill consumer deployment data, 100K+ households</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 7: Costco sustainability position -->
+      <section>
+        <h2 class="slide-title">Building on Costco's sustainability leadership</h2>
+        <div class="two-col">
+          <div>
+            <p>Costco has committed to meaningful sustainability goals. Mill helps accelerate progress with measurable, verifiable data.</p>
+            <div class="step" style="margin-top: 32px;">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>2030 zero waste commitment</h4>
+                <p>Mill provides the tracking infrastructure needed to measure and verify progress.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Rotisserie vertical integration</h4>
+                <p>Unique circular opportunity with 100M+ chickens annually.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Member sustainability expectations</h4>
+                <p>Increasingly important brand differentiator.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="roi-box">
+              <p style="font-size: 14px; margin-bottom: 16px;">Costco food operations</p>
+              <div class="stat-large" style="font-size: 56px;">600+</div>
+              <p style="margin-top: 8px;">Food courts, bakeries, delis to transform</p>
+              <p style="font-size: 14px; margin-top: 24px; color: rgba(255,255,255,0.5);">Standardized operations = scalable impact</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 8: ESG reporting transformation -->
+      <section>
+        <h2 class="slide-title">From vague claims to verified impact</h2>
+        <p class="slide-subtitle">What your ESG reporting could look like</p>
+        <table style="margin-top: 24px;">
+          <tr>
+            <th style="width: 45%;">Today's reporting</th>
+            <th style="width: 45%;">With Mill data</th>
+          </tr>
+          <tr>
+            <td>"We diverted X tons from landfill"</td>
+            <td>"We achieved 90% circularity, waste became feed for 2M chickens"</td>
+          </tr>
+          <tr>
+            <td>"Food waste is a challenge we're addressing"</td>
+            <td>"We reduced food waste generation by 23% through data-driven prevention"</td>
+          </tr>
+          <tr>
+            <td>"Working toward zero waste by 2030"</td>
+            <td>"On track for TRUE Zero Waste certification at 450 locations this year"</td>
+          </tr>
+          <tr>
+            <td>"We're committed to sustainability"</td>
+            <td>"50,000 tons CO2 avoided through circular food waste processing"</td>
+          </tr>
+        </table>
+        <div class="highlight" style="margin-top: 32px;">
+          <p><strong>The difference:</strong> Vague commitments vs. specific, verified, auditable data that withstands scrutiny.</p>
+        </div>
+      </section>
+
+      <!-- Slide 9: Pilot timeline -->
+      <section>
+        <h2 class="slide-title">Path to your 2030 goal</h2>
+        <p class="slide-subtitle">Staged approach with founding partner benefits</p>
+        <div class="timeline">
+          <div class="timeline-phase">
+            <h4>Q2 2026: Pilot</h4>
+            <p>5-10 locations. Baseline capture. Validate environmental metrics.</p>
+          </div>
+          <div class="timeline-phase">
+            <h4>Q3 2026: Validate</h4>
+            <p>Measure CO2 impact. Confirm ESG reporting value. Refine methodology.</p>
+          </div>
+          <div class="timeline-phase">
+            <h4>Q4 2026: Expand</h4>
+            <p>50+ locations. Start certification path. Regional sustainability impact.</p>
+          </div>
+          <div class="timeline-phase">
+            <h4>2027-2030: Scale</h4>
+            <p>Full rollout. Zero waste achievement. Industry leadership.</p>
+          </div>
+        </div>
+        <div class="two-col" style="margin-top: 32px;">
+          <div class="card">
+            <div class="card-label">Time to first metrics</div>
+            <h3>30 days</h3>
+            <p>Environmental insights begin flowing within a month of deployment.</p>
+          </div>
+          <div class="card">
+            <div class="card-label">Certification-ready data</div>
+            <h3>90 days</h3>
+            <p>Full audit trail ready for third-party verification.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 10: Why now -->
+      <section>
+        <h2 class="slide-title">The sustainability case for starting now</h2>
+        <div class="two-col" style="margin-top: 32px;">
+          <div>
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>2030 is 4 years away</h4>
+                <p>Data infrastructure takes time. Starting now ensures credible progress tracking.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>True circular economy is achievable</h4>
+                <p>Your waste can feed your chickens. Complete the loop before competitors.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Lead, don't follow</h4>
+                <p>Set the standard for retail sustainability. First-mover advantage is real.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Co-develop the solution</h4>
+                <p>As a founding partner, shape the product for your sustainability needs.</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="roi-box">
+              <p style="font-size: 14px; margin-bottom: 16px;">Founding partner advantage</p>
+              <p style="font-size: 18px; color: var(--white); margin-bottom: 24px;">Shape the product. Lock in pricing. Lead the category.</p>
+              <p style="font-size: 14px; color: rgba(255,255,255,0.5); margin: 0;">The pilot is low-risk. The upside is category-defining sustainability leadership.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 11: Financial co-benefits -->
+      <section>
+        <h2 class="slide-title">Sustainability that pays for itself</h2>
+        <p class="slide-subtitle">Environmental impact and operational value aligned</p>
+        <div class="two-col">
+          <div>
+            <p>The financial case supports the sustainability mission. Industry benchmarks show waste tracking solutions deliver strong ROI.</p>
+            <table style="margin-top: 24px;">
+              <tr>
+                <th colspan="2">Industry financial benchmarks</th>
+              </tr>
+              <tr>
+                <td>Typical waste reduction</td>
+                <td>20-50%</td>
+              </tr>
+              <tr>
+                <td>Payback period</td>
+                <td>3-12 months</td>
+              </tr>
+              <tr>
+                <td>ROI range</td>
+                <td>2-7x annually</td>
+              </tr>
+            </table>
+            <p class="source">Sources: Leanpath, Winnow, ReFED</p>
+          </div>
+          <div>
+            <div class="highlight">
+              <h4>Sustainability ROI framing</h4>
+              <p>The financial returns make this easier to fund internally. Environmental impact is the mission; cost savings fund the mission.</p>
+            </div>
+            <div class="card" style="margin-top: 24px;">
+              <div class="card-label">Pilot benefit</div>
+              <h3>90 days of real data</h3>
+              <p>Benchmarks are useful, but pilot data will show actual Costco-specific environmental and financial impact.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Slide 12: Contact -->
+      <section style="display: flex; flex-direction: column; justify-content: center;">
+        <h2 class="slide-title" style="font-size: 40px;">Let's close the loop together</h2>
+        <div class="two-col" style="max-width: 800px; margin-top: 48px;">
+          <div>
+            <p style="margin-bottom: 32px;">Interested in being a founding partner for circular economy at scale? Let's discuss the sustainability pilot program.</p>
+            <p style="font-size: 16px; color: var(--text-muted); margin-bottom: 8px;">What we'll cover</p>
+            <ul style="color: var(--text-secondary); font-size: 16px; padding-left: 20px;">
+              <li>Environmental impact modeling</li>
+              <li>ESG reporting and certification path</li>
+              <li>Circular economy supply chain integration</li>
+              <li>2030 goal acceleration roadmap</li>
+            </ul>
+          </div>
+          <div>
+            <div class="card" style="background: var(--text); color: var(--white);">
+              <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 16px;">Next steps</p>
+              <p style="color: var(--white); font-size: 16px; margin-bottom: 12px;">1. 30-min sustainability deep-dive</p>
+              <p style="color: var(--white); font-size: 16px; margin-bottom: 12px;">2. Environmental impact assessment</p>
+              <p style="color: var(--white); font-size: 16px; margin-bottom: 0;">3. Define pilot scope together</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top: 64px; font-size: 28px; font-weight: 700;">mill</p>
+        <p style="font-size: 14px; color: var(--text-muted);">Closing the loop on food waste.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      width: 1280,
+      height: 720,
+      margin: 0.04,
+      center: true,
+      transition: 'none',
+      backgroundTransition: 'none'
+    });
+  </script>
+</body>
+</html>

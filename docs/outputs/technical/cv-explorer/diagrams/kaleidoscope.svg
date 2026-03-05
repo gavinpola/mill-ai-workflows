@@ -1,0 +1,76 @@
+<svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .component { cursor: pointer; }
+    .component:hover .highlight { opacity: 0.2; }
+    .label { font-family: 'Space Grotesk', sans-serif; font-size: 11px; fill: #666; }
+    .part { fill: #1a1a1a; }
+    .part-light { fill: #4a4a4a; }
+    .bin { fill: #e5e5e5; stroke: #ccc; stroke-width: 1; }
+    .mirror { fill: none; stroke: #1a1a1a; stroke-width: 2; }
+    .light-ray { stroke: #999; stroke-width: 1; stroke-dasharray: 4,2; }
+    .hotspot { fill: #3498db; opacity: 0; }
+    .highlight { fill: #3498db; opacity: 0; transition: opacity 0.2s; }
+  </style>
+
+  <!-- Bin body -->
+  <g class="component" data-part="bin">
+    <rect class="highlight" x="100" y="180" width="200" height="120" rx="8"/>
+    <rect class="bin" x="100" y="180" width="200" height="120" rx="8"/>
+    <rect class="bin" x="90" y="170" width="220" height="20" rx="4"/>
+    <text class="label" x="200" y="250" text-anchor="middle">Collection bin</text>
+  </g>
+
+  <!-- Food items in bin -->
+  <g opacity="0.6">
+    <circle cx="140" cy="230" r="12" fill="#8bc34a"/>
+    <circle cx="180" cy="240" r="10" fill="#ff9800"/>
+    <circle cx="220" cy="225" r="14" fill="#e91e63"/>
+    <circle cx="260" cy="235" r="8" fill="#4caf50"/>
+  </g>
+
+  <!-- Mirror array -->
+  <g class="component" data-part="mirrors">
+    <rect class="highlight" x="70" y="100" width="260" height="80" rx="4"/>
+    <!-- Left mirror -->
+    <line class="mirror" x1="100" y1="170" x2="80" y2="120"/>
+    <line class="mirror" x1="80" y1="120" x2="100" y2="115"/>
+    <!-- Right mirror -->
+    <line class="mirror" x1="300" y1="170" x2="320" y2="120"/>
+    <line class="mirror" x1="320" y1="120" x2="300" y2="115"/>
+    <!-- Back mirrors -->
+    <line class="mirror" x1="130" y1="170" x2="120" y2="130"/>
+    <line class="mirror" x1="270" y1="170" x2="280" y2="130"/>
+    <text class="label" x="55" y="145" text-anchor="end">Mirrors</text>
+    <text class="label" x="345" y="145" text-anchor="start">Mirrors</text>
+  </g>
+
+  <!-- Light rays showing multi-angle -->
+  <g class="component" data-part="rays">
+    <line class="light-ray" x1="200" y1="65" x2="80" y2="120"/>
+    <line class="light-ray" x1="200" y1="65" x2="320" y2="120"/>
+    <line class="light-ray" x1="200" y1="65" x2="120" y2="130"/>
+    <line class="light-ray" x1="200" y1="65" x2="280" y2="130"/>
+    <line class="light-ray" x1="80" y1="120" x2="180" y2="220"/>
+    <line class="light-ray" x1="320" y1="120" x2="220" y2="220"/>
+  </g>
+
+  <!-- Camera -->
+  <g class="component" data-part="camera">
+    <rect class="highlight" x="160" y="25" width="80" height="55" rx="4"/>
+    <rect class="part" x="170" y="35" width="60" height="40" rx="4"/>
+    <circle class="part-light" cx="200" cy="55" r="12"/>
+    <circle fill="#333" cx="200" cy="55" r="8"/>
+    <rect class="part" x="185" y="75" width="30" height="8"/>
+    <text class="label" x="200" y="25" text-anchor="middle">Single camera</text>
+  </g>
+
+  <!-- LED ring -->
+  <g class="component" data-part="leds">
+    <rect class="highlight" x="85" y="155" width="230" height="20" rx="2"/>
+    <rect fill="#fff3e0" x="95" y="160" width="210" height="10" rx="2" stroke="#ffb74d" stroke-width="1"/>
+    <text class="label" x="200" y="178" text-anchor="middle" font-size="9">LED illumination ring</text>
+  </g>
+
+  <!-- Caption -->
+  <text x="200" y="315" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" fill="#1a1a1a" font-weight="600">4-6 simultaneous views from single camera</text>
+</svg>

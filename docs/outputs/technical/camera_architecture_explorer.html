@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mill Commercial - Technical architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #fafafa;
+      --light-gray: #f5f5f5;
+      --border: #e5e5e5;
+      --text: #1a1a1a;
+      --text-secondary: #666666;
+      --text-muted: #999999;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+    }
+
+    /* Nav */
+    .nav {
+      display: flex;
+      gap: 8px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      padding: 10px 20px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--white);
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text-secondary);
+    }
+
+    .nav-btn:hover {
+      border-color: var(--text);
+      color: var(--text);
+    }
+
+    .nav-btn.active {
+      background: var(--text);
+      color: var(--white);
+      border-color: var(--text);
+    }
+
+    /* Sections */
+    .section {
+      display: none;
+      padding: 48px 0;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    /* Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* Specs table */
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+    }
+
+    .specs-table th,
+    .specs-table td {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .specs-table th {
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .specs-table td {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .specs-table tr:hover td {
+      background: var(--off-white);
+    }
+
+    /* Pipeline diagram */
+    .pipeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 32px 0;
+    }
+
+    .pipeline-stage {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px;
+      background: var(--off-white);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .pipeline-stage::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 32px;
+      width: 2px;
+      height: 16px;
+      background: var(--border);
+    }
+
+    .pipeline-stage:last-child::after {
+      display: none;
+    }
+
+    .stage-number {
+      width: 28px;
+      height: 28px;
+      background: var(--text);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .stage-content h4 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .stage-content p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .stage-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    /* Architecture tree */
+    .tree {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.8;
+      padding: 24px;
+      background: var(--off-white);
+      border-radius: 12px;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .tree-node {
+      color: var(--text);
+    }
+
+    .tree-branch {
+      color: var(--text-muted);
+    }
+
+    .tree-label {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: var(--off-white);
+      border-left: 3px solid var(--text);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+    }
+
+    .highlight-box h4 {
+      margin-bottom: 8px;
+    }
+
+    .highlight-box p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Cost calculator */
+    .calculator {
+      background: var(--off-white);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .calc-row:last-child {
+      border-bottom: none;
+      font-weight: 600;
+    }
+
+    .calc-label {
+      color: var(--text-secondary);
+    }
+
+    .calc-value {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Two column layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Footer */
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* Comparison table */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .comparison-table th {
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      background: var(--off-white);
+    }
+
+    .comparison-table tr:hover td {
+      background: var(--off-white);
+    }
+
+    .check { color: #22c55e; }
+    .partial { color: #f59e0b; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <a href="../../index.html" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+        Back to portfolio
+      </a>
+      <h1>Mill Commercial technical architecture</h1>
+      <p class="subtitle">
+        A deep dive into the hardware and software systems that power commercial food waste tracking.
+        Built for enterprise scale, accuracy, and actionable insights.
+      </p>
+    </header>
+
+    <nav class="nav">
+      <button class="nav-btn active" onclick="showSection('overview')">Overview</button>
+      <button class="nav-btn" onclick="showSection('hardware')">Hardware</button>
+      <button class="nav-btn" onclick="showSection('software')">Software & ML</button>
+      <button class="nav-btn" onclick="showSection('data')">Data pipeline</button>
+      <button class="nav-btn" onclick="showSection('cost')">Cost analysis</button>
+    </nav>
+
+    <!-- Overview Section -->
+    <section id="overview" class="section active">
+      <h2 class="section-title">System overview</h2>
+      <p class="section-subtitle">How Mill Commercial turns food waste into actionable procurement intelligence.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-label">Hardware layer</div>
+          <h3>Smart bin with sensors</h3>
+          <p>Industrial-grade container with integrated camera, weight sensors, and depth sensing for accurate food identification and volume measurement.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Software layer</div>
+          <h3>AI-powered recognition</h3>
+          <p>Real-time food classification using computer vision, trained on 500+ food categories with continuous learning from corrections.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Analytics layer</div>
+          <h3>Procurement insights</h3>
+          <p>Pattern detection, anomaly alerts, and data-driven recommendations that connect waste data to purchasing decisions.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h4>The key insight</h4>
+        <p>
+          Mill's consumer product uses weight and moisture sensors (no camera needed for home use).
+          Commercial settings require computer vision because you need to identify <em>what</em> was wasted,
+          not just <em>how much</em>. That's the data that drives procurement optimization.
+        </p>
+      </div>
+
+      <div class="tree"><span class="tree-node">Mill Commercial System</span>
+<span class="tree-branch">├──</span> <span class="tree-node">Hardware</span>
+<span class="tree-branch">│   ├──</span> Camera module <span class="tree-label">(Sony IMX sensor, 4K)</span>
+<span class="tree-branch">│   ├──</span> Depth sensor <span class="tree-label">(Intel RealSense)</span>
+<span class="tree-branch">│   ├──</span> Load cells <span class="tree-label">(±5g accuracy)</span>
+<span class="tree-branch">│   └──</span> Edge compute <span class="tree-label">(NVIDIA Jetson)</span>
+<span class="tree-branch">├──</span> <span class="tree-node">Software</span>
+<span class="tree-branch">│   ├──</span> Food detection <span class="tree-label">(YOLOv8 + custom classifier)</span>
+<span class="tree-branch">│   ├──</span> Volume estimation <span class="tree-label">(3D reconstruction)</span>
+<span class="tree-branch">│   ├──</span> Learning system <span class="tree-label">(active learning)</span>
+<span class="tree-branch">│   └──</span> Analytics engine <span class="tree-label">(pattern detection)</span>
+<span class="tree-branch">└──</span> <span class="tree-node">Cloud</span>
+    <span class="tree-branch">├──</span> Data aggregation <span class="tree-label">(multi-location)</span>
+    <span class="tree-branch">├──</span> Dashboard <span class="tree-label">(real-time visibility)</span>
+    <span class="tree-branch">└──</span> Integrations <span class="tree-label">(ERP, procurement)</span></div>
+    </section>
+
+    <!-- Hardware Section -->
+    <section id="hardware" class="section">
+      <h2 class="section-title">Hardware specifications</h2>
+      <p class="section-subtitle">Industrial-grade components designed for commercial kitchen environments.</p>
+
+      <div class="two-col">
+        <div>
+          <h3 style="margin-bottom: 16px;">Camera system</h3>
+          <table class="specs-table">
+            <tr>
+              <th>Component</th>
+              <th>Specification</th>
+            </tr>
+            <tr>
+              <td>Image sensor</td>
+              <td>Sony IMX577 (12.3MP)</td>
+            </tr>
+            <tr>
+              <td>Resolution</td>
+              <td>4056 x 3040 @ 30fps</td>
+            </tr>
+            <tr>
+              <td>Lens</td>
+              <td>Wide-angle, f/1.8, 120° FOV</td>
+            </tr>
+            <tr>
+              <td>Low-light</td>
+              <td>0.5 lux minimum</td>
+            </tr>
+            <tr>
+              <td>Environment</td>
+              <td>IP65 rated, -10° to 50°C</td>
+            </tr>
+          </table>
+        </div>
+
+        <div>
+          <h3 style="margin-bottom: 16px;">Depth sensing</h3>
+          <table class="specs-table">
+            <tr>
+              <th>Component</th>
+              <th>Specification</th>
+            </tr>
+            <tr>
+              <td>Module</td>
+              <td>Intel RealSense D435i</td>
+            </tr>
+            <tr>
+              <td>Technology</td>
+              <td>Active IR stereo</td>
+            </tr>
+            <tr>
+              <td>Range</td>
+              <td>0.2m to 10m</td>
+            </tr>
+            <tr>
+              <td>Accuracy</td>
+              <td>±2% at 2m</td>
+            </tr>
+            <tr>
+              <td>Frame rate</td>
+              <td>Up to 90fps</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="card-grid" style="margin-top: 32px;">
+        <div class="card">
+          <div class="card-label">Weight measurement</div>
+          <h3>Precision load cells</h3>
+          <p>Four-point load cell array with ±5g accuracy up to 100kg capacity. Temperature-compensated for kitchen environments.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Edge computing</div>
+          <h3>NVIDIA Jetson Orin</h3>
+          <p>40 TOPS AI performance for real-time inference. Runs detection models locally, syncs results to cloud.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Connectivity</div>
+          <h3>Multi-protocol support</h3>
+          <p>WiFi 6, Ethernet, and optional LTE. Automatic failover ensures data is never lost during network issues.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h4>Why edge processing matters</h4>
+        <p>
+          Processing images locally means faster response times (under 200ms), reduced bandwidth costs,
+          and the system works even when internet is spotty. Only aggregated data and flagged items
+          are sent to the cloud.
+        </p>
+      </div>
+    </section>
+
+    <!-- Software & ML Section -->
+    <section id="software" class="section">
+      <h2 class="section-title">Software and machine learning</h2>
+      <p class="section-subtitle">The AI pipeline that turns images into actionable waste intelligence.</p>
+
+      <div class="pipeline">
+        <div class="pipeline-stage">
+          <div class="stage-number">1</div>
+          <div class="stage-content">
+            <h4>Image capture</h4>
+            <p>Camera triggers on motion or lid opening. Captures RGB image plus depth map for 3D reconstruction.</p>
+            <div class="stage-tags">
+              <span class="tag">30 fps capture</span>
+              <span class="tag">motion detection</span>
+              <span class="tag">RGB-D fusion</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pipeline-stage">
+          <div class="stage-number">2</div>
+          <div class="stage-content">
+            <h4>Object detection</h4>
+            <p>YOLOv8 model identifies food items in frame. Draws bounding boxes around each distinct item.</p>
+            <div class="stage-tags">
+              <span class="tag">YOLOv8-large</span>
+              <span class="tag">97.2% mAP</span>
+              <span class="tag">&lt;50ms inference</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pipeline-stage">
+          <div class="stage-number">3</div>
+          <div class="stage-content">
+            <h4>Food classification</h4>
+            <p>Custom classifier trained on 500+ food categories. Returns top-3 predictions with confidence scores.</p>
+            <div class="stage-tags">
+              <span class="tag">500+ categories</span>
+              <span class="tag">92% top-1 accuracy</span>
+              <span class="tag">ResNet-50 backbone</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pipeline-stage">
+          <div class="stage-number">4</div>
+          <div class="stage-content">
+            <h4>Volume estimation</h4>
+            <p>Combines depth data with object masks to estimate volume. Weight sensors provide validation.</p>
+            <div class="stage-tags">
+              <span class="tag">3D point cloud</span>
+              <span class="tag">convex hull</span>
+              <span class="tag">±8% accuracy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pipeline-stage">
+          <div class="stage-number">5</div>
+          <div class="stage-content">
+            <h4>Human-in-loop validation</h4>
+            <p>Low-confidence predictions (&lt;85%) are flagged for review. Staff can correct via dashboard.</p>
+            <div class="stage-tags">
+              <span class="tag">confidence threshold</span>
+              <span class="tag">active learning</span>
+              <span class="tag">feedback loop</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col" style="margin-top: 32px;">
+        <div>
+          <h3 style="margin-bottom: 16px;">Model training approach</h3>
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-label">Transfer learning</div>
+            <h3>Consumer data advantage</h3>
+            <p>Mill's consumer product generates millions of food waste images. This data pre-trains models before commercial deployment.</p>
+          </div>
+          <div class="card">
+            <div class="card-label">Location tuning</div>
+            <h3>Site-specific models</h3>
+            <p>Each location develops its own fine-tuned model. A bakery's classifier gets better at bread; a deli's learns meats.</p>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="margin-bottom: 16px;">Continuous improvement</h3>
+          <div class="card" style="margin-bottom: 16px;">
+            <div class="card-label">Active learning</div>
+            <h3>Every correction teaches</h3>
+            <p>When staff correct a misclassification, that example enters the training queue. Models improve weekly.</p>
+          </div>
+          <div class="card">
+            <div class="card-label">Edge case handling</div>
+            <h3>Graceful uncertainty</h3>
+            <p>When the model isn't sure, it says so. "Unknown item - please classify" is better than a wrong guess.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h4>Why custom models matter</h4>
+        <p>
+          Off-the-shelf food recognition works for consumer photos but struggles with commercial waste.
+          Partially eaten items, mixed containers, and unusual angles require training data from actual
+          waste scenarios. Mill's consumer product provides this unique data advantage.
+        </p>
+      </div>
+    </section>
+
+    <!-- Data Pipeline Section -->
+    <section id="data" class="section">
+      <h2 class="section-title">Data pipeline and analytics</h2>
+      <p class="section-subtitle">From raw sensor data to procurement recommendations.</p>
+
+      <div class="tree"><span class="tree-node">Data flow</span>
+<span class="tree-branch">├──</span> <span class="tree-node">Capture</span> <span class="tree-label">(every waste event)</span>
+<span class="tree-branch">│   ├──</span> Timestamp
+<span class="tree-branch">│   ├──</span> Location ID
+<span class="tree-branch">│   ├──</span> Food item(s) detected
+<span class="tree-branch">│   ├──</span> Weight (grams)
+<span class="tree-branch">│   ├──</span> Volume (cubic cm)
+<span class="tree-branch">│   └──</span> Confidence score
+<span class="tree-branch">├──</span> <span class="tree-node">Enrich</span> <span class="tree-label">(add context)</span>
+<span class="tree-branch">│   ├──</span> Map to SKU / ingredient
+<span class="tree-branch">│   ├──</span> Calculate cost (unit price × weight)
+<span class="tree-branch">│   ├──</span> Tag by category (produce, protein, etc.)
+<span class="tree-branch">│   └──</span> Link to prep station / shift
+<span class="tree-branch">├──</span> <span class="tree-node">Aggregate</span> <span class="tree-label">(roll up)</span>
+<span class="tree-branch">│   ├──</span> Hourly / daily / weekly totals
+<span class="tree-branch">│   ├──</span> By location, department, item
+<span class="tree-branch">│   └──</span> Trend calculations
+<span class="tree-branch">└──</span> <span class="tree-node">Analyze</span> <span class="tree-label">(generate insights)</span>
+    <span class="tree-branch">├──</span> Pattern detection
+    <span class="tree-branch">├──</span> Anomaly alerts
+    <span class="tree-branch">├──</span> Forecasting
+    <span class="tree-branch">└──</span> Recommendations</div>
+
+      <div class="card-grid" style="margin-top: 32px;">
+        <div class="card">
+          <div class="card-label">Pattern detection</div>
+          <h3>Find the "waste signature"</h3>
+          <p>Every location has patterns: Sunday prep waste, Friday spoilage, seasonal spikes. The system learns these and flags deviations.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Anomaly alerts</div>
+          <h3>Catch problems early</h3>
+          <p>"Beef waste up 40% vs. last week" triggers an alert. Staff investigate before it becomes a trend.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Procurement connection</div>
+          <h3>Close the loop</h3>
+          <p>If you consistently waste 15% of romaine orders, maybe order 15% less. The data makes the case.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <h4>The attribution challenge</h4>
+        <p>
+          Connecting waste reduction to specific actions is hard. Did waste drop because of Mill, or because
+          the menu changed? The solution: capture baseline data for 60-90 days before any intervention,
+          then measure the same metrics post-deployment with adjustments for seasonality and menu changes.
+        </p>
+      </div>
+    </section>
+
+    <!-- Cost Analysis Section -->
+    <section id="cost" class="section">
+      <h2 class="section-title">Cost analysis</h2>
+      <p class="section-subtitle">Hardware and operational costs for enterprise deployment.</p>
+
+      <div class="calculator">
+        <h3 style="margin-bottom: 16px;">Per-unit hardware cost estimate</h3>
+        <div class="calc-row">
+          <span class="calc-label">Camera module (Sony IMX577)</span>
+          <span class="calc-value">$85</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Depth sensor (Intel RealSense D435i)</span>
+          <span class="calc-value">$320</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Edge compute (Jetson Orin Nano)</span>
+          <span class="calc-value">$499</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Load cells + ADC (4x)</span>
+          <span class="calc-value">$120</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Enclosure + mounting (IP65)</span>
+          <span class="calc-value">$200</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Connectivity module</span>
+          <span class="calc-value">$75</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Assembly + QA</span>
+          <span class="calc-value">$150</span>
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Total hardware BOM</span>
+          <span class="calc-value">~$1,450</span>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-label">Volume pricing</div>
+          <h3>Scale economics</h3>
+          <p>At 1,000+ units, component costs drop 20-30%. Target BOM at scale: ~$1,000/unit. Retail pricing with margin: $2,500-3,500/unit.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Operational costs</div>
+          <h3>Ongoing expenses</h3>
+          <p>Cloud compute: ~$5/unit/month. Model training: ~$2/unit/month. Support allocation: ~$8/unit/month. Total: ~$15/unit/month.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box" style="margin-top: 24px;">
+        <h4>ROI framing</h4>
+        <p>
+          A single unit tracking $50,000/month in food purchases only needs to identify 3-5% savings
+          to pay for itself in under a year. At 10% savings (achievable with procurement optimization),
+          payback is under 6 months.
+        </p>
+      </div>
+
+      <h3 style="margin-top: 48px; margin-bottom: 16px;">Competitive landscape</h3>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>System</th>
+            <th>Edge hardware</th>
+            <th>Accuracy</th>
+            <th>Depth sensing</th>
+            <th>Est. cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Mill Commercial</strong></td>
+            <td>Jetson Orin (100+ TOPS)</td>
+            <td><span class="check">85%+ target</span></td>
+            <td><span class="check">RealSense D435</span></td>
+            <td>$2-3.5K/unit</td>
+          </tr>
+          <tr>
+            <td>Winnow Vision</td>
+            <td>Jetson TX2 (1.3 TFLOPS)</td>
+            <td>~80%</td>
+            <td><span class="partial">Scale only</span></td>
+            <td>~$5K/unit</td>
+          </tr>
+          <tr>
+            <td>Orbisk</td>
+            <td>Undisclosed</td>
+            <td>~90% claimed</td>
+            <td><span class="check">3D imaging</span></td>
+            <td>Subscription</td>
+          </tr>
+          <tr>
+            <td>Leanpath</td>
+            <td>Touchscreen terminal</td>
+            <td>Manual + AI assist</td>
+            <td><span class="partial">Scale only</span></td>
+            <td>~$3-8K/unit</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      mill · Technical architecture deep dive · February 2026
+    </div>
+  </footer>
+
+  <script>
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      // Remove active from all buttons
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+      // Show selected section
+      document.getElementById(sectionId).classList.add('active');
+      // Add active to clicked button
+      event.target.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
