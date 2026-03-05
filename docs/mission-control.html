@@ -1228,18 +1228,21 @@
       document.getElementById('detail-title').textContent = task.name;
       document.getElementById('detail-tagline').textContent = task.isWin ? '\u2B50 Key Win' : '';
       const meta = document.getElementById('detail-meta');
+      const statusText = (task.status || 'pending').replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase());
+      const effortText = (task.effort || 'medium').charAt(0).toUpperCase() + (task.effort || 'medium').slice(1);
+      const impactText = (task.impact || 'medium').charAt(0).toUpperCase() + (task.impact || 'medium').slice(1);
       meta.innerHTML = `
         <div class="meta-item">
-          <span class="meta-badge priority-${task.priority}">${task.priority || 'No priority'}</span>
+          <span class="meta-badge priority-${task.priority}">${task.priority || 'P2'}</span>
         </div>
         <div class="meta-item">
-          <span class="meta-badge status-${task.status}">${task.status || 'pending'}</span>
+          <span class="meta-badge status-${task.status}">${statusText}</span>
         </div>
         <div class="meta-item">
-          <span class="meta-badge effort-${task.effort}">${task.effort || 'medium'} effort</span>
+          <span class="meta-badge effort-${task.effort}">${effortText} Effort</span>
         </div>
         <div class="meta-item">
-          <span class="meta-badge">${task.impact || 'medium'} impact</span>
+          <span class="meta-badge">${impactText} Impact</span>
         </div>
       `;
       const btn = document.getElementById('btn-toggle-status');

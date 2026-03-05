@@ -371,11 +371,10 @@ html, body {
 }
 
 .meta-badge {
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: var(--radius-sm);
   font-size: 11px;
-  font-weight: 500;
-  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .meta-badge.priority-P0 { background: var(--priority-p0); color: white; }
