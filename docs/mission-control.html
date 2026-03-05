@@ -407,7 +407,7 @@
       <span class="stat-value" id="stat-wins">18</span>
       <span class="stat-label">Key Wins</span>
     </div>
-    <a href="https://github.com/Gorp/Mill/blob/main/outputs/strategy/gavin_action_plan.md"
+    <a href="https://github.com/gavinpola/mill-ai-workflows/blob/main/outputs/strategy/gavin_action_plan.md"
        target="_blank"
        class="roadmap-link"
        title="View Full Strategic Roadmap">
@@ -1054,11 +1054,11 @@
 
         // Labels - ALL text INSIDE bubbles with dynamic font sizing
         // Calculate font size to fit text inside circle
-        function getFontSize(text, radius, maxSize, minSize = 2) {
-          // Estimate: font needs to fit within ~1.6x radius width
-          const maxWidth = radius * 1.6;
-          const charWidth = maxSize * 0.55; // Approximate char width ratio
-          const neededSize = maxWidth / (text.length * 0.55);
+        function getFontSize(text, radius, maxSize, minSize = 1) {
+          // Very conservative: text must fit within 1.2x radius (good padding)
+          const maxWidth = radius * 1.2;
+          // Use 0.7 char width ratio (accounts for wide characters like 'W', 'M')
+          const neededSize = maxWidth / (text.length * 0.7);
           return Math.max(minSize, Math.min(maxSize, neededSize));
         }
 
@@ -1082,7 +1082,7 @@
         } else if (node.type === 'pillar') {
           // Pillar: full name inside circle (no % - progress shown via ring)
           const pillarName = node.name;
-          const fontSize = getFontSize(pillarName, node.worldRadius, 10, 5);
+          const fontSize = getFontSize(pillarName, node.worldRadius, 10, 3);
           g.append('text')
             .attr('class', 'node-label pillar')
             .attr('text-anchor', 'middle')
@@ -1094,7 +1094,7 @@
         } else if (node.type === 'subgoal') {
           // Subgoal: name inside circle (no % - progress shown via ring)
           const subgoalName = node.name;
-          const fontSize = getFontSize(subgoalName, node.worldRadius, 6, 2);
+          const fontSize = getFontSize(subgoalName, node.worldRadius, 6, 1);
           g.append('text')
             .attr('class', 'node-label subgoal')
             .attr('text-anchor', 'middle')
