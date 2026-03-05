@@ -7,29 +7,22 @@
   <link rel="stylesheet" href="css/styles.css">
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
-    .nav-link {
-      position: fixed;
-      top: 20px;
-      right: 200px;
-      z-index: 100;
-      padding: 10px 16px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 13px;
-      transition: all 0.2s;
+    /* Scratchboard planet styles */
+    .scratchboard-glow {
+      animation: scratchboard-pulse 3s ease-in-out infinite;
     }
-    .nav-link:hover {
-      background: var(--bg-tertiary);
-      color: var(--text-primary);
+    @keyframes scratchboard-pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.7; }
+    }
+    .scratchboard-label {
+      font-size: 11px;
+      fill: var(--text-secondary);
+      text-anchor: middle;
     }
   </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <a href="scratchboard.html" class="nav-link">Gavin's Tasks</a>
 
   <!-- Breadcrumb Navigation -->
   <div id="breadcrumb">
@@ -120,6 +113,10 @@
           <div class="legend-color" style="background: var(--color-scale);"></div>
           <span>Scale</span>
         </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: #f59e0b;"></div>
+          <span>Gavin</span>
+        </div>
       </div>
     </div>
     <div class="legend-section">
@@ -157,6 +154,84 @@
     // ========================================
     // INLINED DATA - Mill $10B Roadmap
     // ========================================
+    // Gavin's Scratchboard Data - Personal tasks outside the $10B roadmap
+    const SCRATCHBOARD = {
+      id: "scratchboard",
+      name: "Gavin's Tasks",
+      tagline: "Personal scratchboard",
+      type: "scratchboard",
+      color: "#f59e0b",
+      children: [
+        {
+          id: "sb-priorities",
+          name: "90-Day Priorities",
+          type: "subgoal",
+          children: [
+            { id: "sb-c1", name: "Deep dive on top 3 enterprise targets", type: "task", status: "pending", priority: "P0", effort: "medium", impact: "high", category: "commercial" },
+            { id: "sb-c2", name: "Shadow 3 sales/partnership calls", type: "task", status: "pending", priority: "P1", effort: "medium", impact: "high", category: "commercial" },
+            { id: "sb-c3", name: "Own 1 prospect relationship directly", type: "task", status: "pending", priority: "P1", effort: "high", impact: "high", category: "commercial" },
+            { id: "sb-a1", name: "Launch AI Office Hours (weekly)", type: "task", status: "pending", priority: "P0", effort: "low", impact: "high", category: "ai" },
+            { id: "sb-a2", name: "Deploy prospect scoring framework", type: "task", status: "pending", priority: "P0", effort: "medium", impact: "high", category: "ai" },
+            { id: "sb-a3", name: "Ship 3 adopted AI workflows", type: "task", status: "pending", priority: "P1", effort: "high", impact: "high", category: "ai" },
+            { id: "sb-r1", name: "1:1s with every team lead", type: "task", status: "pending", priority: "P0", effort: "medium", impact: "high", category: "relationships" },
+            { id: "sb-r2", name: "Weekly recurring with Harry", type: "task", status: "pending", priority: "P0", effort: "low", impact: "high", category: "relationships" },
+            { id: "sb-r3", name: "Coffee with Matt", type: "task", status: "pending", priority: "P1", effort: "low", impact: "medium", category: "relationships" }
+          ]
+        },
+        {
+          id: "sb-quickwins",
+          name: "Quick Wins (Week 1-2)",
+          type: "subgoal",
+          children: [
+            { id: "sb-q1", name: "Deploy Costco deck framework", type: "task", status: "pending", priority: "P0", effort: "low", impact: "high" },
+            { id: "sb-q2", name: "Demo scoring system to commercial team", type: "task", status: "pending", priority: "P0", effort: "low", impact: "high" },
+            { id: "sb-q3", name: "Set up Jarvis dashboard on screen", type: "task", status: "pending", priority: "P1", effort: "low", impact: "medium" },
+            { id: "sb-q4", name: "Share repo structure as 'how I work'", type: "task", status: "pending", priority: "P1", effort: "low", impact: "medium" }
+          ]
+        },
+        {
+          id: "sb-meetings",
+          name: "Meetings to Schedule",
+          type: "subgoal",
+          children: [
+            { id: "sb-m1", name: "AI/ML Engineering Team - understand AI stack", type: "task", status: "pending", priority: "P0", effort: "low", impact: "high" },
+            { id: "sb-m2", name: "Software Engineering - how they build", type: "task", status: "pending", priority: "P0", effort: "low", impact: "high" },
+            { id: "sb-m3", name: "Product Team - roadmap context", type: "task", status: "pending", priority: "P0", effort: "low", impact: "high" },
+            { id: "sb-m4", name: "Operations - deployment process", type: "task", status: "pending", priority: "P1", effort: "low", impact: "medium" },
+            { id: "sb-m5", name: "Sales/Partnerships - pipeline, deals", type: "task", status: "pending", priority: "P0", effort: "low", impact: "high" },
+            { id: "sb-m6", name: "Data Science - analysis, dashboards", type: "task", status: "pending", priority: "P1", effort: "low", impact: "medium" },
+            { id: "sb-m7", name: "Customer Success - what customers ask", type: "task", status: "pending", priority: "P1", effort: "low", impact: "medium" }
+          ]
+        },
+        {
+          id: "sb-leverage",
+          name: "Leverage This Repo",
+          type: "subgoal",
+          children: [
+            { id: "sb-l1", name: "Demo Enterprise Targeting System", type: "task", status: "pending", priority: "P0", effort: "low", impact: "high" },
+            { id: "sb-l2", name: "Use Auto-Generated Decks for real prospect", type: "task", status: "pending", priority: "P1", effort: "low", impact: "high" },
+            { id: "sb-l3", name: "Meet data team re: dashboards", type: "task", status: "pending", priority: "P1", effort: "low", impact: "medium" },
+            { id: "sb-l4", name: "Show Harry the Reviewer Persona", type: "task", status: "pending", priority: "P0", effort: "low", impact: "medium" },
+            { id: "sb-l5", name: "Share Training Data Strategy with CV team", type: "task", status: "pending", priority: "P1", effort: "low", impact: "high" },
+            { id: "sb-l6", name: "Share Data Strategy Memo with Harry", type: "task", status: "pending", priority: "P0", effort: "low", impact: "high" }
+          ]
+        },
+        {
+          id: "sb-ideas",
+          name: "Ideas Backlog",
+          type: "subgoal",
+          children: [
+            { id: "sb-i1", name: "Agent Dashboard Always On - Jarvis 24/7", type: "task", status: "pending", priority: "P2", effort: "low", impact: "high" },
+            { id: "sb-i2", name: "AI Wins Slack Channel - #ai-wins", type: "task", status: "pending", priority: "P1", effort: "low", impact: "medium" },
+            { id: "sb-i3", name: "Customer Site Ride-Along - watch bins", type: "task", status: "pending", priority: "P1", effort: "low", impact: "high" },
+            { id: "sb-i4", name: "Public GitHub Repo (discuss w/ Harry)", type: "task", status: "pending", priority: "P2", effort: "medium", impact: "high" },
+            { id: "sb-i5", name: "Everyone Works a Trash Shift", type: "task", status: "pending", priority: "P2", effort: "medium", impact: "high" },
+            { id: "sb-i6", name: "Mill GPT - internal chatbot", type: "task", status: "pending", priority: "P2", effort: "high", impact: "high" }
+          ]
+        }
+      ]
+    };
+
     const DATA = {"id":"thesis","name":"Make the Food System Smarter","tagline":"Turn Mill from a hardware company into an autonomous data intelligence platform","type":"thesis","children":[{"id":"commercial","name":"Commercial Autonomy","tagline":"Harry doesn't need to be on every call","type":"pillar","color":"#2563eb","children":[{"id":"commercial-pitch","name":"Repeatable Pitch System","type":"subgoal","children":[{"id":"c-p-1","name":"Create base pitch deck template (reveal.js)","type":"task","status":"completed","priority":"P0","effort":"medium","impact":"high"},{"id":"c-p-2","name":"Build 5 audience variant decks","type":"task","status":"completed","priority":"P0","effort":"medium","impact":"high"},{"id":"c-p-3","name":"Document Mill Story in 3/30/180 seconds","type":"task","status":"pending","priority":"P0","effort":"low","impact":"high"},{"id":"c-p-4","name":"Create objection handling playbook (top 20)","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"c-p-5","name":"Build competitive battlecards (Leanpath, Winnow)","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"c-p-6","name":"Record practice pitch videos for training","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"c-p-7","name":"Set up live demo environment","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"c-p-8","name":"Create pricing presentation","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"c-p-9","name":"Document successful pitch patterns","type":"task","status":"pending","priority":"P2","effort":"low","impact":"medium"},{"id":"c-p-10","name":"Train team member #1 to pitch solo","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"c-p-11","name":"Train team member #2 to pitch solo","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"c-p-12","name":"WIN: First solo pitch (no Harry)","type":"task","status":"pending","priority":"P0","effort":"low","impact":"high","isWin":true}]},{"id":"commercial-pipeline","name":"Pipeline Intelligence","type":"subgoal","children":[{"id":"c-pi-1","name":"Define ICP document","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"c-pi-2","name":"Build master target list (500+ companies)","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"c-pi-3","name":"Apply MECE scoring to all targets","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"c-pi-4","name":"Identify top 50 priority targets","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"c-pi-5","name":"Research decision makers for top 50","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"c-pi-6","name":"Map warm intro paths for top 20","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"c-pi-7","name":"Create outreach sequences per segment","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"c-pi-8","name":"Set up CRM with pipeline stages","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"c-pi-9","name":"Build pipeline dashboard","type":"task","status":"pending","priority":"P2","effort":"medium","impact":"medium"},{"id":"c-pi-10","name":"Establish weekly pipeline review","type":"task","status":"pending","priority":"P1","effort":"low","impact":"medium"},{"id":"c-pi-11","name":"Create inbound lead qualification checklist","type":"task","status":"pending","priority":"P2","effort":"low","impact":"low"}]},{"id":"commercial-proof","name":"Proof Arsenal","type":"subgoal","children":[{"id":"c-pr-1","name":"Document Whole Foods pilot timeline","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"c-pr-2","name":"Calculate verified ROI from Whole Foods","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"c-pr-3","name":"Get testimonial quote from WF contact","type":"task","status":"pending","priority":"P0","effort":"low","impact":"high"},{"id":"c-pr-4","name":"Create PDF case study (2-pager)","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"c-pr-5","name":"Create video case study (90s)","type":"task","status":"pending","priority":"P2","effort":"high","impact":"medium"},{"id":"c-pr-6","name":"Document 2nd enterprise case study","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"c-pr-7","name":"Document 3rd enterprise case study","type":"task","status":"pending","priority":"P2","effort":"high","impact":"medium"},{"id":"c-pr-8","name":"Build interactive ROI calculator","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"c-pr-9","name":"Create proof deck for CFOs","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"c-pr-10","name":"Get 3rd party validation","type":"task","status":"pending","priority":"P2","effort":"medium","impact":"high"}]},{"id":"commercial-pricing","name":"Outcome-Based Pricing","type":"subgoal","children":[{"id":"c-o-1","name":"Define outcome-based pricing model","type":"task","status":"completed","priority":"P0","effort":"medium","impact":"high"},{"id":"c-o-2","name":"Create baseline methodology doc","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"c-o-3","name":"Draft outcome-based contract template","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"c-o-4","name":"Identify 3 pilot customers","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"c-o-5","name":"Deploy 60-day baseline at pilots","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"c-o-6","name":"Build attribution dashboard","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"c-o-7","name":"Calculate verified savings pilot #1","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"c-o-8","name":"Calculate verified savings pilot #2","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"c-o-9","name":"Document learnings, refine model","type":"task","status":"pending","priority":"P2","effort":"medium","impact":"medium"},{"id":"c-o-10","name":"WIN: Roll out outcome pricing default","type":"task","status":"pending","priority":"P2","effort":"medium","impact":"high","isWin":true}]}]},{"id":"ai","name":"AI Leverage","tagline":"Every person becomes 10x","type":"pillar","color":"#7c3aed","children":[{"id":"ai-tools","name":"Tool Access (Claude Code for All)","type":"subgoal","children":[{"id":"a-t-1","name":"Research Anthropic enterprise pricing","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"a-t-2","name":"Build business case for ELA","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"a-t-3","name":"Get Harry/Matt budget approval","type":"task","status":"pending","priority":"P0","effort":"low","impact":"high"},{"id":"a-t-4","name":"Negotiate contract with Anthropic","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"a-t-5","name":"Set up team org and seat allocation","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"a-t-6","name":"Create Getting Started onboarding doc","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"a-t-7","name":"Roll out to first 5 power users","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"a-t-8","name":"Collect feedback, iterate onboarding","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"a-t-9","name":"Roll out to full team","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"a-t-10","name":"Set up usage tracking and ROI measurement","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"}]},{"id":"ai-day","name":"AI Day (Gavin Leads)","type":"subgoal","children":[{"id":"a-d-1","name":"Set date, get leadership buy-in","type":"task","status":"pending","priority":"P0","effort":"low","impact":"high"},{"id":"a-d-2","name":"Define learning objectives","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"a-d-3","name":"Create agenda (AM theory, PM hands-on)","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"a-d-4","name":"Design 5 hands-on exercises per team","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"a-d-5","name":"Prepare demo environments","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"a-d-6","name":"Create pre-work materials (10min video)","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"a-d-7","name":"Send invites + hype communication","type":"task","status":"pending","priority":"P1","effort":"low","impact":"medium"},{"id":"a-d-8","name":"RUN AI DAY","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high","isWin":true},{"id":"a-d-9","name":"Collect feedback (survey)","type":"task","status":"pending","priority":"P1","effort":"low","impact":"medium"},{"id":"a-d-10","name":"Create follow-up resources","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"a-d-11","name":"Measure behavior change (2 weeks post)","type":"task","status":"pending","priority":"P2","effort":"medium","impact":"medium"},{"id":"a-d-12","name":"Plan quarterly AI refreshers","type":"task","status":"pending","priority":"P2","effort":"medium","impact":"medium"}]},{"id":"ai-office","name":"AI Office Hours","type":"subgoal","children":[{"id":"a-o-1","name":"Choose recurring time slot","type":"task","status":"pending","priority":"P0","effort":"low","impact":"medium"},{"id":"a-o-2","name":"Create #ai-office-hours Slack channel","type":"task","status":"pending","priority":"P0","effort":"low","impact":"medium"},{"id":"a-o-3","name":"Send launch announcement","type":"task","status":"pending","priority":"P0","effort":"low","impact":"medium"},{"id":"a-o-4","name":"Prepare 5 demo use cases","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"a-o-5","name":"Run first AI Office Hours","type":"task","status":"pending","priority":"P0","effort":"low","impact":"high"},{"id":"a-o-6","name":"Document questions to FAQ","type":"task","status":"pending","priority":"P1","effort":"low","impact":"medium"},{"id":"a-o-7","name":"Run weekly for 4 weeks","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"a-o-8","name":"Identify AI champions per team","type":"task","status":"pending","priority":"P1","effort":"low","impact":"high"},{"id":"a-o-9","name":"Transition to bi-weekly","type":"task","status":"pending","priority":"P2","effort":"low","impact":"low"}]},{"id":"ai-workflows","name":"Workflow Library","type":"subgoal","children":[{"id":"a-w-1","name":"Document deck generation workflow","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"a-w-2","name":"Document prospect research workflow","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"a-w-3","name":"Document dashboard generation workflow","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"a-w-4","name":"Document meeting notes workflow","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"a-w-5","name":"Document email drafting workflow","type":"task","status":"pending","priority":"P1","effort":"low","impact":"medium"},{"id":"a-w-6","name":"Document competitive analysis workflow","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"a-w-7","name":"Document code review workflow (eng)","type":"task","status":"pending","priority":"P2","effort":"medium","impact":"medium"},{"id":"a-w-8","name":"Create shared prompt library","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"a-w-9","name":"Build internal AI wiki/playbook","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"a-w-10","name":"WIN: 50%+ team using weekly","type":"task","status":"pending","priority":"P1","effort":"low","impact":"high","isWin":true},{"id":"a-w-11","name":"Track time savings by workflow","type":"task","status":"pending","priority":"P2","effort":"medium","impact":"medium"},{"id":"a-w-12","name":"Publish Mill AI Playbook externally","type":"task","status":"pending","priority":"P3","effort":"high","impact":"medium"}]},{"id":"ai-steering","name":"AI Steering Committee","type":"subgoal","children":[{"id":"a-s-1","name":"Define committee members","type":"task","status":"pending","priority":"P1","effort":"low","impact":"medium"},{"id":"a-s-2","name":"Create committee charter","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"a-s-3","name":"Schedule bi-weekly meetings","type":"task","status":"pending","priority":"P1","effort":"low","impact":"medium"},{"id":"a-s-4","name":"Create prioritization framework","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"a-s-5","name":"Establish data privacy guidelines","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"a-s-6","name":"Run first committee meeting","type":"task","status":"pending","priority":"P1","effort":"low","impact":"medium"},{"id":"a-s-7","name":"Approve first 3 AI initiatives","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"a-s-8","name":"Create AI project tracking board","type":"task","status":"pending","priority":"P2","effort":"medium","impact":"medium"}]}]},{"id":"data","name":"Data Precision","tagline":"The best food waste data on Earth","type":"pillar","color":"#ea580c","children":[{"id":"data-hardware","name":"Hardware Excellence","type":"subgoal","children":[{"id":"d-h-1","name":"Finalize camera (Basler ace2)","type":"task","status":"completed","priority":"P0","effort":"medium","impact":"high"},{"id":"d-h-2","name":"Finalize depth sensor (RealSense D455)","type":"task","status":"completed","priority":"P0","effort":"medium","impact":"high"},{"id":"d-h-3","name":"Finalize edge compute (Jetson Orin NX)","type":"task","status":"completed","priority":"P0","effort":"medium","impact":"high"},{"id":"d-h-4","name":"Select carrier board (Connect Tech)","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"medium"},{"id":"d-h-5","name":"Select LED lighting system","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"medium"},{"id":"d-h-6","name":"Integrate weight sensor","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"d-h-7","name":"Design enclosure for commercial env","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"d-h-8","name":"Build first prototype unit","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-h-9","name":"Test prototype in office (2 weeks)","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-h-10","name":"Iterate based on learnings","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"d-h-11","name":"Finalize production BOM","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"d-h-12","name":"Identify manufacturing partner","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"d-h-13","name":"Order components for 10 beta units","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"d-h-14","name":"Assemble 10 beta units","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"}]},{"id":"data-model","name":"Baseline Model (80%+ accuracy)","type":"subgoal","children":[{"id":"d-m-1","name":"Define 30 initial food categories","type":"task","status":"completed","priority":"P0","effort":"medium","impact":"high"},{"id":"d-m-2","name":"Source seed dataset (Food-101 etc)","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-m-3","name":"Collect 500 internal images/category","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-m-4","name":"Clean and validate dataset","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"d-m-5","name":"Set up labeling interface","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-m-6","name":"Label seed dataset (15K images)","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-m-7","name":"Generate synthetic data (3D renders)","type":"task","status":"pending","priority":"P1","effort":"high","impact":"medium"},{"id":"d-m-8","name":"Implement augmentation pipeline","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"d-m-9","name":"Set up training infra (GPU, MLflow)","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-m-10","name":"Train baseline (EfficientNetB4)","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-m-11","name":"Evaluate on held-out test set","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"d-m-12","name":"Identify failure modes","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"d-m-13","name":"Iterate to hit 80% accuracy","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-m-14","name":"Document model card","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"}]},{"id":"data-beta","name":"Beta Deployment (10-50 bins)","type":"subgoal","children":[{"id":"d-b-1","name":"Identify 3-5 beta site partners","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-b-2","name":"Sign beta agreements","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"d-b-3","name":"Install first bin at site #1","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-b-4","name":"Install bins at sites #2-5","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-b-5","name":"Set up HITL review queue","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-b-6","name":"Hire/train 2 labelers","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"d-b-7","name":"Run first week live data","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-b-8","name":"Analyze first week accuracy","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"d-b-9","name":"Implement weekly retrain cycle","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"d-b-10","name":"Scale to 10 bins","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"d-b-11","name":"WIN: Hit 85% accuracy","type":"task","status":"pending","priority":"P0","effort":"low","impact":"high","isWin":true},{"id":"d-b-12","name":"Scale to 25 bins","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"d-b-13","name":"Scale to 50 bins","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"d-b-14","name":"WIN: Hit 88% accuracy","type":"task","status":"pending","priority":"P1","effort":"low","impact":"high","isWin":true},{"id":"d-b-15","name":"Reduce human review to <15%","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"}]},{"id":"data-flywheel","name":"Training Data Flywheel","type":"subgoal","children":[{"id":"d-f-1","name":"Implement auto-labeling (high conf)","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"d-f-2","name":"Implement active learning","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"d-f-3","name":"Build model monitoring dashboard","type":"task","status":"pending","priority":"P1","effort":"high","impact":"medium"},{"id":"d-f-4","name":"Implement menu-aware classification","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"d-f-5","name":"Implement per-customer fine-tuning","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"d-f-6","name":"Design novel food detection","type":"task","status":"pending","priority":"P2","effort":"high","impact":"medium"},{"id":"d-f-7","name":"R&D: Federated learning","type":"task","status":"pending","priority":"P3","effort":"high","impact":"medium"},{"id":"d-f-8","name":"Reach 500K labeled images","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"d-f-9","name":"WIN: Hit 92% accuracy","type":"task","status":"pending","priority":"P2","effort":"low","impact":"high","isWin":true},{"id":"d-f-10","name":"Reduce human review to <10%","type":"task","status":"pending","priority":"P3","effort":"high","impact":"high"}]}]},{"id":"outcomes","name":"Outcome Delivery","tagline":"Prove ROI or don't charge","type":"pillar","color":"#16a34a","children":[{"id":"outcomes-measure","name":"Measurement Infrastructure","type":"subgoal","children":[{"id":"o-m-1","name":"Define baseline methodology","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"o-m-2","name":"Create baseline data collection UX","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"o-m-3","name":"Build waste-to-cost conversion","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"o-m-4","name":"Implement savings calc pipeline","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"o-m-5","name":"Create full audit trail","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"o-m-6","name":"Build attribution model","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"o-m-7","name":"Validate with finance expert","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"o-m-8","name":"Document methodology for trust","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"o-m-9","name":"Get CFO methodology approval","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"}]},{"id":"outcomes-dashboard","name":"Customer Dashboards","type":"subgoal","children":[{"id":"o-d-1","name":"Design dashboard mockups (Figma)","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"o-d-2","name":"Get customer feedback on mockups","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"o-d-3","name":"Build dashboard MVP","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"o-d-4","name":"Add cost savings view","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high"},{"id":"o-d-5","name":"Add sustainability/ESG view","type":"task","status":"pending","priority":"P1","effort":"high","impact":"medium"},{"id":"o-d-6","name":"Add trend analysis + forecasting","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"o-d-7","name":"Add export (PDF, CSV)","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"},{"id":"o-d-8","name":"Add benchmark comparison","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"o-d-9","name":"Deploy to first customer","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"o-d-10","name":"Collect feedback, iterate","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"o-d-11","name":"Deploy to 5 customers","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"o-d-12","name":"Build automated report gen","type":"task","status":"pending","priority":"P2","effort":"high","impact":"medium"}]},{"id":"outcomes-procurement","name":"Procurement Recommendations","type":"subgoal","children":[{"id":"o-p-1","name":"Analyze waste to procurement signals","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"o-p-2","name":"Design recommendation engine","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"o-p-3","name":"Build MVP recommendation system","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"o-p-4","name":"Test with pilot customer","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"o-p-5","name":"Measure adoption rate","type":"task","status":"pending","priority":"P2","effort":"medium","impact":"medium"},{"id":"o-p-6","name":"Calculate $ saved from recs","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"o-p-7","name":"Integrate with procurement APIs","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"o-p-8","name":"WIN: Prove 2-5% cost reduction","type":"task","status":"pending","priority":"P1","effort":"low","impact":"high","isWin":true}]},{"id":"outcomes-proof","name":"Proof Points","type":"subgoal","children":[{"id":"o-pr-1","name":"WIN: Publish first verified ROI","type":"task","status":"pending","priority":"P0","effort":"high","impact":"high","isWin":true},{"id":"o-pr-2","name":"Get customer sign-off on case study","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"o-pr-3","name":"Get testimonial from decision maker","type":"task","status":"pending","priority":"P0","effort":"low","impact":"high"},{"id":"o-pr-4","name":"Publish 2nd verified ROI","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"o-pr-5","name":"Publish 3rd verified ROI","type":"task","status":"pending","priority":"P2","effort":"high","impact":"medium"},{"id":"o-pr-6","name":"Get Whole Foods public reference","type":"task","status":"pending","priority":"P0","effort":"medium","impact":"high"},{"id":"o-pr-7","name":"Get analyst/press coverage","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"o-pr-8","name":"Create shareable proof library","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"medium"}]}]},{"id":"scale","name":"Scale Effects","tagline":"Data that changes the food system","type":"pillar","color":"#0d9488","children":[{"id":"scale-network","name":"Network Effects","type":"subgoal","children":[{"id":"s-n-1","name":"Define anonymization approach","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"s-n-2","name":"Design cross-customer benchmarking","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"s-n-3","name":"Build benchmark comparison tool","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-n-4","name":"Create industry insights","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-n-5","name":"WIN: 20 enterprise deployments","type":"task","status":"pending","priority":"P0","effort":"low","impact":"high","isWin":true},{"id":"s-n-6","name":"WIN: 50 enterprise deployments","type":"task","status":"pending","priority":"P1","effort":"low","impact":"high","isWin":true},{"id":"s-n-7","name":"WIN: 100 enterprise deployments","type":"task","status":"pending","priority":"P2","effort":"low","impact":"high","isWin":true},{"id":"s-n-8","name":"Document network effect metrics","type":"task","status":"pending","priority":"P2","effort":"medium","impact":"medium"}]},{"id":"scale-partners","name":"Strategic Partnerships","type":"subgoal","children":[{"id":"s-p-1","name":"Identify 10 potential data partners","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"s-p-2","name":"Create data partnership pitch","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"s-p-3","name":"Reach out to top 5","type":"task","status":"pending","priority":"P1","effort":"high","impact":"high"},{"id":"s-p-4","name":"WIN: Sign first data partnership","type":"task","status":"pending","priority":"P1","effort":"low","impact":"high","isWin":true},{"id":"s-p-5","name":"Explore distributor partnerships","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-p-6","name":"Explore tech partnerships (POS)","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-p-7","name":"Sign POS integration partnership","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"}]},{"id":"scale-authority","name":"Industry Authority","type":"subgoal","children":[{"id":"s-a-1","name":"Draft State of Food Waste outline","type":"task","status":"pending","priority":"P1","effort":"medium","impact":"high"},{"id":"s-a-2","name":"Compile data for report","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-a-3","name":"Design and publish report","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-a-4","name":"Pitch to press (10 outlets)","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-a-5","name":"Present at industry conference","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-a-6","name":"Brief EPA/USDA","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-a-7","name":"WIN: Cited in policy/academic","type":"task","status":"pending","priority":"P3","effort":"low","impact":"high","isWin":true}]},{"id":"scale-monetize","name":"Data Monetization","type":"subgoal","children":[{"id":"s-m-1","name":"Define Mill Insights concept","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-m-2","name":"Design Mill Insights MVP","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-m-3","name":"Build Mill Insights beta","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-m-4","name":"Pilot with 3 customers","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-m-5","name":"Define pricing model","type":"task","status":"pending","priority":"P2","effort":"medium","impact":"high"},{"id":"s-m-6","name":"Launch publicly","type":"task","status":"pending","priority":"P3","effort":"high","impact":"high"},{"id":"s-m-7","name":"WIN: $100K ARR data products","type":"task","status":"pending","priority":"P3","effort":"low","impact":"high","isWin":true},{"id":"s-m-8","name":"WIN: $1M ARR data products","type":"task","status":"pending","priority":"P3","effort":"low","impact":"high","isWin":true}]},{"id":"scale-supply","name":"Supply Chain Integration","type":"subgoal","children":[{"id":"s-sc-1","name":"Map procurement systems (SAP, Oracle)","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-sc-2","name":"Build integration #1","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-sc-3","name":"Build integration #2","type":"task","status":"pending","priority":"P3","effort":"high","impact":"high"},{"id":"s-sc-4","name":"Pilot upstream recommendations","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-sc-5","name":"Prove supply chain cost reduction","type":"task","status":"pending","priority":"P2","effort":"high","impact":"high"},{"id":"s-sc-6","name":"Package as product","type":"task","status":"pending","priority":"P3","effort":"high","impact":"high"}]}]}]};
 
     // ========================================
@@ -223,6 +298,7 @@
       if (saved) {
         const state = JSON.parse(saved);
         applyState(data, state);
+        applyState(SCRATCHBOARD, state);
       }
     }
 
@@ -248,6 +324,7 @@
     function saveState() {
       const state = {};
       collectState(data, state);
+      collectState(SCRATCHBOARD, state);
       localStorage.setItem('mill-mission-control', JSON.stringify(state));
     }
 
@@ -315,6 +392,72 @@
         .attr('class', 'node-tagline')
         .attr('y', 15)
         .text('Make food smarter');
+      // Render Scratchboard as separate planet in bottom-right
+      const sbRadius = 45;
+      const sbX = width - 120;
+      const sbY = height - 120;
+      const sbProgress = calculateProgress(SCRATCHBOARD);
+      const sbColor = SCRATCHBOARD.color;
+
+      // Scratchboard glow
+      nodesGroup.append('circle')
+        .attr('cx', sbX)
+        .attr('cy', sbY)
+        .attr('r', sbRadius + 15)
+        .attr('fill', sbColor)
+        .attr('opacity', 0.15)
+        .attr('class', 'scratchboard-glow');
+
+      const sbGroup = nodesGroup.append('g')
+        .attr('class', 'node')
+        .attr('transform', `translate(${sbX}, ${sbY})`);
+
+      // Progress ring
+      const sbCircumference = 2 * Math.PI * (sbRadius + 4);
+      sbGroup.append('circle')
+        .attr('r', sbRadius + 4)
+        .attr('fill', 'none')
+        .attr('stroke', '#262626')
+        .attr('stroke-width', 4);
+      sbGroup.append('circle')
+        .attr('r', sbRadius + 4)
+        .attr('fill', 'none')
+        .attr('stroke', sbColor)
+        .attr('stroke-width', 4)
+        .attr('stroke-dasharray', sbCircumference)
+        .attr('stroke-dashoffset', sbCircumference * (1 - sbProgress))
+        .attr('transform', 'rotate(-90)');
+
+      // Main circle
+      sbGroup.append('circle')
+        .attr('r', sbRadius)
+        .attr('fill', sbColor)
+        .attr('fill-opacity', 0.2)
+        .attr('stroke', sbColor)
+        .attr('stroke-width', 2)
+        .attr('cursor', 'pointer')
+        .on('click', () => renderScratchboard(SCRATCHBOARD))
+        .on('mouseenter', (e) => showTooltip(e, { name: "Gavin's Scratchboard", type: "scratchboard" }))
+        .on('mouseleave', hideTooltip);
+
+      // Label
+      sbGroup.append('text')
+        .attr('class', 'scratchboard-label')
+        .attr('y', -8)
+        .attr('fill', '#fafafa')
+        .attr('font-weight', '500')
+        .text("Gavin's");
+      sbGroup.append('text')
+        .attr('class', 'scratchboard-label')
+        .attr('y', 8)
+        .attr('fill', '#fafafa')
+        .attr('font-weight', '500')
+        .text('Tasks');
+      sbGroup.append('text')
+        .attr('class', 'node-tagline')
+        .attr('y', sbRadius + 15)
+        .text(`${countTasks(SCRATCHBOARD)} tasks`);
+
       const pillars = root.children || [];
       pillars.forEach((pillar, i) => {
         const angle = (i / pillars.length) * 2 * Math.PI - Math.PI / 2;
@@ -577,6 +720,224 @@
       });
     }
 
+    function renderScratchboard(scratchboard) {
+      currentNode = scratchboard;
+      currentZoomLevel = 2;
+      const nodesGroup = d3.select('#nodes');
+      const connectionsGroup = d3.select('#connections');
+      nodesGroup.selectAll('*').remove();
+      connectionsGroup.selectAll('*').remove();
+      const cx = width / 2;
+      const cy = height / 2;
+      const color = scratchboard.color;
+      const orbitRadius = Math.min(width, height) * 0.32;
+      const centerRadius = 60;
+      const subgoalRadius = 40;
+
+      // Center
+      const centerGroup = nodesGroup.append('g')
+        .attr('class', 'node')
+        .attr('transform', `translate(${cx}, ${cy})`);
+      centerGroup.append('circle')
+        .attr('r', centerRadius)
+        .attr('fill', color)
+        .attr('fill-opacity', 0.2)
+        .attr('stroke', color)
+        .attr('stroke-width', 3)
+        .attr('cursor', 'pointer')
+        .on('click', () => render(data));
+      centerGroup.append('text')
+        .attr('class', 'node-label pillar')
+        .attr('y', -8)
+        .text("Gavin's");
+      centerGroup.append('text')
+        .attr('class', 'node-label pillar')
+        .attr('y', 12)
+        .text('Tasks');
+
+      const subgoals = scratchboard.children || [];
+      subgoals.forEach((subgoal, i) => {
+        const angle = (i / subgoals.length) * 2 * Math.PI - Math.PI / 2;
+        const x = cx + Math.cos(angle) * orbitRadius;
+        const y = cy + Math.sin(angle) * orbitRadius;
+
+        connectionsGroup.append('line')
+          .attr('class', 'connection-line')
+          .attr('x1', cx)
+          .attr('y1', cy)
+          .attr('x2', x)
+          .attr('y2', y);
+
+        const subgoalGroup = nodesGroup.append('g')
+          .attr('class', 'node')
+          .attr('transform', `translate(${x}, ${y})`);
+
+        const progress = calculateProgress(subgoal);
+        const circumference = 2 * Math.PI * (subgoalRadius + 4);
+        subgoalGroup.append('circle')
+          .attr('r', subgoalRadius + 4)
+          .attr('fill', 'none')
+          .attr('stroke', '#262626')
+          .attr('stroke-width', 4);
+        subgoalGroup.append('circle')
+          .attr('r', subgoalRadius + 4)
+          .attr('fill', 'none')
+          .attr('stroke', color)
+          .attr('stroke-width', 4)
+          .attr('stroke-dasharray', circumference)
+          .attr('stroke-dashoffset', circumference * (1 - progress))
+          .attr('transform', 'rotate(-90)');
+
+        subgoalGroup.append('circle')
+          .attr('r', subgoalRadius)
+          .attr('fill', color)
+          .attr('fill-opacity', 0.15)
+          .attr('stroke', color)
+          .attr('stroke-width', 2)
+          .attr('cursor', 'pointer')
+          .on('click', () => renderScratchboardSubgoal(subgoal))
+          .on('mouseenter', (e) => showTooltip(e, subgoal))
+          .on('mouseleave', hideTooltip);
+
+        const words = subgoal.name.split(' ');
+        const line1 = words.slice(0, 2).join(' ');
+        const line2 = words.slice(2).join(' ');
+        subgoalGroup.append('text')
+          .attr('class', 'node-label subgoal')
+          .attr('y', line2 ? -5 : 4)
+          .text(line1.substring(0, 12));
+        if (line2) {
+          subgoalGroup.append('text')
+            .attr('class', 'node-label subgoal')
+            .attr('y', 10)
+            .text(line2.substring(0, 12));
+        }
+
+        const taskCount = subgoal.children ? subgoal.children.length : 0;
+        subgoalGroup.append('text')
+          .attr('class', 'node-tagline')
+          .attr('y', subgoalRadius + 15)
+          .text(`${taskCount} tasks`);
+      });
+
+      updateBreadcrumb({ type: 'scratchboard', name: "Gavin's Tasks" });
+      resetZoom();
+    }
+
+    function renderScratchboardSubgoal(subgoal) {
+      currentNode = subgoal;
+      currentZoomLevel = 3;
+      const nodesGroup = d3.select('#nodes');
+      const connectionsGroup = d3.select('#connections');
+      nodesGroup.selectAll('*').remove();
+      connectionsGroup.selectAll('*').remove();
+      const cx = width / 2;
+      const cy = height / 2;
+      const color = SCRATCHBOARD.color;
+      const tasks = (subgoal.children || []).filter(t => filterTask(t));
+      if (tasks.length === 0) return;
+      const cols = Math.ceil(Math.sqrt(tasks.length * 1.5));
+      const rows = Math.ceil(tasks.length / cols);
+      const spacing = 100;
+      const taskRadius = 30;
+      const startX = cx - ((cols - 1) * spacing) / 2;
+      const startY = cy - ((rows - 1) * spacing) / 2;
+
+      // Header
+      const headerGroup = nodesGroup.append('g')
+        .attr('transform', `translate(${cx}, 80)`);
+      headerGroup.append('text')
+        .attr('class', 'node-label pillar')
+        .attr('text-anchor', 'middle')
+        .attr('fill', color)
+        .text(subgoal.name);
+      headerGroup.append('text')
+        .attr('class', 'node-tagline')
+        .attr('y', 20)
+        .attr('text-anchor', 'middle')
+        .text(`${tasks.length} tasks | ${Math.round(calculateProgress(subgoal) * 100)}% complete`);
+
+      // Back button
+      const backGroup = nodesGroup.append('g')
+        .attr('class', 'node')
+        .attr('transform', `translate(60, 80)`);
+      backGroup.append('circle')
+        .attr('r', 20)
+        .attr('fill', '#262626')
+        .attr('stroke', color)
+        .attr('cursor', 'pointer')
+        .on('click', () => renderScratchboard(SCRATCHBOARD));
+      backGroup.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('y', 5)
+        .attr('fill', color)
+        .attr('font-size', '16px')
+        .attr('pointer-events', 'none')
+        .text('\u2190');
+
+      tasks.forEach((task, i) => {
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        const x = startX + col * spacing;
+        const y = startY + row * spacing + 60;
+
+        const taskGroup = nodesGroup.append('g')
+          .attr('class', 'node')
+          .attr('transform', `translate(${x}, ${y})`);
+
+        const sizeMultiplier = task.impact === 'high' ? 1.2 : task.impact === 'low' ? 0.8 : 1;
+        const r = taskRadius * sizeMultiplier;
+        const strokeWidth = task.effort === 'high' ? 4 : task.effort === 'low' ? 1.5 : 2.5;
+        const fillOpacity = task.status === 'completed' ? 0.8 : 0.15;
+
+        taskGroup.append('circle')
+          .attr('r', r)
+          .attr('fill', color)
+          .attr('fill-opacity', fillOpacity)
+          .attr('stroke', task.status === 'completed' ? STATUS_COLORS.completed : color)
+          .attr('stroke-width', strokeWidth)
+          .attr('cursor', 'pointer')
+          .on('click', () => showDetail(task, subgoal, true))
+          .on('mouseenter', (e) => showTooltip(e, task))
+          .on('mouseleave', hideTooltip);
+
+        if (task.status === 'completed') {
+          taskGroup.append('text')
+            .attr('text-anchor', 'middle')
+            .attr('y', 5)
+            .attr('fill', 'white')
+            .attr('font-size', '16px')
+            .attr('pointer-events', 'none')
+            .text('\u2713');
+        }
+
+        if (task.priority) {
+          taskGroup.append('circle')
+            .attr('cx', r - 5)
+            .attr('cy', -r + 5)
+            .attr('r', 8)
+            .attr('fill', PRIORITY_COLORS[task.priority] || '#666');
+          taskGroup.append('text')
+            .attr('x', r - 5)
+            .attr('y', -r + 8)
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'white')
+            .attr('font-size', '8px')
+            .attr('font-weight', '600')
+            .attr('pointer-events', 'none')
+            .text(task.priority.replace('P', ''));
+        }
+
+        taskGroup.append('text')
+          .attr('class', 'node-label task')
+          .attr('y', r + 15)
+          .text(task.name.substring(0, 20) + (task.name.length > 20 ? '...' : ''));
+      });
+
+      updateBreadcrumb({ type: 'scratchboard-subgoal', name: subgoal.name, parent: SCRATCHBOARD });
+      resetZoom();
+    }
+
     function calculateProgress(node) {
       if (node.type === 'task') {
         return node.status === 'completed' ? 1 : 0;
@@ -640,6 +1001,13 @@
       const path = [];
       if (node.type === 'thesis') {
         path.push({ name: 'Mission Control', node: data });
+      } else if (node.type === 'scratchboard') {
+        path.push({ name: 'Mission Control', node: data });
+        path.push({ name: "Gavin's Tasks", node: SCRATCHBOARD, action: () => renderScratchboard(SCRATCHBOARD) });
+      } else if (node.type === 'scratchboard-subgoal') {
+        path.push({ name: 'Mission Control', node: data });
+        path.push({ name: "Gavin's Tasks", node: SCRATCHBOARD, action: () => renderScratchboard(SCRATCHBOARD) });
+        path.push({ name: node.name.substring(0, 15), node: node });
       } else if (node.type === 'pillar') {
         path.push({ name: 'Mission Control', node: data });
         path.push({ name: node.name.split(' ')[0], node: node });
@@ -663,7 +1031,13 @@
         const span = document.createElement('span');
         span.className = 'breadcrumb-item' + (i === path.length - 1 ? ' active' : '');
         span.textContent = item.name;
-        span.onclick = () => render(item.node);
+        span.onclick = () => {
+          if (item.action) {
+            item.action();
+          } else {
+            render(item.node);
+          }
+        };
         breadcrumb.appendChild(span);
         if (i < path.length - 1) {
           const sep = document.createElement('span');
@@ -706,10 +1080,12 @@
 
     let selectedTask = null;
     let selectedSubgoal = null;
+    let selectedIsScratchboard = false;
 
-    function showDetail(task, subgoal) {
+    function showDetail(task, subgoal, isScratchboard = false) {
       selectedTask = task;
       selectedSubgoal = subgoal;
+      selectedIsScratchboard = isScratchboard;
       const panel = document.getElementById('detail-panel');
       document.getElementById('detail-title').textContent = task.name;
       document.getElementById('detail-tagline').textContent = task.isWin ? '\u2B50 Key Win' : '';
@@ -745,8 +1121,12 @@
       selectedTask.status = selectedTask.status === 'completed' ? 'pending' : 'completed';
       saveState();
       updateStats();
-      render(currentNode);
-      showDetail(selectedTask, selectedSubgoal);
+      if (selectedIsScratchboard) {
+        renderScratchboardSubgoal(selectedSubgoal);
+      } else {
+        render(currentNode);
+      }
+      showDetail(selectedTask, selectedSubgoal, selectedIsScratchboard);
     }
 
     function setupEventListeners() {
