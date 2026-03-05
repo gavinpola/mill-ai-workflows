@@ -291,10 +291,60 @@
         updateDimensions();
         render(currentNode || data);
       });
+      let lastZoomScale = 1;
+      let zoomTimeout = null;
+
       zoom = d3.zoom()
-        .scaleExtent([0.5, 5])
+        .scaleExtent([0.5, 4])
         .on('zoom', (event) => {
           container.attr('transform', event.transform);
+          const currentScale = event.transform.k;
+
+          // Clear any pending zoom navigation
+          if (zoomTimeout) clearTimeout(zoomTimeout);
+
+          // Zoom-to-navigate: zoom in past 2.5x triggers drill-down
+          if (currentScale > 2.5 && lastZoomScale <= 2.5 && currentZoomLevel < 3) {
+            zoomTimeout = setTimeout(() => {
+              // Find closest clickable node to viewport center
+              const centerX = width / 2;
+              const centerY = height / 2;
+              const nodes = document.querySelectorAll('.node');
+              let closest = null;
+              let closestDist = Infinity;
+
+              nodes.forEach(node => {
+                const transform = node.getAttribute('transform');
+                if (transform) {
+                  const match = transform.match(/translate\(([^,]+),\s*([^)]+)\)/);
+                  if (match) {
+                    const nx = parseFloat(match[1]);
+                    const ny = parseFloat(match[2]);
+                    const dist = Math.sqrt((nx - centerX) ** 2 + (ny - centerY) ** 2);
+                    if (dist < closestDist) {
+                      closestDist = dist;
+                      closest = node;
+                    }
+                  }
+                }
+              });
+
+              if (closest) {
+                // Trigger click on the closest node
+                const circle = closest.querySelector('circle');
+                if (circle) circle.dispatchEvent(new Event('click'));
+              }
+            }, 300);
+          }
+
+          // Zoom out past 0.7x triggers drill-up
+          if (currentScale < 0.7 && lastZoomScale >= 0.7 && currentZoomLevel > 1) {
+            zoomTimeout = setTimeout(() => {
+              render(data); // Go back to galaxy view
+            }, 300);
+          }
+
+          lastZoomScale = currentScale;
         });
       svg.call(zoom);
       render(data);
