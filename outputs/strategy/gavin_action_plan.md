@@ -7,14 +7,14 @@
 
 ## Executive Summary
 
-Mill is transforming from a hardware company into an autonomous data intelligence platform. This roadmap outlines the strategic path from our current state—**in active targeting with 0 deployed customers**—to a $10B food intelligence platform.
+Mill is transforming from a hardware company into an autonomous data intelligence platform. This roadmap outlines the strategic path from our current state—**3 signed enterprise customers (Whole Foods, Amazon, Google) with 2027 deployment target**—to a $10B food intelligence platform.
 
 ### Current State (Honest Assessment)
 
 | Dimension | Where We Are |
 |-----------|--------------|
-| **Customers** | Targeting phase. Costco is #1 priority (scored 4.15/5.0). Whole Foods is a partnership/proof point opportunity, not a paying customer yet. |
-| **Sales Infrastructure** | Pipeline exists with 500+ targets identified. MECE scoring framework operational (5 dimensions, 10-company analysis complete). |
+| **Customers** | 3 signed enterprise customers: Whole Foods (Grocery), Amazon (Tech/Corporate), Google (Tech/Corporate). Product development in progress for 2027 deployment. |
+| **Sales Infrastructure** | Two verticals established (Grocery, Tech/Corporate). 500+ targets identified. MECE scoring framework operational. Focus: expand within verticals + enter new verticals (cruise ships, colleges). |
 | **Pitch Materials** | Costco deck suite complete (5 versions + 3 audience variants for CFO, Procurement, Sustainability). |
 | **Hardware** | Core components selected (Basler ace2, RealSense D455, Jetson Orin NX). BOM estimated at $2,000-3,500/unit. Prototype not yet built. |
 | **ML Model** | 30 food categories defined. No trained model yet. Path to 92% accuracy documented. |
@@ -27,11 +27,19 @@ Mill is transforming from a hardware company into an autonomous data intelligenc
 
 This isn't about selling bins. It's about owning the most valuable food waste dataset on Earth and using it to fundamentally change how the food industry manages inventory, procurement, and sustainability.
 
+### Strategic Priorities (Current Focus)
+
+| Priority | What | Why |
+|----------|------|-----|
+| **1. Vertical Expansion** | Win more Grocery and Tech/Corporate customers | Leverage WF, Amazon, Google as proof points within their verticals |
+| **2. New Verticals** | Enter cruise ships, colleges, stadiums | Expand TAM beyond initial beachheads |
+| **3. Product Excellence** | Build product that works, establish data moat | 2027 deployment deadline drives urgency; data moat is long-term defensibility |
+
 ### The Five Strategic Pillars
 
 | Pillar | Mission | Tasks | Jump to |
 |--------|---------|-------|---------|
-| [**Commercial Autonomy**](#commercial-synthesis) | Harry doesn't need to be on every call | 42 | [Overview](#commercial-synthesis) \| [Details](#commercial-detail) |
+| [**Commercial Autonomy**](#commercial-synthesis) | Harry doesn't need to be on every call | 43 | [Overview](#commercial-synthesis) \| [Details](#commercial-detail) |
 | [**AI Leverage**](#ai-synthesis) | Every person becomes 10x | 47 | [Overview](#ai-synthesis) \| [Details](#ai-detail) |
 | [**Data Precision**](#data-synthesis) | The best food waste data on Earth | 52 | [Overview](#data-synthesis) \| [Details](#data-detail) |
 | [**Outcome Delivery**](#outcome-synthesis) | Prove ROI or don't charge | 37 | [Overview](#outcome-synthesis) \| [Details](#outcome-detail) |
@@ -55,7 +63,7 @@ All pillars accelerated by → AI Leverage (workflows multiply team capacity)
 | Hardware prototype → 10 beta units | 3 months | **9-14 months** | Manufacturing sourcing, iteration cycles, supply chain delays |
 | ML model 80% → 92% accuracy | 2 months | **6-8 months** | Training data acquisition, labeling, iterative improvement |
 | 500K labeled images | 3 months | **4-5 months + $50-250K** | Human labeling at scale is expensive and slow |
-| First enterprise sale (Costco tier) | 3 months | **10-14 months** | Enterprise sales cycles with pilots, legal, procurement |
+| First deployment (WF/Amazon/Google) | 6 months | **12-18 months** | Product development, manufacturing, and deployment to signed customers |
 | 50% team AI tool adoption | 2 weeks | **4-6 months** | Behavior change is hard; requires sustained effort |
 
 **Bottom line:** We're playing a 12-24 month game, not a 3-month sprint.
@@ -82,7 +90,7 @@ Quick reference tables for all 219 tasks. Click any task to jump to full details
 ## Commercial Autonomy — Overview {#commercial-synthesis}
 
 **Mission:** Harry doesn't need to be on every call
-**Tasks:** 42 | **Completed:** 3 | [Jump to Details](#commercial-detail)
+**Tasks:** 43 | **Completed:** 3 | [Jump to Details](#commercial-detail)
 
 | Subgoal | ID | Task | P | Eff | Imp | ✓ |
 |---------|-----|------|---|-----|-----|---|
@@ -108,13 +116,14 @@ Quick reference tables for all 219 tasks. Click any task to jump to full details
 | | c-pi-8 | [Real-time pipeline dashboard](#c-pi-8) | P2 | M | M | |
 | | c-pi-9 | [Weekly pipeline review cadence](#c-pi-9) | P1 | L | M | |
 | | c-pi-10 | [Inbound qualification checklist](#c-pi-10) | P2 | L | L | |
+| | c-pi-11 | [Map new verticals (cruise ships, colleges)](#c-pi-11) | P1 | M | H | |
 | **Proof Arsenal** | c-pr-1 | [Document WF engagement timeline](#c-pr-1) | P0 | M | H | |
 | | c-pr-2 | [Calculate/verify WF ROI](#c-pr-2) | P0 | M | H | |
 | | c-pr-3 | [Secure WF testimonial](#c-pr-3) | P0 | L | H | |
 | | c-pr-4 | [Create PDF case study](#c-pr-4) | P1 | M | H | |
 | | c-pr-5 | [Create video case study](#c-pr-5) | P2 | H | M | |
-| | c-pr-6 | [Second enterprise case study](#c-pr-6) | P1 | H | H | |
-| | c-pr-7 | [Third enterprise case study](#c-pr-7) | P2 | H | M | |
+| | c-pr-6 | [Amazon case study](#c-pr-6) | P1 | H | H | |
+| | c-pr-7 | [Google case study](#c-pr-7) | P2 | H | M | |
 | | c-pr-8 | [Interactive ROI calculator](#c-pr-8) | P1 | H | H | |
 | | c-pr-9 | [CFO-specific proof deck](#c-pr-9) | P1 | M | H | |
 | | c-pr-10 | [Third-party validation](#c-pr-10) | P2 | M | H | |
@@ -302,7 +311,7 @@ Quick reference tables for all 219 tasks. Click any task to jump to full details
 | | o-pr-3 | [Testimonial from decision-maker](#o-pr-3) | P0 | L | H | |
 | | o-pr-4 | [Publish second ROI](#o-pr-4) | P1 | H | H | |
 | | o-pr-5 | [Publish third ROI](#o-pr-5) | P2 | H | M | |
-| | o-pr-6 | [Secure WF public reference](#o-pr-6) | P0 | M | H | |
+| | o-pr-6 | [Publish WF signed customer announcement](#o-pr-6) | P0 | M | H | |
 | | o-pr-7 | [Analyst/press coverage](#o-pr-7) | P2 | H | H | |
 | | o-pr-8 | [Create proof library](#o-pr-8) | P1 | M | M | |
 
@@ -548,9 +557,9 @@ Detailed specifications for every task. Use the synthesis tables above for quick
 
 | | |
 |---|---|
-| **What** | Formalize Ideal Customer Profile from MECE scoring: size, vertical, sustainability commitments, tech stack, "ready to buy" signals. |
-| **Why** | Focused outbound requires knowing exactly who you're targeting. |
-| **Builds On** | MECE scoring framework, 500+ target database |
+| **What** | Refine ICP based on signed customer profile (WF, Amazon, Google). Document what made them say yes. Prioritize similar profiles in Grocery and Tech/Corporate verticals. |
+| **Why** | Three signed customers define our ICP. Target lookalikes in established verticals. |
+| **Builds On** | WF/Amazon/Google deal learnings, MECE framework, 500+ target database |
 | **Timeline** | 1 week |
 | **Success Metric** | Team can filter to "ICP matches" and prioritize |
 | **Priority** | P0 |
@@ -694,6 +703,21 @@ Detailed specifications for every task. Use the synthesis tables above for quick
 
 ---
 
+#### c-pi-11: Map new verticals (cruise ships, colleges) {#c-pi-11}
+
+| | |
+|---|---|
+| **What** | Research top 20 targets in cruise ship and college/university verticals. Adapt ICP criteria for these segments. Identify key decision-makers and champions. |
+| **Why** | New verticals expand TAM beyond Grocery and Tech/Corporate. Cruise ships and colleges have high food waste and sustainability mandates. |
+| **Builds On** | Refined ICP from signed customers, MECE framework |
+| **Timeline** | 2 weeks |
+| **Success Metric** | Prioritized target list with contact paths for each vertical |
+| **Priority** | P1 |
+| **Effort** | Medium |
+| **Impact** | High |
+
+---
+
 ### Proof Arsenal
 
 ---
@@ -702,8 +726,8 @@ Detailed specifications for every task. Use the synthesis tables above for quick
 
 | | |
 |---|---|
-| **What** | Comprehensive timeline: initial contact, meetings, pilot scope, deployment, outcomes. |
-| **Why** | Whole Foods is our proof point. Tell this story precisely. |
+| **What** | Document the signed Whole Foods deal: timeline, decision factors, stakeholders, contract terms. This is our flagship case study for grocery vertical expansion. |
+| **Why** | WF is signed. Tell this story precisely to win other grocery customers. |
 | **Builds On** | Existing WF relationship |
 | **Timeline** | 1 week |
 | **Success Metric** | Complete timeline with dates, contacts, milestones |
@@ -717,8 +741,8 @@ Detailed specifications for every task. Use the synthesis tables above for quick
 
 | | |
 |---|---|
-| **What** | Work with WF to calculate verified ROI: baseline, reduction, savings, payback. Get sign-off. |
-| **Why** | Customer-verified ROI is 10x more credible than projections. |
+| **What** | Project ROI for Whole Foods deployment. Build model based on their waste baseline data and expected Mill impact. Will verify post-2027 deployment. |
+| **Why** | Projected ROI with signed customer backing is highly credible for vertical expansion. |
 | **Builds On** | WF data, baseline methodology |
 | **Timeline** | 2-3 weeks (requires customer collaboration) |
 | **Success Metric** | ROI statement WF agrees can be shared publicly |
@@ -732,8 +756,8 @@ Detailed specifications for every task. Use the synthesis tables above for quick
 
 | | |
 |---|---|
-| **What** | Quotable testimonial from WF decision-maker (Director+). Document approval. |
-| **Why** | Third-party validation beats self-promotion. |
+| **What** | Secure pre-deployment endorsement quote from WF champion explaining why they signed. Document approval for use in sales materials. |
+| **Why** | "Why we chose Mill" quote from signed customer is powerful for vertical expansion. |
 | **Builds On** | WF relationship, ROI calculation |
 | **Timeline** | 1-2 weeks |
 | **Success Metric** | Written quote with attribution approval |
@@ -777,9 +801,9 @@ Detailed specifications for every task. Use the synthesis tables above for quick
 
 | | |
 |---|---|
-| **What** | Replicate WF process with second customer. |
-| **Why** | One case study is anecdote. Two shows pattern. |
-| **Builds On** | WF case study process |
+| **What** | Document Amazon deal for Tech/Corporate vertical case study. |
+| **Why** | Amazon case study opens Tech/Corporate vertical expansion. |
+| **Builds On** | WF case study process, Amazon signed contract |
 | **Timeline** | Depends on customer #2 |
 | **Success Metric** | Complete case study package |
 | **Priority** | P1 |
@@ -788,15 +812,15 @@ Detailed specifications for every task. Use the synthesis tables above for quick
 
 ---
 
-#### c-pr-7: Document third enterprise case study {#c-pr-7}
+#### c-pr-7: Document Google case study {#c-pr-7}
 
 | | |
 |---|---|
-| **What** | Third case study, ideally different vertical. |
-| **Why** | Three case studies = trend. Vertical diversity shows broad applicability. |
-| **Builds On** | Case study process |
-| **Timeline** | Depends on customer #3 |
-| **Success Metric** | Case study in different vertical |
+| **What** | Document Google deal as second Tech/Corporate case study. |
+| **Why** | Three signed customers = trend. Google name recognition accelerates credibility. |
+| **Builds On** | Case study process, Google signed contract |
+| **Timeline** | After Amazon case study |
+| **Success Metric** | Complete Google case study package |
 | **Priority** | P2 |
 | **Effort** | High |
 | **Impact** | Medium |
