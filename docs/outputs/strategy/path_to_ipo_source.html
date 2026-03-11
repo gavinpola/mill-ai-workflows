@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mill: Path to $10B</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #fafafa;
+      --light-gray: #f5f5f5;
+      --border: #e5e5e5;
+      --text: #1a1a1a;
+      --text-secondary: #555555;
+      --text-muted: #888888;
+      --accent: #2563eb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 64px 0 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .lede {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 650px;
+    }
+
+    section {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 36px 0 16px;
+      color: var(--text);
+    }
+
+    h3:first-of-type {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+    }
+
+    p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      background: var(--off-white);
+      color: var(--text);
+      font-size: 0.85rem;
+    }
+
+    td {
+      color: var(--text-secondary);
+    }
+
+    .highlight-row td {
+      background: var(--off-white);
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .callout {
+      background: var(--off-white);
+      border-left: 3px solid var(--text);
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .callout p {
+      margin: 0;
+      color: var(--text);
+    }
+
+    .callout p:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    .callout-accent {
+      border-left-color: var(--accent);
+    }
+
+    .math-box {
+      background: var(--light-gray);
+      padding: 20px 24px;
+      border-radius: 6px;
+      margin: 20px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+    }
+
+    .math-box .label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .math-box .result {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 12px;
+    }
+
+    ul {
+      margin: 16px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    li strong {
+      color: var(--text);
+    }
+
+    .valuation-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .valuation-card {
+      background: var(--off-white);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .valuation-card.highlight {
+      background: var(--text);
+      color: var(--white);
+    }
+
+    .valuation-card.highlight .val-label,
+    .valuation-card.highlight .val-detail {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .val-amount {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .val-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .val-detail {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .timeline {
+      position: relative;
+      margin: 32px 0;
+    }
+
+    .timeline-year {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .timeline-year::before {
+      content: '';
+      position: absolute;
+      left: 50px;
+      top: 0;
+      bottom: -32px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-year:last-child::before {
+      display: none;
+    }
+
+    .year-marker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: var(--white);
+      position: relative;
+      z-index: 1;
+    }
+
+    .year-content {
+      background: var(--off-white);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .year-goal {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .year-metrics {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .year-detail {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .ceiling-card {
+      background: var(--off-white);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 16px 0;
+    }
+
+    .ceiling-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .ceiling-name {
+      font-weight: 600;
+    }
+
+    .ceiling-amount {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .ceiling-constraint {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .ceiling-breakthrough {
+      font-size: 0.9rem;
+      color: var(--text);
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .proof-stage {
+      margin: 24px 0;
+      padding: 20px;
+      background: var(--off-white);
+      border-radius: 8px;
+    }
+
+    .proof-stage-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 16px;
+    }
+
+    .proof-stage-name {
+      font-weight: 600;
+    }
+
+    .proof-stage-years {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .proof-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .proof-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .proof-list li:last-child {
+      border-bottom: none;
+    }
+
+    .decision-box {
+      background: var(--text);
+      color: var(--white);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .decision-box h4 {
+      font-size: 1rem;
+      margin-bottom: 12px;
+    }
+
+    .decision-box p {
+      color: rgba(255,255,255,0.8);
+      margin: 0;
+    }
+
+    footer {
+      padding: 48px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .footer-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .valuation-grid {
+        grid-template-columns: 1fr;
+      }
+      .timeline-year {
+        grid-template-columns: 1fr;
+      }
+      .timeline-year::before {
+        display: none;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <nav>
+    <div class="logo">mill</div>
+    <a href="../../index.html">&larr; Back to Index</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-label">Internal Strategy &middot; Pre-Launch (2027)</div>
+    <h1>Path to $3B / $5B / $10B</h1>
+    <p class="lede">
+      What each valuation milestone requires. Revenue ceilings and how to break through them.
+      The decisions that determine which path is possible. An honest roadmap for internal planning.
+    </p>
+  </section>
+
+  <!-- THE MATH -->
+  <section>
+    <h2>The Math: Valuation = Revenue &times; Multiple</h2>
+
+    <p>
+      The multiple depends on what kind of company Mill becomes, not just what it earns.
+    </p>
+
+    <table>
+      <tr>
+        <th>Company Type</th>
+        <th>Multiple Range (estimate)</th>
+        <th>Rationale</th>
+      </tr>
+      <tr>
+        <td>Hardware/commodity SaaS</td>
+        <td>4-6x</td>
+        <td>Low switching costs, replaceable</td>
+      </tr>
+      <tr>
+        <td>Vertical SaaS with retention</td>
+        <td>8-12x</td>
+        <td>NRR &gt;100% commands premium</td>
+      </tr>
+      <tr>
+        <td>Data business with network effects</td>
+        <td>15-20x</td>
+        <td>Proprietary data creates moat</td>
+      </tr>
+      <tr>
+        <td>Platform with winner-take-most</td>
+        <td>20-30x</td>
+        <td>Rare; requires dominant position</td>
+      </tr>
+    </table>
+
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -12px;">
+      Note: Multiples are directional estimates based on 2023-2024 public market data. Actual multiples vary significantly by growth rate, retention, and market conditions.
+    </p>
+
+    <p>
+      <strong>Hypothesis:</strong> If Mill is perceived as a data layer vs. a waste tool, the multiple could differ by 3x.
+      This depends on proving the data has proprietary value and creates network effects&mdash;neither of which is validated yet.
+    </p>
+
+    <h3>What Each Valuation Requires</h3>
+
+    <div class="valuation-grid">
+      <div class="valuation-card">
+        <div class="val-amount">$3B</div>
+        <div class="val-label">Milestone 1</div>
+        <div class="val-detail">$250M ARR at 12x<br>or $200M at 15x</div>
+      </div>
+      <div class="valuation-card highlight">
+        <div class="val-amount">$5B</div>
+        <div class="val-label">Milestone 2</div>
+        <div class="val-detail">$333M ARR at 15x<br>or $280M at 18x</div>
+      </div>
+      <div class="valuation-card">
+        <div class="val-amount">$10B</div>
+        <div class="val-label">Milestone 3</div>
+        <div class="val-detail">$500M ARR at 20x<br>or $600M at 17x</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>
+        <strong>The uncomfortable math:</strong> $500M ARR requires ~20,000 locations at $2K/month average,
+        or fewer locations plus significant non-customer revenue. These are illustrative scenarios, not forecasts.
+        The $10B path requires Mill to become an industry standard&mdash;a hypothesis that needs validation.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOUR PATHS -->
+  <section>
+    <h2>Four Paths: From Vendor to Infrastructure</h2>
+
+    <p>
+      Mill starts as a waste tool. The question is whether it stays there or evolves into something with
+      a higher multiple and larger addressable value.
+    </p>
+
+    <table>
+      <tr>
+        <th>Path</th>
+        <th>Revenue Potential</th>
+        <th>Multiple</th>
+        <th>Valuation Ceiling</th>
+      </tr>
+      <tr>
+        <td><strong>A. Waste Tool</strong></td>
+        <td>$60M ARR (10K locations &times; $500/mo)</td>
+        <td>5x</td>
+        <td>~$300M</td>
+      </tr>
+      <tr>
+        <td><strong>B. Food Ops Platform</strong></td>
+        <td>$240M ARR (10K locations &times; $2K/mo)</td>
+        <td>10x</td>
+        <td>~$2.4B</td>
+      </tr>
+      <tr>
+        <td><strong>C. Industry Data Layer</strong></td>
+        <td>$400M ARR (customer + CPG revenue)</td>
+        <td>15x</td>
+        <td>~$6B</td>
+      </tr>
+      <tr class="highlight-row">
+        <td><strong>D. Bloomberg of Food</strong></td>
+        <td>$600M+ ARR (industry standard)</td>
+        <td>18x</td>
+        <td>~$10B+</td>
+      </tr>
+    </table>
+
+    <h3>What Has to Be True for Each Path</h3>
+
+    <p><strong>Path A (Waste Tool):</strong> Hardware works, customers reduce waste, basic retention.
+    This is the default if nothing else changes.</p>
+
+    <p><strong>Path B (Platform):</strong> Platform expansion works&mdash;customers adopt food cost, labor,
+    and procurement modules. NRR exceeds 115%. Requires building those modules and proving adoption.</p>
+
+    <p><strong>Path C (Data Layer):</strong> CPG data revenue materializes. $50M+ from data sales to
+    Kraft, Unilever, Tyson. Requires 500+ kitchens for statistical significance and CPG sales capability.</p>
+
+    <p><strong>Path D (Bloomberg):</strong> Mill's data becomes essential for the industry. Every CPG,
+    retailer, and chain needs access. Network effects make the dataset unreplicable. This requires
+    becoming an industry standard&mdash;not just a successful vendor.</p>
+
+    <div class="decision-box">
+      <h4>The Strategic Question</h4>
+      <p>
+        Path A is where Mill starts. The decisions made in 2025-2027 determine whether Path B, C, or D
+        is possible. Product roadmap, pricing structure, and GTM strategy all influence which ceiling
+        Mill hits.
+      </p>
+    </div>
+  </section>
+
+  <!-- REVENUE CEILINGS -->
+  <section>
+    <h2>Revenue Ceilings: What Caps Growth</h2>
+
+    <p>
+      These ceilings aren't predictions&mdash;they're constraints to plan around. Each requires specific
+      capabilities to break through.
+    </p>
+
+    <div class="ceiling-card">
+      <div class="ceiling-header">
+        <span class="ceiling-name">Ceiling 1: Waste-Only Revenue</span>
+        <span class="ceiling-amount">~$60M ARR max</span>
+      </div>
+      <div class="ceiling-constraint">
+        <strong>Why it exists:</strong> Waste is estimated at 4-10% of food costs (industry sources vary).
+        At $500/month, 10K locations = $60M ARR ceiling for waste-only value.
+      </div>
+      <div class="ceiling-breakthrough">
+        <strong>How to break through:</strong> Expand from waste tracking &rarr; food cost management.
+        The hypothesis: waste classification data enables menu-level cost analysis (linking waste to specific items,
+        portions, prep methods). This requires building that analytical layer&mdash;not automatic from waste data alone.
+      </div>
+    </div>
+
+    <div class="ceiling-card">
+      <div class="ceiling-header">
+        <span class="ceiling-name">Ceiling 2: Per-Location Revenue</span>
+        <span class="ceiling-amount">~$3K/month max</span>
+      </div>
+      <div class="ceiling-constraint">
+        <strong>Why it exists:</strong> Even as a full food operations platform, there's a ceiling on
+        what any single location will pay for software.
+      </div>
+      <div class="ceiling-breakthrough">
+        <strong>How to break through:</strong> Enterprise deals (one customer, 10,000 locations).
+        International expansion. Adjacent markets (grocery, manufacturing, distribution).
+      </div>
+    </div>
+
+    <div class="ceiling-card">
+      <div class="ceiling-header">
+        <span class="ceiling-name">Ceiling 3: Customer-Paid Revenue</span>
+        <span class="ceiling-amount">~$400M ARR max</span>
+      </div>
+      <div class="ceiling-constraint">
+        <strong>Why it exists:</strong> Even with maximum penetration and maximum per-location revenue,
+        customer-paid revenue has limits. $400M is illustrative, not a hard ceiling.
+      </div>
+      <div class="ceiling-breakthrough">
+        <strong>How to break through:</strong> CPG data revenue (hypothesis: they'd pay for item-level waste intelligence&mdash;
+        needs validation with actual CPG conversations). Other potential streams (financial services, regulatory) are
+        speculative until market demand is tested.
+      </div>
+    </div>
+
+    <div class="ceiling-card">
+      <div class="ceiling-header">
+        <span class="ceiling-name">Ceiling 4: US Market</span>
+        <span class="ceiling-amount">~50K locations at 5%</span>
+      </div>
+      <div class="ceiling-constraint">
+        <strong>Why it exists:</strong> US commercial kitchens are ~1M locations. Even with strong
+        penetration, the addressable market has limits.
+      </div>
+      <div class="ceiling-breakthrough">
+        <strong>How to break through:</strong> International expansion (EU, UK, APAC). Adjacent verticals
+        (hotels, hospitals, schools, corporate cafeterias). Upstream expansion (food manufacturing).
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF POINTS -->
+  <section>
+    <h2>What Has to Be Proven (and When)</h2>
+
+    <p>
+      Each stage has specific proof points that unlock the next. Missing these creates risk;
+      hitting them early creates optionality.
+    </p>
+
+    <div class="proof-stage">
+      <div class="proof-stage-header">
+        <span class="proof-stage-name">Pre-Launch</span>
+        <span class="proof-stage-years">Now &rarr; 2027</span>
+      </div>
+      <ul class="proof-list">
+        <li><strong>CV accuracy &gt;90%</strong> on common food items (demonstrable in test environment)</li>
+        <li><strong>Hardware reliability</strong> validated (MTBF, installation cost, maintenance model)</li>
+        <li><strong>Unit economics work</strong> (hardware cost vs. base fee&mdash;does the math close?)</li>
+        <li><strong>3-5 design partners</strong> signed (LOIs or pilot agreements with recognizable brands)</li>
+      </ul>
+    </div>
+
+    <div class="proof-stage">
+      <div class="proof-stage-header">
+        <span class="proof-stage-name">Year 1</span>
+        <span class="proof-stage-years">2027 &rarr; 2028</span>
+      </div>
+      <ul class="proof-list">
+        <li><strong>Waste reduction claims hold</strong> (15-25% documented in customer environments)</li>
+        <li><strong>Customers don't churn</strong> after learning (retention &gt;80% annual)</li>
+        <li><strong>Revenue per location</strong> matches model ($500-800/month realized)</li>
+        <li><strong>CAC/LTV sustainable</strong> (payback &lt;18 months)</li>
+        <li><strong>50+ paying locations</strong> with referenceable case studies</li>
+      </ul>
+    </div>
+
+    <div class="proof-stage">
+      <div class="proof-stage-header">
+        <span class="proof-stage-name">Year 2-3</span>
+        <span class="proof-stage-years">2028 &rarr; 2030</span>
+      </div>
+      <ul class="proof-list">
+        <li><strong>Platform expansion works</strong> (customers adopt food cost module, NRR &gt;115%)</li>
+        <li><strong>Enterprise motion works</strong> (3+ accounts with &gt;50 locations each)</li>
+        <li><strong>CPG data has buyers</strong> (first $500K+ contract signed)</li>
+        <li><strong>500+ locations</strong> with food cost module live and generating revenue</li>
+      </ul>
+    </div>
+
+    <div class="proof-stage">
+      <div class="proof-stage-header">
+        <span class="proof-stage-name">Year 4-5</span>
+        <span class="proof-stage-years">2030 &rarr; 2032</span>
+      </div>
+      <ul class="proof-list">
+        <li><strong>Network effects are real</strong> (benchmark accuracy improves with more kitchens; customers stay for peer comparison data they can't get elsewhere)</li>
+        <li><strong>International works</strong> (EU or UK market with 50+ locations)</li>
+        <li><strong>Multiple revenue streams</strong> (customer + CPG + advisory all material)</li>
+        <li><strong>IPO-ready metrics</strong> ($100M+ ARR, NRR &gt;110%, gross margin &gt;70%)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5-YEAR ROADMAP -->
+  <section>
+    <h2>5-Year Commercial Roadmap</h2>
+
+    <p>
+      Year-by-year milestones with specific metrics. The goal is IPO-ready by Year 5, with optionality
+      to stay private if market conditions aren't favorable.
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-year">
+        <div class="year-marker">2027<br>Year 1</div>
+        <div class="year-content">
+          <div class="year-goal">Prove It Works</div>
+          <div class="year-metrics">50 locations &middot; $300K ARR &middot; 80%+ retention</div>
+          <div class="year-detail">
+            Convert design partners to paying customers. First cold outbound.
+            3 published case studies with documented ROI. First multi-location deal.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-year">
+        <div class="year-marker">2028<br>Year 2</div>
+        <div class="year-content">
+          <div class="year-goal">Find Repeatability</div>
+          <div class="year-metrics">200 locations &middot; $2M ARR &middot; &lt;90 day sales cycle</div>
+          <div class="year-detail">
+            Identify best-fit segment. Build repeatable sales playbook.
+            Food cost module beta with 20 customers. First CPG LOI for data pilot.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-year">
+        <div class="year-marker">2029<br>Year 3</div>
+        <div class="year-content">
+          <div class="year-goal">Scale the Machine</div>
+          <div class="year-metrics">1,000 locations &middot; $15M ARR &middot; NRR &gt;110%</div>
+          <div class="year-detail">
+            3+ enterprise accounts (&gt;50 locations each). Food cost module GA with 30% adoption.
+            First $500K CPG contract. Series B positioning with growth metrics.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-year">
+        <div class="year-marker">2030<br>Year 4</div>
+        <div class="year-content">
+          <div class="year-goal">Go Big</div>
+          <div class="year-metrics">3,000 locations &middot; $50M ARR &middot; gross margin &gt;70%</div>
+          <div class="year-detail">
+            International market entry decision (UK/EU). Labor planning module beta.
+            3+ CPG contracts totaling $2M+ data revenue. First 50 international locations.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-year">
+        <div class="year-marker">2031<br>Year 5</div>
+        <div class="year-content">
+          <div class="year-goal">IPO Ready</div>
+          <div class="year-metrics">8,000 locations &middot; $120M ARR &middot; Rule of 40</div>
+          <div class="year-detail">
+            Contribution margin positive. Clear #1 or #2 market position.
+            Bankers engaged, S-1 drafting. Decision: IPO or stay private based on market conditions.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IPO REQUIREMENTS -->
+  <section>
+    <h2>What IPO Requires</h2>
+
+    <p>
+      The public markets have specific requirements. Miss these and the IPO window closes or the
+      valuation compresses.
+    </p>
+
+    <h3>Hard Requirements</h3>
+
+    <table>
+      <tr>
+        <th>Metric</th>
+        <th>Minimum</th>
+        <th>Excellent</th>
+      </tr>
+      <tr>
+        <td>ARR</td>
+        <td>$100M</td>
+        <td>$150M+</td>
+      </tr>
+      <tr>
+        <td>YoY Growth</td>
+        <td>30%</td>
+        <td>50%+</td>
+      </tr>
+      <tr>
+        <td>Net Revenue Retention</td>
+        <td>100%</td>
+        <td>120%+</td>
+      </tr>
+      <tr>
+        <td>Gross Margin</td>
+        <td>65%</td>
+        <td>75%+</td>
+      </tr>
+      <tr>
+        <td>Rule of 40</td>
+        <td>30</td>
+        <td>50+</td>
+      </tr>
+    </table>
+
+    <h3>Soft Requirements</h3>
+
+    <ul>
+      <li><strong>Market leadership:</strong> Clear #1 or #2 position in defined category</li>
+      <li><strong>TAM story:</strong> Large addressable market with credible path to capture more</li>
+      <li><strong>Moat:</strong> Defensible competitive advantage (not just "we have customers")</li>
+      <li><strong>Management:</strong> Team with public company experience (or credible path to add it)</li>
+      <li><strong>Predictability:</strong> Recurring revenue, low churn, forecastable growth</li>
+    </ul>
+
+    <div class="callout">
+      <p>
+        <strong>The multiple question:</strong> How markets perceive Mill will determine the multiple.
+        The positioning story matters, but only if backed by metrics that support it (NRR, data revenue,
+        competitive moat). Claiming "data layer" while showing "waste tool" metrics won't work.
+      </p>
+    </div>
+  </section>
+
+  <!-- DECISIONS -->
+  <section>
+    <h2>Decisions That Determine the Path</h2>
+
+    <p>
+      Some decisions made now constrain which paths are possible later. These aren't reversible
+      without significant cost.
+    </p>
+
+    <h3>Product Decisions</h3>
+
+    <table>
+      <tr>
+        <th>Decision</th>
+        <th>If Yes</th>
+        <th>If No</th>
+      </tr>
+      <tr>
+        <td>Build food cost module by Year 2?</td>
+        <td>Path B/C/D remain possible</td>
+        <td>Capped at Path A ($300M ceiling)</td>
+      </tr>
+      <tr>
+        <td>Build integrations (POS, ordering)?</td>
+        <td>Creates switching costs, enables expansion</td>
+        <td>Higher churn, learn-and-leave pattern</td>
+      </tr>
+      <tr>
+        <td>Invest in prediction accuracy?</td>
+        <td>Compounding predictions become real moat</td>
+        <td>"Insights" are extractable, no lock-in</td>
+      </tr>
+    </table>
+
+    <h3>GTM Decisions</h3>
+
+    <table>
+      <tr>
+        <th>Decision</th>
+        <th>If Yes</th>
+        <th>If No</th>
+      </tr>
+      <tr>
+        <td>Enterprise sales motion by Year 3?</td>
+        <td>Multi-location deals unlock scale</td>
+        <td>Growth limited by SMB velocity</td>
+      </tr>
+      <tr>
+        <td>CPG data sales capability?</td>
+        <td>Path C/D possible, second revenue stream</td>
+        <td>Customer revenue ceiling hits harder</td>
+      </tr>
+      <tr>
+        <td>International by Year 4?</td>
+        <td>TAM multiplies, IPO story stronger</td>
+        <td>US-only ceiling applies</td>
+      </tr>
+    </table>
+
+    <h3>Pricing Decisions</h3>
+
+    <table>
+      <tr>
+        <th>Decision</th>
+        <th>If Yes</th>
+        <th>If No</th>
+      </tr>
+      <tr>
+        <td>Expansion pricing in initial contract?</td>
+        <td>NRR &gt;100% built in, no renegotiation</td>
+        <td>Every expansion is a new negotiation</td>
+      </tr>
+      <tr>
+        <td>Benchmark access as premium tier?</td>
+        <td>Creates stickiness at scale, upsell path</td>
+        <td>Benchmark is table stakes, no leverage</td>
+      </tr>
+      <tr>
+        <td>Data rights in customer contract?</td>
+        <td>CPG revenue possible later</td>
+        <td>Locked out of data monetization</td>
+      </tr>
+    </table>
+
+    <div class="decision-box">
+      <h4>The Meta-Decision</h4>
+      <p>
+        Are we building a waste tool that might become a platform, or a platform that starts with waste?
+        The answer shapes product, pricing, and GTM. If the answer is "waste tool," the ceiling is $300M
+        and we should optimize for profitability. If the answer is "platform," we need to invest in
+        capabilities that don't pay off until Year 3-4.
+      </p>
+    </div>
+  </section>
+
+  <!-- RISKS -->
+  <section>
+    <h2>What Could Break the Thesis</h2>
+
+    <p>
+      Honest assessment of risks. These aren't reasons not to proceed; they're things to watch and
+      mitigate.
+    </p>
+
+    <table>
+      <tr>
+        <th>Risk</th>
+        <th>Impact</th>
+        <th>Mitigation</th>
+      </tr>
+      <tr>
+        <td><strong>Hardware economics don't work</strong></td>
+        <td>Base fee can't cover costs; margin collapse</td>
+        <td>Validate unit costs before scaling production</td>
+      </tr>
+      <tr>
+        <td><strong>Learn-and-leave proves real</strong></td>
+        <td>LTV collapses; CAC doesn't pay back</td>
+        <td>Build compounding predictions; deep integrations</td>
+      </tr>
+      <tr>
+        <td><strong>CPG data doesn't sell</strong></td>
+        <td>Ceiling is Path B, not C/D</td>
+        <td>Early CPG conversations to validate demand</td>
+      </tr>
+      <tr>
+        <td><strong>Competition commoditizes</strong></td>
+        <td>Multiple compresses; price pressure</td>
+        <td>Build moats early; first-mover on data network</td>
+      </tr>
+      <tr>
+        <td><strong>Platform expansion doesn't stick</strong></td>
+        <td>NRR stays flat; ceiling is lower</td>
+        <td>Build modules that solve real problems, not features</td>
+      </tr>
+    </table>
+
+    <div class="callout callout-accent">
+      <p>
+        <strong>A key hypothesis:</strong> The value is in data, not hardware. Hardware is the collection mechanism.
+        This hypothesis is unproven&mdash;it assumes the data is differentiated and valuable. If CV accuracy
+        plateaus or the insights aren't actionable, the "data company" thesis collapses.
+      </p>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section>
+    <h2>Summary: The Path Forward</h2>
+
+    <div class="math-box">
+      <div class="label">The equation</div>
+      Valuation = Revenue &times; Multiple<br>
+      Revenue = Locations &times; Revenue/Location + Data Revenue<br>
+      Multiple = f(company type, retention, growth, moat)<br>
+      <div class="result">$10B requires becoming infrastructure, not just a vendor</div>
+    </div>
+
+    <h3>Three Valuations, Three Requirements</h3>
+
+    <p>
+      <strong>$3B:</strong> Requires ~$250M ARR with platform-level retention (NRR &gt;110%).
+      Becomes viable if Year 1-3 proof points hold and platform expansion works.
+    </p>
+
+    <p>
+      <strong>$5B:</strong> Requires ~$300M+ ARR plus meaningful data revenue. Becomes viable if
+      CPG data demand materializes and NRR exceeds 115%. Higher uncertainty.
+    </p>
+
+    <p>
+      <strong>$10B:</strong> Requires Mill to become industry infrastructure&mdash;not just a successful
+      vendor. This is the highest-risk, highest-reward path. Most companies that aim for this don't reach it.
+    </p>
+
+    <h3>What to Do Now</h3>
+
+    <ul>
+      <li><strong>Product:</strong> Build for platform, not just waste. Food cost module by Year 2.</li>
+      <li><strong>Pricing:</strong> Expansion terms in initial contract. Data rights preserved.</li>
+      <li><strong>GTM:</strong> Land with waste, expand with platform. Enterprise motion by Year 3.</li>
+      <li><strong>Data:</strong> Early CPG conversations to validate demand. Build aggregation infrastructure.</li>
+    </ul>
+
+    <p>
+      The path to $10B isn't guaranteed&mdash;it requires becoming an industry standard. But the path to
+      $3-5B is achievable with strong execution. The decisions made in 2025-2027 determine which
+      ceiling Mill hits.
+    </p>
+  </section>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-logo">mill</div>
+    <p class="footer-text">
+      Internal Strategy &bull; March 2026<br>
+      Built with Claude
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
