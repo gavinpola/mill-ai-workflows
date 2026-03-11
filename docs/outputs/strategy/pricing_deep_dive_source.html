@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mill Value Strategy: First Principles Analysis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #fafafa;
+      --light-gray: #f5f5f5;
+      --border: #e5e5e5;
+      --text: #1a1a1a;
+      --text-secondary: #555555;
+      --text-muted: #888888;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 64px 0 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+
+    .lede {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+    }
+
+    section {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 36px 0 16px;
+      color: var(--text);
+    }
+
+    h3:first-of-type {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+    }
+
+    p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      background: var(--off-white);
+      color: var(--text);
+      font-size: 0.85rem;
+    }
+
+    td {
+      color: var(--text-secondary);
+    }
+
+    .highlight-row td {
+      background: var(--off-white);
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .callout {
+      background: var(--off-white);
+      border-left: 3px solid var(--text);
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .callout p {
+      margin: 0;
+      color: var(--text);
+    }
+
+    .callout p:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    .math-box {
+      background: var(--light-gray);
+      padding: 20px 24px;
+      border-radius: 6px;
+      margin: 20px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+    }
+
+    .math-box .label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .math-box .result {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    ul {
+      margin: 16px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    li strong {
+      color: var(--text);
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .scenario {
+      background: var(--off-white);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .scenario-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .scenario-metric {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .scenario-metric strong {
+      color: var(--text);
+    }
+
+    .quote {
+      font-size: 1.1rem;
+      color: var(--text);
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 28px 0;
+      font-style: italic;
+    }
+
+    .summary-box {
+      background: var(--off-white);
+      border-radius: 8px;
+      padding: 28px;
+      margin: 24px 0;
+    }
+
+    .summary-item {
+      margin-bottom: 16px;
+    }
+
+    .summary-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .summary-item strong {
+      color: var(--text);
+    }
+
+    .summary-item p {
+      margin: 4px 0 0;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      padding: 48px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .footer-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .scenario-grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <nav>
+    <div class="logo">mill</div>
+    <a href="../../index.html">&larr; Back to Index</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-label">Strategic Analysis · Pre-Launch (2027)</div>
+    <h1>Value Strategy: First Principles</h1>
+    <p class="lede">
+      How Mill maximizes customer lifetime value without diluting its own position.
+      An honest assessment of what creates retention, where the money is, and how to price for it.
+    </p>
+  </section>
+
+  <!-- THE ENTRY POINT -->
+  <section>
+    <h2>Waste as Entry Point</h2>
+
+    <p>
+      Commercial kitchens throw away 4-10% of purchased food. That's measurable, painful, and hard to track accurately.
+      Every competitor in this space relies on estimates or self-reported data. Mill verifies waste through physical
+      processing&mdash;if it went through the unit, it was actually wasted.
+    </p>
+
+    <p>
+      This is the credible foundation: <strong>verified waste data that no one else has.</strong>
+    </p>
+
+    <p>
+      But waste is a small slice of what kitchens spend. The strategic question is whether Mill stays
+      a waste tool or becomes something larger.
+    </p>
+
+    <h3>Where Kitchen Money Actually Goes</h3>
+
+    <table>
+      <tr>
+        <th>Category</th>
+        <th>% of Revenue</th>
+        <th>Annual $ (for $2M location)</th>
+      </tr>
+      <tr>
+        <td>Food costs</td>
+        <td>28-35%</td>
+        <td>$560K-700K</td>
+      </tr>
+      <tr>
+        <td>Labor</td>
+        <td>28-35%</td>
+        <td>$560K-700K</td>
+      </tr>
+      <tr>
+        <td>Rent/occupancy</td>
+        <td>5-10%</td>
+        <td>$100K-200K</td>
+      </tr>
+      <tr>
+        <td>Equipment/technology</td>
+        <td>3-5%</td>
+        <td>$60K-100K</td>
+      </tr>
+    </table>
+
+    <p>
+      Industry estimates put waste at 4-10% of food costs; 7% is a reasonable midpoint.
+      For a $2M restaurant, that's ~$42K/year wasted. If Mill helps reduce waste by half
+      and takes 15% of savings, that's $3,150/year&mdash;<strong>about $262/month.</strong>
+    </p>
+
+    <div class="callout">
+      <p>
+        This is the ceiling if waste is the only value. To capture more, Mill must expand into
+        food cost optimization, labor efficiency, or procurement intelligence&mdash;larger buckets
+        where the same data creates additional value.
+      </p>
+    </div>
+  </section>
+
+  <!-- RETENTION -->
+  <section>
+    <h2>What Actually Creates Retention</h2>
+
+    <p>
+      The uncomfortable scenario: a customer uses Mill for six months, learns where their waste is,
+      fixes the problem, and cancels. They extracted the insight; Mill loses the recurring revenue.
+    </p>
+
+    <p>
+      Not everything that sounds like a moat actually prevents this.
+    </p>
+
+    <h3>Mechanisms That Work</h3>
+
+    <table>
+      <tr>
+        <th>Mechanism</th>
+        <th>Why It Creates Retention</th>
+      </tr>
+      <tr>
+        <td><strong>Physical hardware</strong></td>
+        <td>The unit is installed. Removing it requires labor and disruption. Not exciting, but real.</td>
+      </tr>
+      <tr>
+        <td><strong>Compounding predictions</strong></td>
+        <td>Early predictions rely on category-level patterns. Over time, location-specific signals (seasonal, staffing, events) improve accuracy. The hypothesis: leaving after 12 months means losing that learned context.</td>
+      </tr>
+      <tr>
+        <td><strong>Integration depth</strong></td>
+        <td>If Mill connects to POS, ordering systems, and prep software, leaving means rebuilding all those connections.</td>
+      </tr>
+    </table>
+
+    <h3>Mechanisms That Don't (Yet)</h3>
+
+    <table>
+      <tr>
+        <th>Mechanism</th>
+        <th>Why It Falls Short</th>
+      </tr>
+      <tr>
+        <td>"Insights"</td>
+        <td>Once you know chicken waste spikes on Fridays, you know. You don't need Mill to remember.</td>
+      </tr>
+      <tr>
+        <td>"Benchmarking" at small scale</td>
+        <td>50 kitchens isn't a meaningful peer set. "You're in the 60th percentile of 50 restaurants" doesn't drive decisions.</td>
+      </tr>
+      <tr>
+        <td>"Continuous monitoring"</td>
+        <td>If they can hire someone to weigh trash for $15/hour and Mill costs $500/month, the math has to work.</td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <p>
+        <strong>The honest assessment:</strong> Hardware creates real switching costs. Compounding predictions
+        require building models that actually get meaningfully better with more data. Industry benchmarking
+        requires scale Mill doesn't have yet&mdash;it's a future moat, not a current one.
+      </p>
+    </div>
+  </section>
+
+  <!-- SCENARIOS -->
+  <section>
+    <h2>Three Paths Forward</h2>
+
+    <p>
+      Where Mill ends up depends on product decisions made now. Each path has different economics.
+    </p>
+
+    <div class="scenario-grid">
+      <div class="scenario">
+        <div class="scenario-title">Waste Tool</div>
+        <div class="scenario-metric"><strong>$250-500</strong>/month per location</div>
+        <div class="scenario-metric">High churn risk (learn-and-leave pattern)</div>
+        <div class="scenario-metric">Hardware-only moat</div>
+      </div>
+      <div class="scenario">
+        <div class="scenario-title">Food Operations Infrastructure</div>
+        <div class="scenario-metric"><strong>$1,000-3,000</strong>/month per location</div>
+        <div class="scenario-metric">Low churn (operational embedding)</div>
+        <div class="scenario-metric">Hardware + integrations moat</div>
+      </div>
+      <div class="scenario">
+        <div class="scenario-title">Industry Data Layer</div>
+        <div class="scenario-metric"><strong>$500-1,500</strong>/month + CPG data revenue</div>
+        <div class="scenario-metric">Very low churn (benchmark access)</div>
+        <div class="scenario-metric">Network effects moat</div>
+      </div>
+    </div>
+
+    <p>
+      The first scenario is where Mill starts. The question is whether product and go-to-market
+      are designed to evolve toward the second or third.
+    </p>
+
+    <h3>What Expansion Looks Like</h3>
+
+    <table>
+      <tr>
+        <th>Starting Point</th>
+        <th>Expansion</th>
+        <th>Additional Lock-In</th>
+      </tr>
+      <tr>
+        <td>Waste tracking</td>
+        <td>Food cost management</td>
+        <td>Financial data integration</td>
+      </tr>
+      <tr>
+        <td>Food cost management</td>
+        <td>Menu optimization</td>
+        <td>Menu planning workflows</td>
+      </tr>
+      <tr>
+        <td>Menu optimization</td>
+        <td>Labor planning</td>
+        <td>Scheduling systems</td>
+      </tr>
+      <tr>
+        <td>Labor planning</td>
+        <td>Supplier negotiation</td>
+        <td>Procurement relationships</td>
+      </tr>
+    </table>
+
+    <p>
+      Each expansion creates switching costs. Toast, the restaurant tech platform, built this playbook:
+      start with POS, expand into payroll, scheduling, and marketing. Their net revenue retention
+      exceeds 115% because customers keep adding modules. Mill can follow the same expansion pattern.
+    </p>
+  </section>
+
+  <!-- PRICING -->
+  <section>
+    <h2>Pricing Structure</h2>
+
+
+    <table>
+      <tr>
+        <th>Component</th>
+        <th>Amount</th>
+        <th>Purpose</th>
+      </tr>
+      <tr>
+        <td><strong>Base fee</strong></td>
+        <td>$500-800/month</td>
+        <td>Covers hardware amortization, monitoring, and benchmark access. Hardware economics TBD based on unit costs.</td>
+      </tr>
+      <tr>
+        <td><strong>Outcome share</strong></td>
+        <td>10-15% of documented savings</td>
+        <td>Proves value. Mill only earns upside when the system performs.</td>
+      </tr>
+      <tr>
+        <td><strong>Expansion pricing</strong></td>
+        <td>Per-location, volume discounts</td>
+        <td>Captures more value as customer grows. Built into initial contract.</td>
+      </tr>
+    </table>
+
+    <h3>Why Hybrid</h3>
+
+    <table>
+      <tr>
+        <th>Alternative</th>
+        <th>Problem</th>
+      </tr>
+      <tr>
+        <td>Pure outcome-based</td>
+        <td>Revenue unpredictable. Creates attribution arguments. ("Was that savings from Mill or from our new chef?")</td>
+      </tr>
+      <tr>
+        <td>Pure subscription</td>
+        <td>No proof of value. Customer questions ROI every renewal.</td>
+      </tr>
+      <tr class="highlight-row">
+        <td>Hybrid</td>
+        <td>Base fee covers costs. Outcome share proves value. Both sides win when system performs.</td>
+      </tr>
+    </table>
+
+    <p>
+      Sierra makes pure outcome-based work because their value is unambiguous: a customer service
+      conversation either got resolved without human escalation or it didn't. Binary. Timestamped.
+      Waste reduction is messier&mdash;was the 20% reduction from Mill's insights or the new chef?
+      A hybrid model sidesteps this attribution problem while still aligning incentives.
+    </p>
+  </section>
+
+  <!-- CPG DATA -->
+  <section>
+    <h2>The Data Revenue Layer</h2>
+
+    <p>
+      Separate from what customers pay, there's a potential revenue stream from aggregated data.
+    </p>
+
+    <p>
+      <strong>What Mill uniquely has:</strong> item-level waste data verified by physical processing,
+      connected to actual behavior. Not surveys. Not estimates.
+    </p>
+
+    <p>
+      <strong>Who pays for this:</strong> CPGs spend $500K-2M per research study trying to understand
+      what happens to their products after purchase. "Your product is wasted 40% more than competitors
+      in the same category. Here's when and why." That's valuable intelligence they can't get elsewhere.
+    </p>
+
+    <div class="math-box">
+      <div class="label">Directional estimate (assumptions will need validation)</div>
+      500 kitchens &times; $1K/year data fee = $500K/year (customer side)<br>
+      CPG contracts: Highly dependent on data depth, exclusivity, and coverage. Range could be $200K-1M per contract.<br>
+      <div class="result">Total data revenue potential: $1-3M/year at scale</div>
+    </div>
+
+    <p>
+      <strong>Constraints:</strong> This requires 500+ kitchens for statistically meaningful data,
+      privacy/aggregation infrastructure, and CPGs who see value before committing.
+      It's a Year 3+ opportunity, not Year 1.
+    </p>
+  </section>
+
+  <!-- GTM -->
+  <section>
+    <h2>Commercial Formula</h2>
+
+    <p>
+      The go-to-market needs a promise that's simple to make and easy to verify.
+    </p>
+
+    <div class="quote">
+      "We reduce food waste by 15-25%. That's $X/year for your operation. You pay a base fee for
+      the hardware and system. If we hit targets, we share in the savings. As you add locations,
+      we grow together."
+    </div>
+
+    <h3>Why This Works</h3>
+
+    <ul>
+      <li><strong>Promise is specific:</strong> 15-25% reduction, not "significant improvement"</li>
+      <li><strong>Risk is limited:</strong> Base fee covers costs, outcome share is pure upside</li>
+      <li><strong>Category is validated:</strong> Winnow claims 40-70% waste reduction for their customers. Leanpath (acquired by IDEO) claims 50%+ reductions. 15-25% is conservative.</li>
+      <li><strong>Expansion is built in:</strong> Multi-location terms in initial contract, no renegotiation</li>
+    </ul>
+
+    <h3>Pre-Product Credibility</h3>
+
+    <p>
+      Mill doesn't have hardware in market until 2027. Credibility before that comes from:
+    </p>
+
+    <ul>
+      <li><strong>Technical demonstration:</strong> Show CV classification accuracy on test data</li>
+      <li><strong>Design partner pilots:</strong> Even unpaid, having recognizable brands testing creates signal</li>
+      <li><strong>Category validation:</strong> Winnow raised $45M, Leanpath was acquired&mdash;the market exists</li>
+    </ul>
+  </section>
+
+  <!-- FRAMING -->
+  <section>
+    <h2>The Strategic Frame</h2>
+
+    <p>
+      How Mill talks about itself shapes what customers expect and what the company can become.
+    </p>
+
+    <table>
+      <tr>
+        <th>Framing</th>
+        <th>Problem</th>
+      </tr>
+      <tr>
+        <td>"We're a food operations platform"</td>
+        <td>Aspirational. Not credible until the product proves it.</td>
+      </tr>
+      <tr>
+        <td>"We're a waste tracking tool"</td>
+        <td>Undervalues the opportunity. Invites comparison to commodity competitors.</td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <p>
+        <strong>A possible frame:</strong> "We're building the infrastructure layer for food operations.
+        We start with waste because it's the most acute pain and the hardest data to get accurately.
+        The same system that classifies waste can optimize food costs, influence procurement, and
+        benchmark operations against industry peers."
+      </p>
+    </div>
+
+    <p>
+      This framing is credible now (waste tracking is real), expansive over time (platform story),
+      simple to sell (15-25% reduction), and positions for maximum long-term value.
+    </p>
+  </section>
+
+  <!-- SUMMARY -->
+  <section>
+    <h2>Summary</h2>
+
+    <div class="summary-box">
+      <div class="summary-item">
+        <strong>Entry point:</strong>
+        <p>Waste reduction is the credible, painful, data-rich starting point. But it's a small slice of
+        kitchen economics&mdash;roughly $250-500/month ceiling per location.</p>
+      </div>
+      <div class="summary-item">
+        <strong>Expansion path:</strong>
+        <p>The same data that classifies waste can optimize food costs, labor, and procurement.
+        Each expansion creates switching costs and captures more value.</p>
+      </div>
+      <div class="summary-item">
+        <strong>Retention mechanism:</strong>
+        <p>Hardware lock-in is real. Compounding predictions require models that actually improve with
+        more data. Industry benchmarking requires scale&mdash;a future moat, not a current one.</p>
+      </div>
+      <div class="summary-item">
+        <strong>Pricing:</strong>
+        <p>Hybrid model. Base fee ($500-800/month) covers costs and creates predictability.
+        Outcome share (10-15% of savings) proves value and aligns incentives.</p>
+      </div>
+      <div class="summary-item">
+        <strong>Data revenue:</strong>
+        <p>At scale, aggregated waste data becomes valuable to CPGs. $2-3M/year potential.
+        Year 3+ opportunity, not Year 1.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-logo">mill</div>
+    <p class="footer-text">
+      Strategic Analysis &bull; March 2026<br>
+      Built with Claude
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
