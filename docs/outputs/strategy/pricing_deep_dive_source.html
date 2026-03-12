@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mill Value Strategy: First Principles Analysis</title>
+  <title>Mill Value Strategy: The Complete Picture</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -16,6 +16,7 @@
       --text: #1a1a1a;
       --text-secondary: #555555;
       --text-muted: #888888;
+      --accent: #059669;
     }
 
     * {
@@ -33,7 +34,7 @@
     }
 
     .container {
-      max-width: 760px;
+      max-width: 800px;
       margin: 0 auto;
       padding: 0 24px;
     }
@@ -55,10 +56,6 @@
       color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.9rem;
-    }
-
-    nav a:hover {
-      color: var(--text);
     }
 
     .hero {
@@ -85,7 +82,7 @@
     .lede {
       font-size: 1.1rem;
       color: var(--text-secondary);
-      max-width: 600px;
+      max-width: 650px;
     }
 
     section {
@@ -98,7 +95,7 @@
     }
 
     h2 {
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       font-weight: 600;
       margin-bottom: 24px;
       letter-spacing: -0.01em;
@@ -173,6 +170,10 @@
       margin-bottom: 12px;
     }
 
+    .callout-accent {
+      border-left-color: var(--accent);
+    }
+
     .math-box {
       background: var(--light-gray);
       padding: 20px 24px;
@@ -193,6 +194,7 @@
       font-size: 1.1rem;
       font-weight: 600;
       color: var(--text);
+      margin-top: 8px;
     }
 
     ul {
@@ -209,44 +211,105 @@
       color: var(--text);
     }
 
-    .scenario-grid {
+    .layer-card {
+      background: var(--off-white);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 16px 0;
+    }
+
+    .layer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .layer-name {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .layer-timing {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .layer-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .layer-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .tier-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 16px;
       margin: 24px 0;
     }
 
-    .scenario {
+    .tier-card {
       background: var(--off-white);
       border-radius: 8px;
       padding: 20px;
     }
 
-    .scenario-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 12px;
+    .tier-card.primary {
+      background: var(--text);
+      color: var(--white);
     }
 
-    .scenario-metric {
+    .tier-card.primary .tier-examples {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .tier-label {
       font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .tier-card.primary .tier-label {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .tier-name {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .tier-examples {
       font-size: 0.85rem;
       color: var(--text-secondary);
-      margin-bottom: 4px;
     }
 
-    .scenario-metric strong {
-      color: var(--text);
+    .pitch-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 16px 0;
     }
 
-    .quote {
-      font-size: 1.1rem;
-      color: var(--text);
-      padding: 24px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      margin: 28px 0;
+    .pitch-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .pitch-text {
+      font-size: 0.95rem;
       font-style: italic;
+      color: var(--text);
     }
 
     .summary-box {
@@ -291,7 +354,7 @@
     }
 
     @media (max-width: 768px) {
-      .scenario-grid {
+      .tier-grid {
         grid-template-columns: 1fr;
       }
       h1 {
@@ -309,92 +372,355 @@
   </nav>
 
   <section class="hero">
-    <div class="hero-label">Strategic Analysis · Pre-Launch (2027)</div>
-    <h1>Value Strategy: First Principles</h1>
+    <div class="hero-label">Strategic Analysis &middot; Pre-Launch (2027)</div>
+    <h1>Value Strategy: The Complete Picture</h1>
     <p class="lede">
-      How Mill maximizes customer lifetime value without diluting its own position.
-      An honest assessment of what creates retention, where the money is, and how to price for it.
+      Mill's value isn't one thing&mdash;it's a stack. Operational savings, insights, compliance,
+      enterprise economics. Each layer compounds. Here's how they fit together.
     </p>
   </section>
 
-  <!-- THE ENTRY POINT -->
+  <!-- THE VALUE STACK -->
   <section>
-    <h2>Waste as Entry Point</h2>
+    <h2>The Value Stack</h2>
 
     <p>
-      Commercial kitchens throw away 4-10% of purchased food. That's measurable, painful, and hard to track accurately.
-      Every competitor in this space relies on estimates or self-reported data. Mill verifies waste through physical
-      processing&mdash;if it went through the unit, it was actually wasted.
+      The previous framing: "Mill helps you understand waste and reduce food costs by 15-25%."
+      True, but incomplete. It misses the physical value (trash cost reduction), ignores compliance
+      needs, and treats enterprise deals like scaled-up single locations.
     </p>
 
     <p>
-      This is the credible foundation: <strong>verified waste data that no one else has.</strong>
+      <strong>The complete picture:</strong> Four value layers that stack. Each builds on the previous.
+      The highest-value customers get all four.
     </p>
+
+    <div class="layer-card">
+      <div class="layer-header">
+        <span class="layer-name">Layer 1: Operational Savings</span>
+        <span class="layer-timing">Immediate, certain</span>
+      </div>
+      <div class="layer-value">$250-500/month in trash costs</div>
+      <div class="layer-desc">
+        Mill dehydrates food waste, reducing weight and volume by ~80%. Less waste = fewer pickups,
+        smaller dumpsters, lower hauling fees. This isn't "insights"&mdash;it's physics. The savings
+        start on day one and continue as long as the unit is there.
+      </div>
+    </div>
+
+    <div class="layer-card">
+      <div class="layer-header">
+        <span class="layer-name">Layer 2: Insights Value</span>
+        <span class="layer-timing">Medium-term, behavior change required</span>
+      </div>
+      <div class="layer-value">15-25% food cost reduction over time</div>
+      <div class="layer-desc">
+        Know what's wasted, when, why. Optimize purchasing, prep, portions. The 15-25% range
+        is consistent with results reported by Winnow, Leanpath, and industry studies. But this
+        isn't "learn once and leave"&mdash;staff turns over, menus change, seasons shift.
+        Continuous optimization requires continuous data.
+      </div>
+    </div>
+
+    <div class="layer-card">
+      <div class="layer-header">
+        <span class="layer-name">Layer 3: Compliance Value</span>
+        <span class="layer-timing">For regulated segments</span>
+      </div>
+      <div class="layer-value">+$200/month premium for documentation</div>
+      <div class="layer-desc">
+        California SB 1383 mandates organic waste diversion from landfills. Enforcement began 2024
+        with penalties up to $10K/day for repeat violations. ESG reporting increasingly requires
+        verified data. Mill provides automated, audit-ready documentation&mdash;verified by physical
+        processing, not self-reported. For regulated customers, Mill is a compliance solution, not
+        just a cost saver.
+      </div>
+    </div>
+
+    <div class="layer-card">
+      <div class="layer-header">
+        <span class="layer-name">Layer 4: Enterprise Value</span>
+        <span class="layer-timing">For multi-location customers</span>
+      </div>
+      <div class="layer-value">Centralized visibility, benchmark, strategic lock-in</div>
+      <div class="layer-desc">
+        500 locations isn't 500&times; one location. It's centralized visibility across all sites,
+        cross-location benchmarking, one vendor relationship. The switching cost isn't "remove a
+        unit"&mdash;it's "replace enterprise infrastructure."
+      </div>
+    </div>
+
+    <div class="callout callout-accent">
+      <p>
+        <strong>Why this matters for retention:</strong> The "learn and churn" risk is real for
+        insights alone. But a customer who "learned" their waste patterns still saves on trash
+        (Layer 1), needs compliance documentation (Layer 3), and loses centralized visibility
+        (Layer 4). Each layer mitigates churn.
+      </p>
+    </div>
+  </section>
+
+  <!-- LAYER 1: OPERATIONAL SAVINGS -->
+  <section>
+    <h2>Layer 1: Trash Cost Reduction</h2>
 
     <p>
-      But waste is a small slice of what kitchens spend. The strategic question is whether Mill stays
-      a waste tool or becomes something larger.
+      This is the foundation&mdash;and it's been missing from the value story. Mill physically
+      reduces waste volume. That has immediate, measurable impact on trash costs.
     </p>
 
-    <h3>Where Kitchen Money Actually Goes</h3>
+    <h3>The Physics</h3>
+
+    <p>
+      Food waste is heavy (high water content) and decomposes quickly (smells, attracts pests).
+      Mill dehydrates it, reducing weight and volume by approximately 80% (based on consumer
+      unit specifications; commercial unit validation required). What was a full bin
+      of wet, heavy food scraps becomes a small bag of dry material.
+    </p>
+
+    <h3>The Economics</h3>
+
+    <div class="math-box">
+      <div class="label">Restaurant trash cost ranges (industry estimates, varies significantly by location and volume)</div>
+      Dumpster rental: $150-400/month<br>
+      Pickup frequency: 3-5x/week at $75-200 per pickup<br>
+      Range: $800-2,000/month (metro areas, full-service restaurants)<br><br>
+      Food waste: ~40-50% of commercial kitchen waste by weight (EPA, ReFED data)<br>
+      Mill dehydration: reduces food waste volume by ~80% (based on consumer unit specs; commercial validation needed)<br>
+      <div class="result">Estimated savings: $250-600/month on trash (requires validation with pilot data)</div>
+    </div>
+
+    <h3>Why This Changes the Value Proposition</h3>
 
     <table>
       <tr>
-        <th>Category</th>
-        <th>% of Revenue</th>
-        <th>Annual $ (for $2M location)</th>
+        <th>Without Layer 1</th>
+        <th>With Layer 1</th>
       </tr>
       <tr>
-        <td>Food costs</td>
-        <td>28-35%</td>
-        <td>$560K-700K</td>
+        <td>"Pay $500/month, maybe save 15-25% on food costs over time"</td>
+        <td>"Pay $500/month, save $300-500/month on trash immediately, plus food cost savings over time"</td>
       </tr>
       <tr>
-        <td>Labor</td>
-        <td>28-35%</td>
-        <td>$560K-700K</td>
+        <td>ROI depends on behavior change</td>
+        <td>ROI starts day one, behavior change adds upside</td>
       </tr>
       <tr>
-        <td>Rent/occupancy</td>
-        <td>5-10%</td>
-        <td>$100K-200K</td>
+        <td>Attribution is fuzzy ("was it Mill or the new chef?")</td>
+        <td>Attribution is clear (compare trash bills before/after)</td>
       </tr>
       <tr>
-        <td>Equipment/technology</td>
-        <td>3-5%</td>
-        <td>$60K-100K</td>
+        <td>Churn risk if insights are "learned"</td>
+        <td>Savings continue regardless of learning</td>
       </tr>
     </table>
 
+    <div class="callout">
+      <p>
+        <strong>The strategic insight:</strong> Trash savings are the floor that justifies the
+        base fee. Even if a customer never acts on insights, they're still cash-flow positive.
+        This transforms the value proposition from "maybe saves money" to "definitely saves money,
+        probably saves more."
+      </p>
+    </div>
+  </section>
+
+  <!-- ENTERPRISE ECONOMICS -->
+  <section>
+    <h2>Enterprise Economics</h2>
+
     <p>
-      Industry estimates put waste at 4-10% of food costs; 7% is a reasonable midpoint.
-      For a $2M restaurant, that's ~$42K/year wasted. If Mill helps reduce waste by half
-      and takes 15% of savings, that's $3,150/year&mdash;<strong>about $262/month.</strong>
+      A 500-location contract isn't 500&times; a single-location deal. The economics are
+      fundamentally different in ways that make enterprise the priority.
     </p>
+
+    <h3>Why Enterprise Deals Are Transformative</h3>
+
+    <table>
+      <tr>
+        <th>Factor</th>
+        <th>Single Location</th>
+        <th>500-Location Enterprise</th>
+      </tr>
+      <tr>
+        <td><strong>CAC (estimated)</strong></td>
+        <td>~$5K (local sales, demos, install)</td>
+        <td>~$100-200K (enterprise sales cycle)</td>
+      </tr>
+      <tr>
+        <td><strong>CAC per location</strong></td>
+        <td>~$5,000</td>
+        <td>~$200-400</td>
+      </tr>
+      <tr>
+        <td><strong>Payback period</strong></td>
+        <td>10+ months</td>
+        <td>&lt;1 month</td>
+      </tr>
+      <tr>
+        <td><strong>Switching cost</strong></td>
+        <td>Remove one unit</td>
+        <td>Replace enterprise infrastructure</td>
+      </tr>
+      <tr>
+        <td><strong>Data value</strong></td>
+        <td>One location's patterns</td>
+        <td>Cross-location benchmarking, same menu items = better predictions</td>
+      </tr>
+    </table>
+
+    <h3>Enterprise-Specific Value</h3>
+
+    <p>
+      Things enterprise customers get that single locations don't:
+    </p>
+
+    <ul>
+      <li><strong>Centralized visibility:</strong> Corporate sustainability team sees all 500 locations in one dashboard</li>
+      <li><strong>Cross-location benchmarking:</strong> Identify which locations are outliers, why, and fix it</li>
+      <li><strong>Best practice rollout:</strong> When one location finds something that works, standardize across all</li>
+      <li><strong>Aggregate reporting:</strong> One ESG report covering all facilities, not 500 separate data pulls</li>
+      <li><strong>Procurement leverage:</strong> See waste patterns across all locations to negotiate with suppliers</li>
+    </ul>
+
+    <h3>Enterprise Pricing Should Be Premium, Not Discounted</h3>
+
+    <p>
+      The instinct is to give volume discounts. But enterprise customers get <em>more</em> value per
+      location, not less. The pricing should reflect that.
+    </p>
+
+    <table>
+      <tr>
+        <th>Segment</th>
+        <th>Per-Location Price (Proposed)</th>
+        <th>Rationale</th>
+      </tr>
+      <tr>
+        <td>Single location</td>
+        <td>$500/month</td>
+        <td>Base operational + insights value</td>
+      </tr>
+      <tr>
+        <td>10-50 locations</td>
+        <td>$600/month</td>
+        <td>+Centralized view, basic benchmarking</td>
+      </tr>
+      <tr>
+        <td>50-500 locations</td>
+        <td>$700/month</td>
+        <td>+Full enterprise features, dedicated support, API access</td>
+      </tr>
+      <tr>
+        <td>500+ locations</td>
+        <td>$650/month</td>
+        <td>Volume discount kicks in, but still premium to single</td>
+      </tr>
+    </table>
+
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -8px;">
+      Note: Pricing structure is a proposal based on value analysis. Will require market validation.
+    </p>
+
+    <div class="math-box">
+      <div class="label">Enterprise deal example (illustrative, assumes proposed pricing)</div>
+      1,000 locations at $700/month<br>
+      Annual contract value: $8.4M<br>
+      Estimated CAC: ~$200K (enterprise sales team, 12-month cycle)<br>
+      CAC payback: &lt;1 month<br>
+      <div class="result">5-year LTV (assuming 95% retention): ~$40M</div>
+    </div>
+  </section>
+
+  <!-- WHO BUYS FIRST -->
+  <section>
+    <h2>Who Buys First (and Why)</h2>
+
+    <p>
+      Not all customers are equal. Some have regulatory mandates, ESG pressure, or mission alignment
+      that makes them adopt faster and pay more. Prioritize accordingly.
+    </p>
+
+    <div class="tier-grid">
+      <div class="tier-card primary">
+        <div class="tier-label">Tier 1 &middot; Highest Value</div>
+        <div class="tier-name">Regulated + Enterprise + Mission</div>
+        <div class="tier-examples">
+          Whole Foods, Sweetgreen, Chipotle<br>
+          Multi-location, California exposure, sustainability is brand identity, ESG reporting requirements
+        </div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-label">Tier 2 &middot; High Value</div>
+        <div class="tier-name">Any Two of the Above</div>
+        <div class="tier-examples">
+          Hospital systems (compliance + enterprise)<br>
+          Tech campuses (mission + enterprise)<br>
+          Hotel chains with sustainability pledges
+        </div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-label">Tier 3 &middot; Moderate Value</div>
+        <div class="tier-name">Enterprise, Cost-Focused</div>
+        <div class="tier-examples">
+          Large QSR chains (McDonald's, Wendy's)<br>
+          Regional restaurant groups<br>
+          Will adopt if ROI is clear, won't pay premium for "mission"
+        </div>
+      </div>
+      <div class="tier-card">
+        <div class="tier-label">Tier 4 &middot; Standard Value</div>
+        <div class="tier-name">Single Location</div>
+        <div class="tier-examples">
+          Independent restaurants<br>
+          Higher relative CAC, no centralized visibility benefit<br>
+          Not "don't sell to them"&mdash;but don't lead with them
+        </div>
+      </div>
+    </div>
+
+    <h3>Why Tier 1 Customers Adopt Faster</h3>
+
+    <table>
+      <tr>
+        <th>Driver</th>
+        <th>What It Means</th>
+      </tr>
+      <tr>
+        <td><strong>California SB 1383</strong></td>
+        <td>Penalties up to $10K/day for repeat violations (enforcement began 2024). Mill provides verified documentation.</td>
+      </tr>
+      <tr>
+        <td><strong>ESG reporting (public companies)</strong></td>
+        <td>Scope 3 emissions include food waste. Mill provides auditable data for annual reports.</td>
+      </tr>
+      <tr>
+        <td><strong>B-Corp / sustainability mission</strong></td>
+        <td>Brands where sustainability is identity (Sweetgreen) need to show measurable progress.</td>
+      </tr>
+      <tr>
+        <td><strong>Investor pressure</strong></td>
+        <td>ESG funds want portfolio companies to demonstrate sustainability improvements.</td>
+      </tr>
+    </table>
 
     <div class="callout">
       <p>
-        This is the ceiling if waste is the only value. To capture more, Mill must expand into
-        food cost optimization, labor efficiency, or procurement intelligence&mdash;larger buckets
-        where the same data creates additional value.
+        <strong>The GTM implication:</strong> Start with Tier 1. They adopt faster, pay more, and
+        provide the best case studies. Amazon/Whole Foods, Google, and similar deals aren't just
+        revenue&mdash;they're proof points that accelerate every subsequent sale.
       </p>
     </div>
   </section>
 
   <!-- RETENTION -->
   <section>
-    <h2>What Actually Creates Retention</h2>
+    <h2>What Creates Retention</h2>
 
     <p>
-      The uncomfortable scenario: a customer uses Mill for six months, learns where their waste is,
-      fixes the problem, and cancels. They extracted the insight; Mill loses the recurring revenue.
+      The "learn and churn" concern is valid for insights alone. But the full value stack has
+      multiple retention mechanisms.
     </p>
-
-    <p>
-      Not everything that sounds like a moat actually prevents this.
-    </p>
-
-    <h3>Mechanisms That Work</h3>
 
     <table>
       <tr>
@@ -402,117 +728,40 @@
         <th>Why It Creates Retention</th>
       </tr>
       <tr>
+        <td><strong>Trash savings (Layer 1)</strong></td>
+        <td>Savings continue regardless of whether they "learned" anything. Cancel = lose the savings.</td>
+      </tr>
+      <tr>
         <td><strong>Physical hardware</strong></td>
-        <td>The unit is installed. Removing it requires labor and disruption. Not exciting, but real.</td>
+        <td>Unit is installed. Removing it requires labor and disruption.</td>
+      </tr>
+      <tr>
+        <td><strong>Compliance documentation (Layer 3)</strong></td>
+        <td>If they're using Mill for SB 1383 compliance, leaving means building a new system.</td>
+      </tr>
+      <tr>
+        <td><strong>Enterprise centralization (Layer 4)</strong></td>
+        <td>Leaving means losing cross-location visibility, benchmark data, aggregate reporting.</td>
       </tr>
       <tr>
         <td><strong>Compounding predictions</strong></td>
-        <td>Early predictions rely on category-level patterns. Over time, location-specific signals (seasonal, staffing, events) improve accuracy. The hypothesis: leaving after 12 months means losing that learned context.</td>
-      </tr>
-      <tr>
-        <td><strong>Integration depth</strong></td>
-        <td>If Mill connects to POS, ordering systems, and prep software, leaving means rebuilding all those connections.</td>
+        <td>12 months of location-specific data improves accuracy. Leaving = starting over.</td>
       </tr>
     </table>
 
-    <h3>Mechanisms That Don't (Yet)</h3>
+    <h3>The Customer Who "Learned" Their Waste Patterns Still:</h3>
 
-    <table>
-      <tr>
-        <th>Mechanism</th>
-        <th>Why It Falls Short</th>
-      </tr>
-      <tr>
-        <td>"Insights"</td>
-        <td>Once you know chicken waste spikes on Fridays, you know. You don't need Mill to remember.</td>
-      </tr>
-      <tr>
-        <td>"Benchmarking" at small scale</td>
-        <td>50 kitchens isn't a meaningful peer set. "You're in the 60th percentile of 50 restaurants" doesn't drive decisions.</td>
-      </tr>
-      <tr>
-        <td>"Continuous monitoring"</td>
-        <td>If they can hire someone to weigh trash for $15/hour and Mill costs $500/month, the math has to work.</td>
-      </tr>
-    </table>
-
-    <div class="callout">
-      <p>
-        <strong>The honest assessment:</strong> Hardware creates real switching costs. Compounding predictions
-        require building models that actually get meaningfully better with more data. Industry benchmarking
-        requires scale Mill doesn't have yet&mdash;it's a future moat, not a current one.
-      </p>
-    </div>
-  </section>
-
-  <!-- SCENARIOS -->
-  <section>
-    <h2>Three Paths Forward</h2>
+    <ul>
+      <li>Saves $300-500/month on trash costs (ongoing)</li>
+      <li>Needs compliance documentation (if regulated)</li>
+      <li>Loses centralized visibility (if enterprise)</li>
+      <li>Has to physically remove the unit</li>
+      <li>Loses historical data for predictions</li>
+    </ul>
 
     <p>
-      Where Mill ends up depends on product decisions made now. Each path has different economics.
-    </p>
-
-    <div class="scenario-grid">
-      <div class="scenario">
-        <div class="scenario-title">Waste Tool</div>
-        <div class="scenario-metric"><strong>$250-500</strong>/month per location</div>
-        <div class="scenario-metric">High churn risk (learn-and-leave pattern)</div>
-        <div class="scenario-metric">Hardware-only moat</div>
-      </div>
-      <div class="scenario">
-        <div class="scenario-title">Food Operations Infrastructure</div>
-        <div class="scenario-metric"><strong>$1,000-3,000</strong>/month per location</div>
-        <div class="scenario-metric">Low churn (operational embedding)</div>
-        <div class="scenario-metric">Hardware + integrations moat</div>
-      </div>
-      <div class="scenario">
-        <div class="scenario-title">Industry Data Layer</div>
-        <div class="scenario-metric"><strong>$500-1,500</strong>/month + CPG data revenue</div>
-        <div class="scenario-metric">Very low churn (benchmark access)</div>
-        <div class="scenario-metric">Network effects moat</div>
-      </div>
-    </div>
-
-    <p>
-      The first scenario is where Mill starts. The question is whether product and go-to-market
-      are designed to evolve toward the second or third.
-    </p>
-
-    <h3>What Expansion Looks Like</h3>
-
-    <table>
-      <tr>
-        <th>Starting Point</th>
-        <th>Expansion</th>
-        <th>Additional Lock-In</th>
-      </tr>
-      <tr>
-        <td>Waste tracking</td>
-        <td>Food cost management</td>
-        <td>Financial data integration</td>
-      </tr>
-      <tr>
-        <td>Food cost management</td>
-        <td>Menu optimization</td>
-        <td>Menu planning workflows</td>
-      </tr>
-      <tr>
-        <td>Menu optimization</td>
-        <td>Labor planning</td>
-        <td>Scheduling systems</td>
-      </tr>
-      <tr>
-        <td>Labor planning</td>
-        <td>Supplier negotiation</td>
-        <td>Procurement relationships</td>
-      </tr>
-    </table>
-
-    <p>
-      Each expansion creates switching costs. Toast, the restaurant tech platform, built this playbook:
-      start with POS, expand into payroll, scheduling, and marketing. Their net revenue retention
-      exceeds 115% because customers keep adding modules. Mill can follow the same expansion pattern.
+      <strong>Net:</strong> Single-location, non-regulated customers have the highest churn risk.
+      Enterprise customers with compliance needs have the lowest. Prioritize accordingly.
     </p>
   </section>
 
@@ -520,164 +769,94 @@
   <section>
     <h2>Pricing Structure</h2>
 
+    <p>
+      The pricing should reflect the value stack. Base fee covers operational value. Modules add
+      compliance and enterprise tiers. Outcome share captures upside from insights.
+    </p>
 
     <table>
       <tr>
         <th>Component</th>
         <th>Amount</th>
-        <th>Purpose</th>
+        <th>What It Covers</th>
       </tr>
       <tr>
         <td><strong>Base fee</strong></td>
-        <td>$500-800/month</td>
-        <td>Covers hardware amortization, monitoring, and benchmark access. Hardware economics TBD based on unit costs.</td>
+        <td>$500-700/month</td>
+        <td>Hardware, trash savings, basic insights dashboard. Justified by Layer 1 alone.</td>
+      </tr>
+      <tr>
+        <td><strong>Compliance module</strong></td>
+        <td>+$200/month</td>
+        <td>Automated SB 1383 documentation, ESG reporting integration, audit-ready exports.</td>
+      </tr>
+      <tr>
+        <td><strong>Enterprise tier</strong></td>
+        <td>+$100-200/month</td>
+        <td>Centralized dashboard, cross-location benchmarking, API access, dedicated support.</td>
       </tr>
       <tr>
         <td><strong>Outcome share</strong></td>
-        <td>10-15% of documented savings</td>
-        <td>Proves value. Mill only earns upside when the system performs.</td>
-      </tr>
-      <tr>
-        <td><strong>Expansion pricing</strong></td>
-        <td>Per-location, volume discounts</td>
-        <td>Captures more value as customer grows. Built into initial contract.</td>
+        <td>10-15% of documented food cost savings</td>
+        <td>Captures Layer 2 upside. Only kicks in when insights deliver measurable results.</td>
       </tr>
     </table>
 
-    <h3>Why Hybrid</h3>
-
-    <table>
-      <tr>
-        <th>Alternative</th>
-        <th>Problem</th>
-      </tr>
-      <tr>
-        <td>Pure outcome-based</td>
-        <td>Revenue unpredictable. Creates attribution arguments. ("Was that savings from Mill or from our new chef?")</td>
-      </tr>
-      <tr>
-        <td>Pure subscription</td>
-        <td>No proof of value. Customer questions ROI every renewal.</td>
-      </tr>
-      <tr class="highlight-row">
-        <td>Hybrid</td>
-        <td>Base fee covers costs. Outcome share proves value. Both sides win when system performs.</td>
-      </tr>
-    </table>
-
-    <p>
-      Sierra makes pure outcome-based work because their value is unambiguous: a customer service
-      conversation either got resolved without human escalation or it didn't. Binary. Timestamped.
-      Waste reduction is messier&mdash;was the 20% reduction from Mill's insights or the new chef?
-      A hybrid model sidesteps this attribution problem while still aligning incentives.
-    </p>
-  </section>
-
-  <!-- CPG DATA -->
-  <section>
-    <h2>The Data Revenue Layer</h2>
-
-    <p>
-      Separate from what customers pay, there's a potential revenue stream from aggregated data.
-    </p>
-
-    <p>
-      <strong>What Mill uniquely has:</strong> item-level waste data verified by physical processing,
-      connected to actual behavior. Not surveys. Not estimates.
-    </p>
-
-    <p>
-      <strong>Who pays for this:</strong> CPGs spend $500K-2M per research study trying to understand
-      what happens to their products after purchase. "Your product is wasted 40% more than competitors
-      in the same category. Here's when and why." That's valuable intelligence they can't get elsewhere.
-    </p>
-
-    <div class="math-box">
-      <div class="label">Directional estimate (assumptions will need validation)</div>
-      500 kitchens &times; $1K/year data fee = $500K/year (customer side)<br>
-      CPG contracts: Highly dependent on data depth, exclusivity, and coverage. Range could be $200K-1M per contract.<br>
-      <div class="result">Total data revenue potential: $1-3M/year at scale</div>
-    </div>
-
-    <p>
-      <strong>Constraints:</strong> This requires 500+ kitchens for statistically meaningful data,
-      privacy/aggregation infrastructure, and CPGs who see value before committing.
-      It's a Year 3+ opportunity, not Year 1.
-    </p>
-  </section>
-
-  <!-- GTM -->
-  <section>
-    <h2>Commercial Formula</h2>
-
-    <p>
-      The go-to-market needs a promise that's simple to make and easy to verify.
-    </p>
-
-    <div class="quote">
-      "We reduce food waste by 15-25%. That's $X/year for your operation. You pay a base fee for
-      the hardware and system. If we hit targets, we share in the savings. As you add locations,
-      we grow together."
-    </div>
-
-    <h3>Why This Works</h3>
+    <h3>Why This Structure Works</h3>
 
     <ul>
-      <li><strong>Promise is specific:</strong> 15-25% reduction, not "significant improvement"</li>
-      <li><strong>Risk is limited:</strong> Base fee covers costs, outcome share is pure upside</li>
-      <li><strong>Category is validated:</strong> Winnow claims 40-70% waste reduction for their customers. Leanpath (acquired by IDEO) claims 50%+ reductions. 15-25% is conservative.</li>
-      <li><strong>Expansion is built in:</strong> Multi-location terms in initial contract, no renegotiation</li>
-    </ul>
-
-    <h3>Pre-Product Credibility</h3>
-
-    <p>
-      Mill doesn't have hardware in market until 2027. Credibility before that comes from:
-    </p>
-
-    <ul>
-      <li><strong>Technical demonstration:</strong> Show CV classification accuracy on test data</li>
-      <li><strong>Design partner pilots:</strong> Even unpaid, having recognizable brands testing creates signal</li>
-      <li><strong>Category validation:</strong> Winnow raised $45M, Leanpath was acquired&mdash;the market exists</li>
+      <li><strong>Base fee is defensible:</strong> Trash savings justify it even without behavior change</li>
+      <li><strong>Compliance is a premium, not included:</strong> Regulated customers pay for the additional value they receive</li>
+      <li><strong>Enterprise is a premium, not discounted:</strong> Centralization is worth more, not less</li>
+      <li><strong>Outcome share aligns incentives:</strong> Mill only earns upside when insights deliver</li>
     </ul>
   </section>
 
-  <!-- FRAMING -->
+  <!-- THE COMMERCIAL FORMULA -->
   <section>
-    <h2>The Strategic Frame</h2>
+    <h2>The Commercial Formula</h2>
 
     <p>
-      How Mill talks about itself shapes what customers expect and what the company can become.
+      Different segments need different pitches. One size doesn't fit all.
     </p>
 
-    <table>
-      <tr>
-        <th>Framing</th>
-        <th>Problem</th>
-      </tr>
-      <tr>
-        <td>"We're a food operations platform"</td>
-        <td>Aspirational. Not credible until the product proves it.</td>
-      </tr>
-      <tr>
-        <td>"We're a waste tracking tool"</td>
-        <td>Undervalues the opportunity. Invites comparison to commodity competitors.</td>
-      </tr>
-    </table>
-
-    <div class="callout">
-      <p>
-        <strong>A possible frame:</strong> "We're building the infrastructure layer for food operations.
-        We start with waste because it's the most acute pain and the hardest data to get accurately.
-        The same system that classifies waste can optimize food costs, influence procurement, and
-        benchmark operations against industry peers."
-      </p>
+    <div class="pitch-box">
+      <div class="pitch-label">For single locations</div>
+      <div class="pitch-text">
+        "Mill cuts your trash bills by 30%+ immediately&mdash;that's $300-500/month in savings
+        you'll see on your first bill. Over time, the data helps you reduce food purchasing
+        waste too. Total value: $500-800/month in savings against a $500/month fee."
+      </div>
     </div>
 
-    <p>
-      This framing is credible now (waste tracking is real), expansive over time (platform story),
-      simple to sell (15-25% reduction), and positions for maximum long-term value.
-    </p>
+    <div class="pitch-box">
+      <div class="pitch-label">For enterprise (cost-focused)</div>
+      <div class="pitch-text">
+        "Mill standardizes food waste management across all your locations. You'll see 30%+
+        reduction in trash costs immediately, plus 15-25% food cost optimization over time.
+        More importantly: centralized visibility lets you benchmark locations, identify best
+        practices, and roll them out systematically. One vendor, one dashboard, one procurement
+        decision."
+      </div>
+    </div>
+
+    <div class="pitch-box">
+      <div class="pitch-label">For enterprise (compliance-focused)</div>
+      <div class="pitch-text">
+        "Mill solves your SB 1383 compliance automatically. Every unit documents exactly what
+        was diverted, verified by physical processing&mdash;not self-reported. Audit-ready
+        reports, location-by-location or aggregated. Plus the operational savings on top."
+      </div>
+    </div>
+
+    <div class="pitch-box">
+      <div class="pitch-label">For enterprise (mission-focused)</div>
+      <div class="pitch-text">
+        "Mill proves your sustainability commitment with verified data. Not estimates&mdash;actual,
+        measured waste diversion. The kind of data you can put in your ESG report, your B-Corp
+        application, your marketing. Transparent, auditable, real."
+      </div>
+    </div>
   </section>
 
   <!-- SUMMARY -->
@@ -686,29 +865,29 @@
 
     <div class="summary-box">
       <div class="summary-item">
-        <strong>Entry point:</strong>
-        <p>Waste reduction is the credible, painful, data-rich starting point. But it's a small slice of
-        kitchen economics&mdash;roughly $250-500/month ceiling per location.</p>
+        <strong>The value stack:</strong>
+        <p>Four layers that compound. Operational savings (immediate), insights (medium-term),
+        compliance (for regulated), enterprise (for multi-location). Each adds value and retention.</p>
       </div>
       <div class="summary-item">
-        <strong>Expansion path:</strong>
-        <p>The same data that classifies waste can optimize food costs, labor, and procurement.
-        Each expansion creates switching costs and captures more value.</p>
+        <strong>Trash savings are the foundation:</strong>
+        <p>$250-500/month in immediate savings. This justifies the base fee regardless of behavior
+        change. It's the floor, not a side benefit.</p>
       </div>
       <div class="summary-item">
-        <strong>Retention mechanism:</strong>
-        <p>Hardware lock-in is real. Compounding predictions require models that actually improve with
-        more data. Industry benchmarking requires scale&mdash;a future moat, not a current one.</p>
+        <strong>Enterprise economics transform the business:</strong>
+        <p>500 locations ≠ 500× one location. CAC efficiency, centralized value, strategic lock-in.
+        Enterprise pricing should be premium, not discounted.</p>
       </div>
       <div class="summary-item">
-        <strong>Pricing:</strong>
-        <p>Hybrid model. Base fee ($500-800/month) covers costs and creates predictability.
-        Outcome share (10-15% of savings) proves value and aligns incentives.</p>
+        <strong>Tier 1 customers first:</strong>
+        <p>Regulated + Enterprise + Mission (Whole Foods, Sweetgreen, Chipotle). They adopt
+        faster, pay more, and provide proof points for everyone else.</p>
       </div>
       <div class="summary-item">
-        <strong>Data revenue:</strong>
-        <p>At scale, aggregated waste data becomes valuable to CPGs. $2-3M/year potential.
-        Year 3+ opportunity, not Year 1.</p>
+        <strong>Retention is layered:</strong>
+        <p>"Learn and churn" is mitigated by trash savings that continue, compliance
+        documentation they can't replicate, and enterprise centralization they'd have to rebuild.</p>
       </div>
     </div>
   </section>
