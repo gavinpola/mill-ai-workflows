@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mill Commercial GTM: Pricing Strategy Deep Dive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #fafafa;
+      --light-gray: #f5f5f5;
+      --border: #e5e5e5;
+      --text: #1a1a1a;
+      --text-secondary: #555555;
+      --text-muted: #888888;
+      --accent: #059669;
+      --accent-light: #d1fae5;
+      --red: #dc2626;
+      --red-light: #fee2e2;
+      --yellow: #ca8a04;
+      --yellow-light: #fef9c3;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .hero {
+      padding: 64px 0 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+
+    .lede {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+    }
+
+    section {
+      padding: 48px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 32px 0 16px;
+      color: var(--text);
+    }
+
+    h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin: 24px 0 12px;
+      color: var(--text);
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: var(--text-secondary);
+    }
+
+    p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      background: var(--off-white);
+      color: var(--text);
+      font-size: 0.85rem;
+    }
+
+    td {
+      color: var(--text-secondary);
+    }
+
+    .highlight-row td {
+      background: var(--off-white);
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .callout {
+      background: var(--off-white);
+      border-left: 3px solid var(--text);
+      padding: 20px 24px;
+      margin: 24px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .callout p {
+      margin: 0;
+      color: var(--text);
+    }
+
+    .callout p:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    .callout-accent {
+      border-left-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .callout-red {
+      border-left-color: var(--red);
+      background: var(--red-light);
+    }
+
+    .callout-yellow {
+      border-left-color: var(--yellow);
+      background: var(--yellow-light);
+    }
+
+    .math-box {
+      background: var(--light-gray);
+      padding: 20px 24px;
+      border-radius: 6px;
+      margin: 20px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+    }
+
+    .math-box .label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .math-box .result {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    ul, ol {
+      margin: 16px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    li strong {
+      color: var(--text);
+    }
+
+    .model-card {
+      background: var(--off-white);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .model-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 16px;
+    }
+
+    .model-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .model-verdict {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .verdict-use {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .verdict-reject {
+      background: var(--red-light);
+      color: var(--red);
+    }
+
+    .verdict-partial {
+      background: var(--yellow-light);
+      color: var(--yellow);
+    }
+
+    .model-structure {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .pros, .cons {
+      padding: 16px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .pros {
+      background: var(--accent-light);
+    }
+
+    .cons {
+      background: var(--red-light);
+    }
+
+    .pros-cons-label {
+      font-weight: 600;
+      font-size: 0.8rem;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pros .pros-cons-label {
+      color: var(--accent);
+    }
+
+    .cons .pros-cons-label {
+      color: var(--red);
+    }
+
+    .pros ul, .cons ul {
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    .pros li, .cons li {
+      color: var(--text);
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+
+    .year-card {
+      background: var(--off-white);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 16px 0;
+    }
+
+    .year-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .year-label {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .year-revenue {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .year-pricing {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .year-value {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .year-value ul {
+      margin: 8px 0 0;
+      padding-left: 16px;
+    }
+
+    .flywheel-stage {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .flywheel-stage:last-child {
+      border-bottom: none;
+    }
+
+    .flywheel-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      min-width: 80px;
+    }
+
+    .flywheel-content {
+      flex: 1;
+    }
+
+    .flywheel-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .flywheel-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .pitch-box {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+
+    .pitch-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .pitch-text {
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--text);
+    }
+
+    .summary-box {
+      background: var(--off-white);
+      border-radius: 8px;
+      padding: 28px;
+      margin: 24px 0;
+    }
+
+    .summary-item {
+      margin-bottom: 16px;
+    }
+
+    .summary-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .summary-item strong {
+      color: var(--text);
+    }
+
+    .summary-item p {
+      margin: 4px 0 0;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      padding: 48px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .footer-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .pros-cons {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <nav>
+    <div class="logo">mill</div>
+    <a href="../../index.html">&larr; Back to Index</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-label">Commercial GTM Strategy &middot; Pricing Analysis</div>
+    <h1>Pricing Strategy: The Complete Picture</h1>
+    <p class="lede">
+      Not "here's our pricing" but "here's how we evaluated alternatives and landed on a model
+      that works for us AND the customer while preserving lifetime value." Seven models analyzed.
+      One recommended.
+    </p>
+  </section>
+
+  <!-- THE MULTI-YEAR PROBLEM -->
+  <section>
+    <h2>The Multi-Year Problem</h2>
+
+    <p>
+      Every pricing conversation starts here: How do you charge for value that the customer
+      eventually "learns"?
+    </p>
+
+    <h3>The Learn-and-Churn Timeline</h3>
+
+    <p><strong>Year 1:</strong> Customer doesn't know what's being wasted. Mill reveals: chicken
+    waste spikes Fridays, over-prep on Mondays. Customer acts, reduces waste 20%. Mill takes
+    15% of savings. Good revenue.</p>
+
+    <p><strong>Year 2:</strong> Customer already optimized the obvious stuff. Incremental
+    improvement is maybe 5%. Mill's outcome share drops significantly. Customer thinks:
+    "I already learned this. Why am I paying?"</p>
+
+    <p><strong>Year 3:</strong> Customer is fully optimized. Marginal gains are tiny.
+    Outcome-based revenue approaches zero. Customer churns.</p>
+
+    <div class="callout callout-red">
+      <p>
+        <strong>This is the core problem.</strong> Pure outcome-based pricing on "waste reduction
+        learning" creates a self-defeating revenue model. The better you perform in Year 1, the
+        less you can charge in Year 2+.
+      </p>
+    </div>
+
+    <h3>What Actually Creates Year 2+ Value</h3>
+
+    <p>Be brutally honest about what does and doesn't work:</p>
+
+    <table>
+      <tr>
+        <th>Creates Ongoing Value</th>
+        <th>Why It Doesn't Diminish</th>
+      </tr>
+      <tr>
+        <td><strong>Trash savings</strong></td>
+        <td>Physical dehydration continues regardless of what customer "learned"</td>
+      </tr>
+      <tr>
+        <td><strong>Staff turnover training</strong></td>
+        <td>~75% annual turnover in restaurants (National Restaurant Association data). New employees make old mistakes. Continuous data = continuous training.</td>
+      </tr>
+      <tr>
+        <td><strong>Menu changes</strong></td>
+        <td>New items create new waste patterns. Requires new insights.</td>
+      </tr>
+      <tr>
+        <td><strong>Seasonal patterns</strong></td>
+        <td>Only emerge with 12+ months of data. Year 1 data makes Year 2 predictions better.</td>
+      </tr>
+      <tr>
+        <td><strong>Compliance documentation</strong></td>
+        <td>Ongoing regulatory requirement. Can't replicate with "learned insights."</td>
+      </tr>
+      <tr>
+        <td><strong>Benchmark access</strong></td>
+        <td>"How do I compare to peers?" requires ongoing access to Mill's network data.</td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <th>Does NOT Create Ongoing Value</th>
+        <th>Why It's Extractable</th>
+      </tr>
+      <tr>
+        <td>"We learned your waste patterns"</td>
+        <td>Once learned, it's learned. Knowledge doesn't require subscription.</td>
+      </tr>
+      <tr>
+        <td>"We'll send you reports"</td>
+        <td>Reports aren't valuable if insights are stale.</td>
+      </tr>
+      <tr>
+        <td>"Continuous monitoring"</td>
+        <td>If a $15/hour employee can weigh trash and get same result, this isn't defensible.</td>
+      </tr>
+    </table>
+
+    <h3>The Key Reframe</h3>
+
+    <p>
+      The problem isn't that outcome-based pricing doesn't work. The problem is framing outcome
+      as "one-time waste reduction learning."
+    </p>
+
+    <div class="callout callout-accent">
+      <p>
+        <strong>Better frame:</strong> Outcome = "continuous optimization in a changing environment"
+      </p>
+      <p>
+        What changes: Staff (~75% annual turnover per NRA data), menus (seasonal, new items), volume (holidays,
+        events, weather), costs (ingredient prices shift), regulations (new compliance requirements).
+      </p>
+      <p>
+        Static optimization doesn't work in dynamic environments. The customer who "learned" their
+        waste patterns in January doesn't know their summer patterns, holiday patterns, or new
+        menu item patterns.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRICING MODELS: DEEP ANALYSIS -->
+  <section>
+    <h2>Pricing Models: Deep Analysis</h2>
+
+    <p>
+      Seven models, evaluated against Mill's specific context. Each with honest pros, cons,
+      and a verdict.
+    </p>
+
+    <!-- Model 1: Pure Subscription -->
+    <div class="model-card">
+      <div class="model-header">
+        <span class="model-name">Model 1: Pure Subscription</span>
+        <span class="model-verdict verdict-partial">Use as foundation</span>
+      </div>
+      <div class="model-structure">$500-800/month flat fee, no outcome component</div>
+
+      <p>Customer pays fixed amount regardless of results. Simple to explain, simple to budget.
+      Mill captures value regardless of customer behavior.</p>
+
+      <div class="pros-cons">
+        <div class="pros">
+          <div class="pros-cons-label">Why it works</div>
+          <ul>
+            <li>Predictable revenue for Mill</li>
+            <li>Trash savings justify base fee alone</li>
+            <li>Works for compliance customers</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="pros-cons-label">Why it's not enough</div>
+          <ul>
+            <li>No proof of value to customer</li>
+            <li>Customer questions ROI after Year 1</li>
+            <li>No incentive to keep improving</li>
+          </ul>
+        </div>
+      </div>
+
+      <p style="margin-top: 16px; font-size: 0.9rem;">
+        <strong>Verdict:</strong> Use as foundation (base fee), but not sufficient alone for
+        optimization value. Compliance-driven customers may accept this structure.
+      </p>
+    </div>
+
+    <!-- Model 2: Pure Outcome-Based -->
+    <div class="model-card">
+      <div class="model-header">
+        <span class="model-name">Model 2: Pure Outcome-Based</span>
+        <span class="model-verdict verdict-reject">Not viable</span>
+      </div>
+      <div class="model-structure">10-20% of documented savings, no base fee</div>
+
+      <p>Customer pays only for proven results. Zero risk to customer. Mill only earns when
+      value is delivered.</p>
+
+      <div class="pros-cons">
+        <div class="pros">
+          <div class="pros-cons-label">Why it's appealing</div>
+          <ul>
+            <li>Makes "yes" extremely easy</li>
+            <li>Aligns incentives perfectly</li>
+            <li>Forces Mill to prove value</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="pros-cons-label">Why it fails</div>
+          <ul>
+            <li>Year 1 big, Year 2+ diminishes</li>
+            <li>Attribution fights ("Mill or new chef?")</li>
+            <li>Revenue unpredictable</li>
+            <li>Doesn't capture trash savings</li>
+          </ul>
+        </div>
+      </div>
+
+      <p style="margin-top: 16px; font-size: 0.9rem;">
+        <strong>Why Sierra can do this but Mill can't:</strong> AI agent resolution is unambiguous
+        (ticket solved or not). Waste reduction attribution is messy (multiple factors affect
+        food costs). Sierra's "outcome" is instantaneous; Mill's is cumulative over months.
+      </p>
+
+      <p style="font-size: 0.9rem;">
+        <strong>Verdict:</strong> Not viable as primary model. Too much attribution complexity,
+        revenue instability.
+      </p>
+    </div>
+
+    <!-- Model 3: Hybrid -->
+    <div class="model-card">
+      <div class="model-header">
+        <span class="model-name">Model 3: Hybrid (Base + Outcome Share)</span>
+        <span class="model-verdict verdict-use">Best foundation</span>
+      </div>
+      <div class="model-structure">$300-500/month base + 10-15% of documented savings</div>
+
+      <p>Base fee covers hardware and ongoing trash savings. Outcome share kicks in when food
+      cost optimization delivers results. Customer gets "insurance" plus "upside."</p>
+
+      <div class="pros-cons">
+        <div class="pros">
+          <div class="pros-cons-label">Why it works</div>
+          <ul>
+            <li>Base fee ensures revenue floor</li>
+            <li>Outcome share proves value</li>
+            <li>Base defensible via trash savings</li>
+            <li>Outcome share is upside, not core</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="pros-cons-label">Challenges to solve</div>
+          <ul>
+            <li>Still need attribution methodology</li>
+            <li>Year 2+ outcome share will decline</li>
+            <li>Two components to explain</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="math-box" style="margin-top: 16px;">
+        <div class="label">The Year 2+ problem in hybrid</div>
+        Year 1: $400 base + $300 outcome = $700/month<br>
+        Year 2: $400 base + $100 outcome = $500/month (basics already optimized)<br>
+        Year 3: $400 base + $50 outcome = $450/month
+        <div class="result">Revenue declining. Need mechanism to address.</div>
+      </div>
+
+      <p style="font-size: 0.9rem;">
+        <strong>Verdict:</strong> Best foundation. Use as starting point and add mechanisms to
+        address Year 2+ value (see Model 5).
+      </p>
+    </div>
+
+    <!-- Model 4: Declining Outcome Share -->
+    <div class="model-card">
+      <div class="model-header">
+        <span class="model-name">Model 4: Declining Outcome Share Over Time</span>
+        <span class="model-verdict verdict-reject">Strategically wrong</span>
+      </div>
+      <div class="model-structure">Year 1: 20%, Year 2: 15%, Year 3: 10%, Year 4+: 5%</div>
+
+      <p>Explicitly recognizes that early wins are biggest. Customer sees price "decreasing"
+      over time. Mill front-loads revenue.</p>
+
+      <div class="pros-cons">
+        <div class="pros">
+          <div class="pros-cons-label">Why it seems appealing</div>
+          <ul>
+            <li>Matches reality (big wins early)</li>
+            <li>Customer likes "cheaper over time"</li>
+            <li>Predictable decline vs. unpredictable</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="pros-cons-label">Why it's wrong</div>
+          <ul>
+            <li>Incentivizes churn ("I'll leave eventually")</li>
+            <li>Devalues long-term relationship</li>
+            <li>Opposite of what we want</li>
+            <li>Leaves money on table</li>
+          </ul>
+        </div>
+      </div>
+
+      <p style="margin-top: 16px; font-size: 0.9rem;">
+        <strong>Verdict:</strong> Reject. This is the opposite of the strategy we need. We want
+        INCREASING value over time, not decreasing.
+      </p>
+    </div>
+
+    <!-- Model 5: Platform Expansion -->
+    <div class="model-card">
+      <div class="model-header">
+        <span class="model-name">Model 5: Escalating Value + Price (Platform Expansion)</span>
+        <span class="model-verdict verdict-use">Recommended</span>
+      </div>
+      <div class="model-structure">Base fee + modules that unlock over time</div>
+
+      <p>Customer starts with core value. New value unlocks as data accumulates. Each new
+      module is a natural upsell. Price increases with value delivered.</p>
+
+      <div class="math-box">
+        <div class="label">The expansion model</div>
+        Year 1: $500/month (waste tracking + trash savings)<br>
+        Year 2: +$200/month (food cost module - unlock after 12 months)<br>
+        Year 3: +$150/month (procurement insights - unlock after scale)<br>
+        Year 4: +$100/month (benchmark network - meaningful at scale)
+        <div class="result">Revenue increases despite outcome share declining</div>
+      </div>
+
+      <div class="pros-cons">
+        <div class="pros">
+          <div class="pros-cons-label">Why it works</div>
+          <ul>
+            <li>Solves the decline problem</li>
+            <li>Matches data value curve</li>
+            <li>Natural expansion, not extraction</li>
+            <li>Retention through value</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="pros-cons-label">Requirements</div>
+          <ul>
+            <li>Must build the modules (can't be vaporware)</li>
+            <li>Must prove each module's ROI</li>
+            <li>Year 1 must be compelling enough to start</li>
+          </ul>
+        </div>
+      </div>
+
+      <p style="margin-top: 16px; font-size: 0.9rem;">
+        <strong>Verdict:</strong> This is the strategic direction. Requires product investment
+        but solves multi-year problem. Customer isn't "paying more for same thing"&mdash;they're
+        getting new things.
+      </p>
+    </div>
+
+    <!-- Model 6: Enterprise Annual -->
+    <div class="model-card">
+      <div class="model-header">
+        <span class="model-name">Model 6: Enterprise Data Subscription</span>
+        <span class="model-verdict verdict-use">Use for enterprise</span>
+      </div>
+      <div class="model-structure">Annual commitment + 3-5% escalator + inflation</div>
+
+      <p>Customer commits to annual contract with built-in escalator. Positions Mill as "data
+      infrastructure" not "optimization tool."</p>
+
+      <div class="math-box">
+        <div class="label">Enterprise annual trajectory</div>
+        Year 1: $600/month &times; 12 = $7,200/year<br>
+        Year 2: $7,200 &times; 1.04 = $7,488/year<br>
+        Year 3: $7,488 &times; 1.04 = $7,787/year
+      </div>
+
+      <p>
+        <strong>The framing shift:</strong> NOT "We help you save on food costs." YES "We provide
+        continuous access to operational intelligence."
+      </p>
+
+      <p style="font-size: 0.9rem;">
+        <strong>Verdict:</strong> Use for enterprise customers. Pairs well with platform expansion
+        model. Procurement teams understand annual contracts with escalators.
+      </p>
+    </div>
+
+    <!-- Model 7: Guaranteed Savings -->
+    <div class="model-card">
+      <div class="model-header">
+        <span class="model-name">Model 7: Guaranteed Savings (Risk Reversal)</span>
+        <span class="model-verdict verdict-partial">Use selectively</span>
+      </div>
+      <div class="model-structure">"We guarantee X% reduction OR you don't pay"</div>
+
+      <p>Mill takes on all the risk. Customer has zero downside to try. Confidence signal that
+      Mill believes in the product.</p>
+
+      <div class="pros-cons">
+        <div class="pros">
+          <div class="pros-cons-label">Why it's appealing</div>
+          <ul>
+            <li>Makes "yes" trivially easy</li>
+            <li>Cuts through objections</li>
+            <li>Shows confidence</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <div class="pros-cons-label">Why it's dangerous</div>
+          <ul>
+            <li>Adverse selection risk</li>
+            <li>Customer could game it</li>
+            <li>No base for hardware cost</li>
+            <li>Margin pressure</li>
+          </ul>
+        </div>
+      </div>
+
+      <p style="margin-top: 16px; font-size: 0.9rem;">
+        <strong>Safe structure:</strong> "We guarantee 15% waste reduction in Year 1 OR we reduce
+        your Year 2 base fee by the shortfall." Risk reversal + tied to renewal.
+      </p>
+
+      <p style="font-size: 0.9rem;">
+        <strong>Verdict:</strong> Use selectively for high-value prospects who need confidence
+        signal. Not primary model.
+      </p>
+    </div>
+  </section>
+
+  <!-- THE MULTI-YEAR SOLUTION -->
+  <section>
+    <h2>The Solution: Platform Expansion</h2>
+
+    <p>
+      The key insight: Don't fight the learning curve. Add new value on top of it. Revenue
+      increases even as outcome share from initial optimization declines.
+    </p>
+
+    <div class="year-card">
+      <div class="year-header">
+        <span class="year-label">Year 1: Prove It Works</span>
+        <span class="year-revenue">~$750/month</span>
+      </div>
+      <div class="year-pricing">$500 base + 15% outcome share (~$250)</div>
+      <div class="year-value">
+        <strong>Value delivered:</strong>
+        <ul>
+          <li>Trash cost reduction ($250-500/month immediate)</li>
+          <li>Initial waste pattern insights</li>
+          <li>First optimizations (the big wins)</li>
+        </ul>
+        <p style="margin-top: 12px;">
+          <strong>Customer experience:</strong> "Holy shit, we were throwing away 200 lbs of
+          chicken weekly." Visible savings on trash bills. 15-25% reduction in waste.
+        </p>
+      </div>
+    </div>
+
+    <div class="year-card">
+      <div class="year-header">
+        <span class="year-label">Year 2: Expand the Value</span>
+        <span class="year-revenue">~$900/month</span>
+      </div>
+      <div class="year-pricing">$525 base (escalator) + 10% outcome (~$175) + food cost module ($200)</div>
+      <div class="year-value">
+        <strong>New value delivered:</strong>
+        <ul>
+          <li>Full food cost dashboard (not just waste, but procurement patterns)</li>
+          <li>Seasonal prediction (Year 1 data enables Year 2 predictions)</li>
+          <li>Staff turnover training (new employees get waste education)</li>
+        </ul>
+        <p style="margin-top: 12px;">
+          <strong>Key insight:</strong> Revenue INCREASED despite outcome share decreasing. The
+          expansion model works.
+        </p>
+      </div>
+    </div>
+
+    <div class="year-card">
+      <div class="year-header">
+        <span class="year-label">Year 3: Enterprise Value</span>
+        <span class="year-revenue">~$1,050/month</span>
+      </div>
+      <div class="year-pricing">$550 base + 8% outcome (~$100) + full platform ($400)</div>
+      <div class="year-value">
+        <strong>New value delivered:</strong>
+        <ul>
+          <li>Procurement insights (correlate waste with supplier data)</li>
+          <li>Benchmark network (compare to 500+ restaurants)</li>
+          <li>Compliance documentation (for regulated customers)</li>
+        </ul>
+        <p style="margin-top: 12px;">
+          <strong>Customer experience:</strong> "We're in the 85th percentile of efficiency."
+          Compliance reports auto-generated. Can negotiate with suppliers using waste data.
+        </p>
+      </div>
+    </div>
+
+    <div class="year-card">
+      <div class="year-header">
+        <span class="year-label">Year 4+: Strategic Partnership</span>
+        <span class="year-revenue">~$1,200/month</span>
+      </div>
+      <div class="year-pricing">$575 base + 5% outcome (~$50) + enterprise tier ($575)</div>
+      <div class="year-value">
+        <strong>New value delivered:</strong>
+        <ul>
+          <li>Enterprise dashboard (for multi-location)</li>
+          <li>API access (integrate with their systems)</li>
+          <li>Dedicated support</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>The Revenue Trajectory</h3>
+
+    <table>
+      <tr>
+        <th>Year</th>
+        <th>Monthly Revenue</th>
+        <th>Annual Revenue</th>
+        <th>YoY Growth</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>$750</td>
+        <td>$9,000</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>$900</td>
+        <td>$10,800</td>
+        <td>+20%</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>$1,050</td>
+        <td>$12,600</td>
+        <td>+17%</td>
+      </tr>
+      <tr class="highlight-row">
+        <td>4</td>
+        <td>$1,200</td>
+        <td>$14,400</td>
+        <td>+14%</td>
+      </tr>
+    </table>
+
+    <div class="callout callout-accent">
+      <p>
+        <strong>This is the solution to "learn and churn."</strong> You don't fight the learning.
+        You add new value on top of it. Outcome share from Year 1 optimization declines, but total
+        revenue increases because new modules more than offset the decrease.
+      </p>
+    </div>
+  </section>
+
+  <!-- MAKING ROI OBVIOUS -->
+  <section>
+    <h2>Making ROI Obvious</h2>
+
+    <p>
+      How do you make the "yes" decision trivially easy? Address the four reasons customers
+      hesitate.
+    </p>
+
+    <h3>Why Customers Hesitate</h3>
+
+    <ol>
+      <li><strong>Uncertainty:</strong> "Will this actually work for MY kitchen?"</li>
+      <li><strong>Attribution:</strong> "How do I know the savings came from Mill?"</li>
+      <li><strong>Complexity:</strong> "What exactly am I paying for?"</li>
+      <li><strong>Commitment:</strong> "What if I want to cancel?"</li>
+    </ol>
+
+    <h3>The Trash Savings Calculator</h3>
+
+    <p>Before they even sign, show positive ROI on trash savings alone:</p>
+
+    <div class="math-box">
+      <div class="label">Pre-sale ROI calculation</div>
+      Your current trash costs: $X/month (they know this)<br>
+      Food waste as % of trash: ~40-50%<br>
+      Mill reduction in food waste volume: ~80%<br>
+      Estimated savings: $Y/month on trash alone<br>
+      Mill fee: $500/month<br>
+      <div class="result">Net: You save $Z/month BEFORE food cost optimization</div>
+    </div>
+
+    <p>
+      The food cost optimization is upside. Trash savings alone justify the fee. This reframes
+      the decision from "gamble on insights" to "guaranteed savings plus upside."
+    </p>
+
+    <h3>The Pilot-to-Expand Model</h3>
+
+    <p>
+      "Start with 3 locations. We'll prove results in 90 days. If you see the savings, expand
+      to all locations."
+    </p>
+
+    <p>This de-risks the decision:</p>
+    <ul>
+      <li>Limited commitment (3 locations, not 300)</li>
+      <li>Proof before scale (see results before expansion)</li>
+      <li>Natural expansion path (expansion terms in initial contract)</li>
+    </ul>
+
+    <h3>The ROI Dashboard</h3>
+
+    <p>Make value visible continuously, not just at renewal:</p>
+
+    <ul>
+      <li><strong>Day 1:</strong> Real-time waste tracking live</li>
+      <li><strong>Week 1:</strong> First waste classifications visible</li>
+      <li><strong>Month 1:</strong> First savings estimate calculated</li>
+      <li><strong>Month 3:</strong> Accumulated savings vs. cost comparison</li>
+    </ul>
+
+    <p>
+      Customer sees value continuously. No "what am I paying for?" questions at renewal.
+    </p>
+
+    <h3>The Guarantee Option (For High-Value Prospects)</h3>
+
+    <div class="pitch-box">
+      <div class="pitch-label">The safe guarantee structure</div>
+      <div class="pitch-text">
+        "We guarantee a minimum of $X in documented savings in Year 1, or we'll credit the
+        difference against your Year 2 fee."
+      </div>
+    </div>
+
+    <p>This is:</p>
+    <ul>
+      <li><strong>Not a free trial</strong> (there's still a base fee)</li>
+      <li><strong>Risk reversal</strong> (customer is protected)</li>
+      <li><strong>Confidence signal</strong> (Mill believes in the product)</li>
+      <li><strong>Retention mechanism</strong> (credit against Year 2 = customer stays)</li>
+    </ul>
+  </section>
+
+  <!-- DATA FLYWHEEL -->
+  <section>
+    <h2>The Data Flywheel</h2>
+
+    <p>
+      How does data improve the product and justify higher pricing? Show the mechanism, not
+      just the claim.
+    </p>
+
+    <h3>Individual Customer Data</h3>
+
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+      Note: Accuracy figures below are illustrative targets, not validated Mill data.
+      Actual improvement curve will require pilot validation.
+    </p>
+
+    <div class="flywheel-stage">
+      <div class="flywheel-time">Month 1</div>
+      <div class="flywheel-content">
+        <div class="flywheel-title">~70% accuracy on waste predictions</div>
+        <div class="flywheel-desc">Basic classification. No history. Generic patterns.</div>
+      </div>
+    </div>
+    <div class="flywheel-stage">
+      <div class="flywheel-time">Month 6</div>
+      <div class="flywheel-content">
+        <div class="flywheel-title">~80% accuracy</div>
+        <div class="flywheel-desc">Seasonal patterns emerge. Thanksgiving waste ≠ March waste.</div>
+      </div>
+    </div>
+    <div class="flywheel-stage">
+      <div class="flywheel-time">Month 12</div>
+      <div class="flywheel-content">
+        <div class="flywheel-title">~88% accuracy</div>
+        <div class="flywheel-desc">Full annual cycle. Can predict next year's patterns.</div>
+      </div>
+    </div>
+    <div class="flywheel-stage">
+      <div class="flywheel-time">Month 24</div>
+      <div class="flywheel-content">
+        <div class="flywheel-title">~92% accuracy</div>
+        <div class="flywheel-desc">Multi-year patterns. Staff changes, menu evolution factored in.</div>
+      </div>
+    </div>
+
+    <p>
+      <strong>Why it improves:</strong> The model learns YOUR kitchen's specific patterns&mdash;
+      staffing, menu changes, local events, weather impacts. Generic models can't do this.
+    </p>
+
+    <h3>Network Data</h3>
+
+    <table>
+      <tr>
+        <th>Scale</th>
+        <th>What It Enables</th>
+        <th>Pricing Implication</th>
+      </tr>
+      <tr>
+        <td>50 kitchens</td>
+        <td>Weak benchmark ("60th percentile of 50")</td>
+        <td>No premium justified</td>
+      </tr>
+      <tr>
+        <td>500 kitchens</td>
+        <td>Meaningful benchmark ("Top performers prep 20% less chicken on Mondays")</td>
+        <td>+$150/month benchmark tier</td>
+      </tr>
+      <tr>
+        <td>5,000 kitchens</td>
+        <td>Industry intelligence ("This supplier's product generates 15% more waste")</td>
+        <td>+$200/month procurement insights</td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <p>
+        <strong>The customer pitch:</strong> "The longer you're with Mill, the smarter it gets
+        for YOUR kitchen. And the larger our network grows, the more industry intelligence you
+        get access to. Year 1 is about your own optimization. Year 3 is about outperforming
+        your competitors."
+      </p>
+    </div>
+
+    <h3>How This Justifies Higher Pricing</h3>
+
+    <table>
+      <tr>
+        <th>Year</th>
+        <th>New Capability</th>
+        <th>Price Justification</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Trash savings + initial insights</td>
+        <td>Immediate, measurable, single-customer</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Seasonal prediction</td>
+        <td>"Year 1 data makes Year 2 predictions possible"</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Benchmark access</td>
+        <td>"At 500 kitchens, benchmark data is meaningful"</td>
+      </tr>
+      <tr>
+        <td>4+</td>
+        <td>Procurement insights</td>
+        <td>"Cross-supplier waste data reveals cost opportunities"</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- PRESERVING NPS -->
+  <section>
+    <h2>Preserving Customer Satisfaction</h2>
+
+    <p>
+      Price should track value, not extract value. If price goes up 20%, value should go up
+      25%+. This is the opposite of "lock them in and extract."
+    </p>
+
+    <h3>What Causes Dissatisfaction</h3>
+
+    <ol>
+      <li><strong>Feeling overcharged:</strong> "I'm paying more but not getting more"</li>
+      <li><strong>Extraction mindset:</strong> "They're always trying to upsell me"</li>
+      <li><strong>Poor support:</strong> "When something breaks, no one helps"</li>
+      <li><strong>Hidden costs:</strong> "I didn't know that was extra"</li>
+      <li><strong>Value fade:</strong> "I don't see results anymore"</li>
+    </ol>
+
+    <h3>How to Preserve Satisfaction</h3>
+
+    <h4>1. Price increases come with value increases</h4>
+
+    <p>
+      <strong>NEVER:</strong> "Your price is going up 5% because of inflation"<br>
+      <strong>ALWAYS:</strong> "You're now eligible for our Food Cost module, which includes
+      X, Y, Z. This adds $200/month."
+    </p>
+
+    <p>Customer pays more, but gets more. No resentment.</p>
+
+    <h4>2. Make expansion opt-in, not forced</h4>
+
+    <p>
+      "You've been with Mill for 12 months. Your data now enables seasonal predictions.
+      Would you like to add the Food Cost module?"
+    </p>
+
+    <p>Customer chooses expansion, feels in control.</p>
+
+    <h4>3. Visible value dashboard</h4>
+
+    <p>Every month, customer sees:</p>
+    <ul>
+      <li>"Total savings this month: $X"</li>
+      <li>"Waste diverted: X lbs"</li>
+      <li>"Year-to-date savings: $Y"</li>
+    </ul>
+
+    <p>Customer sees value continuously, not just at renewal.</p>
+
+    <h4>4. Fair outcome share calculation</h4>
+
+    <p>Transparent methodology:</p>
+    <ul>
+      <li>Baseline established in Month 1</li>
+      <li>Savings calculated against rolling baseline (accounts for natural fluctuation)</li>
+      <li>Customer can see the calculation</li>
+    </ul>
+
+    <p>No attribution arguments.</p>
+
+    <div class="callout callout-accent">
+      <p>
+        <strong>The NPS preservation principle:</strong> If price goes up 20%, value should go
+        up 25%+. If value stagnates, price should stagnate. This is "grow together," not "lock
+        them in and extract."
+      </p>
+    </div>
+  </section>
+
+  <!-- WHERE DATA GOES NEXT -->
+  <section>
+    <h2>Where the Data Goes Next</h2>
+
+    <p>
+      Mill's data creates value beyond the direct customer relationship. These are expansion
+      paths that don't cannibalize customer revenue.
+    </p>
+
+    <h3>Near-Term (Year 1-2): Customer Value</h3>
+
+    <ul>
+      <li>Waste tracking and insights</li>
+      <li>Food cost optimization</li>
+      <li>Compliance documentation</li>
+    </ul>
+
+    <p><strong>Revenue source:</strong> Customer subscription</p>
+
+    <h3>Medium-Term (Year 2-4): Network Value</h3>
+
+    <ul>
+      <li>Benchmark access (compare to peers)</li>
+      <li>Seasonal prediction (network-wide patterns)</li>
+      <li>Supplier quality insights (which products waste more)</li>
+    </ul>
+
+    <p><strong>Revenue source:</strong> Premium tier, higher subscription</p>
+
+    <h3>Long-Term (Year 4+): Industry Value</h3>
+
+    <table>
+      <tr>
+        <th>Opportunity</th>
+        <th>What It Is</th>
+        <th>Revenue Potential</th>
+      </tr>
+      <tr>
+        <td><strong>CPG Partnerships</strong></td>
+        <td>Kraft, Unilever, Tyson pay for product waste insights. "Your product is wasted 40% more than competitor X."</td>
+        <td>$500K-2M per contract (estimated based on market research spend)</td>
+      </tr>
+      <tr>
+        <td><strong>Procurement Intelligence</strong></td>
+        <td>Aggregate purchasing + waste data = supplier negotiation leverage.</td>
+        <td>Per-transaction fee</td>
+      </tr>
+      <tr>
+        <td><strong>Financial Services</strong></td>
+        <td>Underwrite food business loans using Mill operational data.</td>
+        <td>Referral fees</td>
+      </tr>
+      <tr>
+        <td><strong>Labor Optimization</strong></td>
+        <td>Predict prep needs → optimize staffing. "Tuesday you need 3 prep cooks, Thursday 5."</td>
+        <td>$200-400/month module</td>
+      </tr>
+      <tr>
+        <td><strong>Menu Engineering</strong></td>
+        <td>Which items sell vs. which items waste. "Remove Item X, add Item Y."</td>
+        <td>Consulting tier</td>
+      </tr>
+    </table>
+
+    <div class="callout">
+      <p>
+        <strong>The strategic vision:</strong><br>
+        Year 1: "We help you reduce waste"<br>
+        Year 3: "We optimize your food operations"<br>
+        Year 5: "We're the intelligence layer for food businesses"<br>
+        Year 7: "Every food decision flows through Mill data"
+      </p>
+    </div>
+  </section>
+
+  <!-- THE RECOMMENDED MODEL -->
+  <section>
+    <h2>The Recommended Pricing Model</h2>
+
+    <h3>Structure</h3>
+
+    <table>
+      <tr>
+        <th>Component</th>
+        <th>Year 1</th>
+        <th>Year 2</th>
+        <th>Year 3</th>
+        <th>Year 4+</th>
+      </tr>
+      <tr>
+        <td><strong>Base fee</strong></td>
+        <td>$500</td>
+        <td>$525</td>
+        <td>$550</td>
+        <td>$575</td>
+      </tr>
+      <tr>
+        <td><strong>Outcome share</strong></td>
+        <td>15%</td>
+        <td>10%</td>
+        <td>8%</td>
+        <td>5%</td>
+      </tr>
+      <tr>
+        <td><strong>Food cost module</strong></td>
+        <td>&mdash;</td>
+        <td>+$200</td>
+        <td>+$200</td>
+        <td>+$200</td>
+      </tr>
+      <tr>
+        <td><strong>Benchmark access</strong></td>
+        <td>&mdash;</td>
+        <td>&mdash;</td>
+        <td>+$150</td>
+        <td>+$150</td>
+      </tr>
+      <tr>
+        <td><strong>Enterprise tier</strong></td>
+        <td>&mdash;</td>
+        <td>&mdash;</td>
+        <td>&mdash;</td>
+        <td>+$200</td>
+      </tr>
+      <tr class="highlight-row">
+        <td><strong>Total (est)</strong></td>
+        <td>~$750</td>
+        <td>~$900</td>
+        <td>~$1,050</td>
+        <td>~$1,200</td>
+      </tr>
+    </table>
+
+    <p style="font-size: 0.85rem; color: var(--text-muted);">
+      Note: Outcome share revenue estimated based on typical optimization trajectory. Actual
+      amounts will vary by customer.
+    </p>
+
+    <h3>Key Principles</h3>
+
+    <ol>
+      <li><strong>Base fee covers hardware + trash savings</strong> &mdash; Defensible on its own</li>
+      <li><strong>Outcome share aligns incentives</strong> &mdash; But declines as optimization matures</li>
+      <li><strong>Modules expand value</strong> &mdash; New capability = new price point</li>
+      <li><strong>Total revenue increases</strong> &mdash; Despite outcome share declining</li>
+      <li><strong>Customer sees more value</strong> &mdash; Not "paying more for same thing"</li>
+    </ol>
+
+    <h3>Enterprise Pricing (50+ Locations)</h3>
+
+    <table>
+      <tr>
+        <th>Component</th>
+        <th>Amount</th>
+        <th>Notes</th>
+      </tr>
+      <tr>
+        <td><strong>Base fee per location</strong></td>
+        <td>$600/month</td>
+        <td>Premium for centralization value</td>
+      </tr>
+      <tr>
+        <td><strong>Outcome share</strong></td>
+        <td>8%</td>
+        <td>Lower than single-location (more predictable)</td>
+      </tr>
+      <tr>
+        <td><strong>Enterprise platform</strong></td>
+        <td>+$5K/month</td>
+        <td>Centralized dashboard, API, dedicated support</td>
+      </tr>
+      <tr>
+        <td><strong>Annual escalator</strong></td>
+        <td>3-5%</td>
+        <td>Industry standard for enterprise SaaS contracts</td>
+      </tr>
+      <tr>
+        <td><strong>Contract length</strong></td>
+        <td>3 years</td>
+        <td>Longer term, better pricing</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- SEGMENT PITCHES -->
+  <section>
+    <h2>Segment-Specific Pitches</h2>
+
+    <div class="pitch-box">
+      <div class="pitch-label">Single location, cost-focused</div>
+      <div class="pitch-text">
+        "Mill cuts trash costs by 30%+ immediately. Over time, the data helps you optimize
+        food purchasing too. You pay a base fee plus a small share of documented savings&mdash;we
+        only win when you win."
+      </div>
+    </div>
+
+    <div class="pitch-box">
+      <div class="pitch-label">Multi-location, enterprise</div>
+      <div class="pitch-text">
+        "Mill gives you one system across all locations. Centralized visibility, cross-location
+        benchmarking, best practice rollout. One vendor, one dashboard, one annual contract."
+      </div>
+    </div>
+
+    <div class="pitch-box">
+      <div class="pitch-label">Compliance-driven (SB 1383, ESG)</div>
+      <div class="pitch-text">
+        "Mill solves SB 1383 compliance automatically. Verified documentation, audit-ready
+        reports. Plus the operational savings on top."
+      </div>
+    </div>
+
+    <div class="pitch-box">
+      <div class="pitch-label">Mission-aligned (sustainability brands)</div>
+      <div class="pitch-text">
+        "Mill proves your sustainability commitment with verified data. Not estimates&mdash;actual,
+        measured waste diversion. The kind of data you can put in your ESG report, your B-Corp
+        application, your marketing."
+      </div>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <section>
+    <h2>Summary</h2>
+
+    <div class="summary-box">
+      <div class="summary-item">
+        <strong>The multi-year problem is real.</strong>
+        <p>Pure outcome-based pricing on "waste reduction learning" creates declining revenue.
+        Year 1 wins diminish by Year 2+. Don't fight it&mdash;add new value on top.</p>
+      </div>
+      <div class="summary-item">
+        <strong>Platform expansion solves it.</strong>
+        <p>Outcome share declines, but new modules (food cost, benchmark, procurement) more than
+        offset. Total revenue: $750/month Year 1 &rarr; $1,200/month Year 4.</p>
+      </div>
+      <div class="summary-item">
+        <strong>Make ROI obvious with trash savings.</strong>
+        <p>Lead with the calculator: positive ROI on trash savings alone. Food cost optimization
+        is upside. Pilot-to-expand de-risks the decision.</p>
+      </div>
+      <div class="summary-item">
+        <strong>Data flywheel is mechanical, not hand-wavy.</strong>
+        <p>Data flywheel targets: Month 1 ~70% accuracy, Month 12 ~88% (requires validation). Network scale unlocks benchmarks at
+        500 kitchens, industry intelligence at 5,000.</p>
+      </div>
+      <div class="summary-item">
+        <strong>Price tracks value, doesn't extract it.</strong>
+        <p>If price goes up 20%, value goes up 25%+. Expansion is opt-in. Dashboard shows value
+        continuously. This preserves NPS.</p>
+      </div>
+      <div class="summary-item">
+        <strong>Data goes beyond customer revenue.</strong>
+        <p>CPG partnerships, procurement intelligence, financial services, labor optimization.
+        These are Year 4+ plays that don't cannibalize customer revenue.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-logo">mill</div>
+    <p class="footer-text">
+      Commercial GTM Strategy &bull; March 2026<br>
+      Built with Claude
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
